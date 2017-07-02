@@ -4,29 +4,28 @@
 using namespace waltz::editor::LibraryComponent;
 
 CharacterImage::CharacterImage()
-    : mImage_("qrc:/image/momo.png")
+    : mUrl_()
 {
 }
 
 CharacterImage::CharacterImage(const QString& aPath)
-    :mImage_(aPath)
+    :mUrl_(QUrl::fromLocalFile(aPath))
 {
 }
 
 CharacterImage::CharacterImage(const CharacterImage& aOther)
-    :mImage_(aOther.mImage_)
+    :mUrl_(aOther.mUrl_)
 {
-
 }
 
 CharacterImage& CharacterImage::operator=(const CharacterImage& aOther)
 {
-    mImage_ = aOther.mImage_;
+    mUrl_ = aOther.mUrl_;
     return (*this);
 }
 
-QImage CharacterImage::value() const
+QUrl CharacterImage::url() const
 {
-    return mImage_;
+    return mUrl_;
 }
 

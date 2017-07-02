@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/pitch.cpp \
     src/Domain/ScoreComponent/score.cpp \
     src/Domain/ScoreComponent/syllable.cpp \
-    src/Domain/ScoreComponent/tempo.cpp
+    src/Domain/ScoreComponent/tempo.cpp \
+    src/Domain/LibraryComponent/libraryname.cpp
 
 RESOURCES += qml.qrc
 
@@ -75,4 +76,5 @@ HEADERS += \
     src/Domain/ScoreComponent/pitch.h \
     src/Domain/ScoreComponent/score.h \
     src/Domain/ScoreComponent/syllable.h \
-    src/Domain/ScoreComponent/tempo.h
+    src/Domain/ScoreComponent/tempo.h \
+    src/Domain/LibraryComponent/libraryname.h

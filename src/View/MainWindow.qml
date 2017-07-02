@@ -80,12 +80,16 @@ ApplicationWindow {
             anchors.top:parent.top
             anchors.bottom: parent.bottom
 
+            property string character_image: MainWindowModel.characterImageUrl()
             property string library_description: MainWindowModel.libraryDescription()
+            property string library_name: MainWindowModel.libraryName()
 
             Connections{
                 target: MainWindowModel
                 onLibraryInformationUpdated: {
                     library_information.library_description = MainWindowModel.libraryDescription()
+                    library_information.character_image = MainWindowModel.characterImageUrl()
+                    library_information.library_name = MainWindowModel.libraryName()
                 }
             }
 
@@ -117,7 +121,7 @@ ApplicationWindow {
                     id: vocal_name
                     z:0
                     Layout.alignment: Qt.AlignCenter
-                    text: "Momo Momone"
+                    text: library_information.library_name
                     font.pointSize: 14
                     Layout.preferredHeight: 50
                     color: "#ffffff"
@@ -134,8 +138,7 @@ ApplicationWindow {
                         id: vocal_image
                         fillMode: Image.PreserveAspectFit
                         anchors.fill: parent
-                        source:"qrc:/image/momo.png"
-
+                        source: library_information.character_image
                         smooth: true
                         visible: false
                     }
@@ -149,7 +152,7 @@ ApplicationWindow {
                         source: vocal_image
                     }
                 }
-                Text{
+/*                Text{
                     z:0
                     Layout.alignment: Qt.AlignCenter
                     color: "#ffffff"
@@ -163,7 +166,7 @@ uses : 93.8%
 freq avg : 341.7 Hz (F4)
 logical range : A#3～D5
 voices : 691"
-                }
+                }*/
                 Rectangle{
                     z:0
                     Layout.alignment: Qt.AlignCenter

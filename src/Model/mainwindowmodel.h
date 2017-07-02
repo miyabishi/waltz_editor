@@ -50,7 +50,8 @@ namespace waltz
 
                 // for Voice Library
                 Q_INVOKABLE void loadVoiceLibrary(const QUrl& aUrl);
-                Q_INVOKABLE QImage characterImage() const;
+                Q_INVOKABLE QString characterImageUrl() const;
+                Q_INVOKABLE QString libraryName() const;
                 Q_INVOKABLE QString libraryDescription() const;
                 Q_INVOKABLE QString vocalFileExtention() const;
 

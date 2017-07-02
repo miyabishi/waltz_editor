@@ -2,6 +2,7 @@
 #include <QString>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QUrl>
 #include "mainwindowmodel.h"
 #include "src/Domain/ScoreComponent/syllable.h"
 #include "src/Domain/ScoreComponent/notelength.h"
@@ -130,9 +131,15 @@ void MainWindowModel::loadVoiceLibrary(const QUrl &aUrl)
                                   parameters));
 }
 
-QImage MainWindowModel::characterImage() const
+QString MainWindowModel::characterImageUrl() const
 {
-    return mLibraryInformation_.characterImage().value();
+    return mLibraryInformation_.characterImage().url().toString();
+}
+
+QString MainWindowModel::libraryName() const
+{
+    qDebug() << mLibraryInformation_.libraryName().value();
+    return mLibraryInformation_.libraryName().value();
 }
 
 QString MainWindowModel::libraryDescription() const
@@ -153,7 +160,8 @@ MainWindowModel::MainWindowModel(QObject *aParent)
     , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
     , mLibraryInformation_(
           waltz::editor::LibraryComponent::CharacterImage(),
-          waltz::editor::LibraryComponent::Description())
+          waltz::editor::LibraryComponent::Description(),
+          waltz::editor::LibraryComponent::LibraryName())
 {
 }
 

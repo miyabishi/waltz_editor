@@ -1,7 +1,7 @@
 #ifndef CHARACTERIMAGE_H
 #define CHARACTERIMAGE_H
 
-#include <QImage>
+#include <QUrl>
 
 namespace waltz
 {
@@ -18,10 +18,10 @@ namespace waltz
                 CharacterImage& operator=(const CharacterImage& aOther);
 
             public:
-                QImage value() const;
+                QUrl url() const;
 
             private:
-                QImage mImage_;
+                QUrl mUrl_;
             };
         } // namespace LibraryComponent
     } // namespace editor
