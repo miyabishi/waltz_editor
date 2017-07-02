@@ -7,7 +7,6 @@
         <file>image/play.png</file>
         <file>image/save.png</file>
         <file>image/stop.png</file>
-        <file>image/momo.png</file>
         <file>image/open.png</file>
         <file>src/View/MainWindow.qml</file>
     </qresource>
