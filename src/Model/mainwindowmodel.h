@@ -55,6 +55,9 @@ namespace waltz
                 Q_INVOKABLE QString libraryDescription() const;
                 Q_INVOKABLE QString vocalFileExtention() const;
 
+                // for Controller
+                Q_INVOKABLE void play();
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void libraryInformationUpdated();

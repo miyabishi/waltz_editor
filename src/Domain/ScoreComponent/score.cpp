@@ -1,7 +1,9 @@
 #include "score.h"
 #include "notelist.h"
+#include <QDebug>
 
 using namespace waltz::editor::ScoreComponent;
+using namespace waltz::editor::Commands;
 
 Score::Score()
  : mTempo_(Tempo(120))
@@ -42,6 +44,12 @@ int Score::beatParent()
 Beat Score::beat()
 {
     return mBeat_;
+}
+
+Parameters Score::toParameters() const
+{
+    qDebug() << Q_FUNC_INFO;
+    return Parameters();
 }
 
 void Score::appendNote(const Note& aNote)

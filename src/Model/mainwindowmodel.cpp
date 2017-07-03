@@ -24,6 +24,7 @@ namespace
 {
     const CommandId COMMAND_ID_LOAD_VOICE_LIBRARY("LoadVoiceLibrary");
     const CommandId COMMAND_ID_PLAY_NOTE("PlayNote");
+    const CommandId COMMAND_ID_PLAY_SCORE("PlayScore");
 }
 
 MainWindowModel* MainWindowModel::mInstance_ = 0;
@@ -150,6 +151,14 @@ QString MainWindowModel::libraryDescription() const
 void MainWindowModel::emitErrorOccurred(const QString& aErrorMessage)
 {
     emit errorOccurred(aErrorMessage);
+}
+
+void MainWindowModel::play()
+{
+    mClient_->sendMessage(
+                Message(COMMAND_ID_PLAY_SCORE,
+                        mScore_->toParameters())
+                );
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

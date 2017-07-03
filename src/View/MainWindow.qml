@@ -435,6 +435,13 @@ voices : 691"
                 height: parent.height
                 width: height
                 source: "qrc:/image/play.png"
+
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
+                }
             }
 
             Image {
