@@ -439,7 +439,7 @@ voices : 691"
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-
+                        MainWindowModel.play();
                     }
                 }
             }
