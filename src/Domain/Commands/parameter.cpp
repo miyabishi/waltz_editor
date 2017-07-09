@@ -9,7 +9,7 @@ Parameter::Parameter()
 
 
 Parameter::Parameter(const QString& aName,
-                     const QVariant& aValue)
+                     const QJsonValue& aValue)
     : mName_(aName)
     , mValue_(aValue)
 {
@@ -33,7 +33,7 @@ QString Parameter::name() const
     return mName_;
 }
 
-QVariant Parameter::value() const
+QJsonValue Parameter::value() const
 {
     return mValue_;
 }
@@ -45,24 +45,8 @@ QString Parameter::toString() const
 
 QJsonValue Parameter::toJsonValue() const
 {
-    QJsonValue value;
-    switch(mValue_.type())
-    {
-    case QVariant::String:
-        value = QJsonValue(mValue_.toString());
-        break;
-    case QVariant::Int:
-        value = QJsonValue(mValue_.toInt());
-        break;
-    case QVariant::Double:
-        value = QJsonValue(mValue_.toDouble());
-        break;
-    default:
-        break;
-    }
-
     QJsonObject jsonObject;
     jsonObject[PARAMETER_KEY_NAME]  = QJsonValue(mName_);
-    jsonObject[PARAMETER_KEY_VALUE] = value;
+    jsonObject[PARAMETER_KEY_VALUE] = mValue_;
     return QJsonValue(jsonObject);
 }

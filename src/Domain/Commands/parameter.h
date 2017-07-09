@@ -1,7 +1,5 @@
 #ifndef PARAMETER_H
 #define PARAMETER_H
-
-#include <QVariant>
 #include <QString>
 #include <QJsonValue>
 
@@ -18,19 +16,19 @@ namespace waltz
             public:
                 Parameter();
                 Parameter(const QString& aName,
-                        const QVariant& aValue);
+                        const QJsonValue& aValue);
                 Parameter(const Parameter& aOther);
                 Parameter& operator=(const Parameter& aOther);
 
             public:
-                QVariant value() const;
+                QJsonValue value() const;
                 QString name() const;
                 QJsonValue toJsonValue() const;
                 QString toString() const;
 
             private:
                 QString  mName_;
-                QVariant mValue_;
+                QJsonValue mValue_;
             };
         } // namespace Communicator
     } // namespace editor

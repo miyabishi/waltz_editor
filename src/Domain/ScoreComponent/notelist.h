@@ -2,6 +2,7 @@
 #define NOTELIST_H
 
 #include<QList>
+#include "src/Domain/Commands/parameters.h"
 #include "note.h"
 
 namespace waltz
@@ -15,6 +16,7 @@ namespace waltz
             public:
                 NoteList();
                 void append(Note aNote);
+                waltz::editor::Commands::Parameters toParameters() const;
 
             private:
                 QList<Note> mNoteList_;

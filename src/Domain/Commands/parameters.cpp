@@ -37,5 +37,5 @@ QJsonArray Parameters::toJsonArray() const
 
 Parameter Parameters::find(const QString& aParameterName) const
 {
-    return mParameters_.value(aParameterName, Parameter("",QVariant()));
+    return mParameters_.value(aParameterName, Parameter("",QJsonValue()));
 }

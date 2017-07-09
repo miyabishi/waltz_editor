@@ -48,7 +48,6 @@ Beat Score::beat()
 
 Parameters Score::toParameters() const
 {
-    qDebug() << Q_FUNC_INFO;
     return Parameters();
 }
 

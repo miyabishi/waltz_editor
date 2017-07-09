@@ -77,7 +77,7 @@ Parameters ReceivedData::parseParameters(const QJsonArray& aParameterArray) cons
     {
         QJsonObject jsonObject = jsonValue.toObject();
         parameters.append(Parameter(jsonObject.value(PARAMETER_KEY_NAME).toString(),
-                                    jsonObject.value(PARAMETER_KEY_VALUE).toVariant()));
+                                    jsonObject.value(PARAMETER_KEY_VALUE)));
     }
     return parameters;
 }
