@@ -355,7 +355,7 @@ voices : 691"
                                 note_repeater.model.append({"noteText": noteText,
                                                             "positionX": positionX,
                                                             "positionY": positionY,
-                                                            "noteWidth": edit_area.columnWidth})
+                                                            "noteWidth": edit_area.columnWidth});
                                 MainWindowModel.appendNote(noteText, positionX, positionY, edit_area.columnWidth)
                             }
                         }
