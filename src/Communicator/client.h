@@ -1,16 +1,21 @@
 #ifndef CLIENT_H
 #define CLIENT_H
-
 #include <QObject>
 #include <QtWebSockets/QWebSocket>
 
 namespace waltz
 {
-    namespace editor
+    namespace common
     {
         namespace Communicator
         {
             class Message;
+        }
+    }
+    namespace editor
+    {
+        namespace Communicator
+        {
             class Client  : public QObject
             {
                 Q_OBJECT
@@ -18,7 +23,7 @@ namespace waltz
             public:
                 Client(const QUrl &aUrl, QObject* aParent = Q_NULLPTR);
 
-                void sendMessage(const Message& aMessage);
+                void sendMessage(const waltz::common::Communicator::Message& aMessage);
 
             signals:
                 void closed();

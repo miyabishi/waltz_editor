@@ -3,11 +3,12 @@
 #include "src/Domain/LibraryComponent/description.h"
 #include "src/Domain/LibraryComponent/libraryname.h"
 #include "updatelibraryinformationcommand.h"
-#include "parameters.h"
-#include "parameter.h"
-#include "commandid.h"
+#include <waltz_common/parameters.h>
+#include <waltz_common/parameter.h>
+#include <waltz_common/command.h>
 #include "src/Domain/LibraryComponent/libraryinformation.h"
 
+using namespace waltz::common::Commands;
 using namespace waltz::editor::Commands;
 using namespace waltz::editor::model;
 using namespace waltz::editor::LibraryComponent;

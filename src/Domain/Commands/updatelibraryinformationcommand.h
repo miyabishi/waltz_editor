@@ -1,7 +1,7 @@
 #ifndef UPDATELIBRARYINFORMATIONCOMMAND_H
 #define UPDATELIBRARYINFORMATIONCOMMAND_H
 
-#include "command.h"
+#include <waltz_common/command.h>
 
 namespace waltz
 {
@@ -9,12 +9,12 @@ namespace waltz
     {
         namespace Commands
         {
-            class UpdateLibraryInformationCommand : public Command
+            class UpdateLibraryInformationCommand : public waltz::common::Commands::Command
             {
             public:
                 UpdateLibraryInformationCommand();
             public:
-                void exec(const Parameters& aParameters);
+                void exec(const waltz::common::Commands::Parameters& aParameters);
             };
         } // namespace Commands
     } // namespace editor

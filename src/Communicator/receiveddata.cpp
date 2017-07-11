@@ -2,12 +2,13 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-
-#include "src/Domain/Commands/command.h"
+#include <waltz_common/command.h>
 #include "src/Domain/Commands/commandfactory.h"
 #include "src/Model/mainwindowmodel.h"
 
 #include "receiveddata.h"
+
+using namespace waltz::common::Commands;
 
 using namespace waltz::editor::Communicator;
 using namespace waltz::editor::Commands;

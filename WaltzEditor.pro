@@ -6,11 +6,6 @@ SOURCES += main.cpp \
     src/Model/mainwindowmodel.cpp \
     src/Model/editareainformation.cpp \
     src/Communicator/client.cpp \
-    src/Communicator/message.cpp \
-    src/Domain/Commands/command.cpp \
-    src/Domain/Commands/commandid.cpp \
-    src/Domain/Commands/parameter.cpp \
-    src/Domain/Commands/parameters.cpp \
     src/Domain/Commands/commandfactory.cpp \
     src/Domain/Commands/updatelibraryinformationcommand.cpp \
     src/Domain/LibraryComponent/libraryinformation.cpp \
@@ -56,11 +51,6 @@ HEADERS += \
     src/Model/mainwindowmodel.h \
     src/Model/editareainformation.h \
     src/Communicator/client.h \
-    src/Communicator/message.h \
-    src/Domain/Commands/command.h \
-    src/Domain/Commands/commandid.h \
-    src/Domain/Commands/parameter.h \
-    src/Domain/Commands/parameters.h \
     src/Domain/Commands/commandfactory.h \
     src/Domain/Commands/updatelibraryinformationcommand.h \
     src/Domain/LibraryComponent/libraryinformation.h \
@@ -78,3 +68,10 @@ HEADERS += \
     src/Domain/ScoreComponent/syllable.h \
     src/Domain/ScoreComponent/tempo.h \
     src/Domain/LibraryComponent/libraryname.h
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
+else:unix: LIBS += -L$$PWD/../WaltzCommonLibrary/ -lWaltzCommonLibrary
+
+INCLUDEPATH += $$PWD/../WaltzCommonLibrary/include
+DEPENDPATH += $$PWD/../WaltzCommonLibrary/include

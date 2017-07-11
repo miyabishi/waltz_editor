@@ -3,7 +3,7 @@
 #include <QDebug>
 
 using namespace waltz::editor::ScoreComponent;
-using namespace waltz::editor::Commands;
+using namespace waltz::common::Commands;
 
 Score::Score()
  : mTempo_(Tempo(120))

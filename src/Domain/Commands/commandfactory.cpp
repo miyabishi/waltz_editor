@@ -1,7 +1,8 @@
 #include "commandfactory.h"
-#include "commandid.h"
+#include <waltz_common/commandid.h>
 #include "updatelibraryinformationcommand.h"
 
+using namespace waltz::common::Commands;
 using namespace waltz::editor::Commands;
 
 namespace

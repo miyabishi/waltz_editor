@@ -1,7 +1,7 @@
 #include "notelist.h"
 
 using namespace waltz::editor::ScoreComponent;
-using namespace waltz::editor::Commands;
+using namespace waltz::common::Commands;
 
 NoteList::NoteList()
 {

@@ -1,9 +1,9 @@
-#include "src/Domain/Commands/parameters.h"
-#include "src/Domain/Commands/parameter.h"
+#include <waltz_common/parameters.h>
+#include <waltz_common/parameter.h>
 #include "note.h"
 
 using namespace waltz::editor::ScoreComponent;
-using namespace waltz::editor::Commands;
+using namespace waltz::common::Commands;
 
 Note::Note(Pitch aPitch,
            Syllable aSyllable,

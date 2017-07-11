@@ -2,8 +2,8 @@
 #define RECEIVEDDATA_H
 
 #include <QByteArray>
-#include "src/Domain/Commands/parameters.h"
-#include "src/Domain/Commands/commandid.h"
+#include <waltz_common/parameters.h>
+#include <waltz_common/commandid.h>
 
 namespace waltz
 {
@@ -24,11 +24,11 @@ namespace waltz
 
             private:
                 void parseReceivedData(const QByteArray& aReceivedData);
-                waltz::editor::Commands::Parameters parseParameters(const QJsonArray& aParameterArray) const;
+                waltz::common::Commands::Parameters parseParameters(const QJsonArray& aParameterArray) const;
 
             private:
-                waltz::editor::Commands::CommandId  mCommandId_;
-                waltz::editor::Commands::Parameters mParameters_;
+                waltz::common::Commands::CommandId  mCommandId_;
+                waltz::common::Commands::Parameters mParameters_;
             };
         } // namespace Communicator
     } // namespace editor

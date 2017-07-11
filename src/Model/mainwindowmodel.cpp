@@ -3,6 +3,11 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QUrl>
+#include <waltz_common/commandid.h>
+#include <waltz_common/parameter.h>
+#include <waltz_common/parameters.h>
+#include <waltz_common/message.h>
+
 #include "mainwindowmodel.h"
 #include "src/Domain/ScoreComponent/syllable.h"
 #include "src/Domain/ScoreComponent/notelength.h"
@@ -10,15 +15,14 @@
 #include "src/Domain/ScoreComponent/syllable.h"
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
-#include "src/Domain/Commands/commandid.h"
-#include "src/Domain/Commands/parameter.h"
-#include "src/Domain/Commands/parameters.h"
-#include "src/Communicator/message.h"
+
+using namespace waltz::common::Communicator;
+using namespace waltz::common::Commands;
 
 using namespace waltz::editor::model;
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::editor::Communicator;
-using namespace waltz::editor::Commands;
+
 
 namespace
 {
@@ -159,6 +163,7 @@ void MainWindowModel::play()
                 Message(COMMAND_ID_PLAY_SCORE,
                         mScore_->toParameters())
                 );
+
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

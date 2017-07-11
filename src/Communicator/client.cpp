@@ -1,10 +1,12 @@
 #include <QDebug>
 #include <QByteArray>
+#include <waltz_common/message.h>
+
 #include "client.h"
-#include "message.h"
 #include "receiveddata.h"
 
 using namespace waltz::editor::Communicator;
+using namespace waltz::common::Communicator;
 
 Client::Client(const QUrl &aUrl, QObject* aParent)
     : QObject(aParent)

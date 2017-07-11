@@ -9,13 +9,15 @@
 
 namespace waltz
 {
-    namespace editor
+    namespace  common
     {
         namespace Commands
         {
             class Parameters;
-
         }
+    }
+    namespace editor
+    {
         namespace ScoreComponent
         {
             class Note
@@ -29,7 +31,7 @@ namespace waltz
                 Note& operator=(const Note& aOther);
 
             public:
-                waltz::editor::Commands::Parameters toParameters() const;
+                waltz::common::Commands::Parameters toParameters() const;
 
             private:
                 Pitch         mPitch_;

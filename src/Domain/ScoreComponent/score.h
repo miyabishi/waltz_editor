@@ -6,7 +6,7 @@
 #include "tempo.h"
 #include "beat.h"
 #include "note.h"
-#include "src/Domain/Commands/parameters.h"
+#include <waltz_common/parameters.h>
 
 namespace waltz
 {
@@ -28,7 +28,7 @@ namespace waltz
                 int beatParent();
                 NoteList noteList();
                 void appendNote(const Note& aNote);
-                waltz::editor::Commands::Parameters toParameters() const;
+                waltz::common::Commands::Parameters toParameters() const;
 
             private:
                 Tempo mTempo_;
