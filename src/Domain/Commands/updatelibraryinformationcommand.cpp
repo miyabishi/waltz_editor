@@ -30,9 +30,9 @@ UpdateLibraryInformationCommand::UpdateLibraryInformationCommand()
 
 void UpdateLibraryInformationCommand::exec(const Parameters& aParameters)
 {
-    CharacterImage characterImage(aParameters.find(PARAMETER_NAME_IMAGE_FILE_PATH).toString());
-    Description description(aParameters.find(PARAMETER_NAME_DESCRIPTION).toString());
-    LibraryName libraryName(aParameters.find(PARAMETER_NAME_LIBRARY_NAME).toString());
+    CharacterImage characterImage(aParameters.find(PARAMETER_NAME_IMAGE_FILE_PATH).value().toString());
+    Description description(aParameters.find(PARAMETER_NAME_DESCRIPTION).value().toString());
+    LibraryName libraryName(aParameters.find(PARAMETER_NAME_LIBRARY_NAME).value().toString());
     MainWindowModel::getInstance().setLibraryInformation(
                 LibraryInformation(characterImage,
                                    description,

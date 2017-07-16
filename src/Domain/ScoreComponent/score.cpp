@@ -48,7 +48,7 @@ Beat Score::beat()
 
 Parameters Score::toParameters() const
 {
-    return Parameters();
+    return mNoteList_.toParameters();
 }
 
 void Score::appendNote(const Note& aNote)
