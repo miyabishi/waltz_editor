@@ -16,7 +16,7 @@ namespace waltz
             public:
                 NoteList();
                 void append(Note aNote);
-                waltz::common::Commands::Parameters toParameters() const;
+                waltz::common::Commands::Parameter toParameter() const;
 
             private:
                 QList<Note> mNoteList_;
