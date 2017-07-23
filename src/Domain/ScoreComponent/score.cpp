@@ -1,5 +1,4 @@
 #include "score.h"
-#include "notelist.h"
 #include <QDebug>
 
 using namespace waltz::editor::ScoreComponent;
@@ -8,6 +7,7 @@ using namespace waltz::common::Commands;
 Score::Score()
  : mTempo_(Tempo(120))
  , mBeat_(Beat(4,4))
+ , mNoteList_()
 {
 }
 
@@ -46,7 +46,7 @@ Beat Score::beat()
     return mBeat_;
 }
 
-Parameters Score::toParameters() const
+Parameters Score::toParameters()
 {
     Parameters parameters;
     parameters.append(mNoteList_.toParameter());

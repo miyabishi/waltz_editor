@@ -34,6 +34,12 @@ Note& Note::operator=(const Note& aOther)
     return (*this);
 }
 
+NoteStartTime Note::noteStartTime() const
+{
+    return mNoteStartTime_;
+}
+
+
 Parameters Note::toParameters() const
 {
     Parameters parameters;

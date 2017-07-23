@@ -32,6 +32,7 @@ namespace waltz
 
             public:
                 waltz::common::Commands::Parameters toParameters() const;
+                NoteStartTime noteStartTime() const;
 
             private:
                 Pitch         mPitch_;

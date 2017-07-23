@@ -2,11 +2,11 @@
 #define PROJECT_H
 
 #include <memory>
+#include <waltz_common/parameters.h>
 #include "notelist.h"
 #include "tempo.h"
 #include "beat.h"
 #include "note.h"
-#include <waltz_common/parameters.h>
 
 namespace waltz
 {
@@ -28,7 +28,7 @@ namespace waltz
                 int beatParent();
                 NoteList noteList();
                 void appendNote(const Note& aNote);
-                waltz::common::Commands::Parameters toParameters() const;
+                waltz::common::Commands::Parameters toParameters();
 
             private:
                 Tempo mTempo_;
