@@ -143,7 +143,6 @@ QString MainWindowModel::characterImageUrl() const
 
 QString MainWindowModel::libraryName() const
 {
-    qDebug() << mLibraryInformation_.libraryName().value();
     return mLibraryInformation_.libraryName().value();
 }
 

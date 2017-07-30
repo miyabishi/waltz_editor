@@ -85,7 +85,7 @@ Tone EditAreaInformation::calculateTone(int aY) const
 
 int EditAreaInformation::calculateBelongingOctave(int aY) const
 {
-    return mSupportOctarve_ - aY/octaveHeight();
+    return mSupportOctarve_ - aY/octaveHeight() + 4;
 }
 
 int EditAreaInformation::octaveHeight() const
