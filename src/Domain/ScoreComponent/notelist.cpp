@@ -16,7 +16,7 @@ NoteList::NoteList()
 
 }
 
-void NoteList::append(Note aNote)
+void NoteList::append(const Note& aNote)
 {
     mNoteList_.append(aNote);
 }
@@ -32,4 +32,8 @@ Parameter NoteList::toParameter()
     return Parameter("NoteList",noteListArray);
 }
 
-
+void NoteList::updateNote(const Note& aNote)
+{
+    mNoteList_.removeOne(aNote);
+    append(aNote);
+}

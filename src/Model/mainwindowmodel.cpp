@@ -13,6 +13,7 @@
 #include "src/Domain/ScoreComponent/notelength.h"
 #include "src/Domain/ScoreComponent/pitch.h"
 #include "src/Domain/ScoreComponent/syllable.h"
+#include "src/Domain/ScoreComponent/noteid.h"
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
 
@@ -100,12 +101,14 @@ int MainWindowModel::supportOctave() const
     return mEditAreaInformation_.supportOctave();
 }
 
-void MainWindowModel::appendNote(const QString& aNoteText,
+void MainWindowModel::appendNote(int aNoteId,
+                                 const QString& aNoteText,
                                  int aPositionX,
                                  int aPositionY,
                                  int aNoteWidth)
 {
-    Note note(mEditAreaInformation_.calculatePitch(aPositionY),
+    Note note(NoteId(aNoteId),
+              mEditAreaInformation_.calculatePitch(aPositionY),
               Syllable(aNoteText),
               mEditAreaInformation_.calculateNoteStartTime(aPositionX,
                                                            mScore_->beat(),
@@ -165,6 +168,32 @@ void MainWindowModel::play()
 
 }
 
+void MainWindowModel::updateNote(int aNoteId,
+                                 const QString& aNoteText,
+                                 int aPositionX,
+                                 int aPositionY,
+                                 int aNoteWidth)
+{
+    Note note(NoteId(aNoteId),
+              mEditAreaInformation_.calculatePitch(aPositionY),
+              Syllable(aNoteText),
+              mEditAreaInformation_.calculateNoteStartTime(aPositionX,
+                                                           mScore_->beat(),
+                                                           mScore_->tempo()),
+              mEditAreaInformation_.calculateNoteLength(aNoteWidth,
+                                                        mScore_->beat(),
+                                                        mScore_->tempo()));
+    mScore_->updateNote(note);
+}
+
+
+int MainWindowModel::publishNoteId()
+{
+    mNoteIdCounter_++;
+    return mNoteIdCounter_;
+}
+
+
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(
@@ -175,9 +204,11 @@ MainWindowModel::MainWindowModel(QObject *aParent)
           waltz::editor::LibraryComponent::CharacterImage(),
           waltz::editor::LibraryComponent::Description(),
           waltz::editor::LibraryComponent::LibraryName())
+    , mNoteIdCounter_(0)
 {
 }
 
 MainWindowModel::~MainWindowModel()
 {
 }
+

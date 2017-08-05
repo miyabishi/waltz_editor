@@ -6,6 +6,7 @@
 #include "syllable.h"
 #include "notestarttime.h"
 #include "notelength.h"
+#include "noteid.h"
 
 namespace waltz
 {
@@ -23,18 +24,23 @@ namespace waltz
             class Note
             {
             public:
-                Note(Pitch aPitch,
-                     Syllable aSyllable,
-                     NoteStartTime aNoteStartTime,
-                     NoteLength mNoteLength_);
+                Note(const NoteId& aNoteId,
+                     const Pitch& aPitch,
+                     const Syllable& aSyllable,
+                     const NoteStartTime& aNoteStartTime,
+                     const NoteLength& mNoteLength_);
                 Note(const Note& aOther);
                 Note& operator=(const Note& aOther);
+                bool operator==(const Note& aOther) const;
+                bool operator!=(const Note& aOther) const;
 
             public:
                 waltz::common::Commands::Parameters toParameters() const;
                 NoteStartTime noteStartTime() const;
 
+
             private:
+                NoteId        mNoteId_;
                 Pitch         mPitch_;
                 Syllable      mSyllable_;
                 NoteStartTime mNoteStartTime_;

@@ -57,3 +57,8 @@ void Score::appendNote(const Note& aNote)
 {
     mNoteList_.append(aNote);
 }
+void Score::updateNote(const Note& aNote)
+{
+    mNoteList_.updateNote(aNote);
+}
+

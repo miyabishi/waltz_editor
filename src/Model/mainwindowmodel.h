@@ -33,14 +33,22 @@ namespace waltz
                 Q_INVOKABLE void setTempo(int aTempo);
                 Q_INVOKABLE void setBeatParent(int aBeatParent);
                 Q_INVOKABLE void setBeatChild(int aBeatChild);
-                Q_INVOKABLE void appendNote(const QString& noteText,
+                Q_INVOKABLE void appendNote(int noteId,
+                                            const QString& noteText,
+                                            int positionX,
+                                            int positionY,
+                                            int noteWidth);
+                Q_INVOKABLE void updateNote(int noteId,
+                                            const QString& noteText,
                                             int positionX,
                                             int positionY,
                                             int noteWidth);
 
-                Q_INVOKABLE int  tempo() const;
-                Q_INVOKABLE int  beatChild() const;
-                Q_INVOKABLE int  beatParent() const;
+                Q_INVOKABLE int tempo() const;
+                Q_INVOKABLE int beatChild() const;
+                Q_INVOKABLE int beatParent() const;
+
+                Q_INVOKABLE int publishNoteId();
 
                 // for EditArea
                 Q_INVOKABLE int editAreaWidth() const;
@@ -63,11 +71,12 @@ namespace waltz
                 void libraryInformationUpdated();
 
             private:
-                static MainWindowModel*                             mInstance_;
-                waltz::editor::ScoreComponent::ScorePointer         mScore_;
-                EditAreaInformation                                 mEditAreaInformation_;
-                waltz::editor::Communicator::Client*                mClient_;
-                waltz::editor::LibraryComponent::LibraryInformation mLibraryInformation_;
+                static MainWindowModel*              mInstance_;
+                ScoreComponent::ScorePointer         mScore_;
+                EditAreaInformation                  mEditAreaInformation_;
+                Communicator::Client*                mClient_;
+                LibraryComponent::LibraryInformation mLibraryInformation_;
+                int                                  mNoteIdCounter_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

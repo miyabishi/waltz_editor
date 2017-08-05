@@ -5,11 +5,13 @@
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;
 
-Note::Note(Pitch aPitch,
-           Syllable aSyllable,
-           NoteStartTime aNoteStartTime,
-           NoteLength aNoteLength)
-    : mPitch_(aPitch)
+Note::Note(const NoteId& aNoteId,
+           const Pitch& aPitch,
+           const Syllable& aSyllable,
+           const NoteStartTime& aNoteStartTime,
+           const NoteLength& aNoteLength)
+    : mNoteId_(aNoteId)
+    , mPitch_(aPitch)
     , mSyllable_(aSyllable)
     , mNoteStartTime_(aNoteStartTime)
     , mNoteLength_(aNoteLength)
@@ -17,7 +19,8 @@ Note::Note(Pitch aPitch,
 }
 
 Note::Note(const Note& aOther)
-    : mPitch_(aOther.mPitch_)
+    : mNoteId_(aOther.mNoteId_)
+    , mPitch_(aOther.mPitch_)
     , mSyllable_(aOther.mSyllable_)
     , mNoteStartTime_(aOther.mNoteStartTime_)
     , mNoteLength_(aOther.mNoteLength_)
@@ -26,6 +29,7 @@ Note::Note(const Note& aOther)
 
 Note& Note::operator=(const Note& aOther)
 {
+    mNoteId_        = aOther.mNoteId_;
     mPitch_         = aOther.mPitch_;
     mSyllable_      = aOther.mSyllable_;
     mNoteStartTime_ = aOther.mNoteStartTime_;
@@ -50,5 +54,16 @@ Parameters Note::toParameters() const
     parameters.append(Parameter("NoteLength",    mNoteLength_.value()));
 
     return parameters;
+}
+
+
+bool Note::operator==(const Note& aOther) const
+{
+    return mNoteId_ == aOther.mNoteId_;
+}
+
+bool Note::operator!=(const Note& aOther) const
+{
+    return mNoteId_ != aOther.mNoteId_;
 }
 

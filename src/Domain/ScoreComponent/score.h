@@ -28,6 +28,7 @@ namespace waltz
                 int beatParent();
                 NoteList noteList();
                 void appendNote(const Note& aNote);
+                void updateNote(const Note& aNote);
                 waltz::common::Commands::Parameters toParameters();
 
             private:
