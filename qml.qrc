@@ -9,5 +9,10 @@
         <file>image/stop.png</file>
         <file>image/open.png</file>
         <file>src/View/MainWindow.qml</file>
+        <file>src/View/Note.qml</file>
+        <file>src/View/TopBar.qml</file>
+        <file>src/View/LibraryInformation.qml</file>
+        <file>src/View/EditArea.qml</file>
+        <file>src/View/BottomBar.qml</file>
     </qresource>
 </RCC>

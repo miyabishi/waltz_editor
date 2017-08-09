@@ -5,6 +5,8 @@ using namespace waltz::common::Commands;
 
 namespace
 {
+    const QString PARAMETER_NAME_NOTE_LIST = "NoteList";
+
     bool noteStartTimeLessThan(const Note& aNoteA,const Note& aNoteB)
     {
         return aNoteA.noteStartTime().value() < aNoteB.noteStartTime().value();
@@ -18,6 +20,14 @@ NoteList::NoteList()
 
 void NoteList::append(const Note& aNote)
 {
+    foreach(const Note& note, mNoteList_)
+    {
+        if(note.noteStartTime().value() == aNote.noteStartTime().value())
+        {
+            return;
+        }
+    }
+
     mNoteList_.append(aNote);
 }
 
@@ -25,11 +35,11 @@ Parameter NoteList::toParameter()
 {
     QJsonArray noteListArray;
     qSort(mNoteList_.begin(), mNoteList_.end(), noteStartTimeLessThan);
-    foreach(Note note, mNoteList_)
+    foreach(const Note& note, mNoteList_)
     {
         noteListArray.append(note.toParameters().toJsonArray());
     }
-    return Parameter("NoteList",noteListArray);
+    return Parameter(PARAMETER_NAME_NOTE_LIST,noteListArray);
 }
 
 void NoteList::updateNote(const Note& aNote)

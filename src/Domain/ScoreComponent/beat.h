@@ -1,6 +1,7 @@
 #ifndef BEAT_H
 #define BEAT_H
 
+#include <QSharedPointer>
 
 namespace waltz
 {
@@ -24,6 +25,7 @@ namespace waltz
             private:
                 int mParent_;
                 int mChild_;
+
             };
         } // namespace ScoreComponent
     } // namespace editor
