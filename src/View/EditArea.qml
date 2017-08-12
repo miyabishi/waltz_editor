@@ -97,6 +97,7 @@ Rectangle{
             id: piano_roll_edit_area
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
+
             Repeater{
                 model: edit_area.numberOfRow
                 Rectangle{
@@ -121,6 +122,7 @@ Rectangle{
             function calcX(aX){
                 return aX - aX%edit_area.columnWidth
             }
+
             function calcY(aY){
                 return aY - aY%edit_area.rowHeight
             }
@@ -129,9 +131,9 @@ Rectangle{
                 id: piano_roll_mouse_area
                 anchors.fill:parent
                 property bool control_pressing :false
-                propagateComposedEvents: true;
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onClicked: {
+                    console.log("note clicked")
                     if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
                     {
                         var positionX = piano_roll_edit_area.calcX(mouseX)
@@ -145,7 +147,6 @@ Rectangle{
                                                     "noteWidth": edit_area.columnWidth});
                         MainWindowModel.appendNote(noteId, noteText, positionX, positionY, edit_area.columnWidth)
                     }
-                    mouse.accepted = false
                 }
             }
 
@@ -169,6 +170,17 @@ Rectangle{
                         item.visible = true
                         item.width = noteWidth
                     }
+                }
+            }
+            DropArea{
+                id: edit_drop_area
+                anchors.fill: parent
+                onDropped: {
+                    console.log("dropped x:" + drag.x + " y:" + drag.y + " source:" + drag.source)
+                }
+                onPositionChanged:{
+                    console.log("position changed x:" + drag.x + " y:" + drag.y + " source:" + drag.source)
+                    drag.source.y = piano_roll_edit_area.calcY(drag.y)
                 }
             }
         }
