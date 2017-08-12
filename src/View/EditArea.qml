@@ -175,11 +175,7 @@ Rectangle{
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
-                onDropped: {
-                    console.log("dropped x:" + drag.x + " y:" + drag.y + " source:" + drag.source)
-                }
                 onPositionChanged:{
-                    console.log("position changed x:" + drag.x + " y:" + drag.y + " source:" + drag.source)
                     drag.source.y = piano_roll_edit_area.calcY(drag.y)
                 }
             }
