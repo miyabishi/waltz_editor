@@ -133,7 +133,6 @@ Rectangle{
                 property bool control_pressing :false
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onClicked: {
-                    console.log("note clicked")
                     if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
                     {
                         var positionX = piano_roll_edit_area.calcX(mouseX)
@@ -160,6 +159,8 @@ Rectangle{
                             pNoteId_: noteId
                             pNoteText_: noteText
                             pEditing_: false
+                            positionX: positionX
+                            positionY: positionY
                             width: edit_area.columnWidth
                             height: edit_area.rowHeight
                         }
@@ -175,8 +176,43 @@ Rectangle{
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
+                function calculeDropX(source)
+                {
+                    console.log("call calculate drop x")
+                    var sourceHead = source.x
+                    var sourceTail = source.x + source.width
+                    var count = MainWindowModel.noteCount()
+                    for(var i = 0; i < count; ++i)
+                    {
+                        console.log("search:" + i)
+
+                        var otherNote = note_repeater.itemAt(i)
+                        var otherNoteHead = MainWindowModel.findNotePositionX(i)
+                        var otherNoteTail = otherNoteHead + otherNote.width
+
+                        console.log("source head:" + sourceHead)
+                        console.log("source tail:" + sourceTail)
+                        console.log("other head:" + otherNoteHead)
+                        console.log("other tail:" + otherNoteTail)
+
+                        if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
+                        {
+                            return otherNoteTail
+                        }
+                        if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
+                        {
+                            return otherNoteHead - source.width
+                        }
+                    }
+                    return sourceHead
+                }
+
                 onPositionChanged:{
                     drag.source.y = piano_roll_edit_area.calcY(drag.y)
+                    drag.source.x = calculeDropX(drag.source)
+                    drag.source.positionX = drag.source.x
+                    drag.source.positionY = drag.source.y
+
                 }
             }
         }

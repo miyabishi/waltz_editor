@@ -62,3 +62,12 @@ void Score::updateNote(const Note& aNote)
     mNoteList_.updateNote(aNote);
 }
 
+int Score::noteCount() const
+{
+    return mNoteList_.count();
+}
+
+NoteStartTime Score::findNoteStartTime(int aIndex) const
+{
+    return mNoteList_.findNoteStartTime(aIndex);
+}

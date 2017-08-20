@@ -28,13 +28,16 @@ namespace waltz
                 int rowHeight() const;
                 int supportOctave() const;
                 int editAreaWidth() const;
-                waltz::editor::ScoreComponent::NoteStartTime calculateNoteStartTime(int aX,
-                                                                                      waltz::editor::ScoreComponent::Beat aBeat,
-                                                                                      waltz::editor::ScoreComponent::Tempo aTempo) const;
-                waltz::editor::ScoreComponent::NoteLength calculateNoteLength(int aWidth,
-                                                                                waltz::editor::ScoreComponent::Beat aBeat,
-                                                                                waltz::editor::ScoreComponent::Tempo aTempo) const;
-                waltz::editor::ScoreComponent::Pitch calculatePitch(int aY) const;
+                int calculatePositionX(ScoreComponent::NoteStartTime aNoteLength,
+                                       ScoreComponent::Beat aBeat,
+                                       ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::NoteStartTime calculateNoteStartTime(int aX,
+                                                                     ScoreComponent::Beat aBeat,
+                                                                     ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::NoteLength calculateNoteLength(int aWidth,
+                                                               ScoreComponent::Beat aBeat,
+                                                               ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::Pitch calculatePitch(int aY) const;
 
             private:
                 double calculateSec(int aX,

@@ -30,6 +30,8 @@ namespace waltz
                 void appendNote(const Note& aNote);
                 void updateNote(const Note& aNote);
                 waltz::common::Commands::Parameters toParameters();
+                int noteCount() const;
+                NoteStartTime findNoteStartTime(int aIndex) const;
 
             private:
                 Tempo mTempo_;

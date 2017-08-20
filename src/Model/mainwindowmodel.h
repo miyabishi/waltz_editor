@@ -55,6 +55,8 @@ namespace waltz
                 Q_INVOKABLE int columnWidth() const;
                 Q_INVOKABLE int rowHeight() const;
                 Q_INVOKABLE int supportOctave() const;
+                Q_INVOKABLE int noteCount() const;
+                Q_INVOKABLE int findNotePositionX(int aIndex) const;
 
                 // for Voice Library
                 Q_INVOKABLE void loadVoiceLibrary(const QUrl& aUrl);

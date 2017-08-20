@@ -18,6 +18,8 @@ namespace waltz
                 void append(const Note& aNote);
                 waltz::common::Commands::Parameter toParameter();
                 void updateNote(const Note& aNote);
+                int count() const;
+                NoteStartTime findNoteStartTime(int index) const;
 
             private:
                 QList<Note> mNoteList_;

@@ -3,16 +3,18 @@ import QtQuick.Controls 1.4
 
 Rectangle{
     id: note_rect
-
     property int pNoteId_: noteId
     property string pNoteText_: noteText
     property bool pEditing_: false
     property bool pStretching_: false
     property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
+    property int positionX
+    property int positionY
+
 
     border.color: "#000000"
     border.width: 1
-    color:"#ffd700"
+    color: "#ffd700"
     Drag.hotSpot.x: 0
     Drag.hotSpot.y: 0
     Drag.active: dragActive
@@ -78,6 +80,7 @@ Rectangle{
         onPressed: {
             note_rect.pStretching_ = true
             pPressedX_ = note_rect.x
+            note_rect.focus = true
         }
         onReleased: {
             note_rect.pStretching_ = false

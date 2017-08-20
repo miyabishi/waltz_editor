@@ -15,9 +15,16 @@ namespace
 
 NoteList::NoteList()
 {
-
+}
+NoteStartTime NoteList::findNoteStartTime(int aIndex) const
+{
+    return mNoteList_.at(aIndex).noteStartTime();
 }
 
+int NoteList::count() const
+{
+    return mNoteList_.count();
+}
 void NoteList::append(const Note& aNote)
 {
     foreach(const Note& note, mNoteList_)

@@ -28,6 +28,13 @@ EditAreaInformation::EditAreaInformation(const EditAreaInformation& aOther)
 {
 }
 
+int EditAreaInformation::calculatePositionX(ScoreComponent::NoteStartTime aNoteStartTime,
+                                            ScoreComponent::Beat aBeat,
+                                            ScoreComponent::Tempo aTempo) const
+{
+    return aNoteStartTime.value() / timeLengthOfABar(aTempo) * barWidth(aBeat);
+}
+
 EditAreaInformation& EditAreaInformation::operator=(const EditAreaInformation& aOther)
 {
     mWidthRate_      = aOther.mWidthRate_;

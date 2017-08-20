@@ -193,6 +193,17 @@ int MainWindowModel::publishNoteId()
     return mNoteIdCounter_;
 }
 
+int MainWindowModel::noteCount() const
+{
+    return mScore_->noteCount();
+}
+
+int MainWindowModel::findNotePositionX(int aIndex) const
+{
+    return mEditAreaInformation_.calculatePositionX(mScore_->findNoteStartTime(aIndex),
+                                                    mScore_->beat(),
+                                                    mScore_->tempo());
+}
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
