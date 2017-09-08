@@ -205,6 +205,11 @@ int MainWindowModel::findNotePositionX(int aIndex) const
                                                     mScore_->tempo());
 }
 
+void MainWindowModel::emitActivePlayButton()
+{
+    qDebug() << Q_FUNC_INFO;
+    emit activePlayButton();
+}
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(

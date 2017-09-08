@@ -14,5 +14,6 @@
         <file>src/View/LibraryInformation.qml</file>
         <file>src/View/EditArea.qml</file>
         <file>src/View/BottomBar.qml</file>
+        <file>src/View/WButtonMouseArea.qml</file>
     </qresource>
 </RCC>

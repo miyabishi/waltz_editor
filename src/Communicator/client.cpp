@@ -25,6 +25,7 @@ void Client::onConnected()
 
 void Client::onMessageReceived(QByteArray aData)
 {
+    qDebug() << "message received" << aData;
     ReceivedData data(aData);
     data.executeCommand();
 }

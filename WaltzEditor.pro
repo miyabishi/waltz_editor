@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/syllable.cpp \
     src/Domain/ScoreComponent/tempo.cpp \
     src/Domain/LibraryComponent/libraryname.cpp \
-    src/Domain/ScoreComponent/noteid.cpp
+    src/Domain/ScoreComponent/noteid.cpp \
+    src/Domain/Commands/activeplaybuttoncommand.cpp
 
 RESOURCES += qml.qrc
 
@@ -69,7 +70,8 @@ HEADERS += \
     src/Domain/ScoreComponent/syllable.h \
     src/Domain/ScoreComponent/tempo.h \
     src/Domain/LibraryComponent/libraryname.h \
-    src/Domain/ScoreComponent/noteid.h
+    src/Domain/ScoreComponent/noteid.h \
+    src/Domain/Commands/activeplaybuttoncommand.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

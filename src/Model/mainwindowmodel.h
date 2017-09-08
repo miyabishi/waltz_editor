@@ -26,6 +26,7 @@ namespace waltz
                 void setLibraryInformation(
                         const waltz::editor::LibraryComponent::LibraryInformation& aLibraryInformation);
                 void emitErrorOccurred(const QString& aErrorMessage);
+                void emitActivePlayButton();
 
             public:
                 // Invocable Methods
@@ -70,6 +71,7 @@ namespace waltz
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);
+                void activePlayButton();
                 void libraryInformationUpdated();
 
             private:

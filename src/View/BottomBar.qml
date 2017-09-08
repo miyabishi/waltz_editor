@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.0 as Controls
+import QtGraphicalEffects 1.0
 
 Rectangle{
     id: root
@@ -14,36 +15,76 @@ Rectangle{
         width: 180
         height: parent.height * 0.7
 
-        Image {
+        Rectangle{
             id: stop_button
             anchors.left: parent.left
             height: parent.height
-            width: height
-            source: "qrc:/image/stop.png"
+            width:height
+            color: "#333333"
+            Image {
+                anchors.left: parent.left
+                height: parent.height
+                width: height
+                source: "qrc:/image/stop.png"
+            }
+            WButtonMouseArea{
+                anchors.fill: parent
+            }
         }
 
-        Image {
+        Rectangle
+        {
             id: play_button
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.height
             width: height
-            source: "qrc:/image/play.png"
+            color: "#333333"
+            property bool pIsActive_: true
 
-            MouseArea{
+            onPIsActive_Changed: {
+                play_button_image_brightness.brightness = pIsActive_ ? 0 : -0.50
+            }
+
+            Image {
+                id: play_button_image
+                height: parent.height
+                width: height
+                source: "qrc:/image/play.png"
+            }
+
+            BrightnessContrast{
+                id: play_button_image_brightness
+                source: play_button_image
+                anchors.fill: play_button_image
+            }
+
+            WButtonMouseArea{
                 anchors.fill: parent
-                acceptedButtons: Qt.LeftButton
+
                 onClicked: {
-                    MainWindowModel.play();
+                    if (play_button.pIsActive_)
+                    {
+                        MainWindowModel.play();
+                        play_button.pIsActive_ = false
+                    }
                 }
             }
         }
 
-        Image {
+        Rectangle{
             id: pause_button
             anchors.right: parent.right
             height: parent.height
             width: height
-            source: "qrc:/image/pause.png"
+            color: "#333333"
+            Image {
+                height: parent.height
+                width: height
+                source: "qrc:/image/pause.png"
+            }
+            WButtonMouseArea{
+                anchors.fill: parent
+            }
         }
     }
 
@@ -188,6 +229,12 @@ Rectangle{
                     }
                 }
             }
+        }
+    }
+    Connections{
+        target: MainWindowModel
+        onActivePlayButton: {
+            play_button.pIsActive_ = true;
         }
     }
 }
