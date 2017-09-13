@@ -1,5 +1,4 @@
 #include "notelist.h"
-
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;
 
@@ -7,50 +6,56 @@ namespace
 {
     const QString PARAMETER_NAME_NOTE_LIST = "NoteList";
 
-    bool noteStartTimeLessThan(const Note& aNoteA,const Note& aNoteB)
+    bool noteStartTimeLessThan(const NotePointer aNoteA,const NotePointer aNoteB)
     {
-        return aNoteA.noteStartTime().value() < aNoteB.noteStartTime().value();
+        return aNoteA->xPosition() < aNoteB->xPosition();
     }
 }
 
 NoteList::NoteList()
 {
 }
-NoteStartTime NoteList::findNoteStartTime(int aIndex) const
+int NoteList::findNotePositionX(int aIndex) const
 {
-    return mNoteList_.at(aIndex).noteStartTime();
+    return mNoteList_.at(aIndex)->xPosition();
 }
 
 int NoteList::count() const
 {
     return mNoteList_.count();
 }
-void NoteList::append(const Note& aNote)
+
+void NoteList::append(const NotePointer aNote)
 {
-    foreach(const Note& note, mNoteList_)
+    foreach(const NotePointer note, mNoteList_)
     {
-        if(note.noteStartTime().value() == aNote.noteStartTime().value())
-        {
-            return;
-        }
+        if(note->xPositionIs(aNote->xPosition())) return;
     }
 
     mNoteList_.append(aNote);
 }
 
-Parameter NoteList::toParameter()
+Parameter NoteList::toParameter(
+        Beat aBeat,
+        Tempo aTempo,
+        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation)
 {
     QJsonArray noteListArray;
     qSort(mNoteList_.begin(), mNoteList_.end(), noteStartTimeLessThan);
-    foreach(const Note& note, mNoteList_)
+    foreach(const NotePointer note, mNoteList_)
     {
-        noteListArray.append(note.toParameters().toJsonArray());
+        noteListArray.append(note->toParameters(aBeat, aTempo, aEditAreaInformation).toJsonArray());
     }
-    return Parameter(PARAMETER_NAME_NOTE_LIST,noteListArray);
+    return Parameter(PARAMETER_NAME_NOTE_LIST, noteListArray);
 }
 
-void NoteList::updateNote(const Note& aNote)
+void NoteList::updateNote(const NotePointer aNote)
 {
-    mNoteList_.removeOne(aNote);
+    for (int index = 0; index < mNoteList_.size(); ++index)
+    {
+        if (! mNoteList_.at(index)->noteIdEquals(aNote->noteId())) continue;
+        mNoteList_.removeAt(index);
+        break;
+    }
     append(aNote);
 }

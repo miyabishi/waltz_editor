@@ -28,11 +28,11 @@ EditAreaInformation::EditAreaInformation(const EditAreaInformation& aOther)
 {
 }
 
-int EditAreaInformation::calculatePositionX(ScoreComponent::NoteStartTime aNoteStartTime,
+int EditAreaInformation::calculatePositionX(ScoreComponent::NoteStartTimePointer aNoteStartTime,
                                             ScoreComponent::Beat aBeat,
                                             ScoreComponent::Tempo aTempo) const
 {
-    return aNoteStartTime.value() / timeLengthOfABar(aTempo) * barWidth(aBeat);
+    return aNoteStartTime->value() / timeLengthOfABar(aTempo) * barWidth(aBeat);
 }
 
 EditAreaInformation& EditAreaInformation::operator=(const EditAreaInformation& aOther)
@@ -63,26 +63,26 @@ int EditAreaInformation::editAreaWidth() const
     return mEditAreaWidth_;
 }
 
-NoteStartTime EditAreaInformation::calculateNoteStartTime(int aX,
-                                                          Beat aBeat,
-                                                          Tempo aTempo) const
+NoteStartTimePointer EditAreaInformation::calculateNoteStartTime(int aX,
+                                                                 Beat aBeat,
+                                                                 Tempo aTempo) const
 {
-    return NoteStartTime(calculateSec(aX, aBeat, aTempo));
+    return NoteStartTimePointer(new NoteStartTime(calculateSec(aX, aBeat, aTempo)));
 }
 
-NoteLength EditAreaInformation::calculateNoteLength(int aWidth,
-                                                    Beat aBeat,
-                                                    Tempo aTempo) const
+NoteLengthPointer EditAreaInformation::calculateNoteLength(int aWidth,
+                                                           Beat aBeat,
+                                                           Tempo aTempo) const
 {
-    return NoteLength(calculateSec(aWidth, aBeat, aTempo));
+    return NoteLengthPointer(new NoteLength(calculateSec(aWidth, aBeat, aTempo)));
 }
 
-Pitch EditAreaInformation::calculatePitch(int aY) const
+PitchPointer EditAreaInformation::calculatePitch(int aY) const
 {
     int octave = calculateBelongingOctave(aY);
     Tone tone = calculateTone(aY);
 
-    return Pitch(tone, octave);
+    return PitchPointer(new Pitch(tone, octave));
 }
 
 Tone EditAreaInformation::calculateTone(int aY) const

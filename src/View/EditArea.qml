@@ -173,27 +173,20 @@ Rectangle{
                     }
                 }
             }
+
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
                 function calculeDropX(source)
                 {
-                    console.log("call calculate drop x")
                     var sourceHead = source.x
                     var sourceTail = source.x + source.width
                     var count = MainWindowModel.noteCount()
                     for(var i = 0; i < count; ++i)
                     {
-                        console.log("search:" + i)
-
                         var otherNote = note_repeater.itemAt(i)
                         var otherNoteHead = MainWindowModel.findNotePositionX(i)
                         var otherNoteTail = otherNoteHead + otherNote.width
-
-                        console.log("source head:" + sourceHead)
-                        console.log("source tail:" + sourceTail)
-                        console.log("other head:" + otherNoteHead)
-                        console.log("other tail:" + otherNoteTail)
 
                         if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
                         {

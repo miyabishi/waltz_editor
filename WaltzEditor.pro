@@ -23,7 +23,10 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/tempo.cpp \
     src/Domain/LibraryComponent/libraryname.cpp \
     src/Domain/ScoreComponent/noteid.cpp \
-    src/Domain/Commands/activeplaybuttoncommand.cpp
+    src/Domain/Commands/activeplaybuttoncommand.cpp \
+    src/Domain/ScoreComponent/noterect.cpp \
+    src/Domain/ScoreComponent/noterectposition.cpp \
+    src/Domain/ScoreComponent/noterectwidth.cpp
 
 RESOURCES += qml.qrc
 
@@ -71,7 +74,10 @@ HEADERS += \
     src/Domain/ScoreComponent/tempo.h \
     src/Domain/LibraryComponent/libraryname.h \
     src/Domain/ScoreComponent/noteid.h \
-    src/Domain/Commands/activeplaybuttoncommand.h
+    src/Domain/Commands/activeplaybuttoncommand.h \
+    src/Domain/ScoreComponent/noterect.h \
+    src/Domain/ScoreComponent/noterectposition.h \
+    src/Domain/ScoreComponent/noterectwidth.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

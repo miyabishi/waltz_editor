@@ -14,6 +14,10 @@
 #include "src/Domain/ScoreComponent/pitch.h"
 #include "src/Domain/ScoreComponent/syllable.h"
 #include "src/Domain/ScoreComponent/noteid.h"
+#include "src/Domain/ScoreComponent/noterect.h"
+#include "src/Domain/ScoreComponent/noterectposition.h"
+#include "src/Domain/ScoreComponent/noterectwidth.h"
+
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
 
@@ -30,6 +34,20 @@ namespace
     const CommandId COMMAND_ID_LOAD_VOICE_LIBRARY("LoadVoiceLibrary");
     const CommandId COMMAND_ID_PLAY_NOTE("PlayNote");
     const CommandId COMMAND_ID_PLAY_SCORE("PlayScore");
+    const CommandId COMMAND_ID_SAVE_WAV("SaveWav");
+
+    NotePointer createNote(int aNoteId,
+                           const QString& aNoteText,
+                           int aPositionX,
+                           int aPositionY,
+                           int aNoteWidth)
+    {
+        return NotePointer(new Note(NoteId(aNoteId),
+                                    Syllable(aNoteText),
+                                    NoteRectPointer(new NoteRect(
+                                                        NoteRectPositionPointer(new NoteRectPosition(aPositionX, aPositionY)),
+                                                        NoteRectWidthPointer(new NoteRectWidth(aNoteWidth))))));
+    }
 }
 
 MainWindowModel* MainWindowModel::mInstance_ = 0;
@@ -83,22 +101,22 @@ int MainWindowModel::beatParent() const
 
 int MainWindowModel::editAreaWidth() const
 {
-    return mEditAreaInformation_.editAreaWidth();
+    return mEditAreaInformation_->editAreaWidth();
 }
 int MainWindowModel::columnWidth() const
 {
-    return mEditAreaInformation_.columnWidth(
+    return mEditAreaInformation_->columnWidth(
                 mScore_->beatParent());
 }
 
 int MainWindowModel::rowHeight() const
 {
-    return mEditAreaInformation_.rowHeight();
+    return mEditAreaInformation_->rowHeight();
 }
 
 int MainWindowModel::supportOctave() const
 {
-    return mEditAreaInformation_.supportOctave();
+    return mEditAreaInformation_->supportOctave();
 }
 
 void MainWindowModel::appendNote(int aNoteId,
@@ -107,23 +125,17 @@ void MainWindowModel::appendNote(int aNoteId,
                                  int aPositionY,
                                  int aNoteWidth)
 {
-    Note note(NoteId(aNoteId),
-              mEditAreaInformation_.calculatePitch(aPositionY),
-              Syllable(aNoteText),
-              mEditAreaInformation_.calculateNoteStartTime(aPositionX,
-                                                           mScore_->beat(),
-                                                           mScore_->tempo()),
-              mEditAreaInformation_.calculateNoteLength(aNoteWidth,
-                                                        mScore_->beat(),
-                                                        mScore_->tempo()));
+    NotePointer note(createNote(aNoteId,
+                                aNoteText,
+                                aPositionX,
+                                aPositionY,
+                                aNoteWidth));
     mScore_->appendNote(note);
-
-    mClient_->sendMessage(
-                Message(COMMAND_ID_PLAY_NOTE,
-                        note.toParameters())
-                );
+    mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
+                                  note->toParameters(mScore_->beat(),
+                                                     mScore_->tempo(),
+                                                     mEditAreaInformation_)));
 }
-
 
 QString MainWindowModel::vocalFileExtention() const
 {
@@ -133,11 +145,21 @@ QString MainWindowModel::vocalFileExtention() const
 void MainWindowModel::loadVoiceLibrary(const QUrl &aUrl)
 {
     Parameters parameters;
-    parameters.append(Parameter("FilePath",aUrl.toLocalFile()));
+    parameters.append(Parameter("FilePath", aUrl.toLocalFile()));
 
     mClient_->sendMessage(Message(COMMAND_ID_LOAD_VOICE_LIBRARY,
                                   parameters));
 }
+
+void MainWindowModel::saveWav(const QUrl &aUrl)
+{
+    Parameters parameters = mScore_->toParameters(mEditAreaInformation_);
+    parameters.append(Parameter("FilePath",aUrl.toLocalFile()));
+
+    mClient_->sendMessage(Message(COMMAND_ID_SAVE_WAV,
+                                  parameters));
+}
+
 
 QString MainWindowModel::characterImageUrl() const
 {
@@ -163,8 +185,7 @@ void MainWindowModel::play()
 {
     mClient_->sendMessage(
                 Message(COMMAND_ID_PLAY_SCORE,
-                        mScore_->toParameters())
-                );
+                        mScore_->toParameters(mEditAreaInformation_)));
 
 }
 
@@ -174,15 +195,11 @@ void MainWindowModel::updateNote(int aNoteId,
                                  int aPositionY,
                                  int aNoteWidth)
 {
-    Note note(NoteId(aNoteId),
-              mEditAreaInformation_.calculatePitch(aPositionY),
-              Syllable(aNoteText),
-              mEditAreaInformation_.calculateNoteStartTime(aPositionX,
-                                                           mScore_->beat(),
-                                                           mScore_->tempo()),
-              mEditAreaInformation_.calculateNoteLength(aNoteWidth,
-                                                        mScore_->beat(),
-                                                        mScore_->tempo()));
+    NotePointer note(createNote(aNoteId,
+                                aNoteText,
+                                aPositionX,
+                                aPositionY,
+                                aNoteWidth));
     mScore_->updateNote(note);
 }
 
@@ -200,21 +217,18 @@ int MainWindowModel::noteCount() const
 
 int MainWindowModel::findNotePositionX(int aIndex) const
 {
-    return mEditAreaInformation_.calculatePositionX(mScore_->findNoteStartTime(aIndex),
-                                                    mScore_->beat(),
-                                                    mScore_->tempo());
+    return mScore_->findNotePositionX(aIndex);
 }
 
 void MainWindowModel::emitActivePlayButton()
 {
-    qDebug() << Q_FUNC_INFO;
     emit activePlayButton();
 }
+
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
-    , mScore_(ScorePointer(
-                           new Score()))
-    , mEditAreaInformation_(EditAreaInformation(1, 1, 5, 4000))
+    , mScore_(ScorePointer(new Score()))
+    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 4000))
     , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
     , mLibraryInformation_(
           waltz::editor::LibraryComponent::CharacterImage(),

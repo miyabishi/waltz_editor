@@ -1,8 +1,13 @@
 #ifndef NOTELIST_H
 #define NOTELIST_H
 
-#include<QList>
-#include<waltz_common/parameters.h>
+#include <QSharedPointer>
+#include <QList>
+#include <waltz_common/parameters.h>
+
+#include "src/Model/editareainformation.h"
+#include "beat.h"
+#include "tempo.h"
 #include "note.h"
 
 namespace waltz
@@ -15,15 +20,23 @@ namespace waltz
             {
             public:
                 NoteList();
-                void append(const Note& aNote);
-                waltz::common::Commands::Parameter toParameter();
-                void updateNote(const Note& aNote);
+                void append(const NotePointer aNote);
+                waltz::common::Commands::Parameter toParameter(
+                        Beat aBeat,
+                        Tempo aTempo,
+                        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation);
+                void updateNote(const NotePointer aNote);
                 int count() const;
-                NoteStartTime findNoteStartTime(int index) const;
+                int findNotePositionX(int index) const;
 
             private:
-                QList<Note> mNoteList_;
+                QList<NotePointer> mNoteList_;
+            private:
+                NoteList(const NoteList& aOtehr);
+                NoteList& operator=(const NoteList& aOtehr);
             };
+            typedef QSharedPointer<NoteList> NoteListPointer;
+
         } // namespace ScoreComponent
     } // namespace editor
 } // namespace waltz

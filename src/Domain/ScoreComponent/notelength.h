@@ -1,6 +1,8 @@
 #ifndef NOTELENGTH_H
 #define NOTELENGTH_H
 
+#include <QSharedPointer>
+
 namespace waltz
 {
     namespace editor
@@ -11,14 +13,17 @@ namespace waltz
             {
             public:
                 explicit NoteLength(double aSec);
-                NoteLength(const NoteLength& aOther);
-                NoteLength& operator=(const NoteLength& aOther);
-
                 double value() const;
 
             private:
                 double mSec_;
+
+            private:
+                NoteLength(const NoteLength& aOther);
+                NoteLength& operator=(const NoteLength& aOther);
             };
+            typedef QSharedPointer<NoteLength> NoteLengthPointer;
+
         } // ScoreComponent
     } // namespace editor
 } // namespace waltz

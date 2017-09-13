@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <waltz_common/parameters.h>
+#include "src/Model/editareainformation.h"
 #include "notelist.h"
 #include "tempo.h"
 #include "beat.h"
@@ -27,16 +28,16 @@ namespace waltz
                 int beatChild();
                 int beatParent();
                 NoteList noteList();
-                void appendNote(const Note& aNote);
-                void updateNote(const Note& aNote);
-                waltz::common::Commands::Parameters toParameters();
+                void appendNote(const NotePointer aNote);
+                void updateNote(const NotePointer aNote);
+                waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;
-                NoteStartTime findNoteStartTime(int aIndex) const;
+                int findNotePositionX(int aIndex) const;
 
             private:
                 Tempo mTempo_;
                 Beat  mBeat_;
-                NoteList mNoteList_;
+                NoteListPointer mNoteList_;
             };
             typedef std::shared_ptr<Score> ScorePointer;
         }

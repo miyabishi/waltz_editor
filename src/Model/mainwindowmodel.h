@@ -69,6 +69,9 @@ namespace waltz
                 // for Controller
                 Q_INVOKABLE void play();
 
+                // for toolBar
+                Q_INVOKABLE void saveWav(const QUrl& aUrl);
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();
@@ -77,7 +80,7 @@ namespace waltz
             private:
                 static MainWindowModel*              mInstance_;
                 ScoreComponent::ScorePointer         mScore_;
-                EditAreaInformation                  mEditAreaInformation_;
+                EditAreaInformationPointer           mEditAreaInformation_;
                 Communicator::Client*                mClient_;
                 LibraryComponent::LibraryInformation mLibraryInformation_;
                 int                                  mNoteIdCounter_;

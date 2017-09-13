@@ -8,18 +8,6 @@ NoteStartTime::NoteStartTime(double aSec)
 
 }
 
-NoteStartTime::NoteStartTime(const NoteStartTime& aOther)
-    : mSec_(aOther.mSec_)
-{
-
-}
-
-NoteStartTime& NoteStartTime::operator=(const NoteStartTime& aOther)
-{
-    mSec_ = aOther.mSec_;
-    return (*this);
-}
-
 double NoteStartTime::value() const
 {
     return mSec_;

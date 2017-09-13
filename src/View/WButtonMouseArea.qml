@@ -4,7 +4,7 @@ MouseArea{
     acceptedButtons: Qt.LeftButton
     hoverEnabled: true
     onEntered: {
-        parent.color = "#444444"
+        parent.color = "#666666"
     }
     onExited: {
         parent.color = "#333333"
@@ -13,7 +13,7 @@ MouseArea{
         parent.color = "#444488"
     }
     onReleased: {
-        parent.color = "#444444"
+        parent.color = "#666666"
     }
 }
 

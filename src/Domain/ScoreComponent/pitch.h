@@ -1,6 +1,7 @@
 #ifndef PITCH_H
 #define PITCH_H
 
+#include <QSharedPointer>
 #include "domaindef.h"
 
 namespace waltz
@@ -9,15 +10,11 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-
             class Pitch
             {
             public:
                 Pitch(Tone aTone, int aOctave);
-                Pitch(const Pitch& aOther);
-
-                Pitch& operator=(const Pitch& aOther);
-
+            public:
                 Tone tone() const;
                 int octave() const;
 
@@ -25,7 +22,12 @@ namespace waltz
                 Tone mTone_;
                 int mOctave_;
 
+            private:
+                Pitch(const Pitch& aOther);
+                Pitch& operator=(const Pitch& aOther);
             };
+            typedef QSharedPointer<Pitch> PitchPointer;
+
         } // namespace ScoreComponent
     } // namespace editor
 } // namespace waltz

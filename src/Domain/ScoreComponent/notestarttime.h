@@ -1,6 +1,7 @@
 #ifndef NOTESTARTTIME_H
 #define NOTESTARTTIME_H
 
+#include <QSharedPointer>
 
 namespace waltz
 {
@@ -13,15 +14,16 @@ namespace waltz
             {
             public:
                 explicit NoteStartTime(double aSec);
-                NoteStartTime(const NoteStartTime& aOther);
-                NoteStartTime& operator=(const NoteStartTime& aOther);
-
                 double value() const;
 
             private:
                 double mSec_;
 
+            private:
+                NoteStartTime(const NoteStartTime& aOther);
+                NoteStartTime& operator=(const NoteStartTime& aOther);
             };
+            typedef QSharedPointer<NoteStartTime> NoteStartTimePointer;
         } // namespace ScoreComponent
     } // namespace editor
 } // namespace waltz

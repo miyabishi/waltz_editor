@@ -1,6 +1,7 @@
 #ifndef EDITAREAINFORMATION_H
 #define EDITAREAINFORMATION_H
 
+#include <QSharedPointer>
 #include "src/Domain/ScoreComponent/notestarttime.h"
 #include "src/Domain/ScoreComponent/pitch.h"
 #include "src/Domain/ScoreComponent/beat.h"
@@ -20,24 +21,22 @@ namespace waltz
                                     double aHeightRate,
                                     int aSupportOctave,
                                     int aEditAreaWidth);
-                EditAreaInformation(const EditAreaInformation& aOther);
-                EditAreaInformation& operator=(const EditAreaInformation& aOther);
 
             public:
                 int columnWidth(int aBeatParent) const;
                 int rowHeight() const;
                 int supportOctave() const;
                 int editAreaWidth() const;
-                int calculatePositionX(ScoreComponent::NoteStartTime aNoteLength,
+                int calculatePositionX(ScoreComponent::NoteStartTimePointer aNoteStartTIme,
                                        ScoreComponent::Beat aBeat,
                                        ScoreComponent::Tempo aTempo) const;
-                ScoreComponent::NoteStartTime calculateNoteStartTime(int aX,
-                                                                     ScoreComponent::Beat aBeat,
-                                                                     ScoreComponent::Tempo aTempo) const;
-                ScoreComponent::NoteLength calculateNoteLength(int aWidth,
-                                                               ScoreComponent::Beat aBeat,
-                                                               ScoreComponent::Tempo aTempo) const;
-                ScoreComponent::Pitch calculatePitch(int aY) const;
+                ScoreComponent::NoteStartTimePointer calculateNoteStartTime(int aX,
+                                                                            ScoreComponent::Beat aBeat,
+                                                                            ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::NoteLengthPointer calculateNoteLength(int aWidth,
+                                                                      ScoreComponent::Beat aBeat,
+                                                                      ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::PitchPointer calculatePitch(int aY) const;
 
             private:
                 double calculateSec(int aX,
@@ -54,8 +53,12 @@ namespace waltz
                 double mHeightRate_;
                 int    mSupportOctarve_;
                 int    mEditAreaWidth_;
-            };
 
+            private:
+                EditAreaInformation(const EditAreaInformation& aOther);
+                EditAreaInformation& operator=(const EditAreaInformation& aOther);
+            };
+            typedef QSharedPointer<EditAreaInformation> EditAreaInformationPointer;
         } // namespace model
     }
 } // namespace waltz

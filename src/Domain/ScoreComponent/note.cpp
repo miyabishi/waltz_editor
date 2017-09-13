@@ -6,64 +6,46 @@ using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;
 
 Note::Note(const NoteId& aNoteId,
-           const Pitch& aPitch,
            const Syllable& aSyllable,
-           const NoteStartTime& aNoteStartTime,
-           const NoteLength& aNoteLength)
+           const NoteRectPointer aNoteRect)
     : mNoteId_(aNoteId)
-    , mPitch_(aPitch)
     , mSyllable_(aSyllable)
-    , mNoteStartTime_(aNoteStartTime)
-    , mNoteLength_(aNoteLength)
+    , mNoteRect_(aNoteRect)
 {
 }
 
-Note::Note(const Note& aOther)
-    : mNoteId_(aOther.mNoteId_)
-    , mPitch_(aOther.mPitch_)
-    , mSyllable_(aOther.mSyllable_)
-    , mNoteStartTime_(aOther.mNoteStartTime_)
-    , mNoteLength_(aOther.mNoteLength_)
+NoteId Note::noteId() const
 {
+    return mNoteId_;
 }
 
-Note& Note::operator=(const Note& aOther)
+bool Note::noteIdEquals(const NoteId& aOtherNoteId) const
 {
-    mNoteId_        = aOther.mNoteId_;
-    mPitch_         = aOther.mPitch_;
-    mSyllable_      = aOther.mSyllable_;
-    mNoteStartTime_ = aOther.mNoteStartTime_;
-    mNoteLength_    = aOther.mNoteLength_;
-
-    return (*this);
+    return mNoteId_ == aOtherNoteId;
 }
 
-NoteStartTime Note::noteStartTime() const
+bool Note::xPositionIs(int aX)
 {
-    return mNoteStartTime_;
+    return mNoteRect_->x() == aX;
 }
 
+int Note::xPosition() const
+{
+    return mNoteRect_->x();
+}
 
-Parameters Note::toParameters() const
+Parameters Note::toParameters(Beat aBeat,
+                              Tempo aTempo,
+                              waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const
 {
     Parameters parameters;
-    parameters.append(Parameter("ToneValue",(int)mPitch_.tone()));
-    parameters.append(Parameter("Octave",        mPitch_.octave()));
+    PitchPointer pitch = mNoteRect_->pitch(aEditAreaInformation);
+
+    parameters.append(Parameter("ToneValue",(int)pitch->tone()));
+    parameters.append(Parameter("Octave",        pitch->octave()));
     parameters.append(Parameter("Alias",         mSyllable_.value()));
-    parameters.append(Parameter("NoteStartTime", mNoteStartTime_.value()));
-    parameters.append(Parameter("NoteLength",    mNoteLength_.value()));
+    parameters.append(Parameter("NoteStartTime", mNoteRect_->noteStartTime(aBeat, aTempo, aEditAreaInformation)->value()));
+    parameters.append(Parameter("NoteLength",    mNoteRect_->noteLength(aBeat, aTempo, aEditAreaInformation)->value()));
 
     return parameters;
 }
-
-
-bool Note::operator==(const Note& aOther) const
-{
-    return mNoteId_ == aOther.mNoteId_;
-}
-
-bool Note::operator!=(const Note& aOther) const
-{
-    return mNoteId_ != aOther.mNoteId_;
-}
-

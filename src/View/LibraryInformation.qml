@@ -83,22 +83,6 @@ Rectangle{
                 source: vocal_image
             }
         }
-        /*
-        Text{
-            z:0
-            Layout.alignment: Qt.AlignCenter
-            color: "#ffffff"
-            font.family: "Meiryo"
-            font.pointSize: 7
-            text:"voice：momoko fujimoto
-
-files : 256
-size :  73086636bytes
-uses : 93.8%
-freq avg : 341.7 Hz (F4)
-logical range : A#3～D5
-voices : 691"
-        }*/
 
         Rectangle{
             z:0

@@ -7,7 +7,7 @@ using namespace waltz::common::Commands;
 Score::Score()
  : mTempo_(Tempo(120))
  , mBeat_(Beat(4,4))
- , mNoteList_()
+ , mNoteList_(new NoteList())
 {
 }
 
@@ -46,28 +46,29 @@ Beat Score::beat()
     return mBeat_;
 }
 
-Parameters Score::toParameters()
+Parameters Score::toParameters(const model::EditAreaInformationPointer aEditAreaInformation)
 {
     Parameters parameters;
-    parameters.append(mNoteList_.toParameter());
+    parameters.append(mNoteList_->toParameter(mBeat_, mTempo_, aEditAreaInformation));
     return parameters;
 }
 
-void Score::appendNote(const Note& aNote)
+void Score::appendNote(const NotePointer aNote)
 {
-    mNoteList_.append(aNote);
+    mNoteList_->append(aNote);
 }
-void Score::updateNote(const Note& aNote)
+
+void Score::updateNote(const NotePointer aNote)
 {
-    mNoteList_.updateNote(aNote);
+    mNoteList_->updateNote(aNote);
 }
 
 int Score::noteCount() const
 {
-    return mNoteList_.count();
+    return mNoteList_->count();
 }
 
-NoteStartTime Score::findNoteStartTime(int aIndex) const
+int Score::findNotePositionX(int aIndex) const
 {
-    return mNoteList_.findNoteStartTime(aIndex);
+    return mNoteList_->findNotePositionX(aIndex);
 }
