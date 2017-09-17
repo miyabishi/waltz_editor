@@ -139,11 +139,7 @@ Rectangle{
                         var positionY = piano_roll_edit_area.calcY(mouseY)
                         var noteText = "あ"
                         var noteId = MainWindowModel.publishNoteId();
-                        note_repeater.model.append({"noteId": noteId,
-                                                    "noteText": noteText,
-                                                    "positionX": positionX,
-                                                    "positionY": positionY,
-                                                    "noteWidth": edit_area.columnWidth});
+                        note_repeater.model.append({"noteId": noteId,"noteText": noteText,"positionX": positionX,"positionY": positionY, "noteWidth": edit_area.columnWidth});
                         MainWindowModel.appendNote(noteId, noteText, positionX, positionY, edit_area.columnWidth)
                     }
                 }

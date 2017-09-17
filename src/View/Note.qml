@@ -7,9 +7,17 @@ Rectangle{
     property string pNoteText_: noteText
     property bool pEditing_: false
     property bool pStretching_: false
-    property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
     property int positionX
     property int positionY
+
+    property int pPortamentStartX_ : -10
+    property int pPortamentStartY_ : (height/2)
+    property int pPortamentEndX_ : 10
+    property int pPortamentEndY_ : (height/2)
+
+
+    property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
+
 
 
     border.color: "#000000"
@@ -58,6 +66,71 @@ Rectangle{
         }
     }
 
+
+    Canvas {
+        id: canvas
+        function min(aA, aB)
+        {
+            if (aA > aB)
+            {
+                return aB
+            }
+            return aA
+        }
+
+        function abs(aX)
+        {
+            if (aX < 0)
+            {
+                return aX * -1
+            }
+            return aX
+        }
+
+        function calculateCanvasX()
+        {
+            return note_rect.pPortamentStartX_
+        }
+
+        function calculateCanvasY()
+        {
+            return min(0, note_rect.pPortamentEndY_)
+        }
+
+        function calculateCanvasWidth()
+        {
+            return abs(note_rect.pPortamentEndX_ - note_rect.pPortamentStartX_)
+        }
+
+        function calculateCanvasHeight()
+        {
+            return abs(note_rect.pPortamentEndY_ - note_rect.pPortamentStartY_ + note_rect.height * 2)
+        }
+
+        x: calculateCanvasX()
+        y: calculateCanvasY()
+        width: calculateCanvasWidth()
+        height: calculateCanvasHeight()
+
+        onPaint: {
+            var ctx = canvas.getContext('2d');
+            ctx.strokeStyle = Qt.rgba(.4,.6,.8);
+            ctx.beginPath();
+            ctx.moveTo(note_rect.pPortamentStartX_, note_rect.pPortamentStartY_);
+            ctx.bezierCurveTo(note_rect.pPortamentStartX_, note_rect.pPortamentStartY_ + 100,
+                              note_rect.pPortamentEndX_ -10, note_rect.pPortamentEndY_,
+                              note_rect.pPortamentEndX_, note_rect.pPortamentEndY_);
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+        }
+    }
+
+    Component.onCompleted: {
+
+    }
+
+
     MouseArea{
         id: note_stretch_mouse_area
         anchors.right: parent.right
@@ -77,11 +150,13 @@ Rectangle{
                 note_rect.width += mouseX
             }
         }
+
         onPressed: {
             note_rect.pStretching_ = true
             pPressedX_ = note_rect.x
             note_rect.focus = true
         }
+
         onReleased: {
             note_rect.pStretching_ = false
             note_rect.updateNote()

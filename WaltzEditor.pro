@@ -26,7 +26,16 @@ SOURCES += main.cpp \
     src/Domain/Commands/activeplaybuttoncommand.cpp \
     src/Domain/ScoreComponent/noterect.cpp \
     src/Domain/ScoreComponent/noterectposition.cpp \
-    src/Domain/ScoreComponent/noterectwidth.cpp
+    src/Domain/ScoreComponent/noterectwidth.cpp \
+    src/Domain/ScoreComponent/portamento.cpp \
+    src/Domain/ScoreComponent/vibrato.cpp \
+    src/Domain/ScoreComponent/vibratoamplitude.cpp \
+    src/Domain/ScoreComponent/vibratofrequency.cpp \
+    src/Domain/ScoreComponent/pitchchangingpoint.cpp \
+    src/Domain/ScoreComponent/pitchcurve.cpp \
+    src/Domain/ScoreComponent/pitchcurvecontrolpoint.cpp \
+    src/Domain/ScoreComponent/pitchcurvestartpoint.cpp \
+    src/Domain/ScoreComponent/pitchcurveendpoint.cpp
 
 RESOURCES += qml.qrc
 
@@ -77,7 +86,16 @@ HEADERS += \
     src/Domain/Commands/activeplaybuttoncommand.h \
     src/Domain/ScoreComponent/noterect.h \
     src/Domain/ScoreComponent/noterectposition.h \
-    src/Domain/ScoreComponent/noterectwidth.h
+    src/Domain/ScoreComponent/noterectwidth.h \
+    src/Domain/ScoreComponent/portamento.h \
+    src/Domain/ScoreComponent/vibrato.h \
+    src/Domain/ScoreComponent/vibratoamplitude.h \
+    src/Domain/ScoreComponent/vibratofrequency.h \
+    src/Domain/ScoreComponent/pitchchangingpoint.h \
+    src/Domain/ScoreComponent/pitchcurve.h \
+    src/Domain/ScoreComponent/pitchcurvecontrolpoint.h \
+    src/Domain/ScoreComponent/pitchcurvestartpoint.h \
+    src/Domain/ScoreComponent/pitchcurveendpoint.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

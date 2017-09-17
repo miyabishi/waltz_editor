@@ -27,7 +27,6 @@ namespace waltz
                 Pitch& operator=(const Pitch& aOther);
             };
             typedef QSharedPointer<Pitch> PitchPointer;
-
         } // namespace ScoreComponent
     } // namespace editor
 } // namespace waltz
