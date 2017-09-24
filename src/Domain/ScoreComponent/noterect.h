@@ -7,6 +7,7 @@
 #include "beat.h"
 #include "noterectposition.h"
 #include "noterectwidth.h"
+#include "noterectheight.h"
 #include "notelength.h"
 #include "notestarttime.h"
 #include "pitch.h"
@@ -22,7 +23,8 @@ namespace waltz
             {
             public:
                 NoteRect(const NoteRectPositionPointer aPosition,
-                         const NoteRectWidthPointer aWidth);
+                         const NoteRectWidthPointer aWidth,
+                         const NoteRectHeightPointer aHeight);
 
             public:
                 NoteStartTimePointer noteStartTime(
@@ -36,10 +38,13 @@ namespace waltz
                         const waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
                 PitchPointer pitch(const waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
                 int x() const;
+                int y() const;
+                NoteRectHeightPointer height() const;
 
             private:
                 NoteRectPositionPointer mPosition_;
                 NoteRectWidthPointer    mWidth_;
+                NoteRectHeightPointer   mNoteRectHeight_;
 
             private:
                 NoteRect(const NoteRect& aOther);

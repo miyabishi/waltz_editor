@@ -56,3 +56,8 @@ Parameters Note::toParameters(Beat aBeat,
 
     return parameters;
 }
+
+NoteRectPointer Note::noteRect() const
+{
+    return mNoteRect_;
+}

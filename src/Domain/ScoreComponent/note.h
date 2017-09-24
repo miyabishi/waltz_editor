@@ -47,6 +47,7 @@ namespace waltz
                 NoteId noteId() const;
                 bool noteIdEquals(const NoteId& aOtherNoteId) const;
                 PortamentoPointer portamento() const;
+                NoteRectPointer noteRect() const;
 
             private:
                 NoteId            mNoteId_;

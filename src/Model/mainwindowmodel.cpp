@@ -111,6 +111,7 @@ void MainWindowModel::appendNote(int aNoteId,
                                          aPositionX,
                                          aPositionY,
                                          aNoteWidth,
+                                         mEditAreaInformation_->rowHeight(),
                                          mScore_));
     mScore_->appendNote(note);
     mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
@@ -183,6 +184,7 @@ void MainWindowModel::updateNote(int aNoteId,
                                          aPositionX,
                                          aPositionY,
                                          aNoteWidth,
+                                         mEditAreaInformation_->rowHeight(),
                                          mScore_));
     mScore_->updateNote(note);
 }

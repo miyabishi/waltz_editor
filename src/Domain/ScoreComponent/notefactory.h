@@ -3,7 +3,7 @@
 
 #include <QSharedPointer>
 #include "note.h"
-#include "score.h"
+#include "notelist.h"
 
 namespace waltz
 {
@@ -22,7 +22,8 @@ namespace waltz
                                    int aPositionX,
                                    int aPositionY,
                                    int aNoteWidth,
-                                   const ScorePointer aScore);
+                                   int aNoteHeight,
+                                   const NoteListPointer aNoteList);
 
             private:
                 NoteFactory(const NoteFactory& aOther);
