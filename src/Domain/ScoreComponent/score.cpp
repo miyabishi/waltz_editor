@@ -68,6 +68,11 @@ int Score::noteCount() const
     return mNoteList_->count();
 }
 
+NoteListPointer Score::noteList() const
+{
+    return mNoteList_;
+}
+
 int Score::findNotePositionX(int aIndex) const
 {
     return mNoteList_->findNotePositionX(aIndex);

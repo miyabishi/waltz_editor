@@ -27,12 +27,11 @@ namespace waltz
                 Beat beat();
                 int beatChild();
                 int beatParent();
-                NoteList noteList();
+                NoteListPointer noteList() const;
                 void appendNote(const NotePointer aNote);
                 void updateNote(const NotePointer aNote);
                 waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;
-                int findNotePositionX(int aIndex) const;
 
             private:
                 Tempo mTempo_;

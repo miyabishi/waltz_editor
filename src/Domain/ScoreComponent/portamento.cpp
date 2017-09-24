@@ -1,14 +1,13 @@
 #include "portamento.h"
 
-namespace waltz {
-namespace editor {
-namespace ScoreComponent {
+using namespace waltz::editor::ScoreComponent;
 
-Portamento::Portamento()
+Portamento::Portamento(const PitchCurvePointer aPitchCurve)
+    : mPitchCurve_(aPitchCurve)
 {
-
 }
 
-} // namespace ScoreComponent
-} // namespace editor
-} // namespace waltz
+PitchCurvePointer Portamento::pitchCurve() const
+{
+    return mPitchCurve_;
+}

@@ -2,6 +2,8 @@
 #define PITCHCURVEENDPOINT_H
 
 #include <QSharedPointer>
+#include "point.h"
+#include "pitchcurvecontrolpoint.h"
 
 namespace waltz
 {
@@ -9,10 +11,15 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-            class PitchCurveEndPoint
+            class PitchCurveEndPoint : public Point
             {
             public:
-                PitchCurveEndPoint();
+                PitchCurveEndPoint(int aX, int aY,
+                                   const PitchCurveControlPointPointer aControlPoint);
+                PitchCurveControlPointPointer controlPoint() const;
+
+            private:
+                PitchCurveControlPointPointer mControlPoint_;
 
             private:
                 PitchCurveEndPoint(const PitchCurveEndPoint& aOther);

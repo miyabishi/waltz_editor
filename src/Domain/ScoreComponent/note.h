@@ -12,6 +12,7 @@
 #include "noterect.h"
 #include "tempo.h"
 #include "beat.h"
+#include "portamento.h"
 #include "src/Model/editareainformation.h"
 
 
@@ -33,7 +34,8 @@ namespace waltz
             public:
                 Note(const NoteId& aNoteId,
                      const Syllable& aSyllable,
-                     const NoteRectPointer aNoteRect);
+                     const NoteRectPointer aNoteRect,
+                     const PortamentoPointer aPortament);
             public:
                 waltz::common::Commands::Parameters toParameters(
                         Beat aBeat,
@@ -44,11 +46,13 @@ namespace waltz
 
                 NoteId noteId() const;
                 bool noteIdEquals(const NoteId& aOtherNoteId) const;
+                PortamentoPointer portamento() const;
 
             private:
-                NoteId          mNoteId_;
-                Syllable        mSyllable_;
-                NoteRectPointer mNoteRect_;
+                NoteId            mNoteId_;
+                Syllable          mSyllable_;
+                NoteRectPointer   mNoteRect_;
+                PortamentoPointer mPortamento_;
 
             private:
                 Note(const Note& aOther);

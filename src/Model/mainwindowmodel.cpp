@@ -9,17 +9,9 @@
 #include <waltz_common/message.h>
 
 #include "mainwindowmodel.h"
-#include "src/Domain/ScoreComponent/syllable.h"
-#include "src/Domain/ScoreComponent/notelength.h"
-#include "src/Domain/ScoreComponent/pitch.h"
-#include "src/Domain/ScoreComponent/syllable.h"
-#include "src/Domain/ScoreComponent/noteid.h"
-#include "src/Domain/ScoreComponent/noterect.h"
-#include "src/Domain/ScoreComponent/noterectposition.h"
-#include "src/Domain/ScoreComponent/noterectwidth.h"
-
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
+#include "src/Domain/ScoreComponent/notefactory.h"
 
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
@@ -35,19 +27,6 @@ namespace
     const CommandId COMMAND_ID_PLAY_NOTE("PlayNote");
     const CommandId COMMAND_ID_PLAY_SCORE("PlayScore");
     const CommandId COMMAND_ID_SAVE_WAV("SaveWav");
-
-    NotePointer createNote(int aNoteId,
-                           const QString& aNoteText,
-                           int aPositionX,
-                           int aPositionY,
-                           int aNoteWidth)
-    {
-        return NotePointer(new Note(NoteId(aNoteId),
-                                    Syllable(aNoteText),
-                                    NoteRectPointer(new NoteRect(
-                                                        NoteRectPositionPointer(new NoteRectPosition(aPositionX, aPositionY)),
-                                                        NoteRectWidthPointer(new NoteRectWidth(aNoteWidth))))));
-    }
 }
 
 MainWindowModel* MainWindowModel::mInstance_ = 0;
@@ -125,11 +104,14 @@ void MainWindowModel::appendNote(int aNoteId,
                                  int aPositionY,
                                  int aNoteWidth)
 {
-    NotePointer note(createNote(aNoteId,
-                                aNoteText,
-                                aPositionX,
-                                aPositionY,
-                                aNoteWidth));
+
+    NoteFactoryPointer noteFactory(new NoteFactory());
+    NotePointer note(noteFactory->create(aNoteId,
+                                         aNoteText,
+                                         aPositionX,
+                                         aPositionY,
+                                         aNoteWidth,
+                                         mScore_));
     mScore_->appendNote(note);
     mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
                                   note->toParameters(mScore_->beat(),
@@ -195,11 +177,13 @@ void MainWindowModel::updateNote(int aNoteId,
                                  int aPositionY,
                                  int aNoteWidth)
 {
-    NotePointer note(createNote(aNoteId,
-                                aNoteText,
-                                aPositionX,
-                                aPositionY,
-                                aNoteWidth));
+    NoteFactoryPointer noteFactory(new NoteFactory());
+    NotePointer note(noteFactory->create(aNoteId,
+                                         aNoteText,
+                                         aPositionX,
+                                         aPositionY,
+                                         aNoteWidth,
+                                         mScore_));
     mScore_->updateNote(note);
 }
 
@@ -217,12 +201,77 @@ int MainWindowModel::noteCount() const
 
 int MainWindowModel::findNotePositionX(int aIndex) const
 {
-    return mScore_->findNotePositionX(aIndex);
+    return mScore_->noteList()->at(aIndex)->xPosition();
 }
 
 void MainWindowModel::emitActivePlayButton()
 {
     emit activePlayButton();
+}
+
+int MainWindowModel::portamentStartX(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->x();
+}
+
+int MainWindowModel::portamentStartY(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->y();
+}
+
+int MainWindowModel::portamentStartControlX(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->controlPoint()->x();
+}
+
+int MainWindowModel::portamentStartControlY(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->controlPoint()->y();
+}
+
+int MainWindowModel::pitchChangingPointX(int aNoteId, int aIndex) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->x();
+}
+
+int MainWindowModel::pitchChangingPointY(int aNoteId, int aIndex) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->y();
+}
+
+int MainWindowModel::pitchChangingPointControlX(int aNoteId, int aIndex) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->controlPoint()->x();
+}
+
+int MainWindowModel::pitchChangingPointControlY(int aNoteId, int aIndex) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->controlPoint()->y();
+}
+
+int MainWindowModel::portamentEndX(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->x();
+}
+
+int MainWindowModel::portamentEndY(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->y();
+}
+
+int MainWindowModel::portamentStartControlX(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->controlPoint()->x();
+}
+
+int MainWindowModel::portamentStartControlY(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->controlPoint()->y();
+}
+
+ScoreComponent::NotePointer MainWindowModel::findNote(int aNoteId)
+{
+    return mScore_->noteList()->find(NoteId(aNoteId));
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)
@@ -241,4 +290,3 @@ MainWindowModel::MainWindowModel(QObject *aParent)
 MainWindowModel::~MainWindowModel()
 {
 }
-

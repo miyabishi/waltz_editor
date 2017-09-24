@@ -10,11 +10,6 @@ Rectangle{
     property int positionX
     property int positionY
 
-    property int pPortamentStartX_ : -10
-    property int pPortamentStartY_ : (height/2)
-    property int pPortamentEndX_ : 10
-    property int pPortamentEndY_ : (height/2)
-
 
     property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
 
@@ -65,71 +60,6 @@ Rectangle{
             note_rect.pEditing_ = true
         }
     }
-
-
-    Canvas {
-        id: canvas
-        function min(aA, aB)
-        {
-            if (aA > aB)
-            {
-                return aB
-            }
-            return aA
-        }
-
-        function abs(aX)
-        {
-            if (aX < 0)
-            {
-                return aX * -1
-            }
-            return aX
-        }
-
-        function calculateCanvasX()
-        {
-            return note_rect.pPortamentStartX_
-        }
-
-        function calculateCanvasY()
-        {
-            return min(0, note_rect.pPortamentEndY_)
-        }
-
-        function calculateCanvasWidth()
-        {
-            return abs(note_rect.pPortamentEndX_ - note_rect.pPortamentStartX_)
-        }
-
-        function calculateCanvasHeight()
-        {
-            return abs(note_rect.pPortamentEndY_ - note_rect.pPortamentStartY_ + note_rect.height * 2)
-        }
-
-        x: calculateCanvasX()
-        y: calculateCanvasY()
-        width: calculateCanvasWidth()
-        height: calculateCanvasHeight()
-
-        onPaint: {
-            var ctx = canvas.getContext('2d');
-            ctx.strokeStyle = Qt.rgba(.4,.6,.8);
-            ctx.beginPath();
-            ctx.moveTo(note_rect.pPortamentStartX_, note_rect.pPortamentStartY_);
-            ctx.bezierCurveTo(note_rect.pPortamentStartX_, note_rect.pPortamentStartY_ + 100,
-                              note_rect.pPortamentEndX_ -10, note_rect.pPortamentEndY_,
-                              note_rect.pPortamentEndX_, note_rect.pPortamentEndY_);
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            ctx.restore();
-        }
-    }
-
-    Component.onCompleted: {
-
-    }
-
 
     MouseArea{
         id: note_stretch_mouse_area
@@ -183,6 +113,48 @@ Rectangle{
             }
         }
     }
+
+    Canvas {
+        id: canvas
+        x: MainWindowModel.portamentStartX(note_rect.pNoteId_)
+        y: note_rect.y - edit_area.height
+        height: edit_area.height
+        width: MainWindowModel.portamentEndX(note_rect.pNoteId_) - MainWindowModel.portamentStartX(note_rect.pNoteId_)
+
+        onPaint: {
+            var ctx = canvas.getContext('2d');
+            ctx.strokeStyle = Qt.rgba(.4,.6,.8);
+            ctx.beginPath();
+
+            drawPortamento(ctx, note_rect.pNoteId_);
+
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawPortamento(aCtx, aNoteId)
+        {
+            aCtx.moveTo(MainWindowModel.portamentStartX(aNoteId), MainWindowModel.portamentStartY(aNoteId));
+            var preControlX = MainWindowModel.portamentStartControlX(aNoteId);
+            var preControlY = MainWindowModel.portamentStartControlY(aNoteId);
+
+            for(var index = 0; index < MainWindowModel.pitchChangingPointCount(pNoteId_); ++index)
+            {
+                aCtx.bezierCurveTo(preControlX,preControlY,
+                                  MainWindowModel.pitchChangingPointControlX(aNoteId, index), MainWindowModel.pitchChangingPointControlY(aNoteId, index),
+                                  MainWindowModel.pitchChangingPointX(aNoteId, index), MainWindowModel.pitchChangingPointY(aNoteId, index));
+
+                preControlX = -MainWindowModel.pitchChangingPointControlX(aNoteId, index);
+                preControlY = -MainWindowModel.pitchChangingPointControlY(aNoteId, index);
+            }
+
+            aCtx.bezierCurveTo(preControlX,preControlY,
+                              MainWindowModel.portamentEndControlX(aNoteId),MainWindowModel.portamentEndControlY(aNoteId),
+                              MainWindowModel.portamentEndX(aNoteId), MainWindowModel.portamentEndY(aNoteId));
+        }
+    }
+
 
 }
 

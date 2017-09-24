@@ -3,7 +3,8 @@
 
 using namespace waltz::editor::ScoreComponent;
 
-PitchCurveControlPoint::PitchCurveControlPoint()
+PitchCurveControlPoint::PitchCurveControlPoint(int aX, int aY)
+    : Point(aX, aY)
 {
 
 }

@@ -2,6 +2,7 @@
 #define PORTAMENTO_H
 
 #include <QSharedPointer>
+#include "pitchcurve.h"
 
 namespace waltz
 {
@@ -9,15 +10,20 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-
             class Portamento
             {
             public:
-                Portamento();
+                Portamento(const PitchCurvePointer aPitchCurve);
+                PitchCurvePointer pitchCurve() const;
+
+            private:
+                PitchCurvePointer mPitchCurve_;
+
             private:
                 Portamento(const Portamento& aOther);
                 Portamento& operator=(const Portamento& aOther);
             };
+            typedef QSharedPointer<Portamento> PortamentoPointer;
 
         } // namespace ScoreComponent
     } // namespace editor

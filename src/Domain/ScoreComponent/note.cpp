@@ -7,10 +7,12 @@ using namespace waltz::common::Commands;
 
 Note::Note(const NoteId& aNoteId,
            const Syllable& aSyllable,
-           const NoteRectPointer aNoteRect)
+           const NoteRectPointer aNoteRect,
+           const PortamentoPointer aPortament)
     : mNoteId_(aNoteId)
     , mSyllable_(aSyllable)
     , mNoteRect_(aNoteRect)
+    , mPortamento_(aPortament)
 {
 }
 
@@ -32,6 +34,11 @@ bool Note::xPositionIs(int aX)
 int Note::xPosition() const
 {
     return mNoteRect_->x();
+}
+
+PortamentoPointer Note::portamento() const
+{
+    return mPortamento_;
 }
 
 Parameters Note::toParameters(Beat aBeat,

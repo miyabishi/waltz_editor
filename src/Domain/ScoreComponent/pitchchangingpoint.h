@@ -2,6 +2,8 @@
 #define PITCHCHANGINGPOINT_H
 
 #include <QSharedPointer>
+#include "point.h"
+#include "pitchcurvecontrolpoint.h"
 
 namespace waltz
 {
@@ -9,16 +11,16 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-            class PitchChangingPoint
+            class PitchChangingPoint : Point
             {
             public:
                 PitchChangingPoint(const int aX,
-                                   const int aY);
+                                   const int aY,
+                                   const PitchCurveControlPointPointer aControlPoint);
+                PitchCurveControlPointPointer controlPoint() const;
 
             private:
-                int mX_;
-                int mY_;
-
+                PitchCurveControlPointPointer mControlPoint_;
             private:
                 PitchChangingPoint(const PitchChangingPoint& aOther);
                 PitchChangingPoint& operator=(const PitchChangingPoint& aOther);

@@ -9,6 +9,7 @@
 #include "src/Communicator/client.h"
 #include "src/Model/editareainformation.h"
 #include "src/Domain/LibraryComponent/libraryinformation.h"
+#include "src/Domain/ScoreComponent/note.h"
 
 namespace waltz
 {
@@ -66,6 +67,25 @@ namespace waltz
                 Q_INVOKABLE QString libraryDescription() const;
                 Q_INVOKABLE QString vocalFileExtention() const;
 
+                // for Portament
+                Q_INVOKABLE int portamentStartX(int aNoteId) const;
+                Q_INVOKABLE int portamentStartY(int aNoteId) const;
+                Q_INVOKABLE int portamentStartControlX(int aNoteId) const;
+                Q_INVOKABLE int portamentStartControlY(int aNoteId) const;
+
+                Q_INVOKABLE int pitchChangingPointCount(int aNoteId) const;
+                Q_INVOKABLE int pitchChangingPointX(int aNoteId, int aIndex) const;
+                Q_INVOKABLE int pitchChangingPointY(int aNoteId, int aIndex) const;
+
+                Q_INVOKABLE int pitchChangingPointControlX(int aNoteId, int aIndex) const;
+                Q_INVOKABLE int pitchChangingPointControlY(int aNoteId, int aIndex) const;
+
+                Q_INVOKABLE int portamentEndX(int aNoteId) const;
+                Q_INVOKABLE int portamentEndY(int aNoteId) const;
+                Q_INVOKABLE int portamentEndControlX(int aNoteId) const;
+                Q_INVOKABLE int portamentEndControlY(int aNoteId) const;
+
+
                 // for Controller
                 Q_INVOKABLE void play();
 
@@ -76,6 +96,9 @@ namespace waltz
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();
                 void libraryInformationUpdated();
+
+            private:
+                ScoreComponent::NotePointer findNote(int aNoteId);
 
             private:
                 static MainWindowModel*              mInstance_;

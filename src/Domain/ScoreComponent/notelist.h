@@ -9,6 +9,7 @@
 #include "beat.h"
 #include "tempo.h"
 #include "note.h"
+#include "noterectposition.h"
 
 namespace waltz
 {
@@ -24,13 +25,16 @@ namespace waltz
                 waltz::common::Commands::Parameter toParameter(
                         Beat aBeat,
                         Tempo aTempo,
-                        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation);
+                        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
                 void updateNote(const NotePointer aNote);
                 int count() const;
-                int findNotePositionX(int index) const;
+                NotePointer at(int aIndex) const;
+                NotePointer find(const NoteId aNoteId) const;
+                NotePointer findPreviousNote(const NoteRectPositionPointer aNoteRect) const;
 
             private:
                 QList<NotePointer> mNoteList_;
+
             private:
                 NoteList(const NoteList& aOtehr);
                 NoteList& operator=(const NoteList& aOtehr);

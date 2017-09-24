@@ -1,14 +1,16 @@
 #include "pitchcurvestartpoint.h"
 
-namespace waltz {
-namespace editor {
-namespace ScoreComponent {
+using namespace waltz::editor::ScoreComponent;
 
-PitchCurveStartPoint::PitchCurveStartPoint()
+PitchCurveStartPoint::PitchCurveStartPoint(int aX, int aY,
+                                           const PitchCurveControlPointPointer aControlPoint)
+    : Point(aX, aY)
+    , mControlPoint_(aControlPoint)
 {
-
 }
 
-} // namespace ScoreComponent
-} // namespace editor
-} // namespace waltz
+PitchCurveControlPointPointer PitchCurveStartPoint::controlPoint() const
+{
+    return mControlPoint_;
+}
+

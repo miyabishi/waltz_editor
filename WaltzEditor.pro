@@ -35,7 +35,9 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/pitchcurve.cpp \
     src/Domain/ScoreComponent/pitchcurvecontrolpoint.cpp \
     src/Domain/ScoreComponent/pitchcurvestartpoint.cpp \
-    src/Domain/ScoreComponent/pitchcurveendpoint.cpp
+    src/Domain/ScoreComponent/pitchcurveendpoint.cpp \
+    src/Domain/ScoreComponent/point.cpp \
+    src/Domain/ScoreComponent/notefactory.cpp
 
 RESOURCES += qml.qrc
 
@@ -95,7 +97,9 @@ HEADERS += \
     src/Domain/ScoreComponent/pitchcurve.h \
     src/Domain/ScoreComponent/pitchcurvecontrolpoint.h \
     src/Domain/ScoreComponent/pitchcurvestartpoint.h \
-    src/Domain/ScoreComponent/pitchcurveendpoint.h
+    src/Domain/ScoreComponent/pitchcurveendpoint.h \
+    src/Domain/ScoreComponent/point.h \
+    src/Domain/ScoreComponent/notefactory.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

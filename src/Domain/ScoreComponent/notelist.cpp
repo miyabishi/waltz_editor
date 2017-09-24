@@ -15,10 +15,6 @@ namespace
 NoteList::NoteList()
 {
 }
-int NoteList::findNotePositionX(int aIndex) const
-{
-    return mNoteList_.at(aIndex)->xPosition();
-}
 
 int NoteList::count() const
 {
@@ -38,11 +34,13 @@ void NoteList::append(const NotePointer aNote)
 Parameter NoteList::toParameter(
         Beat aBeat,
         Tempo aTempo,
-        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation)
+        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const
 {
     QJsonArray noteListArray;
-    qSort(mNoteList_.begin(), mNoteList_.end(), noteStartTimeLessThan);
-    foreach(const NotePointer note, mNoteList_)
+    QList<NotePointer> noteList = mNoteList_;
+
+    qSort(noteList.begin(), noteList.end(), noteStartTimeLessThan);
+    foreach(const NotePointer note, noteList)
     {
         noteListArray.append(note->toParameters(aBeat, aTempo, aEditAreaInformation).toJsonArray());
     }
@@ -59,3 +57,34 @@ void NoteList::updateNote(const NotePointer aNote)
     }
     append(aNote);
 }
+
+NotePointer NoteList::at(int aIndex) const
+{
+    return mNoteList_.at(aIndex);
+}
+
+NotePointer NoteList::find(const NoteId aNoteId) const
+{
+    for (int index = 0; index < mNoteList_.size(); ++index)
+    {
+        if (! mNoteList_.at(index)->noteIdEquals(aNoteId)) continue;
+        return mNoteList_.at(index);
+    }
+    return NotePointer();
+}
+
+NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition) const
+{
+    if (mNoteList_.size() == 0) return NotePointer();
+    if (mNoteList_.size() == 1) return mNoteList_.at(0);
+    QList<NotePointer> noteList = mNoteList_;
+
+    qSort(noteList.begin(), noteList.end(), noteStartTimeLessThan);
+    for (int index = 1; index < mNoteList_.size(); ++index)
+    {
+        if (noteList.at(index)->xPosition() < aNoteRectPosition->x()) continue;
+        return noteList.at(index - 1);
+    }
+    return noteList.last();
+}
+

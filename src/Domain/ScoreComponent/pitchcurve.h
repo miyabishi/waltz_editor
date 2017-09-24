@@ -17,12 +17,19 @@ namespace waltz
             class PitchCurve
             {
             public:
-                PitchCurve();
+                PitchCurve(const PitchCurveStartPointPointer aStartPoint,
+                           const PitchCurveEndPointPointer aEndPoint);
+
+                PitchCurveStartPointPointer startPoint() const;
+                void append(PitchChangingPointPointer aChangingPoint);
+                int changingPointCount() const;
+                PitchChangingPointPointer changingPoint(int aIndex) const;
+                PitchCurveEndPointPointer endPoint() const;
 
             private:
-                PitchCurveStartPointPointer      mPitchCurveStartPoint_;
+                PitchCurveStartPointPointer      mStartPoint_;
                 QList<PitchChangingPointPointer> mPitchCurve_;
-                PitchCurveEndPointPointer        mPitchCurveStartPoint_;
+                PitchCurveEndPointPointer        mEndPoint_;
 
             private:
                 PitchCurve(const PitchCurve& aOther);
