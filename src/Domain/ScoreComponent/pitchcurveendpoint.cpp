@@ -10,7 +10,7 @@ PitchCurveEndPoint::PitchCurveEndPoint(int aX, int aY,
 
 }
 
-PitchCurveControlPointPointer controlPoint() const
+PitchCurveControlPointPointer PitchCurveEndPoint::controlPoint() const
 {
     return mControlPoint_;
 }

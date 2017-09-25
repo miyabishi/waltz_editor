@@ -11,7 +11,7 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-            class PitchChangingPoint : Point
+            class PitchChangingPoint : public Point
             {
             public:
                 PitchChangingPoint(const int aX,

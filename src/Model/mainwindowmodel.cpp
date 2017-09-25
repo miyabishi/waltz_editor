@@ -112,7 +112,7 @@ void MainWindowModel::appendNote(int aNoteId,
                                          aPositionY,
                                          aNoteWidth,
                                          mEditAreaInformation_->rowHeight(),
-                                         mScore_));
+                                         mScore_->noteList()));
     mScore_->appendNote(note);
     mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
                                   note->toParameters(mScore_->beat(),
@@ -185,7 +185,7 @@ void MainWindowModel::updateNote(int aNoteId,
                                          aPositionY,
                                          aNoteWidth,
                                          mEditAreaInformation_->rowHeight(),
-                                         mScore_));
+                                         mScore_->noteList()));
     mScore_->updateNote(note);
 }
 
@@ -236,6 +236,11 @@ int MainWindowModel::pitchChangingPointX(int aNoteId, int aIndex) const
     return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->x();
 }
 
+int MainWindowModel::pitchChangingPointCount(int aNoteId) const
+{
+    return findNote(aNoteId)->portamento()->pitchCurve()->changingPointCount();
+}
+
 int MainWindowModel::pitchChangingPointY(int aNoteId, int aIndex) const
 {
     return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->y();
@@ -261,17 +266,17 @@ int MainWindowModel::portamentEndY(int aNoteId) const
     return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->y();
 }
 
-int MainWindowModel::portamentStartControlX(int aNoteId) const
+int MainWindowModel::portamentEndControlX(int aNoteId) const
 {
     return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->controlPoint()->x();
 }
 
-int MainWindowModel::portamentStartControlY(int aNoteId) const
+int MainWindowModel::portamentEndControlY(int aNoteId) const
 {
     return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->controlPoint()->y();
 }
 
-ScoreComponent::NotePointer MainWindowModel::findNote(int aNoteId)
+NotePointer MainWindowModel::findNote(int aNoteId) const
 {
     return mScore_->noteList()->find(NoteId(aNoteId));
 }

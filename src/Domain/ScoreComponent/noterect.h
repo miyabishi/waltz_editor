@@ -39,6 +39,7 @@ namespace waltz
                 PitchPointer pitch(const waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
                 int x() const;
                 int y() const;
+                NoteRectPositionPointer position() const;
                 NoteRectHeightPointer height() const;
 
             private:

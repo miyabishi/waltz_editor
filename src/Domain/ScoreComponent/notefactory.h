@@ -24,7 +24,6 @@ namespace waltz
                                    int aNoteWidth,
                                    int aNoteHeight,
                                    const NoteListPointer aNoteList);
-
             private:
                 NoteFactory(const NoteFactory& aOther);
                 NoteFactory& operator=(const NoteFactory& aOther);

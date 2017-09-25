@@ -98,7 +98,7 @@ namespace waltz
                 void libraryInformationUpdated();
 
             private:
-                ScoreComponent::NotePointer findNote(int aNoteId);
+                ScoreComponent::NotePointer findNote(int aNoteId)const;
 
             private:
                 static MainWindowModel*              mInstance_;

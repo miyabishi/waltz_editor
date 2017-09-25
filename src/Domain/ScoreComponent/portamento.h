@@ -13,7 +13,7 @@ namespace waltz
             class Portamento
             {
             public:
-                Portamento(const PitchCurvePointer aPitchCurve);
+                explicit Portamento(const PitchCurvePointer aPitchCurve);
                 PitchCurvePointer pitchCurve() const;
 
             private:

@@ -6,7 +6,6 @@
 #include "noterectheight.h"
 #include "portamento.h"
 
-
 using namespace waltz::editor::ScoreComponent;
 
 namespace
@@ -25,13 +24,13 @@ namespace
                                                  new PitchCurveControlPoint(x, y))));
     }
 
-    PitchCurveStartPointPointer createPitchCurveEndPoint(const NoteRectPointer aNoteRect)
+    PitchCurveEndPointPointer createPitchCurveEndPoint(const NoteRectPointer aNoteRect)
     {
         int x = 0;
         int y = aNoteRect->height()->center();
 
-        return PitchCurveStartPointPointer(
-                    new PitchCurveStartPoint(x, y,
+        return PitchCurveEndPointPointer(
+                    new PitchCurveEndPoint(x, y,
                                              PitchCurveControlPointPointer(
                                                  new PitchCurveControlPoint(x, y))));
     }
@@ -47,26 +46,27 @@ namespace
     PortamentoPointer createPortamento(const NoteRectPointer aNoteRect,
                                       const NoteListPointer aNoteList)
     {
-        NoteRectPointer previousNoteRect(aNoteList->findPreviousNote(aNoteRect)->noteRect());
+        NoteRectPointer previousNoteRect(aNoteList->findPreviousNote(aNoteRect->position())->noteRect());
         return PortamentoPointer(new Portamento(createPitchCurve(previousNoteRect, aNoteRect)));
     }
 }
 
 NoteFactory::NoteFactory()
 {
-
 }
+
 NotePointer NoteFactory::create(int aNoteId,
                                 const QString& aNoteText,
                                 int aPositionX,
                                 int aPositionY,
                                 int aNoteWidth,
-                                int aNoteHeight,
+                                int aNoteRectHeight,
                                 const NoteListPointer aNoteList)
 {
+    ;
     NoteRectPointer noteRect(new NoteRect(NoteRectPositionPointer(new NoteRectPosition(aPositionX, aPositionY)),
-                                          NoteRectWidthPointer(new NoteRectWidth(aNoteWidth),
-                                          NoteRectHeightPointer(new NoteRectHeight(aNoteRectHeight)))));
+                                          NoteRectWidthPointer(new NoteRectWidth(aNoteWidth)),
+                                          NoteRectHeightPointer(new NoteRectHeight(aNoteRectHeight))));
     PortamentoPointer portamento(createPortamento(noteRect, aNoteList));
     return NotePointer(new Note(NoteId(aNoteId),
                                 Syllable(aNoteText),

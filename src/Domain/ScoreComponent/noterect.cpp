@@ -49,3 +49,7 @@ NoteRectHeightPointer NoteRect::height() const
     return mNoteRectHeight_;
 }
 
+NoteRectPositionPointer NoteRect::position() const
+{
+    return mPosition_;
+}
