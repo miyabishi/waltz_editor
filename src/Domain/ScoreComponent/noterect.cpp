@@ -8,7 +8,7 @@ NoteRect::NoteRect(const NoteRectPositionPointer aPosition,
                    const NoteRectHeightPointer aHeight)
     : mPosition_(aPosition)
     , mWidth_(aWidth)
-    , mNoteRectHeight_(aHeight)
+    , mHeight_(aHeight)
 {
 }
 
@@ -46,10 +46,18 @@ PitchPointer NoteRect::pitch(const waltz::editor::model::EditAreaInformationPoin
 
 NoteRectHeightPointer NoteRect::height() const
 {
-    return mNoteRectHeight_;
+    return mHeight_;
 }
 
 NoteRectPositionPointer NoteRect::position() const
 {
     return mPosition_;
+}
+
+NoteRectPositionPointer NoteRect::center() const
+{
+    return NoteRectPositionPointer(
+                new NoteRectPosition(
+                    mPosition_->x() + mWidth_->value() / 2,
+                    mPosition_->y() + mHeight_->value() / 2));
 }

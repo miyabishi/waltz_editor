@@ -8,7 +8,6 @@ Pitch::Pitch(Tone aTone, int aOctave)
 {
 }
 
-
 Tone Pitch::tone() const
 {
     return mTone_;

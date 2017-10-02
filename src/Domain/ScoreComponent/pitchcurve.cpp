@@ -25,7 +25,7 @@ PitchCurveEndPointPointer PitchCurve::endPoint() const
     return mEndPoint_;
 }
 
-void PitchCurve::append(PitchChangingPointPointer aChangingPoint)
+void PitchCurve::appendChangingPoint(PitchChangingPointPointer aChangingPoint)
 {
     mPitchCurve_.append(aChangingPoint);
 }

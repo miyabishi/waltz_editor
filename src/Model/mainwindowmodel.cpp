@@ -98,11 +98,16 @@ int MainWindowModel::supportOctave() const
     return mEditAreaInformation_->supportOctave();
 }
 
+// 　リファクタ対象：引数が多い
 void MainWindowModel::appendNote(int aNoteId,
                                  const QString& aNoteText,
                                  int aPositionX,
                                  int aPositionY,
-                                 int aNoteWidth)
+                                 int aNoteWidth,
+                                 int aPortamentStartX,
+                                 int aPortamentStartY,
+                                 int aPortamentEndX,
+                                 int aPortamentEndY)
 {
 
     NoteFactoryPointer noteFactory(new NoteFactory());
@@ -112,7 +117,14 @@ void MainWindowModel::appendNote(int aNoteId,
                                          aPositionY,
                                          aNoteWidth,
                                          mEditAreaInformation_->rowHeight(),
-                                         mScore_->noteList()));
+                                         aPortamentStartX,
+                                         aPortamentStartY,
+                                         QList<int>(),
+                                         QList<int>(),
+                                         aPortamentEndX,
+                                         aPortamentEndY));
+
+
     mScore_->appendNote(note);
     mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
                                   note->toParameters(mScore_->beat(),
@@ -173,10 +185,16 @@ void MainWindowModel::play()
 }
 
 void MainWindowModel::updateNote(int aNoteId,
-                                 const QString& aNoteText,
-                                 int aPositionX,
-                                 int aPositionY,
-                                 int aNoteWidth)
+                            const QString& aNoteText,
+                            int aPositionX,
+                            int aPositionY,
+                            int aNoteWidth,
+                            int aPortamentStartX,
+                            int aPortamentStartY,
+                            QList<int> aPitchChangingPointXArray,
+                            QList<int> aPitchChangingPointYArray,
+                            int aPortamentEndX,
+                            int aPortamentEndY)
 {
     NoteFactoryPointer noteFactory(new NoteFactory());
     NotePointer note(noteFactory->create(aNoteId,
@@ -185,7 +203,12 @@ void MainWindowModel::updateNote(int aNoteId,
                                          aPositionY,
                                          aNoteWidth,
                                          mEditAreaInformation_->rowHeight(),
-                                         mScore_->noteList()));
+                                         aPortamentStartX,
+                                         aPortamentStartY,
+                                         aPitchChangingPointXArray,
+                                         aPitchChangingPointYArray,
+                                         aPortamentEndX,
+                                         aPortamentEndY));
     mScore_->updateNote(note);
 }
 
@@ -213,73 +236,77 @@ void MainWindowModel::emitActivePlayButton()
 
 int MainWindowModel::portamentStartX(int aNoteId) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->x();
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+
+    return note->portamento()->pitchCurve()->startPoint()->x();
 }
 
 int MainWindowModel::portamentStartY(int aNoteId) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->y();
-}
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
 
-int MainWindowModel::portamentStartControlX(int aNoteId) const
-{
-    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->controlPoint()->x();
-}
-
-int MainWindowModel::portamentStartControlY(int aNoteId) const
-{
-    return findNote(aNoteId)->portamento()->pitchCurve()->startPoint()->controlPoint()->y();
+    return note->portamento()->pitchCurve()->startPoint()->y();
 }
 
 int MainWindowModel::pitchChangingPointX(int aNoteId, int aIndex) const
 {
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+
     return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->x();
 }
 
 int MainWindowModel::pitchChangingPointCount(int aNoteId) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->changingPointCount();
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+
+    return note->portamento()->pitchCurve()->changingPointCount();
 }
 
 int MainWindowModel::pitchChangingPointY(int aNoteId, int aIndex) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->y();
-}
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
 
-int MainWindowModel::pitchChangingPointControlX(int aNoteId, int aIndex) const
-{
-    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->controlPoint()->x();
-}
-
-int MainWindowModel::pitchChangingPointControlY(int aNoteId, int aIndex) const
-{
-    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->controlPoint()->y();
+    return note->portamento()->pitchCurve()->changingPoint(aIndex)->y();
 }
 
 int MainWindowModel::portamentEndX(int aNoteId) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->x();
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+
+    return note->portamento()->pitchCurve()->endPoint()->x();
 }
 
 int MainWindowModel::portamentEndY(int aNoteId) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->y();
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+
+    return note->portamento()->pitchCurve()->endPoint()->y();
 }
 
-int MainWindowModel::portamentEndControlX(int aNoteId) const
+
+int MainWindowModel::yPositionOfPreviousNote(int aXPosition, int aYPosition, int aNoteId) const
 {
-    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->controlPoint()->x();
+    NoteRectPositionPointer position(new NoteRectPosition(aXPosition, aYPosition));
+    NotePointer note = mScore_->noteList()->findPreviousNote(position, NoteId(aNoteId));
+
+    if (note.isNull()) return aYPosition;
+    return note->noteRect()->center()->y();
 }
 
-int MainWindowModel::portamentEndControlY(int aNoteId) const
-{
-    return findNote(aNoteId)->portamento()->pitchCurve()->endPoint()->controlPoint()->y();
-}
 
 NotePointer MainWindowModel::findNote(int aNoteId) const
 {
+    qDebug() << "note id:" << aNoteId;
     return mScore_->noteList()->find(NoteId(aNoteId));
 }
+
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)

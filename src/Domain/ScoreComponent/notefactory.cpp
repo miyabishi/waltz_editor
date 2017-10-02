@@ -8,49 +8,6 @@
 
 using namespace waltz::editor::ScoreComponent;
 
-namespace
-{
-    const int DEFAULT_PORTAMENTO_LENGTH = 30;
-    PitchCurveStartPointPointer createPitchCurveStartPoint(const NoteRectPointer aPreviousNoteRect,
-                                                           const NoteRectPointer aCurrentNoteRect)
-    {
-        int x = - DEFAULT_PORTAMENTO_LENGTH;
-        int y = (aCurrentNoteRect->y() + aCurrentNoteRect->height()->center())
-                - (aPreviousNoteRect->y() + aPreviousNoteRect->height()->center());
-
-        return PitchCurveStartPointPointer(
-                    new PitchCurveStartPoint(x, y,
-                                             PitchCurveControlPointPointer(
-                                                 new PitchCurveControlPoint(x, y))));
-    }
-
-    PitchCurveEndPointPointer createPitchCurveEndPoint(const NoteRectPointer aNoteRect)
-    {
-        int x = 0;
-        int y = aNoteRect->height()->center();
-
-        return PitchCurveEndPointPointer(
-                    new PitchCurveEndPoint(x, y,
-                                             PitchCurveControlPointPointer(
-                                                 new PitchCurveControlPoint(x, y))));
-    }
-
-    PitchCurvePointer createPitchCurve(const NoteRectPointer aPreviousNoteRect,
-                                       const NoteRectPointer aNoteRect)
-    {
-        return PitchCurvePointer(new PitchCurve(createPitchCurveStartPoint(aPreviousNoteRect, aNoteRect),
-                                                createPitchCurveEndPoint(aNoteRect)));
-
-    }
-
-    PortamentoPointer createPortamento(const NoteRectPointer aNoteRect,
-                                      const NoteListPointer aNoteList)
-    {
-        NoteRectPointer previousNoteRect(aNoteList->findPreviousNote(aNoteRect->position())->noteRect());
-        return PortamentoPointer(new Portamento(createPitchCurve(previousNoteRect, aNoteRect)));
-    }
-}
-
 NoteFactory::NoteFactory()
 {
 }
@@ -60,14 +17,39 @@ NotePointer NoteFactory::create(int aNoteId,
                                 int aPositionX,
                                 int aPositionY,
                                 int aNoteWidth,
-                                int aNoteRectHeight,
-                                const NoteListPointer aNoteList)
+                                int aNoteHeight,
+                                int aPortamentoStartX,
+                                int aPortamentoStartY,
+                                QList<int> aPitchChangingPointX,
+                                QList<int> aPitchChangingPointY,
+                                int aPortamentoEndX,
+                                int aPortamentoEndY)
 {
-    ;
     NoteRectPointer noteRect(new NoteRect(NoteRectPositionPointer(new NoteRectPosition(aPositionX, aPositionY)),
                                           NoteRectWidthPointer(new NoteRectWidth(aNoteWidth)),
-                                          NoteRectHeightPointer(new NoteRectHeight(aNoteRectHeight))));
-    PortamentoPointer portamento(createPortamento(noteRect, aNoteList));
+                                          NoteRectHeightPointer(new NoteRectHeight(aNoteHeight))));
+    PitchCurvePointer pitchCurve(new PitchCurve(
+                                     PitchCurveStartPointPointer(new PitchCurveStartPoint(
+                                                                     aPortamentoStartX,
+                                                                     aPortamentoStartY)),
+                                     PitchCurveEndPointPointer(new PitchCurveEndPoint(
+                                                                   aPortamentoEndX,
+                                                                   aPortamentoEndY))));
+    int changingPointCount = aPitchChangingPointX.size();
+    if (changingPointCount != aPitchChangingPointY.size())
+    {
+        // TODO:エラーハンドリング
+        qDebug() << "Error!";
+    }
+
+    for(int index = 0; index < changingPointCount; ++index)
+    {
+        pitchCurve->appendChangingPoint(PitchChangingPointPointer(
+                                            new PitchChangingPoint(aPitchChangingPointX[index],
+                                                                   aPitchChangingPointY[index])));
+    }
+
+    PortamentoPointer portamento(new Portamento(pitchCurve));
     return NotePointer(new Note(NoteId(aNoteId),
                                 Syllable(aNoteText),
                                 noteRect,

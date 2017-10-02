@@ -35,16 +35,27 @@ namespace waltz
                 Q_INVOKABLE void setTempo(int aTempo);
                 Q_INVOKABLE void setBeatParent(int aBeatParent);
                 Q_INVOKABLE void setBeatChild(int aBeatChild);
-                Q_INVOKABLE void appendNote(int noteId,
-                                            const QString& noteText,
-                                            int positionX,
-                                            int positionY,
-                                            int noteWidth);
-                Q_INVOKABLE void updateNote(int noteId,
-                                            const QString& noteText,
-                                            int positionX,
-                                            int positionY,
-                                            int noteWidth);
+                Q_INVOKABLE void appendNote(int aNoteId,
+                                            const QString& aNoteText,
+                                            int aPositionX,
+                                            int aPositionY,
+                                            int noteWidth,
+                                            int aPortamentStartX,
+                                            int aPortamentStartY,
+                                            int aPortamentEndX,
+                                            int aPortamentEndY);
+
+                Q_INVOKABLE void updateNote(int aNoteId,
+                                            const QString& aNoteText,
+                                            int aPositionX,
+                                            int aPositionY,
+                                            int noteWidth,
+                                            int aPortamentStartX,
+                                            int aPortamentStartY,
+                                            QList<int> aPitchChangingPointX,
+                                            QList<int> aPitchChangingPointY,
+                                            int aPortamentEndX,
+                                            int aPortamentEndY);
 
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;
@@ -70,20 +81,17 @@ namespace waltz
                 // for Portament
                 Q_INVOKABLE int portamentStartX(int aNoteId) const;
                 Q_INVOKABLE int portamentStartY(int aNoteId) const;
-                Q_INVOKABLE int portamentStartControlX(int aNoteId) const;
-                Q_INVOKABLE int portamentStartControlY(int aNoteId) const;
 
                 Q_INVOKABLE int pitchChangingPointCount(int aNoteId) const;
                 Q_INVOKABLE int pitchChangingPointX(int aNoteId, int aIndex) const;
                 Q_INVOKABLE int pitchChangingPointY(int aNoteId, int aIndex) const;
 
-                Q_INVOKABLE int pitchChangingPointControlX(int aNoteId, int aIndex) const;
-                Q_INVOKABLE int pitchChangingPointControlY(int aNoteId, int aIndex) const;
-
                 Q_INVOKABLE int portamentEndX(int aNoteId) const;
                 Q_INVOKABLE int portamentEndY(int aNoteId) const;
-                Q_INVOKABLE int portamentEndControlX(int aNoteId) const;
-                Q_INVOKABLE int portamentEndControlY(int aNoteId) const;
+
+                Q_INVOKABLE int yPositionOfPreviousNote(int aXPosition,
+                                                        int aYPosition,
+                                                        int aNoteId) const;
 
 
                 // for Controller

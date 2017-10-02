@@ -3,7 +3,6 @@
 
 #include <QSharedPointer>
 #include "point.h"
-#include "pitchcurvecontrolpoint.h"
 
 namespace waltz
 {
@@ -14,12 +13,8 @@ namespace waltz
             class PitchCurveStartPoint : public Point
             {
             public:
-                PitchCurveStartPoint(int aX, int aY,
-                                     const PitchCurveControlPointPointer aControlPoint);
-
-                PitchCurveControlPointPointer controlPoint() const;
+                PitchCurveStartPoint(int aX, int aY);
             private:
-                PitchCurveControlPointPointer mControlPoint_;
 
             private:
                 PitchCurveStartPoint(const PitchCurveStartPoint& aOther);

@@ -10,6 +10,14 @@ Rectangle{
     property int positionX
     property int positionY
 
+    property int portamentoStartX
+    property int portamentoStartY
+    property int pitchChangingPointCount:0
+    property var pitchChangingPointXArray:[]
+    property var pitchChangingPointYArray:[]
+    property int portamentoEndX
+    property int portamentoEndY
+
 
     property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
 
@@ -22,19 +30,36 @@ Rectangle{
     Drag.hotSpot.y: 0
     Drag.active: dragActive
 
-    Text{
-        text: pNoteText_
-        font.family: "Meiryo"
-        font.pointSize: 10
-    }
-
     function updateNote()
     {
+        updatePortamento();
         MainWindowModel.updateNote(note_rect.pNoteId_,
                                    note_rect.pNoteText_,
                                    note_rect.x,
                                    note_rect.y,
-                                   note_rect.width)
+                                   note_rect.width,
+                                   note_rect.portamentStartX,
+                                   note_rect.portamentStartY,
+                                   note_rect.pitchChangingPointXArray,
+                                   note_rect.pitchChangingPointYArray,
+                                   note_rect.portamentEndX,
+                                   note_rect.portamentEndY);
+    }
+
+    function updatePortamento()
+    {
+        note_rect.portamentoStartY = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
+                                                                             note_rect.x + note_rect.height / 2,
+                                                                             note_rect.pNoteId_);
+        note_rect.portamentoEndY = note_rect.y + note_rect.height / 2;
+
+        canvas.requestPaint()
+    }
+
+    Text{
+        text: pNoteText_
+        font.family: "Meiryo"
+        font.pointSize: 10
     }
 
     MouseArea{
@@ -60,6 +85,8 @@ Rectangle{
             note_rect.pEditing_ = true
         }
     }
+
+
 
     MouseArea{
         id: note_stretch_mouse_area
@@ -116,12 +143,14 @@ Rectangle{
 
     Canvas {
         id: canvas
-        x: MainWindowModel.portamentStartX(note_rect.pNoteId_)
-        y: note_rect.y - edit_area.height
-        height: edit_area.height
-        width: MainWindowModel.portamentEndX(note_rect.pNoteId_) - MainWindowModel.portamentStartX(note_rect.pNoteId_)
+        x: -30
+        y: -note_rect.y
+        height: piano_roll_edit_area.height
+        width: 60
 
         onPaint: {
+            console.log("y:" + y)
+            console.log("height:" + height)
             var ctx = canvas.getContext('2d');
             ctx.strokeStyle = Qt.rgba(.4,.6,.8);
             ctx.beginPath();
@@ -135,23 +164,47 @@ Rectangle{
 
         function drawPortamento(aCtx, aNoteId)
         {
-            aCtx.moveTo(MainWindowModel.portamentStartX(aNoteId), MainWindowModel.portamentStartY(aNoteId));
-            var preControlX = MainWindowModel.portamentStartControlX(aNoteId);
-            var preControlY = MainWindowModel.portamentStartControlY(aNoteId);
+            aCtx.clearRect(0,0,canvas.width, canvas.height);
+            console.log("draw");
 
-            for(var index = 0; index < MainWindowModel.pitchChangingPointCount(pNoteId_); ++index)
+            aCtx.moveTo(note_rect.portamentoStartX, note_rect.portamentoStartY);
+
+            console.log("portamentoStartX:" + note_rect.portamentoStartX);
+            console.log("portamentoStartY:" + note_rect.portamentoStartY);
+
+            var preControlX = note_rect.portamentoStartX + 30
+            var preControlY = note_rect.portamentoStartY;
+
+            for (var index = 0; index < pitchChangingPointCount; ++index)
             {
-                aCtx.bezierCurveTo(preControlX,preControlY,
-                                  MainWindowModel.pitchChangingPointControlX(aNoteId, index), MainWindowModel.pitchChangingPointControlY(aNoteId, index),
-                                  MainWindowModel.pitchChangingPointX(aNoteId, index), MainWindowModel.pitchChangingPointY(aNoteId, index));
-
-                preControlX = -MainWindowModel.pitchChangingPointControlX(aNoteId, index);
-                preControlY = -MainWindowModel.pitchChangingPointControlY(aNoteId, index);
+                var changingPointX = note_rect.pitchChangingPointXArray[index];
+                var changingPointY = note_rect.pitchChangingPointYArray[index]
+                aCtx.bezierCurveTo(preControlX, preControlY,
+                                   changingPointX - 10, changingPointY,
+                                   changingPointX, changingPointY);
+                preControlX = changingPointX + 10;
+                preControlY = changingPointY;
             }
 
-            aCtx.bezierCurveTo(preControlX,preControlY,
-                              MainWindowModel.portamentEndControlX(aNoteId),MainWindowModel.portamentEndControlY(aNoteId),
-                              MainWindowModel.portamentEndX(aNoteId), MainWindowModel.portamentEndY(aNoteId));
+            console.log("preControlX:" + preControlX);
+            console.log("preControlX:" + preControlY);
+
+            console.log("portamentoEndX:" + note_rect.portamentoEndX);
+            console.log("portamentoEndY:" + note_rect.portamentoEndY);
+
+            aCtx.bezierCurveTo(preControlX, preControlY,
+                               note_rect.portamentoEndX - 30, note_rect.portamentoEndY,
+                               note_rect.portamentoEndX, note_rect.portamentoEndY);
+
+            /*
+            var previousNoteYPosition = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
+                                                                                note_rect.y + note_rect.height/2,
+                                                                                aNoteId)
+            aCtx.moveTo(0, previousNoteYPosition)
+            aCtx.bezierCurveTo(30, previousNoteYPosition,
+                               canvas.width - 30, note_rect.y + note_rect.height/2,
+                               canvas.width, note_rect.y + note_rect.height/2);
+            */
         }
     }
 

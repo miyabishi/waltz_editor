@@ -2,15 +2,7 @@
 
 using namespace waltz::editor::ScoreComponent;
 
-PitchCurveStartPoint::PitchCurveStartPoint(int aX, int aY,
-                                           const PitchCurveControlPointPointer aControlPoint)
+PitchCurveStartPoint::PitchCurveStartPoint(int aX, int aY)
     : Point(aX, aY)
-    , mControlPoint_(aControlPoint)
 {
 }
-
-PitchCurveControlPointPointer PitchCurveStartPoint::controlPoint() const
-{
-    return mControlPoint_;
-}
-

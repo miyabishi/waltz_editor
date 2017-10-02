@@ -21,7 +21,7 @@ namespace waltz
                            const PitchCurveEndPointPointer aEndPoint);
 
                 PitchCurveStartPointPointer startPoint() const;
-                void append(PitchChangingPointPointer aChangingPoint);
+                void appendChangingPoint(PitchChangingPointPointer aChangingPoint);
                 int changingPointCount() const;
                 PitchChangingPointPointer changingPoint(int aIndex) const;
                 PitchCurveEndPointPointer endPoint() const;

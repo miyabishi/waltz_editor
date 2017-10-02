@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "noteid.h"
 
 using namespace waltz::editor::ScoreComponent;
@@ -24,4 +25,9 @@ bool NoteId::operator==(const NoteId& aOther) const
 bool NoteId::operator!=(const NoteId& aOther) const
 {
     return mValue_ != aOther.mValue_;
+}
+
+int NoteId::value() const
+{
+    return mValue_;
 }

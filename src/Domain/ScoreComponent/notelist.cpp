@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "notelist.h"
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;
@@ -63,28 +65,47 @@ NotePointer NoteList::at(int aIndex) const
     return mNoteList_.at(aIndex);
 }
 
-NotePointer NoteList::find(const NoteId aNoteId) const
+NotePointer NoteList::find(const NoteId& aNoteId) const
 {
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "notelist size" << mNoteList_.size();
     for (int index = 0; index < mNoteList_.size(); ++index)
     {
+        qDebug() << "index" << index;
         if (! mNoteList_.at(index)->noteIdEquals(aNoteId)) continue;
+        qDebug() << "note found";
         return mNoteList_.at(index);
     }
+    qDebug() << "Note Not Found";
     return NotePointer();
 }
 
-NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition) const
+NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition,
+                                       const NoteId aCurrentNoteId) const
 {
-    if (mNoteList_.size() == 0) return NotePointer();
-    if (mNoteList_.size() == 1) return mNoteList_.at(0);
-    QList<NotePointer> noteList = mNoteList_;
+    // 要リファクタ
+    if (mNoteList_.size() < 2) return NotePointer();
 
+    qDebug() << "crurrent note id:" << aCurrentNoteId.value();
+    QList<NotePointer> noteList = mNoteList_;
     qSort(noteList.begin(), noteList.end(), noteStartTimeLessThan);
+
     for (int index = 1; index < mNoteList_.size(); ++index)
     {
+        if (noteList.at(index - 1)->noteIdEquals(aCurrentNoteId)) continue;
         if (noteList.at(index)->xPosition() < aNoteRectPosition->x()) continue;
         return noteList.at(index - 1);
     }
+
+    if (noteList.last()->noteIdEquals(aCurrentNoteId))
+    {
+        if(noteList.size() > 2)
+        {
+            return noteList.at(noteList.size() - 2);
+        }
+        return noteList.first();
+    }
+
     return noteList.last();
 }
 

@@ -29,8 +29,9 @@ namespace waltz
                 void updateNote(const NotePointer aNote);
                 int count() const;
                 NotePointer at(int aIndex) const;
-                NotePointer find(const NoteId aNoteId) const;
-                NotePointer findPreviousNote(const NoteRectPositionPointer aNoteRect) const;
+                NotePointer find(const NoteId& aNoteId) const;
+                NotePointer findPreviousNote(const NoteRectPositionPointer aNoteRect,
+                                             const NoteId aCurrentNoteId = NoteId(-1)) const;
 
             private:
                 QList<NotePointer> mNoteList_;

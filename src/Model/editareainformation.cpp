@@ -5,7 +5,7 @@ using namespace waltz::editor::ScoreComponent;
 
 namespace
 {
-    const int BASE_COLUMN_WIDTH = 100;
+    const int BASE_COLUMN_WIDTH = 150;
     const int BASE_ROW_HEIGHT   = 20;
 }
 

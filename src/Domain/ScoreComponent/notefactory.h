@@ -23,7 +23,12 @@ namespace waltz
                                    int aPositionY,
                                    int aNoteWidth,
                                    int aNoteHeight,
-                                   const NoteListPointer aNoteList);
+                                   int aPortamentStartX,
+                                   int aPortamentStartY,
+                                   QList<int> aPitchChangingPointX,
+                                   QList<int> aPitchChangingPointY,
+                                   int aPortamentEndX,
+                                   int aPortamentEndY);
             private:
                 NoteFactory(const NoteFactory& aOther);
                 NoteFactory& operator=(const NoteFactory& aOther);

@@ -33,7 +33,6 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/vibratofrequency.cpp \
     src/Domain/ScoreComponent/pitchchangingpoint.cpp \
     src/Domain/ScoreComponent/pitchcurve.cpp \
-    src/Domain/ScoreComponent/pitchcurvecontrolpoint.cpp \
     src/Domain/ScoreComponent/pitchcurvestartpoint.cpp \
     src/Domain/ScoreComponent/pitchcurveendpoint.cpp \
     src/Domain/ScoreComponent/point.cpp \
@@ -96,7 +95,6 @@ HEADERS += \
     src/Domain/ScoreComponent/vibratofrequency.h \
     src/Domain/ScoreComponent/pitchchangingpoint.h \
     src/Domain/ScoreComponent/pitchcurve.h \
-    src/Domain/ScoreComponent/pitchcurvecontrolpoint.h \
     src/Domain/ScoreComponent/pitchcurvestartpoint.h \
     src/Domain/ScoreComponent/pitchcurveendpoint.h \
     src/Domain/ScoreComponent/point.h \

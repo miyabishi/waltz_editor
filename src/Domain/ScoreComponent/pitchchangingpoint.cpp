@@ -3,16 +3,9 @@
 using namespace waltz::editor::ScoreComponent;
 
 PitchChangingPoint::PitchChangingPoint(const int aX,
-                                       const int aY,
-                                       const PitchCurveControlPointPointer aControlPoint)
+                                       const int aY)
     : Point(aX, aY)
-    , mControlPoint_(aControlPoint)
 {
 
-}
-
-PitchCurveControlPointPointer PitchChangingPoint::controlPoint() const
-{
-    return mControlPoint_;
 }
 

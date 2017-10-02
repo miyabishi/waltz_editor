@@ -40,12 +40,13 @@ namespace waltz
                 int x() const;
                 int y() const;
                 NoteRectPositionPointer position() const;
+                NoteRectPositionPointer center() const;
                 NoteRectHeightPointer height() const;
 
             private:
                 NoteRectPositionPointer mPosition_;
                 NoteRectWidthPointer    mWidth_;
-                NoteRectHeightPointer   mNoteRectHeight_;
+                NoteRectHeightPointer   mHeight_;
 
             private:
                 NoteRect(const NoteRect& aOther);

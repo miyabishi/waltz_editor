@@ -97,6 +97,7 @@ Rectangle{
             id: piano_roll_edit_area
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
+            signal updateAllNote()
 
             Repeater{
                 model: edit_area.numberOfRow
@@ -135,12 +136,37 @@ Rectangle{
                 onClicked: {
                     if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
                     {
-                        var positionX = piano_roll_edit_area.calcX(mouseX)
-                        var positionY = piano_roll_edit_area.calcY(mouseY)
-                        var noteText = "あ"
+                        var positionX = piano_roll_edit_area.calcX(mouseX);
+                        var positionY = piano_roll_edit_area.calcY(mouseY);
+                        var noteText = "あ";
                         var noteId = MainWindowModel.publishNoteId();
-                        note_repeater.model.append({"noteId": noteId,"noteText": noteText,"positionX": positionX,"positionY": positionY, "noteWidth": edit_area.columnWidth});
-                        MainWindowModel.appendNote(noteId, noteText, positionX, positionY, edit_area.columnWidth)
+
+                        var noteWidth = edit_area.columnWidth;
+                        var portamentStartX = 0;
+                        var portamentStartY = MainWindowModel.yPositionOfPreviousNote(positionX - 1,
+                                                                                      positionY + edit_area.rowHeight / 2,
+                                                                                      noteId);
+                        var portamentEndX = 60;
+                        var portamentEndY = positionY + edit_area.rowHeight / 2;
+
+                        note_repeater.model.append({"noteId": noteId,
+                                                    "noteText": noteText,
+                                                    "positionX": positionX,
+                                                    "positionY": positionY,
+                                                    "noteWidth": noteWidth,
+                                                    "portamentoStartX": portamentStartX,
+                                                    "portamentoStartY": portamentStartY,
+                                                    "portamentoEndX": portamentEndX,
+                                                    "portamentoEndY": portamentEndY});
+                        MainWindowModel.appendNote(noteId,
+                                                   noteText,
+                                                   positionX ,
+                                                   positionY,
+                                                   edit_area.columnWidth,
+                                                   portamentStartX,
+                                                   portamentStartY,
+                                                   portamentEndX,
+                                                   portamentEndY);
                     }
                 }
             }
@@ -149,6 +175,7 @@ Rectangle{
                 id: note_repeater
                 model: ListModel{}
                 Loader{
+                    id:noteloader
                     sourceComponent: Component{
                         id: note
                         Note{
@@ -162,10 +189,15 @@ Rectangle{
                         }
                     }
                     onLoaded: {
-                        item.x = positionX
-                        item.y = positionY
-                        item.visible = true
-                        item.width = noteWidth
+                        item.x = positionX;
+                        item.y = positionY;
+                        item.visible = true;
+                        item.width = noteWidth;
+                        item.portamentoStartX = portamentoStartX;
+                        item.portamentoStartY = portamentoStartY;
+                        item.portamentoEndX = portamentoEndX;
+                        item.portamentoEndY = portamentoEndY;
+                        piano_roll_edit_area.updateAllNote.connect(item.updateNote);
                     }
                 }
             }
@@ -197,11 +229,15 @@ Rectangle{
                 }
 
                 onPositionChanged:{
-                    drag.source.y = piano_roll_edit_area.calcY(drag.y)
-                    drag.source.x = calculeDropX(drag.source)
-                    drag.source.positionX = drag.source.x
-                    drag.source.positionY = drag.source.y
+                    drag.source.y = piano_roll_edit_area.calcY(drag.y);
+                    drag.source.x = calculeDropX(drag.source);
+                    drag.source.positionX = drag.source.x;
+                    drag.source.positionY = drag.source.y;
+                    drag.source.updatePortamento();
+                }
 
+                onDropped: {
+                    piano_roll_edit_area.updateAllNote()
                 }
             }
         }
