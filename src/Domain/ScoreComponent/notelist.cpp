@@ -83,12 +83,15 @@ NotePointer NoteList::find(const NoteId& aNoteId) const
 NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition,
                                        const NoteId aCurrentNoteId) const
 {
-    // 要リファクタ
+    // 要リファクタ 複雑すぎ
+
     if (mNoteList_.size() < 2) return NotePointer();
 
     qDebug() << "crurrent note id:" << aCurrentNoteId.value();
     QList<NotePointer> noteList = mNoteList_;
     qSort(noteList.begin(), noteList.end(), noteStartTimeLessThan);
+
+    if (noteList.first()->noteIdEquals(aCurrentNoteId)) return noteList.first();
 
     for (int index = 1; index < mNoteList_.size(); ++index)
     {

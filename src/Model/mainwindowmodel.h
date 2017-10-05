@@ -57,6 +57,8 @@ namespace waltz
                                             int aPortamentEndX,
                                             int aPortamentEndY);
 
+                Q_INVOKABLE int noteIdFromIndex(int aIndex);
+
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;
                 Q_INVOKABLE int beatParent() const;

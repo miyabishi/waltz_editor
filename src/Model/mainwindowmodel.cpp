@@ -196,6 +196,19 @@ void MainWindowModel::updateNote(int aNoteId,
                             int aPortamentEndX,
                             int aPortamentEndY)
 {
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << aNoteId
+             << aNoteText
+             << aPositionX
+             << aPositionY
+             << aNoteWidth
+             << aPortamentStartX
+             << aPortamentStartY
+             << aPitchChangingPointXArray
+             << aPitchChangingPointYArray
+             << aPortamentEndX
+             << aPortamentEndY;
+
     NoteFactoryPointer noteFactory(new NoteFactory());
     NotePointer note(noteFactory->create(aNoteId,
                                          aNoteText,
@@ -299,6 +312,12 @@ int MainWindowModel::yPositionOfPreviousNote(int aXPosition, int aYPosition, int
     if (note.isNull()) return aYPosition;
     return note->noteRect()->center()->y();
 }
+
+int MainWindowModel::noteIdFromIndex(int aIndex)
+{
+    return mScore_->noteList()->at(aIndex)->noteId().value();
+}
+
 
 
 NotePointer MainWindowModel::findNote(int aNoteId) const

@@ -33,27 +33,30 @@ Rectangle{
     function updateNote()
     {
         updatePortamento();
+        console.log("---- update ---");
+        note_rect.positionX = note_rect.x;
+        note_rect.positionY = note_rect.y;
         MainWindowModel.updateNote(note_rect.pNoteId_,
                                    note_rect.pNoteText_,
                                    note_rect.x,
                                    note_rect.y,
                                    note_rect.width,
-                                   note_rect.portamentStartX,
-                                   note_rect.portamentStartY,
+                                   note_rect.portamentoStartX,
+                                   note_rect.portamentoStartY,
                                    note_rect.pitchChangingPointXArray,
                                    note_rect.pitchChangingPointYArray,
-                                   note_rect.portamentEndX,
-                                   note_rect.portamentEndY);
+                                   note_rect.portamentoEndX,
+                                   note_rect.portamentoEndY);
     }
 
     function updatePortamento()
     {
+        note_rect.portamentoStartX = note_rect.x - 30;
         note_rect.portamentoStartY = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
                                                                              note_rect.x + note_rect.height / 2,
                                                                              note_rect.pNoteId_);
+        note_rect.portamentoEndX = note_rect.x + 30;
         note_rect.portamentoEndY = note_rect.y + note_rect.height / 2;
-
-        canvas.requestPaint()
     }
 
     Text{
@@ -140,75 +143,6 @@ Rectangle{
             }
         }
     }
-
-    Canvas {
-        id: canvas
-        x: -30
-        y: -note_rect.y
-        height: piano_roll_edit_area.height
-        width: 60
-
-        onPaint: {
-            console.log("y:" + y)
-            console.log("height:" + height)
-            var ctx = canvas.getContext('2d');
-            ctx.strokeStyle = Qt.rgba(.4,.6,.8);
-            ctx.beginPath();
-
-            drawPortamento(ctx, note_rect.pNoteId_);
-
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            ctx.restore();
-        }
-
-        function drawPortamento(aCtx, aNoteId)
-        {
-            aCtx.clearRect(0,0,canvas.width, canvas.height);
-            console.log("draw");
-
-            aCtx.moveTo(note_rect.portamentoStartX, note_rect.portamentoStartY);
-
-            console.log("portamentoStartX:" + note_rect.portamentoStartX);
-            console.log("portamentoStartY:" + note_rect.portamentoStartY);
-
-            var preControlX = note_rect.portamentoStartX + 30
-            var preControlY = note_rect.portamentoStartY;
-
-            for (var index = 0; index < pitchChangingPointCount; ++index)
-            {
-                var changingPointX = note_rect.pitchChangingPointXArray[index];
-                var changingPointY = note_rect.pitchChangingPointYArray[index]
-                aCtx.bezierCurveTo(preControlX, preControlY,
-                                   changingPointX - 10, changingPointY,
-                                   changingPointX, changingPointY);
-                preControlX = changingPointX + 10;
-                preControlY = changingPointY;
-            }
-
-            console.log("preControlX:" + preControlX);
-            console.log("preControlX:" + preControlY);
-
-            console.log("portamentoEndX:" + note_rect.portamentoEndX);
-            console.log("portamentoEndY:" + note_rect.portamentoEndY);
-
-            aCtx.bezierCurveTo(preControlX, preControlY,
-                               note_rect.portamentoEndX - 30, note_rect.portamentoEndY,
-                               note_rect.portamentoEndX, note_rect.portamentoEndY);
-
-            /*
-            var previousNoteYPosition = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
-                                                                                note_rect.y + note_rect.height/2,
-                                                                                aNoteId)
-            aCtx.moveTo(0, previousNoteYPosition)
-            aCtx.bezierCurveTo(30, previousNoteYPosition,
-                               canvas.width - 30, note_rect.y + note_rect.height/2,
-                               canvas.width, note_rect.y + note_rect.height/2);
-            */
-        }
-    }
-
-
 }
 
 

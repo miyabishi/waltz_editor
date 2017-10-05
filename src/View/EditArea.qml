@@ -142,31 +142,31 @@ Rectangle{
                         var noteId = MainWindowModel.publishNoteId();
 
                         var noteWidth = edit_area.columnWidth;
-                        var portamentStartX = 0;
-                        var portamentStartY = MainWindowModel.yPositionOfPreviousNote(positionX - 1,
-                                                                                      positionY + edit_area.rowHeight / 2,
-                                                                                      noteId);
-                        var portamentEndX = 60;
-                        var portamentEndY = positionY + edit_area.rowHeight / 2;
+                        var portamentoStartX = positionX - 30;
+                        var portamentoStartY = MainWindowModel.yPositionOfPreviousNote(positionX - 1,
+                                                                                       positionY + edit_area.rowHeight / 2,
+                                                                                       noteId);
+                        var portamentoEndX = positionX + 30;
+                        var portamentoEndY = positionY + edit_area.rowHeight / 2;
 
                         note_repeater.model.append({"noteId": noteId,
                                                     "noteText": noteText,
                                                     "positionX": positionX,
                                                     "positionY": positionY,
                                                     "noteWidth": noteWidth,
-                                                    "portamentoStartX": portamentStartX,
-                                                    "portamentoStartY": portamentStartY,
-                                                    "portamentoEndX": portamentEndX,
-                                                    "portamentoEndY": portamentEndY});
+                                                    "portamentoStartX": portamentoStartX,
+                                                    "portamentoStartY": portamentoStartY,
+                                                    "portamentoEndX": portamentoEndX,
+                                                    "portamentoEndY": portamentoEndY});
                         MainWindowModel.appendNote(noteId,
                                                    noteText,
                                                    positionX ,
                                                    positionY,
                                                    edit_area.columnWidth,
-                                                   portamentStartX,
-                                                   portamentStartY,
-                                                   portamentEndX,
-                                                   portamentEndY);
+                                                   portamentoStartX,
+                                                   portamentoStartY,
+                                                   portamentoEndX,
+                                                   portamentoEndY);
                     }
                 }
             }
@@ -184,6 +184,10 @@ Rectangle{
                             pEditing_: false
                             positionX: positionX
                             positionY: positionY
+                            portamentoStartX: portamentoStartX;
+                            portamentoStartY: portamentoStartY;
+                            portamentoEndX: portamentoEndX;
+                            portamentoEndY: portamentoEndY;
                             width: edit_area.columnWidth
                             height: edit_area.rowHeight
                         }
@@ -198,7 +202,70 @@ Rectangle{
                         item.portamentoEndX = portamentoEndX;
                         item.portamentoEndY = portamentoEndY;
                         piano_roll_edit_area.updateAllNote.connect(item.updateNote);
+                        pitch_curve_canvas.requestPaint()
                     }
+                }
+            }
+
+            Canvas{
+                id: pitch_curve_canvas
+                anchors.fill: parent
+
+                onPaint: {
+                    var ctx = pitch_curve_canvas.getContext('2d');
+                    ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
+                    ctx.strokeStyle = Qt.rgba(.4,.6,.8);
+                    ctx.beginPath();
+
+                    for (var index = 0; index < MainWindowModel.noteCount(); ++index)
+                    {
+                        drawPitchCurve(ctx, MainWindowModel.noteIdFromIndex(index));
+                    }
+
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                function drawPitchCurve(aCtx, aNoteId)
+                {
+                    var portamentoStartX = MainWindowModel.portamentStartX(aNoteId);
+                    var portamentoStartY = MainWindowModel.portamentStartY(aNoteId);
+                    var pitchChangingPointCount = MainWindowModel.pitchChangingPointCount(aNoteId);
+                    var portamentoEndX = MainWindowModel.portamentEndX(aNoteId);
+                    var portamentoEndY = MainWindowModel.portamentEndY(aNoteId);
+
+                    aCtx.moveTo(portamentoStartX,
+                                portamentoStartY);
+                    console.log("note id:" + aNoteId);
+                    console.log("portamentoStartX:" + portamentoStartX);
+                    console.log("portamentoStartY:" + portamentoStartY);
+
+                    var preControlX = portamentoStartX + 30
+                    var preControlY = portamentoStartY;
+
+                    for (var index = 0; index < pitchChangingPointCount; ++index)
+                    {
+                        var changingPointX = MainWindowModel.pitchChangingPointX(aNoteId, index);
+                        var changingPointY = MainWindowModel.pitchChangingPointY(aNoteId, index);
+
+                        aCtx.bezierCurveTo(preControlX,         preControlY,
+                                           changingPointX - 10, changingPointY,
+                                           changingPointX,      changingPointY);
+                        console.log("changingPointX:" + changingPointX);
+                        console.log("changingPointY:" + changingPointY);
+                        preControlX = changingPointX + 10;
+                        preControlY = changingPointY;
+                    }
+
+                    console.log("preControlX:" + preControlX);
+                    console.log("preControlX:" + preControlY);
+                    console.log("portamentoEndX:" + portamentoEndX);
+                    console.log("portamentoEndY:" + portamentoEndY);
+
+                    aCtx.bezierCurveTo(preControlX, preControlY,
+                                       portamentoEndX - 30, portamentoEndY,
+                                       portamentoEndX, portamentoEndY);
                 }
             }
 
@@ -233,11 +300,11 @@ Rectangle{
                     drag.source.x = calculeDropX(drag.source);
                     drag.source.positionX = drag.source.x;
                     drag.source.positionY = drag.source.y;
-                    drag.source.updatePortamento();
                 }
 
                 onDropped: {
                     piano_roll_edit_area.updateAllNote()
+                    pitch_curve_canvas.requestPaint()
                 }
             }
         }
