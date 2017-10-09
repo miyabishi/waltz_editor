@@ -5,14 +5,16 @@
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;
 
-Note::Note(const NoteId& aNoteId,
-           const Syllable& aSyllable,
-           const NoteRectPointer aNoteRect,
-           const PortamentoPointer aPortament)
+Note::Note(const NoteId&           aNoteId,
+           const Syllable&         aSyllable,
+           const NoteRectPointer   aNoteRect,
+           const PortamentoPointer aPortament,
+           const VibratoPointer    aVibrato)
     : mNoteId_(aNoteId)
     , mSyllable_(aSyllable)
     , mNoteRect_(aNoteRect)
     , mPortamento_(aPortament)
+    , mVibrato_(aVibrato)
 {
 }
 
@@ -39,6 +41,11 @@ int Note::xPosition() const
 PortamentoPointer Note::portamento() const
 {
     return mPortamento_;
+}
+
+VibratoPointer Note::vibrato() const
+{
+    return mVibrato_;
 }
 
 Parameters Note::toParameters(Beat aBeat,

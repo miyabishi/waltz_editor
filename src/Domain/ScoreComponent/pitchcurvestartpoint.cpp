@@ -6,3 +6,4 @@ PitchCurveStartPoint::PitchCurveStartPoint(int aX, int aY)
     : Point(aX, aY)
 {
 }
+

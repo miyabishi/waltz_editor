@@ -1,7 +1,5 @@
 #include <QDebug>
 #include <QString>
-#include <QJsonObject>
-#include <QJsonDocument>
 #include <QUrl>
 #include <waltz_common/commandid.h>
 #include <waltz_common/parameter.h>
@@ -11,7 +9,10 @@
 #include "mainwindowmodel.h"
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
-#include "src/Domain/ScoreComponent/notefactory.h"
+
+#include "src/Domain/ScoreComponent/noteinformation.h"
+#include "src/Domain/ScoreComponent/portamentoinformation.h"
+#include "src/Domain/ScoreComponent/vibratoinformation.h"
 
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
@@ -19,7 +20,6 @@ using namespace waltz::common::Commands;
 using namespace waltz::editor::model;
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::editor::Communicator;
-
 
 namespace
 {
@@ -104,26 +104,35 @@ void MainWindowModel::appendNote(int aNoteId,
                                  int aPositionX,
                                  int aPositionY,
                                  int aNoteWidth,
-                                 int aPortamentStartX,
-                                 int aPortamentStartY,
-                                 int aPortamentEndX,
-                                 int aPortamentEndY)
+                                 int aPortamentoStartX,
+                                 int aPortamentoStartY,
+                                 int aPortamentoEndX,
+                                 int aPortamentoEndY,
+                                 double aVibratoAmplitude,
+                                 double aVibratoFrecuency,
+                                 int aVibratoLength)
 {
+    NoteInformationPointer noteInformation(
+                new NoteInformation(aNoteId,
+                                    aNoteText,
+                                    aPositionX,
+                                    aPositionY,
+                                    aNoteWidth,
+                                    mEditAreaInformation_->rowHeight()));
 
-    NoteFactoryPointer noteFactory(new NoteFactory());
-    NotePointer note(noteFactory->create(aNoteId,
-                                         aNoteText,
-                                         aPositionX,
-                                         aPositionY,
-                                         aNoteWidth,
-                                         mEditAreaInformation_->rowHeight(),
-                                         aPortamentStartX,
-                                         aPortamentStartY,
-                                         QList<int>(),
-                                         QList<int>(),
-                                         aPortamentEndX,
-                                         aPortamentEndY));
+    PortamentoInformationPointer portamentoInformation(
+                new PortamentoInformation(aPortamentoStartX,
+                                          aPortamentoStartY,
+                                          QList<int>(),
+                                          QList<int>(),
+                                          aPortamentoEndX,
+                                          aPortamentoEndY));
 
+    VibratoInformationPointer vibratoInformation(new VibratoInformation(aVibratoAmplitude,
+                                                                        aVibratoFrecuency,
+                                                                        aVibratoLength));
+
+    NotePointer note(noteInformation->note(portamentoInformation, vibratoInformation));
 
     mScore_->appendNote(note);
     mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
@@ -189,39 +198,38 @@ void MainWindowModel::updateNote(int aNoteId,
                             int aPositionX,
                             int aPositionY,
                             int aNoteWidth,
-                            int aPortamentStartX,
-                            int aPortamentStartY,
+                            int aPortamentoStartX,
+                            int aPortamentoStartY,
                             QList<int> aPitchChangingPointXArray,
                             QList<int> aPitchChangingPointYArray,
-                            int aPortamentEndX,
-                            int aPortamentEndY)
+                            int aPortamentoEndX,
+                            int aPortamentoEndY,
+                            double aVibratoAmplitude,
+                            double aVibratoFrecuency,
+                            int aVibratoLength)
 {
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << aNoteId
-             << aNoteText
-             << aPositionX
-             << aPositionY
-             << aNoteWidth
-             << aPortamentStartX
-             << aPortamentStartY
-             << aPitchChangingPointXArray
-             << aPitchChangingPointYArray
-             << aPortamentEndX
-             << aPortamentEndY;
 
-    NoteFactoryPointer noteFactory(new NoteFactory());
-    NotePointer note(noteFactory->create(aNoteId,
-                                         aNoteText,
-                                         aPositionX,
-                                         aPositionY,
-                                         aNoteWidth,
-                                         mEditAreaInformation_->rowHeight(),
-                                         aPortamentStartX,
-                                         aPortamentStartY,
-                                         aPitchChangingPointXArray,
-                                         aPitchChangingPointYArray,
-                                         aPortamentEndX,
-                                         aPortamentEndY));
+    NoteInformationPointer noteInformation(
+                new NoteInformation(aNoteId,
+                                    aNoteText,
+                                    aPositionX,
+                                    aPositionY,
+                                    aNoteWidth,
+                                    mEditAreaInformation_->rowHeight()));
+
+    PortamentoInformationPointer portamentoInformation(
+                new PortamentoInformation(aPortamentoStartX,
+                                          aPortamentoStartY,
+                                          aPitchChangingPointXArray,
+                                          aPitchChangingPointYArray,
+                                          aPortamentoEndX,
+                                          aPortamentoEndY));
+
+    VibratoInformationPointer vibratoInformation(new VibratoInformation(aVibratoAmplitude,
+                                                                        aVibratoFrecuency,
+                                                                        aVibratoLength));
+
+    NotePointer note(noteInformation->note(portamentoInformation, vibratoInformation));
     mScore_->updateNote(note);
 }
 
@@ -247,28 +255,20 @@ void MainWindowModel::emitActivePlayButton()
     emit activePlayButton();
 }
 
-int MainWindowModel::portamentStartX(int aNoteId) const
+QPoint MainWindowModel::portamentStartPoint(int aNoteId) const
 {
     NotePointer note = findNote(aNoteId);
-    if (note.isNull()) return 0;
+    if (note.isNull()) return QPoint(0,0);
 
-    return note->portamento()->pitchCurve()->startPoint()->x();
+    return note->portamento()->pitchCurve()->startPoint()->toQPoint();
 }
 
-int MainWindowModel::portamentStartY(int aNoteId) const
+QPoint MainWindowModel::pitchChangingPoint(int aNoteId, int aIndex) const
 {
     NotePointer note = findNote(aNoteId);
-    if (note.isNull()) return 0;
+    if (note.isNull()) return QPoint(0,0);
 
-    return note->portamento()->pitchCurve()->startPoint()->y();
-}
-
-int MainWindowModel::pitchChangingPointX(int aNoteId, int aIndex) const
-{
-    NotePointer note = findNote(aNoteId);
-    if (note.isNull()) return 0;
-
-    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->x();
+    return findNote(aNoteId)->portamento()->pitchCurve()->changingPoint(aIndex)->toQPoint();
 }
 
 int MainWindowModel::pitchChangingPointCount(int aNoteId) const
@@ -279,30 +279,13 @@ int MainWindowModel::pitchChangingPointCount(int aNoteId) const
     return note->portamento()->pitchCurve()->changingPointCount();
 }
 
-int MainWindowModel::pitchChangingPointY(int aNoteId, int aIndex) const
+QPoint MainWindowModel::portamentEndPoint(int aNoteId) const
 {
     NotePointer note = findNote(aNoteId);
-    if (note.isNull()) return 0;
+    if (note.isNull()) return QPoint(0,0);
 
-    return note->portamento()->pitchCurve()->changingPoint(aIndex)->y();
+    return note->portamento()->pitchCurve()->endPoint()->toQPoint();
 }
-
-int MainWindowModel::portamentEndX(int aNoteId) const
-{
-    NotePointer note = findNote(aNoteId);
-    if (note.isNull()) return 0;
-
-    return note->portamento()->pitchCurve()->endPoint()->x();
-}
-
-int MainWindowModel::portamentEndY(int aNoteId) const
-{
-    NotePointer note = findNote(aNoteId);
-    if (note.isNull()) return 0;
-
-    return note->portamento()->pitchCurve()->endPoint()->y();
-}
-
 
 int MainWindowModel::yPositionOfPreviousNote(int aXPosition, int aYPosition, int aNoteId) const
 {

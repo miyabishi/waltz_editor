@@ -149,6 +149,10 @@ Rectangle{
                         var portamentoEndX = positionX + 30;
                         var portamentoEndY = positionY + edit_area.rowHeight / 2;
 
+                        var vibratoAmplitude = 0.0;
+                        var vibratoFrequency = 5.0;
+                        var vibratoLength = 10;
+
                         note_repeater.model.append({"noteId": noteId,
                                                     "noteText": noteText,
                                                     "positionX": positionX,
@@ -157,7 +161,10 @@ Rectangle{
                                                     "portamentoStartX": portamentoStartX,
                                                     "portamentoStartY": portamentoStartY,
                                                     "portamentoEndX": portamentoEndX,
-                                                    "portamentoEndY": portamentoEndY});
+                                                    "portamentoEndY": portamentoEndY,
+                                                    "vibratoAmplitude": vibratoAmplitude,
+                                                    "vibratoFrequency": vibratoFrequency,
+                                                    "vibratoLength": vibratoLength});
                         MainWindowModel.appendNote(noteId,
                                                    noteText,
                                                    positionX ,
@@ -166,7 +173,11 @@ Rectangle{
                                                    portamentoStartX,
                                                    portamentoStartY,
                                                    portamentoEndX,
-                                                   portamentoEndY);
+                                                   portamentoEndY,
+                                                   vibratoAmplitude,
+                                                   vibratoFrequency,
+                                                   vibratoLength);
+                        piano_roll_edit_area.updateAllNote();
                     }
                 }
             }
@@ -201,6 +212,9 @@ Rectangle{
                         item.portamentoStartY = portamentoStartY;
                         item.portamentoEndX = portamentoEndX;
                         item.portamentoEndY = portamentoEndY;
+                        item.vibratoAmplitude = vibratoAmplitude;
+                        item.vibratoFrequency = vibratoFrequency;
+                        item.vibratoLength= vibratoLength;
                         piano_roll_edit_area.updateAllNote.connect(item.updateNote);
                         pitch_curve_canvas.requestPaint()
                     }
@@ -229,39 +243,45 @@ Rectangle{
 
                 function drawPitchCurve(aCtx, aNoteId)
                 {
-                    var portamentoStartX = MainWindowModel.portamentStartX(aNoteId);
-                    var portamentoStartY = MainWindowModel.portamentStartY(aNoteId);
+                    drawPortamento(aCtx, aNoteId);
+                    drawVibrato(aCtx, aNoteId);
+                }
+
+                function drawVibrato(aCtx, aNoteId)
+                {
+                }
+
+                function drawPortamento(aCtx, aNoteId)
+                {
+                    var portamentStartPoint = MainWindowModel.portamentStartPoint(aNoteId)
+                    var portamentoStartX = portamentStartPoint.x;
+                    var portamentoStartY = portamentStartPoint.y;
+
                     var pitchChangingPointCount = MainWindowModel.pitchChangingPointCount(aNoteId);
-                    var portamentoEndX = MainWindowModel.portamentEndX(aNoteId);
-                    var portamentoEndY = MainWindowModel.portamentEndY(aNoteId);
+
+                    var portamentEndPoint = MainWindowModel.portamentEndPoint(aNoteId)
+                    var portamentoEndX = portamentEndPoint.x;
+                    var portamentoEndY = portamentEndPoint.y;
 
                     aCtx.moveTo(portamentoStartX,
                                 portamentoStartY);
-                    console.log("note id:" + aNoteId);
-                    console.log("portamentoStartX:" + portamentoStartX);
-                    console.log("portamentoStartY:" + portamentoStartY);
 
                     var preControlX = portamentoStartX + 30
                     var preControlY = portamentoStartY;
 
                     for (var index = 0; index < pitchChangingPointCount; ++index)
                     {
-                        var changingPointX = MainWindowModel.pitchChangingPointX(aNoteId, index);
-                        var changingPointY = MainWindowModel.pitchChangingPointY(aNoteId, index);
+                        var changingPoint = MainWindowModel.pitchChangingPoint(aNoteId, index);
+                        var changingPointX = changingPoint.x;
+                        var changingPointY = changingPoint.y;
 
                         aCtx.bezierCurveTo(preControlX,         preControlY,
                                            changingPointX - 10, changingPointY,
                                            changingPointX,      changingPointY);
-                        console.log("changingPointX:" + changingPointX);
-                        console.log("changingPointY:" + changingPointY);
+
                         preControlX = changingPointX + 10;
                         preControlY = changingPointY;
                     }
-
-                    console.log("preControlX:" + preControlX);
-                    console.log("preControlX:" + preControlY);
-                    console.log("portamentoEndX:" + portamentoEndX);
-                    console.log("portamentoEndY:" + portamentoEndY);
 
                     aCtx.bezierCurveTo(preControlX, preControlY,
                                        portamentoEndX - 30, portamentoEndY,
@@ -350,6 +370,5 @@ Rectangle{
             }
         }
     }
-
 }
 

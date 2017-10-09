@@ -36,8 +36,11 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/pitchcurvestartpoint.cpp \
     src/Domain/ScoreComponent/pitchcurveendpoint.cpp \
     src/Domain/ScoreComponent/point.cpp \
-    src/Domain/ScoreComponent/notefactory.cpp \
-    src/Domain/ScoreComponent/noterectheight.cpp
+    src/Domain/ScoreComponent/noterectheight.cpp \
+    src/Domain/ScoreComponent/vibratolength.cpp \
+    src/Domain/ScoreComponent/noteinformation.cpp \
+    src/Domain/ScoreComponent/portamentoinformation.cpp \
+    src/Domain/ScoreComponent/vibratoinformation.cpp
 
 RESOURCES += qml.qrc
 
@@ -98,8 +101,11 @@ HEADERS += \
     src/Domain/ScoreComponent/pitchcurvestartpoint.h \
     src/Domain/ScoreComponent/pitchcurveendpoint.h \
     src/Domain/ScoreComponent/point.h \
-    src/Domain/ScoreComponent/notefactory.h \
-    src/Domain/ScoreComponent/noterectheight.h
+    src/Domain/ScoreComponent/noterectheight.h \
+    src/Domain/ScoreComponent/vibratolength.h \
+    src/Domain/ScoreComponent/noteinformation.h \
+    src/Domain/ScoreComponent/portamentoinformation.h \
+    src/Domain/ScoreComponent/vibratoinformation.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

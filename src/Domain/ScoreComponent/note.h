@@ -13,6 +13,7 @@
 #include "tempo.h"
 #include "beat.h"
 #include "portamento.h"
+#include "vibrato.h"
 #include "src/Model/editareainformation.h"
 
 
@@ -32,21 +33,22 @@ namespace waltz
             class Note
             {
             public:
-                Note(const NoteId& aNoteId,
-                     const Syllable& aSyllable,
-                     const NoteRectPointer aNoteRect,
-                     const PortamentoPointer aPortament);
+                Note(const NoteId&           aNoteId,
+                     const Syllable&         aSyllable,
+                     const NoteRectPointer   aNoteRect,
+                     const PortamentoPointer aPortament,
+                     const VibratoPointer    aVibrato);
             public:
-                waltz::common::Commands::Parameters toParameters(
-                        Beat aBeat,
-                        Tempo aTempo,
-                        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
+                waltz::common::Commands::Parameters toParameters(Beat aBeat,
+                                                                 Tempo aTempo,
+                                                                 waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
                 bool xPositionIs(int aX);
                 int xPosition() const;
 
                 NoteId noteId() const;
                 bool noteIdEquals(const NoteId& aOtherNoteId) const;
                 PortamentoPointer portamento() const;
+                VibratoPointer    vibrato() const;
                 NoteRectPointer noteRect() const;
 
             private:
@@ -54,13 +56,13 @@ namespace waltz
                 Syllable          mSyllable_;
                 NoteRectPointer   mNoteRect_;
                 PortamentoPointer mPortamento_;
+                VibratoPointer    mVibrato_;
 
             private:
                 Note(const Note& aOther);
                 Note& operator=(const Note& aOther);
             };
             typedef QSharedPointer<Note> NotePointer;
-
         } // namespace ScoreComponent
     } // namespace editor
 } // namespace waltz

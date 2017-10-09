@@ -18,10 +18,11 @@ Rectangle{
     property int portamentoEndX
     property int portamentoEndY
 
+    property double vibratoAmplitude
+    property double vibratoFrequency
+    property double vibratoLength
 
     property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
-
-
 
     border.color: "#000000"
     border.width: 1
@@ -46,14 +47,17 @@ Rectangle{
                                    note_rect.pitchChangingPointXArray,
                                    note_rect.pitchChangingPointYArray,
                                    note_rect.portamentoEndX,
-                                   note_rect.portamentoEndY);
+                                   note_rect.portamentoEndY,
+                                   note_rect.vibratoAmplitude,
+                                   note_rect.vibratoFrequency,
+                                   note_rect.vibratoLength);
     }
 
     function updatePortamento()
     {
         note_rect.portamentoStartX = note_rect.x - 30;
         note_rect.portamentoStartY = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
-                                                                             note_rect.x + note_rect.height / 2,
+                                                                             note_rect.y + note_rect.height / 2,
                                                                              note_rect.pNoteId_);
         note_rect.portamentoEndX = note_rect.x + 30;
         note_rect.portamentoEndY = note_rect.y + note_rect.height / 2;

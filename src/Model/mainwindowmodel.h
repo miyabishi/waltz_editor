@@ -43,7 +43,10 @@ namespace waltz
                                             int aPortamentStartX,
                                             int aPortamentStartY,
                                             int aPortamentEndX,
-                                            int aPortamentEndY);
+                                            int aPortamentEndY,
+                                            double aVibratoAmplitude,
+                                            double aVibratoFrequency,
+                                            int aVibratoLength);
 
                 Q_INVOKABLE void updateNote(int aNoteId,
                                             const QString& aNoteText,
@@ -55,7 +58,10 @@ namespace waltz
                                             QList<int> aPitchChangingPointX,
                                             QList<int> aPitchChangingPointY,
                                             int aPortamentEndX,
-                                            int aPortamentEndY);
+                                            int aPortamentEndY,
+                                            double aVibratoAmplitude,
+                                            double aVibratoFrequency,
+                                            int aVibratoLength);
 
                 Q_INVOKABLE int noteIdFromIndex(int aIndex);
 
@@ -81,19 +87,21 @@ namespace waltz
                 Q_INVOKABLE QString vocalFileExtention() const;
 
                 // for Portament
-                Q_INVOKABLE int portamentStartX(int aNoteId) const;
-                Q_INVOKABLE int portamentStartY(int aNoteId) const;
+                Q_INVOKABLE QPoint portamentStartPoint(int aNoteId) const;
 
                 Q_INVOKABLE int pitchChangingPointCount(int aNoteId) const;
-                Q_INVOKABLE int pitchChangingPointX(int aNoteId, int aIndex) const;
-                Q_INVOKABLE int pitchChangingPointY(int aNoteId, int aIndex) const;
+                Q_INVOKABLE QPoint pitchChangingPoint(int aNoteId, int aIndex) const;
 
-                Q_INVOKABLE int portamentEndX(int aNoteId) const;
-                Q_INVOKABLE int portamentEndY(int aNoteId) const;
+                Q_INVOKABLE QPoint portamentEndPoint(int aNoteId) const;
 
                 Q_INVOKABLE int yPositionOfPreviousNote(int aXPosition,
                                                         int aYPosition,
                                                         int aNoteId) const;
+
+                // for Vibrato
+                //Q_INVOKABLE QPoint vibratoStartPoint(int aNoteId) const;
+                //Q_INVOKABLE QPoint vibratoEndPoint(int aNoteId) const;
+                //Q_INVOKABLE double vibratoAmplitude(int aNoteId) const;
 
 
                 // for Controller

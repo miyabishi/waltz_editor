@@ -1,6 +1,7 @@
 #ifndef POINT_H
 #define POINT_H
 
+#include <QPoint>
 
 namespace waltz
 {
@@ -17,6 +18,7 @@ namespace waltz
             public:
                 int x() const;
                 int y() const;
+                QPoint toQPoint() const;
 
             private:
                 int mX_;

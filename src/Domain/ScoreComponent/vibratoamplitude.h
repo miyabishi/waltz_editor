@@ -12,7 +12,10 @@ namespace waltz
             class VibratoAmplitude
             {
             public:
-                VibratoAmplitude();
+                VibratoAmplitude(const double aValue);
+
+            private:
+                double mValue_;
 
             private:
                 VibratoAmplitude(const VibratoAmplitude& aOther);

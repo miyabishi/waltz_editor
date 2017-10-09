@@ -2,6 +2,9 @@
 #define VIBRATO_H
 
 #include <QSharedPointer>
+#include "vibratoamplitude.h"
+#include "vibratolength.h"
+#include "vibratofrequency.h"
 
 namespace waltz
 {
@@ -12,8 +15,14 @@ namespace waltz
             class Vibrato
             {
             public:
-                Vibrato();
+                Vibrato(const VibratoAmplitudePointer aAmplitude,
+                        const VibratoFrequencyPointer aFrequency,
+                        const VibratoLengthPointer    aLength);
 
+            private:
+                VibratoAmplitudePointer mAmplitude_;
+                VibratoFrequencyPointer mFrequency_;
+                VibratoLengthPointer    mLength_;
 
             private:
                 Vibrato(const Vibrato& aOther);

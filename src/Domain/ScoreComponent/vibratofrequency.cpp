@@ -2,9 +2,8 @@
 
 using namespace waltz::editor::ScoreComponent;
 
-
-VibratoFrequency::VibratoFrequency()
+VibratoFrequency::VibratoFrequency(const double aValue)
+    : mValue_(aValue)
 {
-
 }
 

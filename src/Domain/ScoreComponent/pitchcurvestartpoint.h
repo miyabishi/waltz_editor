@@ -14,7 +14,6 @@ namespace waltz
             {
             public:
                 PitchCurveStartPoint(int aX, int aY);
-            private:
 
             private:
                 PitchCurveStartPoint(const PitchCurveStartPoint& aOther);

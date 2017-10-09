@@ -21,3 +21,8 @@ int Point::y() const
 {
     return mY_;
 }
+
+QPoint Point::toQPoint() const
+{
+    return QPoint(mX_, mY_);
+}
