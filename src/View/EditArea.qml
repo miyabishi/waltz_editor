@@ -149,7 +149,7 @@ Rectangle{
                         var portamentoEndX = positionX + 30;
                         var portamentoEndY = positionY + edit_area.rowHeight / 2;
 
-                        var vibratoAmplitude = 0.0;
+                        var vibratoAmplitude = 1.0;
                         var vibratoFrequency = 5.0;
                         var vibratoLength = 10;
 

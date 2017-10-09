@@ -15,6 +15,8 @@
 #include "portamento.h"
 #include "vibrato.h"
 #include "src/Model/editareainformation.h"
+#include "vibratoendpoint.h"
+#include "vibratostartpoint.h"
 
 
 namespace waltz
@@ -45,8 +47,12 @@ namespace waltz
                 bool xPositionIs(int aX);
                 int xPosition() const;
 
+                VibratoStartPointPointer vibratoStartPoint() const;
+                VibratoEndPointPointer vibratoEndPoint() const;
+
                 NoteId noteId() const;
                 bool noteIdEquals(const NoteId& aOtherNoteId) const;
+
                 PortamentoPointer portamento() const;
                 VibratoPointer    vibrato() const;
                 NoteRectPointer noteRect() const;

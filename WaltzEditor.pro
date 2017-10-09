@@ -40,7 +40,9 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/vibratolength.cpp \
     src/Domain/ScoreComponent/noteinformation.cpp \
     src/Domain/ScoreComponent/portamentoinformation.cpp \
-    src/Domain/ScoreComponent/vibratoinformation.cpp
+    src/Domain/ScoreComponent/vibratoinformation.cpp \
+    src/Domain/ScoreComponent/vibratostartpoint.cpp \
+    src/Domain/ScoreComponent/vibratoendpoint.cpp
 
 RESOURCES += qml.qrc
 
@@ -105,7 +107,9 @@ HEADERS += \
     src/Domain/ScoreComponent/vibratolength.h \
     src/Domain/ScoreComponent/noteinformation.h \
     src/Domain/ScoreComponent/portamentoinformation.h \
-    src/Domain/ScoreComponent/vibratoinformation.h
+    src/Domain/ScoreComponent/vibratoinformation.h \
+    src/Domain/ScoreComponent/vibratostartpoint.h \
+    src/Domain/ScoreComponent/vibratoendpoint.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

@@ -13,6 +13,7 @@ namespace waltz
             {
             public:
                 VibratoAmplitude(const double aValue);
+                double value() const;
 
             private:
                 double mValue_;

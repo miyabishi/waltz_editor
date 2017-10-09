@@ -7,3 +7,8 @@ VibratoFrequency::VibratoFrequency(const double aValue)
 {
 }
 
+double VibratoFrequency::value() const
+{
+    return mValue_;
+}
+

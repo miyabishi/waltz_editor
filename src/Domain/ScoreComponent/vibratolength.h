@@ -14,6 +14,8 @@ namespace waltz
             public:
                 VibratoLength(int aValue);
 
+                int value() const;
+
             private:
                 int mValue_;
 

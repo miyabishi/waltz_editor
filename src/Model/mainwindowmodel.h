@@ -99,9 +99,9 @@ namespace waltz
                                                         int aNoteId) const;
 
                 // for Vibrato
-                //Q_INVOKABLE QPoint vibratoStartPoint(int aNoteId) const;
-                //Q_INVOKABLE QPoint vibratoEndPoint(int aNoteId) const;
-                //Q_INVOKABLE double vibratoAmplitude(int aNoteId) const;
+                Q_INVOKABLE QPoint vibratoStartPoint(int aNoteId) const;
+                Q_INVOKABLE QPoint vibratoEndPoint(int aNoteId) const;
+                Q_INVOKABLE double vibratoAmplitude(int aNoteId) const;
 
 
                 // for Controller

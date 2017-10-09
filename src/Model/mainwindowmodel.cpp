@@ -301,7 +301,26 @@ int MainWindowModel::noteIdFromIndex(int aIndex)
     return mScore_->noteList()->at(aIndex)->noteId().value();
 }
 
+QPoint MainWindowModel::vibratoStartPoint(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return QPoint(0, 0);
+    return note->vibratoStartPoint()->toQPoint();
+}
 
+QPoint MainWindowModel::vibratoEndPoint(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return QPoint(0, 0);
+    return note->vibratoEndPoint()->toQPoint();
+}
+
+double MainWindowModel::vibratoAmplitude(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0.0;
+    return note->vibrato()->amplitude()->value();
+}
 
 NotePointer MainWindowModel::findNote(int aNoteId) const
 {

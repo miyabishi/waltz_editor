@@ -11,3 +11,12 @@ Vibrato::Vibrato(const VibratoAmplitudePointer aAmplitude,
 {
 }
 
+VibratoLengthPointer Vibrato::length() const
+{
+    return mLength_;
+}
+
+VibratoAmplitudePointer Vibrato::amplitude() const
+{
+    return mAmplitude_;
+}

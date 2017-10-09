@@ -7,3 +7,8 @@ VibratoLength::VibratoLength(int aValue)
 {
 }
 
+
+int VibratoLength::value() const
+{
+    return mValue_;
+}

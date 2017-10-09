@@ -48,6 +48,20 @@ VibratoPointer Note::vibrato() const
     return mVibrato_;
 }
 
+VibratoStartPointPointer Note::vibratoStartPoint() const
+{
+    return VibratoStartPointPointer(
+                new VibratoStartPoint(mNoteRect_->rightX() - mVibrato_->length()->value(),
+                                      mNoteRect_->center()->y()));
+}
+
+VibratoEndPointPointer Note::vibratoEndPoint() const
+{
+    return VibratoEndPointPointer(
+                new VibratoEndPoint(mNoteRect_->rightX(),
+                                    mNoteRect_->center()->y()));
+}
+
 Parameters Note::toParameters(Beat aBeat,
                               Tempo aTempo,
                               waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const

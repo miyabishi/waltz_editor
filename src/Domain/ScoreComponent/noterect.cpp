@@ -39,6 +39,11 @@ int NoteRect::y() const
     return mPosition_->y();
 }
 
+int NoteRect::rightX() const
+{
+    return mPosition_->x() + mWidth_->value();
+}
+
 PitchPointer NoteRect::pitch(const waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const
 {
     return aEditAreaInformation->calculatePitch(mPosition_->y());
