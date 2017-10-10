@@ -1,10 +1,9 @@
 #include "vibratoinformation.h"
 
-
 using namespace waltz::editor::ScoreComponent;
 
 VibratoInformation::VibratoInformation(double aVibratoAmplitude,
-                                       double aVibratoFrequency,
+                                       int aVibratoFrequency,
                                        int aVibratoLength)
     : mVibratoAmplitude_(aVibratoAmplitude)
     , mVibratoFequency_(aVibratoFrequency)

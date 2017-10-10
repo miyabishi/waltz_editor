@@ -109,7 +109,7 @@ void MainWindowModel::appendNote(int aNoteId,
                                  int aPortamentoEndX,
                                  int aPortamentoEndY,
                                  double aVibratoAmplitude,
-                                 double aVibratoFrecuency,
+                                 int aVibratoFrecuency,
                                  int aVibratoLength)
 {
     NoteInformationPointer noteInformation(
@@ -205,7 +205,7 @@ void MainWindowModel::updateNote(int aNoteId,
                             int aPortamentoEndX,
                             int aPortamentoEndY,
                             double aVibratoAmplitude,
-                            double aVibratoFrecuency,
+                            int aVibratoFrecuency,
                             int aVibratoLength)
 {
 
@@ -321,6 +321,14 @@ double MainWindowModel::vibratoAmplitude(int aNoteId) const
     if (note.isNull()) return 0.0;
     return note->vibrato()->amplitude()->value();
 }
+
+int MainWindowModel::vibratoFrequency(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+    return note->vibrato()->frequency()->value();
+}
+
 
 NotePointer MainWindowModel::findNote(int aNoteId) const
 {

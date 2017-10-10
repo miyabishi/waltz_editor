@@ -12,11 +12,11 @@ namespace waltz
             class VibratoFrequency
             {
             public:
-                VibratoFrequency(const double aValue);
-                double value() const;
+                VibratoFrequency(const int aValue);
+                int value() const;
 
             private:
-                double mValue_;
+                int mValue_;
             private:
                 VibratoFrequency(const VibratoFrequency& aOther);
                 VibratoFrequency& operator=(const VibratoFrequency& aOther);

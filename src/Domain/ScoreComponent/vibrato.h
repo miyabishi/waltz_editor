@@ -21,6 +21,7 @@ namespace waltz
 
                 VibratoLengthPointer length() const;
                 VibratoAmplitudePointer amplitude() const;
+                VibratoFrequencyPointer frequency() const;
 
             private:
                 VibratoAmplitudePointer mAmplitude_;

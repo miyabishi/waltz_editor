@@ -45,7 +45,7 @@ namespace waltz
                                             int aPortamentEndX,
                                             int aPortamentEndY,
                                             double aVibratoAmplitude,
-                                            double aVibratoFrequency,
+                                            int aVibratoFrequency,
                                             int aVibratoLength);
 
                 Q_INVOKABLE void updateNote(int aNoteId,
@@ -60,7 +60,7 @@ namespace waltz
                                             int aPortamentEndX,
                                             int aPortamentEndY,
                                             double aVibratoAmplitude,
-                                            double aVibratoFrequency,
+                                            int aVibratoFrequency,
                                             int aVibratoLength);
 
                 Q_INVOKABLE int noteIdFromIndex(int aIndex);
@@ -102,7 +102,7 @@ namespace waltz
                 Q_INVOKABLE QPoint vibratoStartPoint(int aNoteId) const;
                 Q_INVOKABLE QPoint vibratoEndPoint(int aNoteId) const;
                 Q_INVOKABLE double vibratoAmplitude(int aNoteId) const;
-
+                Q_INVOKABLE int vibratoFrequency(int aNoteId) const;
 
                 // for Controller
                 Q_INVOKABLE void play();

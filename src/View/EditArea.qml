@@ -149,9 +149,9 @@ Rectangle{
                         var portamentoEndX = positionX + 30;
                         var portamentoEndY = positionY + edit_area.rowHeight / 2;
 
-                        var vibratoAmplitude = 1.0;
-                        var vibratoFrequency = 5.0;
-                        var vibratoLength = 10;
+                        var vibratoAmplitude = 1.2;
+                        var vibratoFrequency = 4;
+                        var vibratoLength = edit_area.columnWidth /2 ;
 
                         note_repeater.model.append({"noteId": noteId,
                                                     "noteText": noteText,
@@ -228,17 +228,12 @@ Rectangle{
                 onPaint: {
                     var ctx = pitch_curve_canvas.getContext('2d');
                     ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
-                    ctx.strokeStyle = Qt.rgba(.4,.6,.8);
-                    ctx.beginPath();
 
                     for (var index = 0; index < MainWindowModel.noteCount(); ++index)
                     {
                         drawPitchCurve(ctx, MainWindowModel.noteIdFromIndex(index));
                     }
 
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                    ctx.restore();
                 }
 
                 function drawPitchCurve(aCtx, aNoteId)
@@ -249,11 +244,59 @@ Rectangle{
 
                 function drawVibrato(aCtx, aNoteId)
                 {
+                    aCtx.strokeStyle = Qt.rgba(.3,.7,.5);
+                    aCtx.beginPath();
+
+                    var vibratoStartPoint = MainWindowModel.vibratoStartPoint(aNoteId);
+                    var vibratoStartX = vibratoStartPoint.x;
+                    var vibratoStartY = vibratoStartPoint.y;
+
+                    var vibratoEndPoint = MainWindowModel.vibratoEndPoint(aNoteId);
+                    var vibratoEndX = vibratoEndPoint.x;
+                    var vibratoEndY = vibratoEndPoint.y;
+
+                    var length = vibratoEndX - vibratoStartX;
+                    var frequency = MainWindowModel.vibratoFrequency(aNoteId);
+                    var halfWaveLength = length / frequency / 2;
+                    var amplitude = MainWindowModel.vibratoAmplitude(aNoteId) * edit_area.rowHeight / 2;
+
+
+                    aCtx.moveTo(vibratoStartX - 10,
+                                vibratoStartY);
+
+                    var preControlX = vibratoStartX - 5;
+                    var preControlY = vibratoStartY;
+
+                    for (var index = 0; index < frequency * 2; ++index)
+                    {
+                        var direction = (index%2 == 0) ? 1 : -1;
+
+                        aCtx.bezierCurveTo(preControlX,
+                                           preControlY,
+                                           vibratoStartX + halfWaveLength * index- 5,
+                                           vibratoStartY + amplitude * direction,
+                                           vibratoStartX + halfWaveLength * index ,
+                                           vibratoStartY + amplitude * direction);
+
+                        preControlX = vibratoStartX + halfWaveLength * index + 5;
+                        preControlY = vibratoStartY + amplitude * direction;
+
+                    }
+
+                    aCtx.bezierCurveTo(preControlX,     preControlY,
+                                       vibratoEndX -5 , vibratoEndY,
+                                       vibratoEndX, vibratoEndY);
+                    aCtx.lineWidth = 2;
+                    aCtx.stroke();
+                    aCtx.restore();
                 }
 
                 function drawPortamento(aCtx, aNoteId)
                 {
-                    var portamentStartPoint = MainWindowModel.portamentStartPoint(aNoteId)
+                    aCtx.strokeStyle = Qt.rgba(.4,.6,.8);
+                    aCtx.beginPath();
+
+                    var portamentStartPoint = MainWindowModel.portamentStartPoint(aNoteId);
                     var portamentoStartX = portamentStartPoint.x;
                     var portamentoStartY = portamentStartPoint.y;
 
@@ -286,6 +329,9 @@ Rectangle{
                     aCtx.bezierCurveTo(preControlX, preControlY,
                                        portamentoEndX - 30, portamentoEndY,
                                        portamentoEndX, portamentoEndY);
+                    aCtx.lineWidth = 2;
+                    aCtx.stroke();
+                    aCtx.restore();
                 }
             }
 

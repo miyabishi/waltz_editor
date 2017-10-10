@@ -20,3 +20,8 @@ VibratoAmplitudePointer Vibrato::amplitude() const
 {
     return mAmplitude_;
 }
+
+VibratoFrequencyPointer Vibrato::frequency() const
+{
+    return mFrequency_;
+}

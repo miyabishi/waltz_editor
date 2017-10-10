@@ -14,12 +14,12 @@ namespace waltz
             {
             public:
                 VibratoInformation(double aVibratoAmplitude,
-                                   double aVibratoFrequency,
+                                   int aVibratoFrequency,
                                    int aVibratoLength);
                 VibratoPointer vibrato() const;
             private:
                 double mVibratoAmplitude_;
-                double mVibratoFequency_;
+                int mVibratoFequency_;
                 int    mVibratoLength_;
 
             private:

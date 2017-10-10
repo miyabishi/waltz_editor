@@ -34,7 +34,6 @@ Rectangle{
     function updateNote()
     {
         updatePortamento();
-        console.log("---- update ---");
         note_rect.positionX = note_rect.x;
         note_rect.positionY = note_rect.y;
         MainWindowModel.updateNote(note_rect.pNoteId_,
