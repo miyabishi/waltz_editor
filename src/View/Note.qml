@@ -52,6 +52,10 @@ Rectangle{
                                    note_rect.vibratoLength);
     }
 
+    function reload()
+    {
+    }
+
     function updatePortamento()
     {
         note_rect.portamentoStartX = note_rect.x - 30;

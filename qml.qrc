@@ -16,5 +16,7 @@
         <file>src/View/BottomBar.qml</file>
         <file>src/View/WButtonMouseArea.qml</file>
         <file>image/sound_wave.png</file>
+        <file>src/View/PortamentoEditArea.qml</file>
+        <file>src/View/PianoRoll.qml</file>
     </qresource>
 </RCC>

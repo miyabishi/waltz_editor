@@ -10,6 +10,10 @@ ApplicationWindow {
     height: 940
     title: qsTr("Waltz Editor")
 
+    ListModel{
+        id: note_list_model
+    }
+
     TopBar{
         id: top_bar
         width: parent.width
@@ -32,12 +36,27 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
         }
 
-        EditArea{
-            id: edit_area
+        SplitView{
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: library_information.right
             anchors.right: parent.right
+            orientation: Qt.Vertical
+
+            EditArea{
+                id: edit_area
+                height: 300
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
+
+            PortamentoEditArea{
+                id: portamento_edit_area
+                anchors.top: edit_area.bottom
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
         }
     }
 

@@ -139,6 +139,7 @@ void MainWindowModel::appendNote(int aNoteId,
                                   note->toParameters(mScore_->beat(),
                                                      mScore_->tempo(),
                                                      mEditAreaInformation_)));
+    scoreUpdated();
 }
 
 QString MainWindowModel::vocalFileExtention() const
@@ -231,6 +232,7 @@ void MainWindowModel::updateNote(int aNoteId,
 
     NotePointer note(noteInformation->note(portamentoInformation, vibratoInformation));
     mScore_->updateNote(note);
+    scoreUpdated();
 }
 
 

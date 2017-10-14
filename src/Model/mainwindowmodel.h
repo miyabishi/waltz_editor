@@ -114,6 +114,7 @@ namespace waltz
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();
                 void libraryInformationUpdated();
+                void scoreUpdated();
 
             private:
                 ScoreComponent::NotePointer findNote(int aNoteId)const;
