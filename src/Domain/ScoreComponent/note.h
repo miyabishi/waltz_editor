@@ -56,6 +56,7 @@ namespace waltz
                 PortamentoPointer portamento() const;
                 VibratoPointer    vibrato() const;
                 NoteRectPointer noteRect() const;
+                Syllable syllable() const;
 
             private:
                 NoteId            mNoteId_;

@@ -64,12 +64,15 @@ namespace waltz
                                             int aVibratoLength);
 
                 Q_INVOKABLE int noteIdFromIndex(int aIndex);
-
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;
                 Q_INVOKABLE int beatParent() const;
-
                 Q_INVOKABLE int publishNoteId();
+
+                // for NoteParameter
+                Q_INVOKABLE QPoint notePoint(int aNoteId) const;
+                Q_INVOKABLE QString noteText(int aNoteId) const;
+                Q_INVOKABLE int noteRectWidth(int aNoteId) const;
 
                 // for EditArea
                 Q_INVOKABLE int editAreaWidth() const;

@@ -48,10 +48,26 @@ ApplicationWindow {
                 height: 300
                 anchors.left: parent.left
                 anchors.right: parent.right
+                onXOffsetChanged: {
+                    if (portamento_edit_area.xOffset === xOffset)
+                    {
+                        return;
+                    }
+                    portamento_edit_area.xOffset = xOffset;
+                }
             }
 
             PortamentoEditArea{
                 id: portamento_edit_area
+                xOffset: edit_area.xOffset
+                onXOffsetChanged: {
+                    if (edit_area.xOffset === xOffset)
+                    {
+                        return;
+                    }
+                    edit_area.xOffset = xOffset;
+                }
+
                 anchors.top: edit_area.bottom
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left

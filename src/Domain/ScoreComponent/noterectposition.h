@@ -2,6 +2,7 @@
 #define NOTERECTPOSITION_H
 
 #include <QSharedPointer>
+#include "point.h"
 
 namespace waltz
 {
@@ -9,17 +10,13 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-            class NoteRectPosition
+            class NoteRectPosition : public Point
             {
             public:
                 NoteRectPosition(const int aX,
                                  const int aY);
-                int x() const;
-                int y() const;
 
-            private:
-                int mX_;
-                int mY_;
+
 
             private:
                 NoteRectPosition(const NoteRectPosition& aOther);

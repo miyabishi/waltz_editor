@@ -67,24 +67,19 @@ NotePointer NoteList::at(int aIndex) const
 
 NotePointer NoteList::find(const NoteId& aNoteId) const
 {
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << "notelist size" << mNoteList_.size();
     for (int index = 0; index < mNoteList_.size(); ++index)
     {
-        qDebug() << "index" << index;
         if (! mNoteList_.at(index)->noteIdEquals(aNoteId)) continue;
-        qDebug() << "note found";
         return mNoteList_.at(index);
     }
-    qDebug() << "Note Not Found";
     return NotePointer();
 }
 
 NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition,
                                        const NoteId aCurrentNoteId) const
 {
-    //ノートがないもしくは1個だった場合
-    if (mNoteList_.size() < 2) return NotePointer();
+    if (mNoteList_.size() == 0) return NotePointer();
+    if (mNoteList_.size() == 1) return mNoteList_.first();
 
     QList<NotePointer> noteList = mNoteList_;
     qSort(noteList.begin(), noteList.end(), noteStartTimeLessThan);

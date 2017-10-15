@@ -1,5 +1,4 @@
 #include "score.h"
-#include <QDebug>
 
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;

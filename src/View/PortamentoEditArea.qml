@@ -4,6 +4,15 @@ import QtQuick.Controls 1.4
 Rectangle {
     id: root
     color: "#222222"
+    property int xOffset:0
+
+    onXOffsetChanged: {
+        if (portamento_edit_area_scroll_view.flickableItem.contentX === xOffset)
+        {
+            return;
+        }
+        portamento_edit_area_scroll_view.flickableItem.contentX = xOffset
+    }
 
     function updateProperty(){
         edit_area.supportOctarve = MainWindowModel.supportOctave()
@@ -14,7 +23,6 @@ Rectangle {
         edit_area.columnWidth    = MainWindowModel.columnWidth()
         edit_area.editAreaWidth  = MainWindowModel.editAreaWidth()
     }
-
     function isBlackKey(aIndex){
         switch(aIndex%12){
         case 1:
@@ -33,18 +41,23 @@ Rectangle {
         width:80
         PianoRoll{
             id: portamento_piano_roll
-            anchors.fill: parent
+            width: parent.width
+            y: -portamento_edit_area_scroll_view.flickableItem.contentY
         }
     }
 
     ScrollView{
-        id: edit_area_scroll_view
+        id: portamento_edit_area_scroll_view
         verticalScrollBarPolicy: Qt.ScrollBarAlwaysOn
         horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
         anchors.left: portament_area_piano_view.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: beat_axis_view.bottom
+        flickableItem.onContentXChanged: {
+            xOffset = flickableItem.contentX;
+        }
+
 
         Rectangle{
             id: portamento_edit_area
@@ -108,7 +121,8 @@ Rectangle {
                             portamentoEndY: portamentoEndY;
                             width: edit_area.columnWidth;
                             height: edit_area.rowHeight;
-                            color: "#555555"
+                            color: "#555555";
+                            isEditable: false;
                         }
                     }
                     onLoaded: {
@@ -124,6 +138,7 @@ Rectangle {
                         item.vibratoFrequency = vibratoFrequency;
                         item.vibratoLength= vibratoLength;
                         pitch_curve_canvas.requestPaint();
+                        item.isEditable = false;
                     }
                 }
             }
@@ -257,7 +272,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: edit_area.editAreaWidth
-            x: -edit_area_scroll_view.flickableItem.contentX
+            x: -portamento_edit_area_scroll_view.flickableItem.contentX
 
             Repeater{
                 model: parent.width / edit_area.columnWidth * edit_area.beatChild

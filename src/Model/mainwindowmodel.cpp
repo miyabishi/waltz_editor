@@ -334,10 +334,30 @@ int MainWindowModel::vibratoFrequency(int aNoteId) const
 
 NotePointer MainWindowModel::findNote(int aNoteId) const
 {
-    qDebug() << "note id:" << aNoteId;
     return mScore_->noteList()->find(NoteId(aNoteId));
 }
 
+
+QPoint MainWindowModel::notePoint(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return QPoint(0, 0);
+    return note->noteRect()->position()->toQPoint();
+}
+
+QString MainWindowModel::noteText(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return QString();
+    return note->syllable().value();
+}
+
+int MainWindowModel::noteRectWidth(int aNoteId) const
+{
+    NotePointer note = findNote(aNoteId);
+    if (note.isNull()) return 0;
+    return note->noteRect()->width()->value();
+}
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)

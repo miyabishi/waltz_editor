@@ -3,7 +3,6 @@ import QtQuick 2.0
 Rectangle {
     id:root
     height:edit_area.numberOfRow * edit_area.rowHeight
-    y: -edit_area_scroll_view.flickableItem.contentY
     Repeater{
         model:edit_area.numberOfRow
         Rectangle{

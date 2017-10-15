@@ -21,6 +21,10 @@ Rectangle{
     property double vibratoAmplitude
     property double vibratoFrequency
     property double vibratoLength
+    property bool isEditable: true
+    onEnabledChanged: {
+
+    }
 
     property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
 
@@ -30,6 +34,13 @@ Rectangle{
     Drag.hotSpot.x: 0
     Drag.hotSpot.y: 0
     Drag.active: dragActive
+
+    Connections{
+        target: MainWindowModel
+        onScoreUpdated:{
+            reload();
+        }
+    }
 
     function updateNote()
     {
@@ -54,6 +65,30 @@ Rectangle{
 
     function reload()
     {
+        console.log("note reload");
+        note_rect.pNoteText_ = MainWindowModel.noteText(note_rect.pNoteId_);
+        var notePoint = MainWindowModel.notePoint(note_rect.pNoteId_);
+        note_rect.x = notePoint.x;
+        note_rect.y = notePoint.y;
+        note_rect.width = MainWindowModel.noteRectWidth(note_rect.pNoteId_);
+        var portamentStartPoint =  MainWindowModel.portamentStartPoint(note_rect.pNoteId_);
+        note_rect.portamentoStartX = portamentStartPoint.x;
+        note_rect.portamentoStartY = portamentStartPoint.y;
+
+        note_rect.pitchChangingPointXArray= [];
+        note_rect.pitchChangingPointYArray= [];
+
+        for (var index = 0; index < MainWindowModel.pitchChangingPointCount(note_rect.pNoteId_); ++index)
+        {
+            var pitchChangingPoint = MainWindowModel.pitchChangingPoint(note_rect.pNoteId_, index);
+            note_rect.pitchChangingPointXArray.push(pitchChangingPoint.x);
+            note_rect.pitchChangingPointYArray.push(pitchChangingPoint.y);
+        }
+
+        var portamentEndPoint = MainWindowModel.portamentEndPoint(note_rect.pNoteId_);
+
+        note_rect.portamentoEndX = portamentEndPoint.x;
+        note_rect.portamentoEndY = portamentEndPoint.y;
     }
 
     function updatePortamento()
@@ -80,6 +115,7 @@ Rectangle{
         anchors.right: note_stretch_mouse_area.left
         acceptedButtons: Qt.LeftButton
         propagateComposedEvents: pEditing_
+        enabled: isEditable
         drag.target: note_rect
 
         onReleased: {
@@ -103,6 +139,7 @@ Rectangle{
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        enabled: isEditable
         drag.axis: Drag.XAxis
         width: 10
         property int pPressedX_: 0

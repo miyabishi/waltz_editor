@@ -12,6 +12,17 @@ Rectangle{
     property int beatParent:     MainWindowModel.beatParent()
     property int columnWidth:    MainWindowModel.columnWidth()
     property int editAreaWidth:  MainWindowModel.editAreaWidth()
+    property int xOffset:0
+
+    onXOffsetChanged: {
+        if (edit_area_scroll_view.flickableItem.contentX === xOffset)
+        {
+            return;
+        }
+        edit_area_scroll_view.flickableItem.contentX = xOffset
+    }
+
+
 
     function updateProperty(){
         edit_area.supportOctarve = MainWindowModel.supportOctave()
@@ -42,18 +53,24 @@ Rectangle{
         width:80
         PianoRoll{
             id:piano_roll_area
-            anchors.fill: parent
+            width: parent.width
+            x: 0
+            y: -edit_area_scroll_view.flickableItem.contentY
         }
     }
 
     ScrollView{
         id: edit_area_scroll_view
         verticalScrollBarPolicy: Qt.ScrollBarAlwaysOn
-        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
+        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
         anchors.left: piano_view.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: beat_axis_view.bottom
+
+        flickableItem.onContentXChanged: {
+            xOffset = flickableItem.contentX;
+        }
 
         Rectangle{
             id: piano_roll_edit_area
@@ -178,124 +195,9 @@ Rectangle{
                         item.vibratoFrequency = vibratoFrequency;
                         item.vibratoLength= vibratoLength;
                         piano_roll_edit_area.updateAllNote.connect(item.updateNote);
-                        pitch_curve_canvas.requestPaint()
                     }
                 }
             }
-/*
-            Canvas{
-                id: pitch_curve_canvas
-                anchors.fill: parent
-
-                onPaint: {
-                    var ctx = pitch_curve_canvas.getContext('2d');
-                    ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
-
-                    for (var index = 0; index < MainWindowModel.noteCount(); ++index)
-                    {
-                        drawPitchCurve(ctx, MainWindowModel.noteIdFromIndex(index));
-                    }
-
-                }
-
-                function drawPitchCurve(aCtx, aNoteId)
-                {
-                    drawPortamento(aCtx, aNoteId);
-                    drawVibrato(aCtx, aNoteId);
-                }
-
-                function drawVibrato(aCtx, aNoteId)
-                {
-                    aCtx.strokeStyle = Qt.rgba(.3,.7,.5);
-                    aCtx.beginPath();
-
-                    var vibratoStartPoint = MainWindowModel.vibratoStartPoint(aNoteId);
-                    var vibratoStartX = vibratoStartPoint.x;
-                    var vibratoStartY = vibratoStartPoint.y;
-
-                    var vibratoEndPoint = MainWindowModel.vibratoEndPoint(aNoteId);
-                    var vibratoEndX = vibratoEndPoint.x;
-                    var vibratoEndY = vibratoEndPoint.y;
-
-                    var length = vibratoEndX - vibratoStartX;
-                    var frequency = MainWindowModel.vibratoFrequency(aNoteId);
-                    var halfWaveLength = length / frequency / 2;
-                    var amplitude = MainWindowModel.vibratoAmplitude(aNoteId) * edit_area.rowHeight / 2;
-
-
-                    aCtx.moveTo(vibratoStartX - 10,
-                                vibratoStartY);
-
-                    var preControlX = vibratoStartX - 5;
-                    var preControlY = vibratoStartY;
-
-                    for (var index = 0; index < frequency * 2; ++index)
-                    {
-                        var direction = (index%2 == 0) ? 1 : -1;
-
-                        aCtx.bezierCurveTo(preControlX,
-                                           preControlY,
-                                           vibratoStartX + halfWaveLength * index- 5,
-                                           vibratoStartY + amplitude * direction,
-                                           vibratoStartX + halfWaveLength * index ,
-                                           vibratoStartY + amplitude * direction);
-
-                        preControlX = vibratoStartX + halfWaveLength * index + 5;
-                        preControlY = vibratoStartY + amplitude * direction;
-
-                    }
-
-                    aCtx.bezierCurveTo(preControlX,     preControlY,
-                                       vibratoEndX -5 , vibratoEndY,
-                                       vibratoEndX, vibratoEndY);
-                    aCtx.lineWidth = 2;
-                    aCtx.stroke();
-                    aCtx.restore();
-                }
-
-                function drawPortamento(aCtx, aNoteId)
-                {
-                    aCtx.strokeStyle = Qt.rgba(.4,.6,.8);
-                    aCtx.beginPath();
-
-                    var portamentStartPoint = MainWindowModel.portamentStartPoint(aNoteId);
-                    var portamentoStartX = portamentStartPoint.x;
-                    var portamentoStartY = portamentStartPoint.y;
-
-                    var pitchChangingPointCount = MainWindowModel.pitchChangingPointCount(aNoteId);
-
-                    var portamentEndPoint = MainWindowModel.portamentEndPoint(aNoteId)
-                    var portamentoEndX = portamentEndPoint.x;
-                    var portamentoEndY = portamentEndPoint.y;
-
-                    aCtx.moveTo(portamentoStartX,
-                                portamentoStartY);
-
-                    var preControlX = portamentoStartX + 30
-                    var preControlY = portamentoStartY;
-
-                    for (var index = 0; index < pitchChangingPointCount; ++index)
-                    {
-                        var changingPoint = MainWindowModel.pitchChangingPoint(aNoteId, index);
-                        var changingPointX = changingPoint.x;
-                        var changingPointY = changingPoint.y;
-
-                        aCtx.bezierCurveTo(preControlX,         preControlY,
-                                           changingPointX - 10, changingPointY,
-                                           changingPointX,      changingPointY);
-
-                        preControlX = changingPointX + 10;
-                        preControlY = changingPointY;
-                    }
-
-                    aCtx.bezierCurveTo(preControlX, preControlY,
-                                       portamentoEndX - 30, portamentoEndY,
-                                       portamentoEndX, portamentoEndY);
-                    aCtx.lineWidth = 2;
-                    aCtx.stroke();
-                    aCtx.restore();
-                }
-            }*/
 
             DropArea{
                 id: edit_drop_area
@@ -332,7 +234,6 @@ Rectangle{
 
                 onDropped: {
                     piano_roll_edit_area.updateAllNote()
-                    pitch_curve_canvas.requestPaint()
                 }
             }
         }

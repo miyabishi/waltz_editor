@@ -78,6 +78,11 @@ Parameters Note::toParameters(Beat aBeat,
     return parameters;
 }
 
+Syllable Note::syllable() const
+{
+    return mSyllable_;
+}
+
 NoteRectPointer Note::noteRect() const
 {
     return mNoteRect_;
