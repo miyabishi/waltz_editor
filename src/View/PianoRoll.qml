@@ -1,6 +1,7 @@
 import QtQuick 2.0
+import QtQuick.Controls 1.4
 
-Rectangle {
+Item {
     id:root
     height:edit_area.numberOfRow * edit_area.rowHeight
     Repeater{
@@ -39,6 +40,7 @@ Rectangle {
             z: edit_area.isBlackKey(index) ? 10 : 5
             color: edit_area.isBlackKey(index) ? "#333333" : "#eeeeee"
             border.color: "#333333"
+            visible: y > -(root.y + edit_area.rowHeight * 2)
         }
     }
 }
