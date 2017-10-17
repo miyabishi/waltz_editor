@@ -18,5 +18,6 @@
         <file>image/sound_wave.png</file>
         <file>src/View/PortamentoEditArea.qml</file>
         <file>src/View/PianoRoll.qml</file>
+        <file>src/View/PortamentoStartPoint.qml</file>
     </qresource>
 </RCC>

@@ -5,6 +5,7 @@ Rectangle {
     id: root
     color: "#222222"
     property int xOffset:0
+    property int noteCount: MainWindowModel.noteCount()
 
     onXOffsetChanged: {
         if (portamento_edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -73,6 +74,7 @@ Rectangle {
                 }
             }
 
+
             Repeater{
                 model: edit_area.numberOfRow
                 Rectangle{
@@ -103,7 +105,7 @@ Rectangle {
             }
 
             Repeater{
-                id: note_repeater
+                id: portamento_note_repeater
                 model: note_list_model
                 Loader{
                     id:noteloader
@@ -253,6 +255,23 @@ Rectangle {
                     aCtx.lineWidth = 2;
                     aCtx.stroke();
                     aCtx.restore();
+                }
+            }
+
+            Repeater{
+                id: portamento_start_point_repeater
+                model: root.noteCount
+                Loader{
+                    sourceComponent: PortamentoStartPoint{
+                        id: protamento_start_point
+                        width: 10
+                        height: 10
+                    }
+                    onLoaded: {
+                        console.log("portamento:" + index)
+                        item.x = MainWindowModel.portamentStartPoint(index).x
+                        item.y = MainWindowModel.portamentStartPoint(index).y
+                    }
                 }
             }
         }

@@ -65,7 +65,6 @@ Rectangle{
 
     function reload()
     {
-        console.log("note reload");
         note_rect.pNoteText_ = MainWindowModel.noteText(note_rect.pNoteId_);
         var notePoint = MainWindowModel.notePoint(note_rect.pNoteId_);
         note_rect.x = notePoint.x;
