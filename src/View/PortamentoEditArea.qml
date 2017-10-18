@@ -260,17 +260,17 @@ Rectangle {
 
             Repeater{
                 id: portamento_start_point_repeater
-                model: root.noteCount
+                model:  note_list_model
                 Loader{
                     sourceComponent: PortamentoStartPoint{
                         id: protamento_start_point
                         width: 10
                         height: 10
+
                     }
                     onLoaded: {
-                        console.log("portamento:" + index)
-                        item.x = MainWindowModel.portamentStartPoint(index).x
-                        item.y = MainWindowModel.portamentStartPoint(index).y
+                        item.x = portamentoStartX;
+                        item.y = portamentoStartY;
                     }
                 }
             }
