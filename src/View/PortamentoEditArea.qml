@@ -266,9 +266,9 @@ Rectangle {
                         id: protamento_start_point
                         width: 10
                         height: 10
-
                     }
                     onLoaded: {
+                        item.noteId = noteId
                         item.x = portamentoStartX;
                         item.y = portamentoStartY;
                     }
