@@ -154,17 +154,71 @@ Rectangle {
 
                     for (var index = 0; index < MainWindowModel.noteCount(); ++index)
                     {
-                        drawPitchCurve(ctx, MainWindowModel.noteIdFromIndex(index));
+//                        drawPitchCurve(ctx, MainWindowModel.noteIdFromIndex(index));
+                        drawPitchCurve(ctx, index);
                     }
 
                 }
 
-                function drawPitchCurve(aCtx, aNoteId)
+                function drawPitchCurve(aCtx, aIndex)
                 {
-                    drawPortamento(aCtx, aNoteId);
-                    drawVibrato(aCtx, aNoteId);
+                    //drawPortamento(aCtx, aNoteId);
+                    drawVibrato(aCtx, aIndex);
                 }
 
+                function drawVibrato(aCtx, aIndex)
+                {
+                    aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
+                    aCtx.beginPath();
+
+                    var note = note_list_model.get(aIndex);
+                    console.log(note);
+                    conosle.log(note.positionX);
+                    conosle.log(note.vibratoLength);
+                    var vibratoStartX =  note.positionX + edit_area.rowHeight / 2;
+                    var vibratoStartY = note.positionY + note.noteWidth - note.vibratoLength;
+
+                    var vibratoEndPoint = note.positionY + note.noteWidth
+                    var vibratoEndX = vibratoEndPoint.x;
+                    var vibratoEndY = vibratoEndPoint.y;
+
+                    var length = vibratoEndX - vibratoStartX;
+                    var frequency = note.vibratoFrequency
+                    var halfWaveLength = length / frequency / 2;
+                    var amplitude = note.vibratoAmplitude * edit_area.rowHeight / 2;
+
+
+                    aCtx.moveTo(vibratoStartX - 10,
+                                vibratoStartY);
+
+                    var preControlX = vibratoStartX - 5;
+                    var preControlY = vibratoStartY;
+
+                    for (var index = 0; index < frequency * 2; ++index)
+                    {
+                        var direction = (index%2 == 0) ? 1 : -1;
+
+                        aCtx.bezierCurveTo(preControlX,
+                                           preControlY,
+                                           vibratoStartX + halfWaveLength * index- 5,
+                                           vibratoStartY + amplitude * direction,
+                                           vibratoStartX + halfWaveLength * index ,
+                                           vibratoStartY + amplitude * direction);
+
+                        preControlX = vibratoStartX + halfWaveLength * index + 5;
+                        preControlY = vibratoStartY + amplitude * direction;
+
+                    }
+
+                    aCtx.bezierCurveTo(preControlX,     preControlY,
+                                       vibratoEndX -5 , vibratoEndY,
+                                       vibratoEndX, vibratoEndY);
+                    aCtx.lineWidth = 2;
+                    aCtx.stroke();
+                    aCtx.restore();
+                }
+
+                /*
                 function drawVibrato(aCtx, aNoteId)
                 {
                     aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
@@ -212,7 +266,7 @@ Rectangle {
                     aCtx.lineWidth = 2;
                     aCtx.stroke();
                     aCtx.restore();
-                }
+                }*/
 
                 function drawPortamento(aCtx, aNoteId)
                 {
@@ -272,6 +326,22 @@ Rectangle {
                         item.x = portamentoStartX;
                         item.y = portamentoStartY;
                     }
+                }
+            }
+
+            DropArea{
+                id: portamento_edit_drop_area
+                anchors.fill: parent
+                onPositionChanged:{
+                    /*
+                    drag.source.y = piano_roll_edit_area.calcY(drag.y);
+                    drag.source.x = calculeDropX(drag.source);
+                    drag.source.positionX = drag.source.x;
+                    drag.source.positionY = drag.source.y;
+                    */
+                }
+
+                onDropped: {
                 }
             }
         }

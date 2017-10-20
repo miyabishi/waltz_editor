@@ -7,6 +7,10 @@ Rectangle{
 
     border.color: "#ccddff"
     border.width: 1
+    Drag.hotSpot.x: width/2
+    Drag.hotSpot.y: height/2
+    Drag.active: true
+
 
     Connections{
         target: MainWindowModel
@@ -24,6 +28,15 @@ Rectangle{
         console.log("(" + root.x + ", " + ")");
     }
 
+    MouseArea{
+        id: portamento_start_point_mouse_area
+        anchors.fill: root
+        acceptedButtons: Qt.LeftButton
+        drag.target: root
 
+        onReleased: {
+            root.Drag.drop()
+        }
+    }
 }
 
