@@ -20,11 +20,8 @@ Rectangle{
 
     property double vibratoAmplitude
     property double vibratoFrequency
-    property double vibratoLength
+    property int vibratoLength
     property bool isEditable: true
-    onEnabledChanged: {
-
-    }
 
     property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
 
@@ -61,6 +58,7 @@ Rectangle{
                                    note_rect.vibratoAmplitude,
                                    note_rect.vibratoFrequency,
                                    note_rect.vibratoLength);
+        updateModel();
     }
 
     function reload()
@@ -88,6 +86,7 @@ Rectangle{
 
         note_rect.portamentoEndX = portamentEndPoint.x;
         note_rect.portamentoEndY = portamentEndPoint.y;
+        updateModel();
     }
 
     function updatePortamento()
@@ -98,6 +97,37 @@ Rectangle{
                                                                              note_rect.pNoteId_);
         note_rect.portamentoEndX = note_rect.x + 30;
         note_rect.portamentoEndY = note_rect.y + note_rect.height / 2;
+    }
+
+    function updateModel()
+    {
+        for (var index = 0; index < note_list_model.count; ++index)
+        {
+            if (note_list_model.get(index).noteId !== pNoteId_)
+            {
+                continue;
+            }
+            console.log("update model");
+            console.log("positionX" + note_rect.positionX);
+            console.log("positionY" + note_rect.positionY);
+
+            note_list_model.set(index, {"noteId": note_rect.pNoteId_,
+                                       "noteText": note_rect.pNoteText_,
+                                       "positionX": note_rect.positionX,
+                                       "positionY": note_rect.positionY,
+                                       "noteWidth": note_rect.width,
+                                       "portamentoStartX": note_rect.portamentoStartX,
+                                       "portamentoStartY": note_rect.portamentoStartY,
+                                       "pitchChangingPointCount":pitchChangingPointCount,
+                                       "pitchChangingPointXArray":pitchChangingPointXArray,
+                                       "pitchChangingPointYArray":pitchChangingPointYArray,
+                                       "portamentoEndX": note_rect.portamentoEndX,
+                                       "portamentoEndY": note_rect.portamentoEndY,
+                                       "vibratoAmplitude": note_rect.vibratoAmplitude,
+                                       "vibratoFrequency": note_rect.vibratoFrequency,
+                                       "vibratoLength": note_rect.vibratoLength});
+            break;
+        }
     }
 
     Text{

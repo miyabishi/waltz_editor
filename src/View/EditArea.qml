@@ -139,6 +139,9 @@ Rectangle{
                                                 "noteWidth": noteWidth,
                                                 "portamentoStartX": portamentoStartX,
                                                 "portamentoStartY": portamentoStartY,
+                                                "pitchChangingPointCount":0,
+                                                "pitchChangingPointXArray":[],
+                                                "pitchChangingPointYArray":[],
                                                 "portamentoEndX": portamentoEndX,
                                                 "portamentoEndY": portamentoEndY,
                                                 "vibratoAmplitude": vibratoAmplitude,
@@ -174,26 +177,34 @@ Rectangle{
                             pEditing_: false
                             positionX: positionX
                             positionY: positionY
-                            portamentoStartX: portamentoStartX;
-                            portamentoStartY: portamentoStartY;
-                            portamentoEndX: portamentoEndX;
-                            portamentoEndY: portamentoEndY;
-                            width: edit_area.columnWidth
+                            portamentoStartX: portamentoStartX
+                            portamentoStartY: portamentoStartY
+                            portamentoEndX: portamentoEndX
+                            portamentoEndY: portamentoEndY
+                            vibratoAmplitude: vibratoAmplitude
+                            vibratoFrequency: vibratoFrequency
+                            pitchChangingPointCount: pitchChangingPointCount
+                            vibratoLength: vibratoLength
+                            width: noteWidth
                             height: edit_area.rowHeight
                         }
                     }
                     onLoaded: {
                         item.x = positionX;
                         item.y = positionY;
+                        item.positionX = positionX;
+                        item.positionY = positionY;
                         item.visible = true;
-                        item.width = noteWidth;
                         item.portamentoStartX = portamentoStartX;
                         item.portamentoStartY = portamentoStartY;
                         item.portamentoEndX = portamentoEndX;
                         item.portamentoEndY = portamentoEndY;
+                        item.pitchChangingPointXArray = pitchChangingPointXArray;
+                        item.pitchChangingPointYArray = pitchChangingPointYArray;
+                        item.vibratoLength = vibratoLength;
                         item.vibratoAmplitude = vibratoAmplitude;
                         item.vibratoFrequency = vibratoFrequency;
-                        item.vibratoLength= vibratoLength;
+
                         piano_roll_edit_area.updateAllNote.connect(item.updateNote);
                     }
                 }

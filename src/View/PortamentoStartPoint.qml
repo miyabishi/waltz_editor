@@ -25,7 +25,7 @@ Rectangle{
         var startPoint = MainWindowModel.portamentStartPoint(noteId);
         root.x = startPoint.x - width / 2;
         root.y = startPoint.y - height / 2;
-        console.log("(" + root.x + ", " + ")");
+        console.log("(" + root.x + ", " + root.y + ")");
     }
 
     MouseArea{
