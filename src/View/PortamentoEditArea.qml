@@ -104,7 +104,6 @@ Rectangle {
                 return aY - aY%edit_area.rowHeight
             }
 
-            /*
             Repeater{
                 id: portamento_note_repeater
                 model: note_list_model
@@ -112,20 +111,10 @@ Rectangle {
                     id:noteloader
                     sourceComponent: Component{
                         id: note
-                        Note{
+                        UndraggableNote{
                             pNoteId_: noteId
                             pNoteText_: noteText
-                            pEditing_: false
-                            positionX: positionX
-                            positionY: positionY
-                            portamentoStartX: portamentoStartX;
-                            portamentoStartY: portamentoStartY;
-                            portamentoEndX: portamentoEndX;
-                            portamentoEndY: portamentoEndY;
-                            width: edit_area.columnWidth;
                             height: edit_area.rowHeight;
-                            color: "#555555";
-                            isEditable: false;
                         }
                     }
                     onLoaded: {
@@ -133,18 +122,10 @@ Rectangle {
                         item.y = positionY;
                         item.visible = true;
                         item.width = noteWidth;
-                        item.portamentoStartX = portamentoStartX;
-                        item.portamentoStartY = portamentoStartY;
-                        item.portamentoEndX = portamentoEndX;
-                        item.portamentoEndY = portamentoEndY;
-                        item.vibratoAmplitude = vibratoAmplitude;
-                        item.vibratoFrequency = vibratoFrequency;
-                        item.vibratoLength= vibratoLength;
                         pitch_curve_canvas.requestPaint();
-                        item.isEditable = false;
                     }
                 }
-            }*/
+            }
 
             Canvas{
                 id: pitch_curve_canvas

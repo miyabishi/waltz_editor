@@ -19,5 +19,6 @@
         <file>src/View/PortamentoEditArea.qml</file>
         <file>src/View/PianoRoll.qml</file>
         <file>src/View/PortamentoStartPoint.qml</file>
+        <file>src/View/UndraggableNote.qml</file>
     </qresource>
 </RCC>

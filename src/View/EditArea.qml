@@ -220,17 +220,19 @@ Rectangle{
                     var count = MainWindowModel.noteCount()
                     for(var i = 0; i < count; ++i)
                     {
-                        var otherNote = note_repeater.itemAt(i)
-                        var otherNoteHead = MainWindowModel.findNotePositionX(i)
-                        var otherNoteTail = otherNoteHead + otherNote.width
+                        var otherNote = note_repeater.itemAt(i);
+                        var otherNoteHead = MainWindowModel.findNotePositionX(i);
+                        var otherNoteTail = otherNoteHead + otherNote.width;
+
+                        if (otherNote.pNoteId_ === source.pNoteId_) continue;
 
                         if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
                         {
-                            return otherNoteTail
+                            return otherNoteTail;
                         }
                         if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
                         {
-                            return otherNoteHead - source.width
+                            return otherNoteHead - source.width;
                         }
                     }
                     return sourceHead
