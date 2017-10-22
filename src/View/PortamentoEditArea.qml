@@ -106,7 +106,7 @@ Rectangle {
 
             Repeater{
                 id: portamento_note_repeater
-                model: note_list_model
+                model: note_list_model_container.getModel()
                 Loader{
                     id:noteloader
                     sourceComponent: Component{
@@ -152,7 +152,7 @@ Rectangle {
                     aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
                     aCtx.beginPath();
 
-                    var note = note_list_model.get(aIndex);
+                    var note = note_list_model_container.findByIndex(aIndex);
 
                     var vibratoStartX = note.positionX + note.noteWidth - note.vibratoLength;
                     var vibratoStartY =  note.positionY + edit_area.rowHeight / 2;
@@ -215,7 +215,7 @@ Rectangle {
                 {
                     aCtx.strokeStyle = Qt.rgba(.6,.8,1);
                     aCtx.beginPath();
-                    var note = note_list_model.get(aIndex);
+                    var note = note_list_model_container.findByIndex(aIndex);
 
                     var portamentoStartX = note.portamentoStartX;
                     var portamentoStartY = note.portamentoStartY;
@@ -255,7 +255,7 @@ Rectangle {
 
             Repeater{
                 id: portamento_start_point_repeater
-                model:  note_list_model
+                model:  note_list_model_container.getModel()
                 Loader{
                     sourceComponent: PortamentoStartPoint{
                         id: protamento_start_point

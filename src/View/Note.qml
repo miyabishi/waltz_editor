@@ -21,16 +21,13 @@ Rectangle{
     property double vibratoAmplitude
     property double vibratoFrequency
     property int vibratoLength
-    property bool isEditable: true
-
-    property bool dragActive: note_move_mouse_area.drag.active | note_stretch_mouse_area.drag.active
 
     border.color: "#000000"
     border.width: 1
     color: "#ffd700"
     Drag.hotSpot.x: 0
     Drag.hotSpot.y: 0
-    Drag.active: dragActive
+    Drag.active: ! pEditing_
 
     Connections{
         target: MainWindowModel
@@ -39,9 +36,33 @@ Rectangle{
         }
     }
 
+    function updateNoteListModel()
+    {
+        note_list_model_container.updateNote({"noteId": note_rect.pNoteId_,
+                                              "noteText": note_rect.pNoteText_,
+                                              "positionX": note_rect.positionX,
+                                              "positionY": note_rect.positionY,
+                                              "noteWidth": note_rect.width,
+                                              "portamentoStartX": note_rect.portamentoStartX,
+                                              "portamentoStartY": note_rect.portamentoStartY,
+                                              "pitchChangingPointCount":pitchChangingPointCount,
+                                              "pitchChangingPointXArray":pitchChangingPointXArray,
+                                              "pitchChangingPointYArray":pitchChangingPointYArray,
+                                              "portamentoEndX": note_rect.portamentoEndX,
+                                              "portamentoEndY": note_rect.portamentoEndY,
+                                              "vibratoAmplitude": note_rect.vibratoAmplitude,
+                                              "vibratoFrequency": note_rect.vibratoFrequency,
+                                              "vibratoLength": note_rect.vibratoLength});
+    }
+
     function updateNote()
     {
-        updatePortamento();
+        note_rect.portamentoStartX = note_rect.x - 30;
+        note_rect.portamentoStartY = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
+                                                                             note_rect.y + note_rect.height / 2,
+                                                                             note_rect.pNoteId_);
+        note_rect.portamentoEndX = note_rect.x + 30;
+        note_rect.portamentoEndY = note_rect.y + note_rect.height / 2;
         note_rect.positionX = note_rect.x;
         note_rect.positionY = note_rect.y;
         MainWindowModel.updateNote(note_rect.pNoteId_,
@@ -58,7 +79,6 @@ Rectangle{
                                    note_rect.vibratoAmplitude,
                                    note_rect.vibratoFrequency,
                                    note_rect.vibratoLength);
-        updateModel();
     }
 
     function reload()
@@ -86,48 +106,13 @@ Rectangle{
 
         note_rect.portamentoEndX = portamentEndPoint.x;
         note_rect.portamentoEndY = portamentEndPoint.y;
-        updateModel();
+
+        note_rect.updateNoteListModel();
     }
 
     function updatePortamento()
     {
-        note_rect.portamentoStartX = note_rect.x - 30;
-        note_rect.portamentoStartY = MainWindowModel.yPositionOfPreviousNote(note_rect.x - 1,
-                                                                             note_rect.y + note_rect.height / 2,
-                                                                             note_rect.pNoteId_);
-        note_rect.portamentoEndX = note_rect.x + 30;
-        note_rect.portamentoEndY = note_rect.y + note_rect.height / 2;
-    }
 
-    function updateModel()
-    {
-        for (var index = 0; index < note_list_model.count; ++index)
-        {
-            if (note_list_model.get(index).noteId !== pNoteId_)
-            {
-                continue;
-            }
-            console.log("update model");
-            console.log("positionX" + note_rect.positionX);
-            console.log("positionY" + note_rect.positionY);
-
-            note_list_model.set(index, {"noteId": note_rect.pNoteId_,
-                                       "noteText": note_rect.pNoteText_,
-                                       "positionX": note_rect.positionX,
-                                       "positionY": note_rect.positionY,
-                                       "noteWidth": note_rect.width,
-                                       "portamentoStartX": note_rect.portamentoStartX,
-                                       "portamentoStartY": note_rect.portamentoStartY,
-                                       "pitchChangingPointCount":pitchChangingPointCount,
-                                       "pitchChangingPointXArray":pitchChangingPointXArray,
-                                       "pitchChangingPointYArray":pitchChangingPointYArray,
-                                       "portamentoEndX": note_rect.portamentoEndX,
-                                       "portamentoEndY": note_rect.portamentoEndY,
-                                       "vibratoAmplitude": note_rect.vibratoAmplitude,
-                                       "vibratoFrequency": note_rect.vibratoFrequency,
-                                       "vibratoLength": note_rect.vibratoLength});
-            break;
-        }
     }
 
     Text{
@@ -144,7 +129,6 @@ Rectangle{
         anchors.right: note_stretch_mouse_area.left
         acceptedButtons: Qt.LeftButton
         propagateComposedEvents: pEditing_
-        enabled: isEditable
         drag.target: note_rect
 
         onReleased: {
@@ -168,7 +152,6 @@ Rectangle{
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        enabled: isEditable
         drag.axis: Drag.XAxis
         width: 10
         property int pPressedX_: 0

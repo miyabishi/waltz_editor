@@ -132,7 +132,7 @@ Rectangle{
                         var vibratoFrequency = 4;
                         var vibratoLength = edit_area.columnWidth /2 ;
 
-                        note_list_model.append({"noteId": noteId,
+                        note_list_model_container.append({"noteId": noteId,
                                                 "noteText": noteText,
                                                 "positionX": positionX,
                                                 "positionY": positionY,
@@ -166,7 +166,7 @@ Rectangle{
 
             Repeater{
                 id: note_repeater
-                model:note_list_model
+                model:note_list_model_container.getModel()
                 Loader{
                     id:noteloader
                     sourceComponent: Component{
@@ -213,6 +213,7 @@ Rectangle{
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
+                /*
                 function calculeDropX(source)
                 {
                     var sourceHead = source.x
@@ -236,11 +237,38 @@ Rectangle{
                         }
                     }
                     return sourceHead
+                }*/
+                function calculateDropY(source)
+                {
                 }
 
+                function calculateDropX(source)
+                {
+                    var sourceHead = source.x
+                    var sourceTail = source.x + source.width
+                    var count = note_list_model_container.count();
+                    for(var i = 0; i < count; ++i)
+                    {
+                        var otherNote = note_repeater.itemAt(i);
+                        var otherNoteHead = MainWindowModel.findNotePositionX(i);
+                        var otherNoteTail = otherNoteHead + otherNote.width;
+
+                        if (otherNote.pNoteId_ === source.pNoteId_) continue;
+
+                        if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
+                        {
+                            return otherNoteTail;
+                        }
+                        if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
+                        {
+                            return otherNoteHead - source.width;
+                        }
+                    }
+                    return sourceHead
+                }
                 onPositionChanged:{
-                    drag.source.y = piano_roll_edit_area.calcY(drag.y);
-                    drag.source.x = calculeDropX(drag.source);
+                    drag.source.y = piano_roll_edit_area.calcY(drag.source.y);
+                    drag.source.x = calculateDropX(drag.source);
                     drag.source.positionX = drag.source.x;
                     drag.source.positionY = drag.source.y;
                 }

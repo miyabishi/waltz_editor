@@ -24,7 +24,7 @@ Rectangle {
         var notePoint = MainWindowModel.notePoint(root.pNoteId_);
         root.x = notePoint.x;
         root.y = notePoint.y;
-        root.width = MainWindowModel.noteRectWidth(note_rect.pNoteId_);
+        root.width = MainWindowModel.noteRectWidth(root.pNoteId_);
         root.height = edit_area.rowHeight;
     }
 

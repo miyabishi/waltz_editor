@@ -11,6 +11,15 @@ Rectangle{
     Drag.hotSpot.y: height/2
     Drag.active: true
 
+    function centerX()
+    {
+        return root.x + root.width / 2;
+    }
+    function centerY()
+    {
+        return root.y + root.height / 2;
+    }
+
 
     Connections{
         target: MainWindowModel
@@ -21,11 +30,21 @@ Rectangle{
 
     function reload()
     {
-        console.log("noteid" + noteId);
         var startPoint = MainWindowModel.portamentStartPoint(noteId);
-        root.x = startPoint.x - width / 2;
-        root.y = startPoint.y - height / 2;
-        console.log("(" + root.x + ", " + root.y + ")");
+        root.x = centerX();
+        root.y = centerY();
+    }
+
+    function updateScore()
+    {
+        // スコアを更新する
+        updateModel();
+    }
+
+    function updateModel()
+    {
+        // モデルを更新する
+        note_list_model_container.updatePortamentoStartPoint(noteId, x, y);
     }
 
     MouseArea{
@@ -33,9 +52,11 @@ Rectangle{
         anchors.fill: root
         acceptedButtons: Qt.LeftButton
         drag.target: root
+        drag.axis: Drag.XAxis
 
         onReleased: {
-            root.Drag.drop()
+            root.Drag.drop();
+            root.updateScore();
         }
     }
 }

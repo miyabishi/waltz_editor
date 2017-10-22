@@ -20,5 +20,6 @@
         <file>src/View/PianoRoll.qml</file>
         <file>src/View/PortamentoStartPoint.qml</file>
         <file>src/View/UndraggableNote.qml</file>
+        <file>src/View/NoteListModelContainer.qml</file>
     </qresource>
 </RCC>

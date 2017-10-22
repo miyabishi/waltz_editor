@@ -10,9 +10,11 @@ ApplicationWindow {
     height: 940
     title: qsTr("Waltz Editor")
 
-    ListModel{
-        id: note_list_model
+    NoteListModelContainer{
+        id: note_list_model_container
     }
+
+
 
     TopBar{
         id: top_bar
