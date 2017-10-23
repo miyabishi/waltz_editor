@@ -76,7 +76,6 @@ Rectangle{
             id: piano_roll_edit_area
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
-            signal updateAllNote()
 
             Repeater{
                 model: edit_area.numberOfRow
@@ -204,8 +203,6 @@ Rectangle{
                         item.vibratoLength = vibratoLength;
                         item.vibratoAmplitude = vibratoAmplitude;
                         item.vibratoFrequency = vibratoFrequency;
-
-                        piano_roll_edit_area.updateAllNote.connect(item.updateNote);
                     }
                 }
             }
@@ -274,7 +271,8 @@ Rectangle{
                 }
 
                 onDropped: {
-                    piano_roll_edit_area.updateAllNote()
+                    //drag.source.updateNote();
+
                 }
             }
         }

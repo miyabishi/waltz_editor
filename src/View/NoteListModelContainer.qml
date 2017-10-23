@@ -4,17 +4,21 @@ Item {
     id: root
     property ListModel noteListModel: ListModel{}
 
+    signal modelUpdated()
+
     function append(aObject)
     {
         console.log("append");
         console.log("id:" + aObject.noteId);
         noteListModel.append(aObject)
+        modelUpdated();
     }
 
     function updateNote(aObject)
     {
         noteListModel.remove(findIndexByNoteId(aObject.noteId));
         noteListModel.append(aObject);
+        modelUpdated();
     }
 
     function updatePortamentoStartPoint(aNoteId, aX, aY)
@@ -54,5 +58,10 @@ Item {
    function count()
    {
        return noteListModel.count;
+   }
+
+   function yPositionOfPreviousNote(aXPosition, aYPosition, aNoteId)
+   {
+       return 0;
    }
 }
