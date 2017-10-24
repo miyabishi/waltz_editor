@@ -91,7 +91,6 @@ Item {
                minimumDistance = distance;
                previousNoteIndex = index;
            }
-
        }
 
        return previousNoteIndex;

@@ -64,12 +64,10 @@ Rectangle {
             id: portamento_edit_area
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
-            signal reloadAllNote()
 
             Connections{
-                target:MainWindowModel
-                onScoreUpdated:{
-                    portamento_edit_area.reloadAllNote();
+                target: note_list_model_container
+                onModelUpdated:{
                     pitch_curve_canvas.requestPaint();
                 }
             }
