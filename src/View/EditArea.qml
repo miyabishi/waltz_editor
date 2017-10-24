@@ -121,9 +121,9 @@ Rectangle{
 
                         var noteWidth = edit_area.columnWidth;
                         var portamentoStartX = positionX - 30;
-                        var portamentoStartY = MainWindowModel.yPositionOfPreviousNote(positionX - 1,
-                                                                                       positionY + edit_area.rowHeight / 2,
-                                                                                       noteId);
+                        var portamentoStartY = note_list_model_container.yPositionOfPreviousNote(positionX - 1,
+                                                                                                 positionY + edit_area.rowHeight / 2,
+                                                                                                 noteId);
                         var portamentoEndX = positionX + 30;
                         var portamentoEndY = positionY + edit_area.rowHeight / 2;
 
