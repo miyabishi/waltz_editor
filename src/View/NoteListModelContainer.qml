@@ -21,14 +21,6 @@ Item {
         modelUpdated();
     }
 
-    function updatePortamentoStartPoint(aNoteId, aX, aY)
-    {
-        var note = find(aNoteId);
-        note.portamentoStartX = aX;
-        note.portamentoStartY = aY;
-        updateNote(aNoteId, note);
-    }
-
     function getModel()
     {
         return noteListModel;

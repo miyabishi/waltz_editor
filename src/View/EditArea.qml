@@ -25,13 +25,13 @@ Rectangle{
 
 
     function updateProperty(){
-        edit_area.supportOctarve = MainWindowModel.supportOctave()
-        edit_area.numberOfRow    = 12 * supportOctarve
-        edit_area.rowHeight      = MainWindowModel.rowHeight()
-        edit_area.beatChild      = MainWindowModel.beatChild()
-        edit_area.beatParent     = MainWindowModel.beatParent()
-        edit_area.columnWidth    = MainWindowModel.columnWidth()
-        edit_area.editAreaWidth  = MainWindowModel.editAreaWidth()
+        edit_area.supportOctarve = MainWindowModel.supportOctave();
+        edit_area.numberOfRow    = 12 * supportOctarve;
+        edit_area.rowHeight      = MainWindowModel.rowHeight();
+        edit_area.beatChild      = MainWindowModel.beatChild();
+        edit_area.beatParent     = MainWindowModel.beatParent();
+        edit_area.columnWidth    = MainWindowModel.columnWidth();
+        edit_area.editAreaWidth  = MainWindowModel.editAreaWidth();
     }
 
     function isBlackKey(aIndex){
@@ -210,44 +210,16 @@ Rectangle{
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
-                /*
-                function calculeDropX(source)
-                {
-                    var sourceHead = source.x
-                    var sourceTail = source.x + source.width
-                    var count = MainWindowModel.noteCount()
-                    for(var i = 0; i < count; ++i)
-                    {
-                        var otherNote = note_repeater.itemAt(i);
-                        var otherNoteHead = MainWindowModel.findNotePositionX(i);
-                        var otherNoteTail = otherNoteHead + otherNote.width;
-
-                        if (otherNote.pNoteId_ === source.pNoteId_) continue;
-
-                        if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
-                        {
-                            return otherNoteTail;
-                        }
-                        if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
-                        {
-                            return otherNoteHead - source.width;
-                        }
-                    }
-                    return sourceHead
-                }*/
-                function calculateDropY(source)
-                {
-                }
 
                 function calculateDropX(source)
                 {
                     var sourceHead = source.x
                     var sourceTail = source.x + source.width
-                    var count = note_list_model_container.count();
-                    for(var i = 0; i < count; ++i)
+
+                    for(var index = 0; index < note_list_model_container.count(); ++index)
                     {
-                        var otherNote = note_repeater.itemAt(i);
-                        var otherNoteHead = MainWindowModel.findNotePositionX(i);
+                        var otherNote = note_list_model_container.findByIndex(index)
+                        var otherNoteHead = otherNote.positionX;
                         var otherNoteTail = otherNoteHead + otherNote.width;
 
                         if (otherNote.pNoteId_ === source.pNoteId_) continue;

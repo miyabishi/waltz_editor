@@ -67,6 +67,13 @@ Rectangle{
     function reload()
     {
         var note = note_list_model_container.find(root.pNoteId_);
+        note.portamentoStartX = root.x - 30;
+        note.portamentoStartY = note_list_model_container.yPositionOfPreviousNote(root.x - 1,
+                                                                                  root.y + root.height / 2,
+                                                                                  root.pNoteId_);
+        note.portamentoEndX = root.x + 30;
+        note.portamentoEndY = root.y + root.height / 2;
+
         root.pNoteText_ = note.noteText;
         root.x = note.positionX
         root.y = note.positionY
@@ -85,7 +92,7 @@ Rectangle{
 
         root.vibratoAmplitude = note.vibratoAmplitude;
         root.vibratoFrequency = note.vibratoFrequency;
-        root.vibratoLength = note.vibratoLength
+        root.vibratoLength = note.vibratoLength;
     }
 
     Text{

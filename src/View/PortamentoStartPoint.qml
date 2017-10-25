@@ -11,40 +11,18 @@ Rectangle{
     Drag.hotSpot.y: height/2
     Drag.active: true
 
-    function centerX()
-    {
-        return root.x + root.width / 2;
-    }
-    function centerY()
-    {
-        return root.y + root.height / 2;
-    }
-
-
     Connections{
-        target: MainWindowModel
-        onScoreUpdated:{
+        target: note_list_model_container
+        onModelUpdated:{
             reload();
         }
     }
 
     function reload()
     {
-        var startPoint = MainWindowModel.portamentStartPoint(noteId);
-        root.x = centerX();
-        root.y = centerY();
-    }
-
-    function updateScore()
-    {
-        // スコアを更新する
-        updateModel();
-    }
-
-    function updateModel()
-    {
-        // モデルを更新する
-        note_list_model_container.updatePortamentoStartPoint(noteId, x, y);
+        var note = note_list_model_container.find(noteId);
+        root.x = note.portamentoStartX - root.width / 2;
+        root.y = note.portamentoStartY - root.height / 2;
     }
 
     MouseArea{
@@ -56,7 +34,6 @@ Rectangle{
 
         onReleased: {
             root.Drag.drop();
-            root.updateScore();
         }
     }
 }
