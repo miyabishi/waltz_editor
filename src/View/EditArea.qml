@@ -235,11 +235,20 @@ Rectangle{
                     }
                     return sourceHead
                 }
+
+                function calculateDropY(source)
+                {
+                    console.log("adjust drop y");
+                    return source.y - source.y%edit_area.rowHeight
+                }
+
                 onPositionChanged:{
-                    drag.source.y = piano_roll_edit_area.calcY(drag.source.y);
+                    console.log("on position changed ");
+                    console.log("note id:" + drag.source.pNoteId_);
+                    drag.source.y = calculateDropY(drag.source);
                     drag.source.x = calculateDropX(drag.source);
-                    drag.source.positionX = drag.source.x;
-                    drag.source.positionY = drag.source.y;
+                   // drag.source.positionX = drag.source.x;
+                   // drag.source.positionY = drag.source.y;
                 }
 
                 onDropped: {

@@ -27,7 +27,7 @@ Rectangle{
     color: "#ffd700"
     Drag.hotSpot.x: 0
     Drag.hotSpot.y: 0
-    Drag.active: ! pEditing_
+    Drag.active: note_move_mouse_area.drag.active
 
     Connections{
         target: note_list_model_container
