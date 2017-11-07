@@ -35,6 +35,10 @@ Rectangle {
         }
         return false
     }
+    function reloadCanvas()
+    {
+        pitch_curve_canvas.requestPaint();
+    }
 
     Rectangle{
         id:portament_area_piano_view
@@ -68,6 +72,7 @@ Rectangle {
             Connections{
                 target: note_list_model_container
                 onModelUpdated:{
+                    console.log("portamento_edit_area received model update signal");
                     pitch_curve_canvas.requestPaint();
                 }
             }
@@ -141,6 +146,7 @@ Rectangle {
 
                 function drawPitchCurve(aCtx, aIndex)
                 {
+                    console.log("draw pitch curve");
                     drawPortamento(aCtx, aIndex);
                     drawVibrato(aCtx, aIndex);
                 }
@@ -158,20 +164,7 @@ Rectangle {
                     var vibratoEndX = note.positionX + note.noteWidth;
                     var vibratoEndY = note.positionY + edit_area.rowHeight / 2;
 
-
                     var length = vibratoEndX - vibratoStartX;
-
-                    console.log("note positionX:" + note.positionX);
-                    console.log("note positionY:" + note.positionY);
-
-                    console.log("note width:" + note.noteWidth);
-
-                    console.log("vibratoStartX:" + vibratoStartX);
-                    console.log("vibratoStartY:" + vibratoStartY);
-                    console.log("vibratoEndX:" + vibratoEndX);
-                    console.log("vibratoEndY:" + vibratoEndY);
-
-                    console.log("vibratoLength" + note.vibratoLength);
 
 
                     var frequency = note.vibratoFrequency
@@ -215,12 +208,12 @@ Rectangle {
                     aCtx.beginPath();
                     var note = note_list_model_container.findByIndex(aIndex);
 
-                    var portamentoStartX = note.portamentoStartX;
+                    var portamentoStartX = note.portamentoStartX + note.portamentoStartXOffset;
                     var portamentoStartY = note.portamentoStartY;
 
                     var pitchChangingPointCount = note.pitchChangingPointCount;
 
-                    var portamentoEndX = note.portamentoEndX;
+                    var portamentoEndX = note.portamentoEndX + note.portamentoEndXOffset;
                     var portamentoEndY = note.portamentoEndY;
 
                     aCtx.moveTo(portamentoStartX,

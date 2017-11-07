@@ -14,6 +14,11 @@ Item {
         modelUpdated();
     }
 
+    function emitModelUpdated()
+    {
+        modelUpdated();
+    }
+
     function updateNote(aObject)
     {
         noteListModel.remove(findIndexByNoteId(aObject.noteId));

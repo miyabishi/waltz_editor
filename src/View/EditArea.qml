@@ -138,11 +138,13 @@ Rectangle{
                                                 "noteWidth": noteWidth,
                                                 "portamentoStartX": portamentoStartX,
                                                 "portamentoStartY": portamentoStartY,
+                                                "portamentoStartXOffset":0,
                                                 "pitchChangingPointCount":0,
                                                 "pitchChangingPointXArray":[],
                                                 "pitchChangingPointYArray":[],
                                                 "portamentoEndX": portamentoEndX,
                                                 "portamentoEndY": portamentoEndY,
+                                                "portamentoEndXOffset":0,
                                                 "vibratoAmplitude": vibratoAmplitude,
                                                 "vibratoFrequency": vibratoFrequency,
                                                 "vibratoLength": vibratoLength});
@@ -247,8 +249,6 @@ Rectangle{
                     console.log("note id:" + drag.source.pNoteId_);
                     drag.source.y = calculateDropY(drag.source);
                     drag.source.x = calculateDropX(drag.source);
-                   // drag.source.positionX = drag.source.x;
-                   // drag.source.positionY = drag.source.y;
                 }
 
                 onDropped: {
