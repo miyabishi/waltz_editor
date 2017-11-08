@@ -72,7 +72,6 @@ Rectangle {
             Connections{
                 target: note_list_model_container
                 onModelUpdated:{
-                    console.log("portamento_edit_area received model update signal");
                     pitch_curve_canvas.requestPaint();
                 }
             }
@@ -146,7 +145,6 @@ Rectangle {
 
                 function drawPitchCurve(aCtx, aIndex)
                 {
-                    console.log("draw pitch curve");
                     drawPortamento(aCtx, aIndex);
                     drawVibrato(aCtx, aIndex);
                 }
@@ -260,6 +258,24 @@ Rectangle {
                     }
                 }
             }
+
+            Repeater{
+                id: portamento_end_point_repeater
+                model:  note_list_model_container.getModel()
+                Loader{
+                    sourceComponent: PortamentoEndPoint{
+                        id: protamento_end_point
+                        width: 10
+                        height: 10
+                    }
+                    onLoaded: {
+                        item.noteId = noteId
+                        item.x = portamentoEndX;
+                        item.y = portamentoEndY;
+                    }
+                }
+            }
+
 
             DropArea{
                 id: portamento_edit_drop_area

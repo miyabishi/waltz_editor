@@ -21,8 +21,8 @@ Rectangle{
     function reload()
     {
         var note = note_list_model_container.find(noteId);
-        root.x = note.portamentoStartX + note.portamentoStartXOffset - root.width / 2;
-        root.y = note.portamentoStartY - root.height / 2;
+        root.x = note.portamentoEndX + note.portamentoEndXOffset - root.width / 2;
+        root.y = note.portamentoEndY - root.height / 2;
     }
 
     function updatePortamentoStartPoint(aOffset)
@@ -35,20 +35,20 @@ Rectangle{
                                               "noteWidth": note.noteWidth,
                                               "portamentoStartX": note.portamentoStartX,
                                               "portamentoStartY": note.portamentoStartY,
-                                              "portamentoStartXOffset": note.portamentoStartXOffset + aOffset,
+                                              "portamentoStartXOffset": note.portamentoStartXOffset,
                                               "pitchChangingPointCount": note.pitchChangingPointCount,
                                               "pitchChangingPointXArray": note.pitchChangingPointXArray,
                                               "pitchChangingPointYArray": note.pitchChangingPointYArray,
                                               "portamentoEndX": note.portamentoEndX,
                                               "portamentoEndY": note.portamentoEndY,
-                                              "portamentoEndXOffset": note.portamentoEndXOffset,
+                                              "portamentoEndXOffset": note.portamentoEndXOffset + aOffset,
                                               "vibratoAmplitude": note.vibratoAmplitude,
                                               "vibratoFrequency": note.vibratoFrequency,
                                               "vibratoLength": note.vibratoLength});
     }
 
     MouseArea{
-        id: portamento_start_point_mouse_area
+        id: portamento_end_point_mouse_area
         property int clickedPointX
 
         anchors.fill: root
@@ -58,7 +58,6 @@ Rectangle{
 
         onPressed: {
             clickedPointX = root.x
-            console.log("clickedPointX:" + clickedPointX);
         }
 
         onReleased: {

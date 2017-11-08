@@ -3,13 +3,10 @@ import QtQuick 2.0
 Item {
     id: root
     property ListModel noteListModel: ListModel{}
-
     signal modelUpdated()
 
     function append(aObject)
     {
-        console.log("append");
-        console.log("id:" + aObject.noteId);
         noteListModel.append(aObject)
         modelUpdated();
     }
@@ -61,8 +58,6 @@ Item {
    {
        var previousNoteIndex = findPreviousNoteIndex(aNoteId, aPositionX);
        if (previousNoteIndex < 0) return aPositionY;
-
-       console.log("previous note index" + previousNoteIndex);
 
        var previousNote = noteListModel.get(previousNoteIndex);
        return previousNote.positionY + edit_area.rowHeight / 2;
