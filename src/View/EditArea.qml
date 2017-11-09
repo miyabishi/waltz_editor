@@ -139,28 +139,12 @@ Rectangle{
                                                 "portamentoStartX": portamentoStartX,
                                                 "portamentoStartY": portamentoStartY,
                                                 "portamentoStartXOffset":0,
-                                                "pitchChangingPointCount":0,
-                                                "pitchChangingPointXArray":[],
-                                                "pitchChangingPointYArray":[],
                                                 "portamentoEndX": portamentoEndX,
                                                 "portamentoEndY": portamentoEndY,
                                                 "portamentoEndXOffset":0,
                                                 "vibratoAmplitude": vibratoAmplitude,
                                                 "vibratoFrequency": vibratoFrequency,
                                                 "vibratoLength": vibratoLength});
-
-                        MainWindowModel.appendNote(noteId,
-                                                   noteText,
-                                                   positionX ,
-                                                   positionY,
-                                                   edit_area.columnWidth,
-                                                   portamentoStartX,
-                                                   portamentoStartY,
-                                                   portamentoEndX,
-                                                   portamentoEndY,
-                                                   vibratoAmplitude,
-                                                   vibratoFrequency,
-                                                   vibratoLength);
                     }
                 }
             }
@@ -184,7 +168,6 @@ Rectangle{
                             portamentoEndY: portamentoEndY
                             vibratoAmplitude: vibratoAmplitude
                             vibratoFrequency: vibratoFrequency
-                            pitchChangingPointCount: pitchChangingPointCount
                             vibratoLength: vibratoLength
                             width: noteWidth
                             height: edit_area.rowHeight
@@ -200,8 +183,6 @@ Rectangle{
                         item.portamentoStartY = portamentoStartY;
                         item.portamentoEndX = portamentoEndX;
                         item.portamentoEndY = portamentoEndY;
-                        item.pitchChangingPointXArray = pitchChangingPointXArray;
-                        item.pitchChangingPointYArray = pitchChangingPointYArray;
                         item.vibratoLength = vibratoLength;
                         item.vibratoAmplitude = vibratoAmplitude;
                         item.vibratoFrequency = vibratoFrequency;
@@ -240,13 +221,10 @@ Rectangle{
 
                 function calculateDropY(source)
                 {
-                    console.log("adjust drop y");
                     return source.y - source.y%edit_area.rowHeight
                 }
 
                 onPositionChanged:{
-                    console.log("on position changed ");
-                    console.log("note id:" + drag.source.pNoteId_);
                     drag.source.y = calculateDropY(drag.source);
                     drag.source.x = calculateDropX(drag.source);
                 }

@@ -63,16 +63,10 @@ namespace waltz
                                             int aVibratoFrequency,
                                             int aVibratoLength);
 
-                Q_INVOKABLE int noteIdFromIndex(int aIndex);
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;
                 Q_INVOKABLE int beatParent() const;
                 Q_INVOKABLE int publishNoteId();
-
-                // for NoteParameter
-                Q_INVOKABLE QPoint notePoint(int aNoteId) const;
-                Q_INVOKABLE QString noteText(int aNoteId) const;
-                Q_INVOKABLE int noteRectWidth(int aNoteId) const;
 
                 // for EditArea
                 Q_INVOKABLE int editAreaWidth() const;
@@ -88,24 +82,6 @@ namespace waltz
                 Q_INVOKABLE QString libraryName() const;
                 Q_INVOKABLE QString libraryDescription() const;
                 Q_INVOKABLE QString vocalFileExtention() const;
-
-                // for Portament
-                Q_INVOKABLE QPoint portamentStartPoint(int aNoteId) const;
-
-                Q_INVOKABLE int pitchChangingPointCount(int aNoteId) const;
-                Q_INVOKABLE QPoint pitchChangingPoint(int aNoteId, int aIndex) const;
-
-                Q_INVOKABLE QPoint portamentEndPoint(int aNoteId) const;
-
-                Q_INVOKABLE int yPositionOfPreviousNote(int aXPosition,
-                                                        int aYPosition,
-                                                        int aNoteId) const;
-
-                // for Vibrato
-                Q_INVOKABLE QPoint vibratoStartPoint(int aNoteId) const;
-                Q_INVOKABLE QPoint vibratoEndPoint(int aNoteId) const;
-                Q_INVOKABLE double vibratoAmplitude(int aNoteId) const;
-                Q_INVOKABLE int vibratoFrequency(int aNoteId) const;
 
                 // for Controller
                 Q_INVOKABLE void play();

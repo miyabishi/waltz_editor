@@ -129,6 +129,18 @@ Rectangle {
                 }
             }
 
+            MouseArea{
+                id: portamento_edit_mouse_area
+                anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onClicked: {
+                    if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                    {
+
+                    }
+                }
+            }
+
             Canvas{
                 id: pitch_curve_canvas
                 anchors.fill: parent
@@ -136,7 +148,7 @@ Rectangle {
                     var ctx = pitch_curve_canvas.getContext('2d');
                     ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
 
-                    for (var index = 0; index < MainWindowModel.noteCount(); ++index)
+                    for (var index = 0; index < note_list_model_container.count(); ++index)
                     {
                         drawPitchCurve(ctx, index);
                     }
@@ -146,7 +158,7 @@ Rectangle {
                 function drawPitchCurve(aCtx, aIndex)
                 {
                     drawPortamento(aCtx, aIndex);
-                    drawVibrato(aCtx, aIndex);
+                    //drawVibrato(aCtx, aIndex);
                 }
 
                 function drawVibrato(aCtx, aIndex)
@@ -220,6 +232,7 @@ Rectangle {
                     var preControlX = portamentoStartX + 30
                     var preControlY = portamentoStartY;
 
+/*
                     for (var index = 0; index < pitchChangingPointCount; ++index)
                     {
                         var changingPointX = note.pitchChangingPointXArray[index];
@@ -232,6 +245,7 @@ Rectangle {
                         preControlX = changingPointX + 10;
                         preControlY = changingPointY;
                     }
+*/
 
                     aCtx.bezierCurveTo(preControlX, preControlY,
                                        portamentoEndX - 30, portamentoEndY,
@@ -276,21 +290,9 @@ Rectangle {
                 }
             }
 
-
             DropArea{
                 id: portamento_edit_drop_area
                 anchors.fill: parent
-                onPositionChanged:{
-                    /*
-                    drag.source.y = piano_roll_edit_area.calcY(drag.y);
-                    drag.source.x = calculeDropX(drag.source);
-                    drag.source.positionX = drag.source.x;
-                    drag.source.positionY = drag.source.y;
-                    */
-                }
-
-                onDropped: {
-                }
             }
         }
     }

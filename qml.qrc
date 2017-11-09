@@ -22,6 +22,6 @@
         <file>src/View/UndraggableNote.qml</file>
         <file>src/View/NoteListModelContainer.qml</file>
         <file>src/View/PortamentoEndPoint.qml</file>
-        <file>src/View/PitchChangingPointModelContainer.qml</file>
+        <file>src/View/PitchChangingPointListModelContainer.qml</file>
     </qresource>
 </RCC>

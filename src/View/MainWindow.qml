@@ -14,7 +14,9 @@ ApplicationWindow {
         id: note_list_model_container
     }
 
-
+    PitchChangingPointListModelContainer{
+        id: pitch_changing_point_list_model
+    }
 
     TopBar{
         id: top_bar
