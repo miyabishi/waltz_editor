@@ -8,8 +8,7 @@ Item {
     function append(aX, aY)
     {
         // TODO
-        var noteId = 1;
-        var note = note_list_model_container.find(noteId);
+        var note = note_list_model_container.findNoteWithPitchChangingPoint(aX)
         var id = 0;
         var pitchChangingPointX = note.positionX - aX;
         var pitchChangingPointY = note.positionY - aY;

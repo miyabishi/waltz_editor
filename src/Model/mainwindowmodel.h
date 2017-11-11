@@ -67,13 +67,13 @@ namespace waltz
                 Q_INVOKABLE int beatChild() const;
                 Q_INVOKABLE int beatParent() const;
                 Q_INVOKABLE int publishNoteId();
+                Q_INVOKABLE int publishPitchChangingPointId();
 
                 // for EditArea
                 Q_INVOKABLE int editAreaWidth() const;
                 Q_INVOKABLE int columnWidth() const;
                 Q_INVOKABLE int rowHeight() const;
                 Q_INVOKABLE int supportOctave() const;
-                Q_INVOKABLE int noteCount() const;
                 Q_INVOKABLE int findNotePositionX(int aIndex) const;
 
                 // for Voice Library
@@ -105,6 +105,7 @@ namespace waltz
                 Communicator::Client*                mClient_;
                 LibraryComponent::LibraryInformation mLibraryInformation_;
                 int                                  mNoteIdCounter_;
+                int                                  mPitchChangingPointIdCounter_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

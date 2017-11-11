@@ -28,6 +28,19 @@ Item {
         return noteListModel;
     }
 
+    function findNoteWithPitchChangingPoint(aX)
+    {
+        for (var index; index < noteListModel.count; ++index)
+        {
+            var note = noteListModel.get(index);
+            if (note.portamentoStartX < aX && aX < note.portamentoEndX)
+            {
+                return note;
+            }
+        }
+        return 0;
+    }
+
     function find(aNoteId)
     {
         return noteListModel.get(findIndexByNoteId(aNoteId));

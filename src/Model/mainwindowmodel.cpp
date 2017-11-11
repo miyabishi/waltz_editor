@@ -242,9 +242,10 @@ int MainWindowModel::publishNoteId()
     return mNoteIdCounter_;
 }
 
-int MainWindowModel::noteCount() const
+int MainWindowModel::publishPitchChangingPointId()
 {
-    return mScore_->noteCount();
+    mPitchChangingPointIdCounter_++;
+    return mPitchChangingPointIdCounter_;
 }
 
 int MainWindowModel::findNotePositionX(int aIndex) const
@@ -272,6 +273,7 @@ MainWindowModel::MainWindowModel(QObject *aParent)
           waltz::editor::LibraryComponent::Description(),
           waltz::editor::LibraryComponent::LibraryName())
     , mNoteIdCounter_(0)
+    , mPitchChangingPointIdCounter_(0)
 {
 }
 
