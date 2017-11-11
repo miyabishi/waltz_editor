@@ -15,7 +15,7 @@ ApplicationWindow {
     }
 
     PitchChangingPointListModelContainer{
-        id: pitch_changing_point_list_model
+        id: pitch_changing_point_list_model_containter
     }
 
     TopBar{

@@ -9,18 +9,28 @@ Item {
     {
         // TODO
         var note = note_list_model_container.findNoteWithPitchChangingPoint(aX)
-        var id = 0;
+        if (note === 0) return;
+
+        var id = MainWindowModel.publishPitchChangingPointId();
         var pitchChangingPointX = note.positionX - aX;
         var pitchChangingPointY = note.positionY - aY;
 
+        console.log("id" + id);
+        console.log("pitchChangingPointX:" + pitchChangingPointX);
+        console.log("pitchChangingPointY:" + pitchChangingPointY);
 
         pitchChangingPointListModel.append({
                                                "id": id,
-                                               "noteId": noteId,
+                                               "noteId": note.noteId,
                                                "pitchChangingPointX": pitchChangingPointX,
                                                "pitchChangingPointY": pitchChangingPointY
                                            });
         modelUpdated();
+    }
+
+    function getModel()
+    {
+        return pitchChangingPointListModel;
     }
 
     function update(aObject)
@@ -40,5 +50,4 @@ Item {
         }
         return;
     }
-
 }

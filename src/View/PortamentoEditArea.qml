@@ -5,7 +5,6 @@ Rectangle {
     id: root
     color: "#222222"
     property int xOffset:0
-    property int noteCount: MainWindowModel.noteCount()
 
     onXOffsetChanged: {
         if (portamento_edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -136,7 +135,7 @@ Rectangle {
                 onClicked: {
                     if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
                     {
-
+                        pitch_changing_point_list_model_containter.append(mouseX, mouseY)
                     }
                 }
             }
@@ -286,6 +285,28 @@ Rectangle {
                         item.noteId = noteId
                         item.x = portamentoEndX;
                         item.y = portamentoEndY;
+                    }
+                }
+            }
+
+            Repeater{
+                id: pitch_changing_point_repeater
+                model: pitch_changing_point_list_model_containter.getModel()
+                Loader{
+                    sourceComponent: Component{
+                        id: note
+                        PitchangingPoint{
+                            id: pitch_changing_point
+                            width:10
+                            height:10
+                        }
+                    }
+                    onLoaded: {
+                        var note = note_list_model_container.find(noteId);
+                        item.x = note.positionX + pitchChangingPointX;
+                        item.y = note.positionY + pitchChangingPointY;
+                        item.visible = true;
+                        pitch_curve_canvas.requestPaint();
                     }
                 }
             }
