@@ -305,6 +305,7 @@ Rectangle {
                         var note = note_list_model_container.find(noteId);
                         item.x = note.positionX + pitchChangingPointX - 5;
                         item.y = note.positionY + pitchChangingPointY - 5;
+                        item.pitchChangingPointId = pitchChangingPointId;
                         item.visible = true;
                         pitch_curve_canvas.requestPaint();
                     }

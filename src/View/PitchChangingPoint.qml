@@ -7,10 +7,12 @@ Rectangle{
 
     border.color: "#ccddff"
     border.width: 1
+
+    /*
+
     Drag.hotSpot.x: width/2
     Drag.hotSpot.y: height/2
     Drag.active: true
-/*
     Connections{
         target: pitch_changing_point_list_model_containter
         onModelUpdated:{

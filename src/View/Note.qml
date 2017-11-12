@@ -12,9 +12,6 @@ Rectangle{
 
     property int portamentoStartX
     property int portamentoStartY
-    property int pitchChangingPointCount:0
-    property var pitchChangingPointXArray:[]
-    property var pitchChangingPointYArray:[]
     property int portamentoEndX
     property int portamentoEndY
 

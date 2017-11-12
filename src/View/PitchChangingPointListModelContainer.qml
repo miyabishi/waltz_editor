@@ -11,8 +11,8 @@ Item {
         var note = note_list_model_container.findNoteWithPitchChangingPoint(aX)
         if (note === 0) return;
 
-        var pitchChangingPointX = note.positionX - aX;
-        var pitchChangingPointY = note.positionY - aY;
+        var pitchChangingPointX = aX - note.positionX;
+        var pitchChangingPointY = aY - note.positionY;
 
         console.log("pitchChangingPointId:" + MainWindowModel.publishPitchChangingPointId());
         console.log("noteId:" + note.noteId);
