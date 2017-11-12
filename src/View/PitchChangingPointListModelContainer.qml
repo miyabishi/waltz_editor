@@ -11,16 +11,16 @@ Item {
         var note = note_list_model_container.findNoteWithPitchChangingPoint(aX)
         if (note === 0) return;
 
-        var id = MainWindowModel.publishPitchChangingPointId();
         var pitchChangingPointX = note.positionX - aX;
         var pitchChangingPointY = note.positionY - aY;
 
-        console.log("id" + id);
+        console.log("pitchChangingPointId:" + MainWindowModel.publishPitchChangingPointId());
+        console.log("noteId:" + note.noteId);
         console.log("pitchChangingPointX:" + pitchChangingPointX);
         console.log("pitchChangingPointY:" + pitchChangingPointY);
 
         pitchChangingPointListModel.append({
-                                               "id": id,
+                                               "pitchChangingPointId": MainWindowModel.publishPitchChangingPointId(),
                                                "noteId": note.noteId,
                                                "pitchChangingPointX": pitchChangingPointX,
                                                "pitchChangingPointY": pitchChangingPointY
@@ -33,11 +33,36 @@ Item {
         return pitchChangingPointListModel;
     }
 
-    function update(aObject)
+    function update(aPitchChangingPointId, aPitchChangingPointX, aPitchChangingPointY)
     {
-        pitchChangingPointListModel.remove(findIndexByPitchChangingPointId(aObject.pitchChangingPointId));
-        pitchChangingPointListModel.append(aObject);
+        var pitchChangingPoint = find(aPitchChangingPointId);
+        var noteId = pitchChangingPoint.noteId;
+        var note = note_list_model_container.find(noteId);
+        if (note === 0) return;
+
+        var pitchChangingPointX = note.positionX - aPitchChangingPointX;
+        var pitchChangingPointY = note.positionY - aPitchChangingPointY;
+
+
+        pitchChangingPointListModel.remove(findIndexByPitchChangingPointId(pitchChangingPointId));
+        pitchChangingPointListModel.append({
+                                               "pitchChangingPointId": aPitchChangingPointId,
+                                               "noteId": noteId,
+                                               "pitchChangingPointX": pitchChangingPointX,
+                                               "pitchChangingPointY": pitchChangingPointY
+                                           });
         modelUpdated();
+    }
+
+    function find(aPitchChangingPointId)
+    {
+        return pitchChangingPointListModel.get(findIndexByPitchChangingPointId(aPitchChangingPointId));
+    }
+
+    function findPoint(aPitchChangingPointId)
+    {
+        var pitchChangingPoint = find(aPitchChangingPointId);
+        return Qt.point(pitchChangingPoint.pitchChangingPointX, pitchChangingPoint.pitchChangingPointY);
     }
 
     function findIndexByPitchChangingPointId(aPitchChangingPointId)

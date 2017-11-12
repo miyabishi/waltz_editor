@@ -23,6 +23,8 @@
         <file>src/View/NoteListModelContainer.qml</file>
         <file>src/View/PortamentoEndPoint.qml</file>
         <file>src/View/PitchChangingPointListModelContainer.qml</file>
-        <file>src/View/PitchangingPoint.qml</file>
+        <file>src/View/PitchChangingPoint.qml</file>
+        <file>src/View/PortamentoStartPointListModelContainer.qml</file>
+        <file>src/View/PortamentoEndPointListModelContainer.qml</file>
     </qresource>
 </RCC>

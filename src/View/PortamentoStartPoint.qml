@@ -36,9 +36,6 @@ Rectangle{
                                               "portamentoStartX": note.portamentoStartX,
                                               "portamentoStartY": note.portamentoStartY,
                                               "portamentoStartXOffset": note.portamentoStartXOffset + aOffset,
-                                              "pitchChangingPointCount": note.pitchChangingPointCount,
-                                              "pitchChangingPointXArray": note.pitchChangingPointXArray,
-                                              "pitchChangingPointYArray": note.pitchChangingPointYArray,
                                               "portamentoEndX": note.portamentoEndX,
                                               "portamentoEndY": note.portamentoEndY,
                                               "portamentoEndXOffset": note.portamentoEndXOffset,
@@ -58,7 +55,6 @@ Rectangle{
 
         onPressed: {
             clickedPointX = root.x
-            console.log("clickedPointX:" + clickedPointX);
         }
 
         onReleased: {

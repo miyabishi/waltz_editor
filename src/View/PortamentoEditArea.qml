@@ -220,7 +220,6 @@ Rectangle {
                     var portamentoStartX = note.portamentoStartX + note.portamentoStartXOffset;
                     var portamentoStartY = note.portamentoStartY;
 
-                    var pitchChangingPointCount = note.pitchChangingPointCount;
 
                     var portamentoEndX = note.portamentoEndX + note.portamentoEndXOffset;
                     var portamentoEndY = note.portamentoEndY;
@@ -295,16 +294,17 @@ Rectangle {
                 Loader{
                     sourceComponent: Component{
                         id: note
-                        PitchangingPoint{
+                        PitchChangingPoint{
                             id: pitch_changing_point
                             width:10
                             height:10
                         }
                     }
                     onLoaded: {
+                        console.log("pitch changing point loaded");
                         var note = note_list_model_container.find(noteId);
-                        item.x = note.positionX + pitchChangingPointX;
-                        item.y = note.positionY + pitchChangingPointY;
+                        item.x = note.positionX + pitchChangingPointX - 5;
+                        item.y = note.positionY + pitchChangingPointY - 5;
                         item.visible = true;
                         pitch_curve_canvas.requestPaint();
                     }
