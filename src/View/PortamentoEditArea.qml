@@ -14,6 +14,16 @@ Rectangle {
         portamento_edit_area_scroll_view.flickableItem.contentX = xOffset
     }
 
+    PortamentoStartPointListModelContainer{
+        id: portamento_start_point_list_model_container
+    }
+    PitchChangingPointListModelContainer{
+        id: pitch_changing_point_list_model_containter
+    }
+    PortamentoEndPointListModelContainer{
+        id: portamento_end_point_list_model_container
+    }
+
     function updateProperty(){
         edit_area.supportOctarve = MainWindowModel.supportOctave()
         edit_area.numberOfRow    = 12 * supportOctarve
