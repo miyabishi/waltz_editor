@@ -14,11 +14,6 @@ Item {
         var pitchChangingPointX = aX - note.positionX;
         var pitchChangingPointY = aY - note.positionY;
 
-        console.log("pitchChangingPointId:" + MainWindowModel.publishPitchChangingPointId());
-        console.log("noteId:" + note.noteId);
-        console.log("pitchChangingPointX:" + pitchChangingPointX);
-        console.log("pitchChangingPointY:" + pitchChangingPointY);
-
         pitchChangingPointListModel.append({
                                                "pitchChangingPointId": MainWindowModel.publishPitchChangingPointId(),
                                                "noteId": note.noteId,

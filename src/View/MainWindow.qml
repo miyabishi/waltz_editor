@@ -14,6 +14,17 @@ ApplicationWindow {
         id: note_list_model_container
     }
 
+    PortamentoStartPointListModelContainer{
+        id: portamento_start_point_list_model_container
+    }
+
+    PitchChangingPointListModelContainer{
+        id: pitch_changing_point_list_model_containter
+    }
+
+    PortamentoEndPointListModelContainer{
+        id: portamento_end_point_list_model_container
+    }
 
     TopBar{
         id: top_bar

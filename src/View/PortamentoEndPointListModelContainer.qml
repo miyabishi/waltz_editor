@@ -10,7 +10,7 @@ Item {
     {
         portamentoEndPointListModel.append({
                                                "portamentoEndPointId": portamentoEndPointIdCounter,
-                                               "noteId": note.noteId,
+                                               "noteId": aNoteId,
                                                "portamentoEndX": aX,
                                                "portamentoEndY": aY,
                                                "portamentoEndXOffset": 0
@@ -27,39 +27,53 @@ Item {
     function updateBasePoint(aPortamentoEndPointId, aPortamentoEndX, aPortamentoEndY)
     {
         var portamentoEndPoint = find(aPortamentoEndPointId);
-        var noteId = portamentoEndoPoint.noteId;
+        var noteId = portamentoEndPoint.noteId;
         var portamentoEndX = portamentoEndPoint.portamentoEndX;
         var portamentoEndY = portamentoEndPoint.portamentoEndY;
 
-        pitchChangingPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
-        pitchChangingPointListModel.append({
+        portamentoEndPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        portamentoEndPointListModel.append({
                                                "portamentoEndPointId": aPortamentoEndPointId,
                                                "noteId": noteId,
                                                "portamentoEndX": portamentoEndX,
                                                "portamentoEndY": portamentoEndY,
-                                               "portamentoEndXOffset": portamentoEndoPoint.portamentoEndoXOffset
+                                               "portamentoEndXOffset": portamentoEndPoint.portamentoEndoXOffset
                                            });
         modelUpdated();
     }
 
     function updateOffset(aPortamentoEndPointId,aOffset)
     {
-        var portamentoEndoPoint = find(aPortamentoEndPointId);
-
-        pitchChangingPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
-        pitchChangingPointListModel.append({
+        var portamentoEndPoint = find(aPortamentoEndPointId);
+        console.log("update offset");
+        // ここが取れていない
+        console.log("portamentoEndX " + portamentoEndPoint.portamentoEndX);
+        console.log("portamentoEndY " + portamentoEndPoint.portamentoEndY);
+        portamentoEndPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        portamentoEndPointListModel.append({
                                                "portamentoEndPointId": aPortamentoEndPointId,
-                                               "noteId": portamentoEndoPoint.noteId,
-                                               "portamentoEndX": portamentoEndoPoint.portamentoEndX,
-                                               "portamentoEndY": portamentoEndoPoint.portamentoEndY,
+                                               "noteId": portamentoEndPoint.noteId,
+                                               "portamentoEndX": portamentoEndPoint.portamentoEndX,
+                                               "portamentoEndY": portamentoEndPoint.portamentoEndY,
                                                "portamentoEndXOffset": aOffset
                                            });
         modelUpdated();
     }
 
+    function findByNoteId(aNoteId)
+    {
+        for(var index = 0; index < portamentoEndPointListModel.count; ++index)
+        {
+            var portamentoEndPoint = portamentoEndPointListModel.get(index);
+            if (portamentoEndPoint.noteId !== aNoteId) continue;
+            return portamentoEndPoint;
+        }
+        return 0;
+    }
+
     function find(aPortamentoEndPointId)
     {
-        return portamentoEndPointListModel.get(findIndexIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        return portamentoEndPointListModel.get(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
     }
 
     function findPoint(aPortamentoEndPointId)
@@ -68,14 +82,18 @@ Item {
         return Qt.point(portamentoEndPoint.portamentoEndX, portamentoEndPoint.portamentoEndY);
     }
 
-    function findIndexIndexByPortamentoEndPointId(aPortamentoEndPointId)
+    function findIndexByPortamentoEndPointId(aPortamentoEndPointId)
     {
         for(var index = 0; index < portamentoEndPointListModel.count; ++index)
         {
+            console.log("index:" + index);
             var portamentoEndPoint = portamentoEndPointListModel.get(index);
+            console.log("compare " + portamentoEndPoint.portamentoEndPointId + " : " + aPortamentoEndPointId);
             if (portamentoEndPoint.portamentoEndPointId !== aPortamentoEndPointId) continue;
+            find("find:" + index);
             return index;
         }
+        console.log("not found");
         return 0;
     }
 }

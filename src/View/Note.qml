@@ -12,8 +12,6 @@ Rectangle{
 
     property int portamentoStartX
     property int portamentoStartY
-    property int portamentoEndX
-    property int portamentoEndY
 
     property double vibratoAmplitude
     property double vibratoFrequency
@@ -40,8 +38,7 @@ Rectangle{
         portamentoStartY = note_list_model_container.yPositionOfPreviousNote(root.x - 1,
                                                                              root.y + root.height / 2,
                                                                              root.pNoteId_);
-        portamentoEndX = x + 30;
-        portamentoEndY = y + height / 2;
+
         positionX = x;
         positionY = y;
 
@@ -52,14 +49,10 @@ Rectangle{
                                               "noteWidth": width,
                                               "portamentoStartX": portamentoStartX,
                                               "portamentoStartY": portamentoStartY,
-                                              "pitchChangingPointCount": pitchChangingPointCount,
-                                              "pitchChangingPointXArray": pitchChangingPointXArray,
-                                              "pitchChangingPointYArray": pitchChangingPointYArray,
-                                              "portamentoEndX": portamentoEndX,
-                                              "portamentoEndY": portamentoEndY,
                                               "vibratoAmplitude": vibratoAmplitude,
                                               "vibratoFrequency": vibratoFrequency,
                                               "vibratoLength": vibratoLength});
+
     }
 
     function reload()
@@ -82,12 +75,6 @@ Rectangle{
 
         root.portamentoStartX = note.portamentoStartX;
         root.portamentoStartY = note.portamentoStartY;
-
-        root.pitchChangingPointXArray= note.pitchChangingPointXArray;
-        root.pitchChangingPointYArray= note.pitchChangingPointYArray;
-
-        root.portamentoEndX = note.portamentoEndX;
-        root.portamentoEndY = note.portamentoEndY;
 
         root.vibratoAmplitude = note.vibratoAmplitude;
         root.vibratoFrequency = note.vibratoFrequency;

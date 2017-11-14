@@ -14,16 +14,6 @@ Rectangle {
         portamento_edit_area_scroll_view.flickableItem.contentX = xOffset
     }
 
-    PortamentoStartPointListModelContainer{
-        id: portamento_start_point_list_model_container
-    }
-    PitchChangingPointListModelContainer{
-        id: pitch_changing_point_list_model_containter
-    }
-    PortamentoEndPointListModelContainer{
-        id: portamento_end_point_list_model_container
-    }
-
     function updateProperty(){
         edit_area.supportOctarve = MainWindowModel.supportOctave()
         edit_area.numberOfRow    = 12 * supportOctarve
@@ -161,7 +151,6 @@ Rectangle {
                     {
                         drawPitchCurve(ctx, index);
                     }
-
                 }
 
                 function drawPitchCurve(aCtx, aIndex)
@@ -226,13 +215,15 @@ Rectangle {
                     aCtx.strokeStyle = Qt.rgba(.6,.8,1);
                     aCtx.beginPath();
                     var note = note_list_model_container.findByIndex(aIndex);
+                    var portamentoEndPoint = portamento_end_point_list_model_container.findByNoteId(note.noteId);
 
                     var portamentoStartX = note.portamentoStartX + note.portamentoStartXOffset;
                     var portamentoStartY = note.portamentoStartY;
 
 
-                    var portamentoEndX = note.portamentoEndX + note.portamentoEndXOffset;
-                    var portamentoEndY = note.portamentoEndY;
+                    var portamentoEndX = portamentoEndPoint.portamentoEndX
+                                       + portamentoEndPoint.portamentoEndXOffset;
+                    var portamentoEndY = portamentoEndPoint.portamentoEndY;
 
                     aCtx.moveTo(portamentoStartX,
                                 portamentoStartY);
@@ -283,7 +274,7 @@ Rectangle {
 
             Repeater{
                 id: portamento_end_point_repeater
-                model:  note_list_model_container.getModel()
+                model:portamento_end_point_list_model_container.getModel()
                 Loader{
                     sourceComponent: PortamentoEndPoint{
                         id: protamento_end_point
@@ -292,6 +283,7 @@ Rectangle {
                     }
                     onLoaded: {
                         item.noteId = noteId
+                        item.portamentoEndPointId = portamentoEndPointId;
                         item.x = portamentoEndX;
                         item.y = portamentoEndY;
                     }

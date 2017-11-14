@@ -7,72 +7,72 @@ Item {
 
     function append(aNoteId, aX, aY)
     {
-        portamentoEndPointListModel.append({
-                                               "portamentoEndPointId": portamentoEndPointIdCounter,
+        portamentoStartPointListModel.append({
+                                               "portamentoStartPointId": portamentoStartPointIdCounter,
                                                "noteId": note.noteId,
-                                               "portamentoEndX": aX,
-                                               "portamentoEndY": aY,
-                                               "portamentoEndXOffset": 0
+                                               "portamentoStartX": aX,
+                                               "portamentoStartY": aY,
+                                               "portamentoStartXOffset": 0
                                            });
-        portamentoEndPointIdCounter++;
+        portamentoStartPointIdCounter++;
         modelUpdated();
     }
 
     function getModel()
     {
-        return portamentoEndPointListModel;
+        return portamentoStartPointListModel;
     }
 
-    function updateBasePoint(aPortamentoEndPointId, aPortamentoEndX, aPortamentoEndY)
+    function updateBasePoint(aPortamentoStartPointId, aPortamentoStartX, aPortamentoStartY)
     {
-        var portamentoEndPoint = find(aPortamentoEndPointId);
+        var portamentoStartPoint = find(aPortamentoStartPointId);
         var noteId = portamentoEndoPoint.noteId;
-        var portamentoEndX = portamentoEndPoint.portamentoEndX;
-        var portamentoEndY = portamentoEndPoint.portamentoEndY;
+        var portamentoStartX = portamentoStartPoint.portamentoStartX;
+        var portamentoStartY = portamentoStartPoint.portamentoStartY;
 
-        pitchChangingPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        pitchChangingPointListModel.remove(findIndexByPortamentoStartPointId(aPortamentoStartPointId));
         pitchChangingPointListModel.append({
-                                               "portamentoEndPointId": aPortamentoEndPointId,
+                                               "portamentoStartPointId": aPortamentoStartPointId,
                                                "noteId": noteId,
-                                               "portamentoEndX": portamentoEndX,
-                                               "portamentoEndY": portamentoEndY,
-                                               "portamentoEndXOffset": portamentoEndoPoint.portamentoEndoXOffset
+                                               "portamentoStartX": portamentoStartX,
+                                               "portamentoStartY": portamentoStartY,
+                                               "portamentoStartXOffset": portamentoEndoPoint.portamentoEndoXOffset
                                            });
         modelUpdated();
     }
 
-    function updateOffset(aPortamentoEndPointId,aOffset)
+    function updateOffset(aPortamentoStartPointId,aOffset)
     {
-        var portamentoEndoPoint = find(aPortamentoEndPointId);
+        var portamentoEndoPoint = find(aPortamentoStartPointId);
 
-        pitchChangingPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        pitchChangingPointListModel.remove(findIndexByPortamentoStartPointId(aPortamentoStartPointId));
         pitchChangingPointListModel.append({
-                                               "portamentoEndPointId": aPortamentoEndPointId,
+                                               "portamentoStartPointId": aPortamentoStartPointId,
                                                "noteId": portamentoEndoPoint.noteId,
-                                               "portamentoEndX": portamentoEndoPoint.portamentoEndX,
-                                               "portamentoEndY": portamentoEndoPoint.portamentoEndY,
-                                               "portamentoEndXOffset": aOffset
+                                               "portamentoStartX": portamentoEndoPoint.portamentoStartX,
+                                               "portamentoStartY": portamentoEndoPoint.portamentoStartY,
+                                               "portamentoStartXOffset": aOffset
                                            });
         modelUpdated();
     }
 
-    function find(aPortamentoEndPointId)
+    function find(aPortamentoStartPointId)
     {
-        return portamentoEndPointListModel.get(findIndexIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        return portamentoStartPointListModel.get(findIndexIndexByPortamentoStartPointId(aPortamentoStartPointId));
     }
 
-    function findPoint(aPortamentoEndPointId)
+    function findPoint(aPortamentoStartPointId)
     {
-        var portamentoEndPoint = find(aPortamentoEndPointId);
-        return Qt.point(portamentoEndPoint.portamentoEndX, portamentoEndPoint.portamentoEndY);
+        var portamentoStartPoint = find(aPortamentoStartPointId);
+        return Qt.point(portamentoStartPoint.portamentoStartX, portamentoStartPoint.portamentoStartY);
     }
 
-    function findIndexIndexByPortamentoEndPointId(aPortamentoEndPointId)
+    function findIndexIndexByPortamentoStartPointId(aPortamentoStartPointId)
     {
-        for(var index = 0; index < portamentoEndPointListModel.count; ++index)
+        for(var index = 0; index < portamentoStartPointListModel.count; ++index)
         {
-            var portamentoEndPoint = portamentoEndPointListModel.get(index);
-            if (portamentoEndPoint.portamentoEndPointId !== aPortamentoEndPointId) continue;
+            var portamentoStartPoint = portamentoStartPointListModel.get(index);
+            if (portamentoStartPoint.portamentoStartPointId !== aPortamentoStartPointId) continue;
             return index;
         }
         return 0;

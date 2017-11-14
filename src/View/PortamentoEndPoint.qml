@@ -4,6 +4,7 @@ Rectangle{
     id: root
     color: "#ffffff"
     property int noteId
+    property int portamentoEndPointId
 
     border.color: "#ccddff"
     border.width: 1
@@ -14,37 +15,46 @@ Rectangle{
     Connections{
         target: note_list_model_container
         onModelUpdated:{
+            adjust()
             reload();
         }
     }
 
-    function reload()
-    {
-        var note = note_list_model_container.find(noteId);
-        root.x = note.portamentoEndX + note.portamentoEndXOffset - root.width / 2;
-        root.y = note.portamentoEndY - root.height / 2;
+    Connections{
+        target: portamento_end_point_list_model_container
+        onModelUpdated:{
+            reload();
+        }
     }
 
-    function updatePortamentoStartPoint(aOffset)
+    function adjust()
     {
         var note = note_list_model_container.find(noteId);
-        note_list_model_container.updateNote({"noteId": note.noteId,
-                                              "noteText": note.noteText,
-                                              "positionX":note.positionX,
-                                              "positionY":note.positionY,
-                                              "noteWidth": note.noteWidth,
-                                              "portamentoStartX": note.portamentoStartX,
-                                              "portamentoStartY": note.portamentoStartY,
-                                              "portamentoStartXOffset": note.portamentoStartXOffset,
-                                              "pitchChangingPointCount": note.pitchChangingPointCount,
-                                              "pitchChangingPointXArray": note.pitchChangingPointXArray,
-                                              "pitchChangingPointYArray": note.pitchChangingPointYArray,
-                                              "portamentoEndX": note.portamentoEndX,
-                                              "portamentoEndY": note.portamentoEndY,
-                                              "portamentoEndXOffset": note.portamentoEndXOffset + aOffset,
-                                              "vibratoAmplitude": note.vibratoAmplitude,
-                                              "vibratoFrequency": note.vibratoFrequency,
-                                              "vibratoLength": note.vibratoLength});
+        var portamentoEndX = note.positionX + 30;
+        var portamentoEndY = note.positionY + edit_area.rowHeight / 2;
+
+        portamento_end_point_list_model_container.updateBasePoint(
+                    portamentoEndPointId,
+                    portamentoEndX,
+                    portamentoEndY)
+    }
+
+    function reload()
+    {
+        var portamentoEndPoint = portamento_end_point_list_model_container.find(portamentoEndPointId);
+        console.log("PortamentoEndPoit::reload");
+        console.log("portamentoEndPointId:" + portamentoEndPointId);
+        console.log("portamentoEndX:" + portamentoEndPoint.portamentoEndX);
+        console.log("portamentoEndY:" + portamentoEndPoint.portamentoEndY);
+
+        root.x = portamentoEndPoint.portamentoEndX + portamentoEndPoint.portamentoEndXOffset - root.width / 2;
+        root.y = portamentoEndPoint.portamentoEndY - root.height / 2;
+    }
+
+    function updatePortamentoEndPoint(aOffset)
+    {
+        console.log("updatePortamentoEndPoint:" + portamentoEndPointId);
+        portamento_end_point_list_model_container.updateOffset(portamentoEndPointId, aOffset);
     }
 
     MouseArea{
@@ -62,7 +72,7 @@ Rectangle{
 
         onReleased: {
             var dropX = root.x;
-            updatePortamentoStartPoint(dropX - clickedPointX);
+            updatePortamentoEndPoint(dropX - clickedPointX);
             root.Drag.drop();
         }
     }
