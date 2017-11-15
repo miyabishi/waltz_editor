@@ -46,7 +46,6 @@ Item {
     {
         var portamentoEndPoint = find(aPortamentoEndPointId);
         console.log("update offset");
-        // ここが取れていない
         console.log("portamentoEndX " + portamentoEndPoint.portamentoEndX);
         console.log("portamentoEndY " + portamentoEndPoint.portamentoEndY);
         portamentoEndPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
@@ -68,12 +67,18 @@ Item {
             if (portamentoEndPoint.noteId !== aNoteId) continue;
             return portamentoEndPoint;
         }
-        return 0;
+        return;
     }
 
     function find(aPortamentoEndPointId)
     {
-        return portamentoEndPointListModel.get(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        console.log("try find " + aPortamentoEndPointId);
+        var portamentoEndPoint = portamentoEndPointListModel.get(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
+        console.log(portamentoEndPoint);
+        console.log("portamento end x" + portamentoEndPoint.portamentoEndX);
+        console.log("portamento end y" + portamentoEndPoint.portamentoEndY);
+
+        return portamentoEndPoint;
     }
 
     function findPoint(aPortamentoEndPointId)
@@ -90,7 +95,6 @@ Item {
             var portamentoEndPoint = portamentoEndPointListModel.get(index);
             console.log("compare " + portamentoEndPoint.portamentoEndPointId + " : " + aPortamentoEndPointId);
             if (portamentoEndPoint.portamentoEndPointId !== aPortamentoEndPointId) continue;
-            find("find:" + index);
             return index;
         }
         console.log("not found");

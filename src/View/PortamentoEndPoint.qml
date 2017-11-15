@@ -16,7 +16,6 @@ Rectangle{
         target: note_list_model_container
         onModelUpdated:{
             adjust()
-            reload();
         }
     }
 
@@ -29,6 +28,7 @@ Rectangle{
 
     function adjust()
     {
+        console.log("ADJUST");
         var note = note_list_model_container.find(noteId);
         var portamentoEndX = note.positionX + 30;
         var portamentoEndY = note.positionY + edit_area.rowHeight / 2;
@@ -41,9 +41,11 @@ Rectangle{
 
     function reload()
     {
-        var portamentoEndPoint = portamento_end_point_list_model_container.find(portamentoEndPointId);
+        console.log("RELOAD");
         console.log("PortamentoEndPoit::reload");
         console.log("portamentoEndPointId:" + portamentoEndPointId);
+
+        var portamentoEndPoint = portamento_end_point_list_model_container.find(portamentoEndPointId);
         console.log("portamentoEndX:" + portamentoEndPoint.portamentoEndX);
         console.log("portamentoEndY:" + portamentoEndPoint.portamentoEndY);
 
@@ -53,7 +55,6 @@ Rectangle{
 
     function updatePortamentoEndPoint(aOffset)
     {
-        console.log("updatePortamentoEndPoint:" + portamentoEndPointId);
         portamento_end_point_list_model_container.updateOffset(portamentoEndPointId, aOffset);
     }
 
