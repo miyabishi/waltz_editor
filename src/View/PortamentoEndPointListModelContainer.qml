@@ -30,15 +30,15 @@ Item {
         var noteId = portamentoEndPoint.noteId;
         var portamentoEndX = portamentoEndPoint.portamentoEndX;
         var portamentoEndY = portamentoEndPoint.portamentoEndY;
+        portamentoEndPointListModel.set(findIndexByPortamentoEndPointId(aPortamentoEndPointId),
+                                        {
+                                            "portamentoEndPointId": aPortamentoEndPointId,
+                                             "noteId": noteId,
+                                             "portamentoEndX": portamentoEndX,
+                                             "portamentoEndY": portamentoEndY,
+                                             "portamentoEndXOffset": portamentoEndPoint.portamentoEndoXOffset
+                                        });
 
-        portamentoEndPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
-        portamentoEndPointListModel.append({
-                                               "portamentoEndPointId": aPortamentoEndPointId,
-                                               "noteId": noteId,
-                                               "portamentoEndX": portamentoEndX,
-                                               "portamentoEndY": portamentoEndY,
-                                               "portamentoEndXOffset": portamentoEndPoint.portamentoEndoXOffset
-                                           });
         modelUpdated();
     }
 
@@ -46,16 +46,18 @@ Item {
     {
         var portamentoEndPoint = find(aPortamentoEndPointId);
         console.log("update offset");
+        console.log("id:" + aPortamentoEndPointId);
         console.log("portamentoEndX " + portamentoEndPoint.portamentoEndX);
         console.log("portamentoEndY " + portamentoEndPoint.portamentoEndY);
-        portamentoEndPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId));
-        portamentoEndPointListModel.append({
-                                               "portamentoEndPointId": aPortamentoEndPointId,
-                                               "noteId": portamentoEndPoint.noteId,
-                                               "portamentoEndX": portamentoEndPoint.portamentoEndX,
-                                               "portamentoEndY": portamentoEndPoint.portamentoEndY,
-                                               "portamentoEndXOffset": aOffset
-                                           });
+
+        portamentoEndPointListModel.set(findIndexByPortamentoEndPointId(aPortamentoEndPointId),
+                                        {
+                                            "portamentoEndPointId": aPortamentoEndPointId,
+                                             "noteId": portamentoEndPoint.noteId,
+                                             "portamentoEndX": portamentoEndPoint.portamentoEndX,
+                                             "portamentoEndY": portamentoEndPoint.portamentoEndY,
+                                             "portamentoEndXOffset": portamentoEndPoint.aOffset + aOffset
+                                        });
         modelUpdated();
     }
 

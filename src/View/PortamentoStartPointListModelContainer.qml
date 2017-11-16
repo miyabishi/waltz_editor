@@ -4,6 +4,7 @@ Item {
     id: root
     property ListModel portamentoStartPointListModel: ListModel{}
     signal modelUpdated()
+    /*
 
     function append(aNoteId, aX, aY)
     {
@@ -77,4 +78,5 @@ Item {
         }
         return 0;
     }
+    */
 }
