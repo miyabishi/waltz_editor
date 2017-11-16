@@ -28,7 +28,6 @@ Rectangle{
 
     function adjust()
     {
-        console.log("ADJUST");
         var note = note_list_model_container.find(noteId);
         var portamentoEndX = note.positionX + 30;
         var portamentoEndY = note.positionY + edit_area.rowHeight / 2;
@@ -41,14 +40,7 @@ Rectangle{
 
     function reload()
     {
-        console.log("RELOAD");
-        console.log("PortamentoEndPoit::reload");
-        console.log("portamentoEndPointId:" + portamentoEndPointId);
-
         var portamentoEndPoint = portamento_end_point_list_model_container.find(portamentoEndPointId);
-        console.log("portamentoEndX:" + portamentoEndPoint.portamentoEndX);
-        console.log("portamentoEndY:" + portamentoEndPoint.portamentoEndY);
-
         root.x = portamentoEndPoint.portamentoEndX + portamentoEndPoint.portamentoEndXOffset - root.width / 2;
         root.y = portamentoEndPoint.portamentoEndY - root.height / 2;
     }

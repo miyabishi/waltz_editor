@@ -3,14 +3,14 @@ import QtQuick 2.0
 Item {
     id: root
     property ListModel portamentoStartPointListModel: ListModel{}
+    property int portamentoStartPointIdCounter: 0
     signal modelUpdated()
-    /*
 
     function append(aNoteId, aX, aY)
     {
         portamentoStartPointListModel.append({
                                                "portamentoStartPointId": portamentoStartPointIdCounter,
-                                               "noteId": note.noteId,
+                                               "noteId": aNoteId,
                                                "portamentoStartX": aX,
                                                "portamentoStartY": aY,
                                                "portamentoStartXOffset": 0
@@ -31,35 +31,47 @@ Item {
         var portamentoStartX = portamentoStartPoint.portamentoStartX;
         var portamentoStartY = portamentoStartPoint.portamentoStartY;
 
-        pitchChangingPointListModel.remove(findIndexByPortamentoStartPointId(aPortamentoStartPointId));
-        pitchChangingPointListModel.append({
-                                               "portamentoStartPointId": aPortamentoStartPointId,
-                                               "noteId": noteId,
-                                               "portamentoStartX": portamentoStartX,
-                                               "portamentoStartY": portamentoStartY,
-                                               "portamentoStartXOffset": portamentoEndoPoint.portamentoEndoXOffset
-                                           });
+        portamentoStartPointListModel.set(findIndexByPortamentoStartPointId(aPortamentoStartPointId),
+                                        {
+                                            "portamentoStartPointId": aPortamentoStartPointId,
+                                            "noteId": noteId,
+                                            "portamentoStartX": portamentoStartX,
+                                            "portamentoStartY": portamentoStartY,
+                                            "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
+                                        });
         modelUpdated();
     }
 
-    function updateOffset(aPortamentoStartPointId,aOffset)
+    function updateOffset(aPortamentoStartPointId, aOffset)
     {
-        var portamentoEndoPoint = find(aPortamentoStartPointId);
+        var portamentoStartPoint = find(aPortamentoStartPointId);
 
-        pitchChangingPointListModel.remove(findIndexByPortamentoStartPointId(aPortamentoStartPointId));
-        pitchChangingPointListModel.append({
-                                               "portamentoStartPointId": aPortamentoStartPointId,
-                                               "noteId": portamentoEndoPoint.noteId,
-                                               "portamentoStartX": portamentoEndoPoint.portamentoStartX,
-                                               "portamentoStartY": portamentoEndoPoint.portamentoStartY,
-                                               "portamentoStartXOffset": aOffset
-                                           });
+        portamentoStartPointListModel.set(findIndexByPortamentoStartPointId(aPortamentoStartPointId),
+                                        {
+                                            "portamentoStartPointId": aPortamentoStartPointId,
+                                            "noteId": portamentoStartPoint.noteId,
+                                            "portamentoStartX": portamentoStartPoint.portamentoStartX,
+                                            "portamentoStartY": portamentoStartPoint.portamentoStartY,
+                                            "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
+                                                                      + aOffset
+                                        });
         modelUpdated();
     }
 
     function find(aPortamentoStartPointId)
     {
-        return portamentoStartPointListModel.get(findIndexIndexByPortamentoStartPointId(aPortamentoStartPointId));
+        return portamentoStartPointListModel.get(findIndexByPortamentoStartPointId(aPortamentoStartPointId));
+    }
+
+    function findByNoteId(aNoteId)
+    {
+        for(var index = 0; index < portamentoStartPointListModel.count; ++index)
+        {
+            var portamentoStartPoint = portamentoStartPointListModel.get(index);
+            if (portamentoStartPoint.noteId !== aNoteId) continue;
+            return portamentoStartPoint;
+        }
+        return;
     }
 
     function findPoint(aPortamentoStartPointId)
@@ -68,7 +80,7 @@ Item {
         return Qt.point(portamentoStartPoint.portamentoStartX, portamentoStartPoint.portamentoStartY);
     }
 
-    function findIndexIndexByPortamentoStartPointId(aPortamentoStartPointId)
+    function findIndexByPortamentoStartPointId(aPortamentoStartPointId)
     {
         for(var index = 0; index < portamentoStartPointListModel.count; ++index)
         {
@@ -78,5 +90,4 @@ Item {
         }
         return 0;
     }
-    */
 }

@@ -4,6 +4,7 @@ Rectangle{
     id: root
     color: "#ffffff"
     property int noteId
+    property int portamentoStartPointId
 
     border.color: "#ccddff"
     border.width: 1
@@ -14,34 +15,40 @@ Rectangle{
     Connections{
         target: note_list_model_container
         onModelUpdated:{
+            adjust()
+        }
+    }
+
+    Connections{
+        target: portamento_start_point_list_model_container
+        onModelUpdated:{
             reload();
         }
     }
 
-    function reload()
+    function adjust()
     {
         var note = note_list_model_container.find(noteId);
-        root.x = note.portamentoStartX + note.portamentoStartXOffset - root.width / 2;
-        root.y = note.portamentoStartY - root.height / 2;
+        var portamentoStartX = note.positionX - 30;
+        var portamentoStartY = note_list_model_container.yPositionOfPreviousNote(root.x - 1,
+                                                                                 root.y + root.height / 2,
+                                                                                 root.pNoteId_);
+        portamento_start_point_list_model_container.updateBasePoint(portamentoStartPointId,
+                                                                    portamentoStartX,
+                                                                    portamentoStartY)
+    }
+
+    function reload()
+    {
+        var portamentoStartPoint = portamento_start_point_list_model_container.find(portamentoStartPointId);
+        root.x = portamentoStartPoint.portamentoStartX
+                + portamentoStartPoint.portamentoStartXOffset - root.width / 2;
+        root.y = portamentoStartPoint.portamentoStartY - root.height / 2;
     }
 
     function updatePortamentoStartPoint(aOffset)
     {
-        var note = note_list_model_container.find(noteId);
-        note_list_model_container.updateNote({"noteId": note.noteId,
-                                              "noteText": note.noteText,
-                                              "positionX":note.positionX,
-                                              "positionY":note.positionY,
-                                              "noteWidth": note.noteWidth,
-                                              "portamentoStartX": note.portamentoStartX,
-                                              "portamentoStartY": note.portamentoStartY,
-                                              "portamentoStartXOffset": note.portamentoStartXOffset + aOffset,
-                                              "portamentoEndX": note.portamentoEndX,
-                                              "portamentoEndY": note.portamentoEndY,
-                                              "portamentoEndXOffset": note.portamentoEndXOffset,
-                                              "vibratoAmplitude": note.vibratoAmplitude,
-                                              "vibratoFrequency": note.vibratoFrequency,
-                                              "vibratoLength": note.vibratoLength});
+        portamento_start_point_list_model_container.updateOffset(portamentoStartPointId, aOffset);
     }
 
     MouseArea{

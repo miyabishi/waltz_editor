@@ -75,6 +75,20 @@ Rectangle {
                 }
             }
 
+            Connections{
+                target: portamento_start_point_list_model_container
+                onModelUpdated:{
+                    pitch_curve_canvas.requestPaint();
+                }
+            }
+
+            Connections{
+                target: portamento_end_point_list_model_container
+                onModelUpdated:{
+                    pitch_curve_canvas.requestPaint();
+                }
+            }
+
 
             Repeater{
                 model: edit_area.numberOfRow
@@ -215,12 +229,13 @@ Rectangle {
                     aCtx.strokeStyle = Qt.rgba(.6,.8,1);
                     aCtx.beginPath();
                     var note = note_list_model_container.findByIndex(aIndex);
+
+                    var portamentoStartPoint = portamento_start_point_list_model_container.findByNoteId(note.noteId);
+                    var portamentoStartX = portamentoStartPoint.portamentoStartX
+                                         + portamentoStartPoint.portamentoStartXOffset;
+                    var portamentoStartY = portamentoStartPoint.portamentoStartY;
+
                     var portamentoEndPoint = portamento_end_point_list_model_container.findByNoteId(note.noteId);
-
-                    var portamentoStartX = note.portamentoStartX + note.portamentoStartXOffset;
-                    var portamentoStartY = note.portamentoStartY;
-
-
                     var portamentoEndX = portamentoEndPoint.portamentoEndX
                                        + portamentoEndPoint.portamentoEndXOffset;
                     var portamentoEndY = portamentoEndPoint.portamentoEndY;
@@ -257,7 +272,7 @@ Rectangle {
 
             Repeater{
                 id: portamento_start_point_repeater
-                model:  note_list_model_container.getModel()
+                model: portamento_start_point_list_model_container.getModel()
                 Loader{
                     sourceComponent: PortamentoStartPoint{
                         id: protamento_start_point
@@ -266,6 +281,7 @@ Rectangle {
                     }
                     onLoaded: {
                         item.noteId = noteId
+                        item.portamentoStartPointId = portamentoStartPointId;
                         item.x = portamentoStartX;
                         item.y = portamentoStartY;
                     }
@@ -303,7 +319,6 @@ Rectangle {
                         }
                     }
                     onLoaded: {
-                        console.log("pitch changing point loaded");
                         var note = note_list_model_container.find(noteId);
                         item.x = note.positionX + pitchChangingPointX - 5;
                         item.y = note.positionY + pitchChangingPointY - 5;

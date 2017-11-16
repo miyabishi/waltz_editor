@@ -18,8 +18,7 @@ Item {
 
     function updateNote(aObject)
     {
-        noteListModel.remove(findIndexByNoteId(aObject.noteId));
-        noteListModel.append(aObject);
+        noteListModel.set(findIndexByNoteId(aObject.noteId), aObject);
         modelUpdated();
     }
 
@@ -30,19 +29,14 @@ Item {
 
     function findNoteWithPitchChangingPoint(aX)
     {
-        console.log("find note with pitch changing poiint: " + aX);
         for (var index = 0; index < noteListModel.count; ++index)
         {
             var note = noteListModel.get(index);
-            console.log("startx: " + note.portamentoStartX);
-            console.log("starty: " + note.portamentoStartY);
             if (note.portamentoStartX < aX && aX < note.portamentoEndX)
             {
-                console.log("find note");
                 return note;
             }
         }
-        console.log("not found");
         return 0;
     }
 

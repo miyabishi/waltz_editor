@@ -39,13 +39,13 @@ Item {
         var pitchChangingPointY = note.positionY - aPitchChangingPointY;
 
 
-        pitchChangingPointListModel.remove(findIndexByPitchChangingPointId(pitchChangingPointId));
-        pitchChangingPointListModel.append({
+        pitchChangingPointListModel.set(findIndexByPitchChangingPointId(pitchChangingPointId),
+                                        {
                                                "pitchChangingPointId": aPitchChangingPointId,
                                                "noteId": noteId,
                                                "pitchChangingPointX": pitchChangingPointX,
                                                "pitchChangingPointY": pitchChangingPointY
-                                           });
+                                        });
         modelUpdated();
     }
 

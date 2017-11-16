@@ -36,7 +36,7 @@ Item {
                                              "noteId": noteId,
                                              "portamentoEndX": portamentoEndX,
                                              "portamentoEndY": portamentoEndY,
-                                             "portamentoEndXOffset": portamentoEndPoint.portamentoEndoXOffset
+                                             "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
                                         });
 
         modelUpdated();
@@ -56,7 +56,8 @@ Item {
                                              "noteId": portamentoEndPoint.noteId,
                                              "portamentoEndX": portamentoEndPoint.portamentoEndX,
                                              "portamentoEndY": portamentoEndPoint.portamentoEndY,
-                                             "portamentoEndXOffset": portamentoEndPoint.aOffset + aOffset
+                                             "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
+                                                                     + aOffset
                                         });
         modelUpdated();
     }

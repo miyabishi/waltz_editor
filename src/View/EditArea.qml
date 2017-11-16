@@ -136,13 +136,11 @@ Rectangle{
                                                 "positionX": positionX,
                                                 "positionY": positionY,
                                                 "noteWidth": noteWidth,
-                                                "portamentoStartX": portamentoStartX,
-                                                "portamentoStartY": portamentoStartY,
-                                                "portamentoStartXOffset":0,
                                                 "vibratoAmplitude": vibratoAmplitude,
                                                 "vibratoFrequency": vibratoFrequency,
                                                 "vibratoLength": vibratoLength});
 
+                        portamento_start_point_list_model_container.append(noteId, portamentoStartX, portamentoStartY);
                         portamento_end_point_list_model_container.append(noteId, portamentoEndX, portamentoEndY);
                     }
                 }
@@ -161,8 +159,6 @@ Rectangle{
                             pEditing_: false
                             positionX: positionX
                             positionY: positionY
-                            portamentoStartX: portamentoStartX
-                            portamentoStartY: portamentoStartY
                             vibratoAmplitude: vibratoAmplitude
                             vibratoFrequency: vibratoFrequency
                             vibratoLength: vibratoLength
@@ -176,8 +172,6 @@ Rectangle{
                         item.positionX = positionX;
                         item.positionY = positionY;
                         item.visible = true;
-                        item.portamentoStartX = portamentoStartX;
-                        item.portamentoStartY = portamentoStartY;
                         item.vibratoLength = vibratoLength;
                         item.vibratoAmplitude = vibratoAmplitude;
                         item.vibratoFrequency = vibratoFrequency;
