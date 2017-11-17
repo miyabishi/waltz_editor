@@ -7,7 +7,6 @@ Item {
 
     function append(aX, aY)
     {
-        // TODO
         var note = note_list_model_container.findNoteWithPitchChangingPoint(aX)
         if (note === 0) return;
 
@@ -39,7 +38,7 @@ Item {
         var pitchChangingPointY = note.positionY - aPitchChangingPointY;
 
 
-        pitchChangingPointListModel.set(findIndexByPitchChangingPointId(pitchChangingPointId),
+        pitchChangingPointListModel.set(findIndexByPitchChangingPointId(aPitchChangingPointId),
                                         {
                                                "pitchChangingPointId": aPitchChangingPointId,
                                                "noteId": noteId,
@@ -52,6 +51,11 @@ Item {
     function find(aPitchChangingPointId)
     {
         return pitchChangingPointListModel.get(findIndexByPitchChangingPointId(aPitchChangingPointId));
+    }
+
+    function findByIndex(aIndex)
+    {
+        return pitchChangingPointListModel.get(aIndex);
     }
 
     function findPoint(aPitchChangingPointId)
@@ -69,5 +73,10 @@ Item {
             return index;
         }
         return;
+    }
+
+    function count()
+    {
+        return pitchChangingPointListModel.count
     }
 }

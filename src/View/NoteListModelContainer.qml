@@ -32,7 +32,10 @@ Item {
         for (var index = 0; index < noteListModel.count; ++index)
         {
             var note = noteListModel.get(index);
-            if (note.portamentoStartX < aX && aX < note.portamentoEndX)
+            var portamentoStartPoint = portamento_start_point_list_model_container.findByNoteId(note.noteId);
+            var portamentoEndPoint = portamento_end_point_list_model_container.findByNoteId(note.noteId);
+
+            if (portamentoStartPoint.portamentoStartX < aX && aX < portamentoEndPoint.portamentoEndX)
             {
                 return note;
             }

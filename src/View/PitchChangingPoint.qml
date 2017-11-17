@@ -8,7 +8,6 @@ Rectangle{
     border.color: "#ccddff"
     border.width: 1
 
-    /*
 
     Drag.hotSpot.x: width/2
     Drag.hotSpot.y: height/2
@@ -48,5 +47,4 @@ Rectangle{
             root.Drag.drop();
         }
     }
-    */
 }

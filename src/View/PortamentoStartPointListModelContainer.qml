@@ -27,7 +27,7 @@ Item {
     function updateBasePoint(aPortamentoStartPointId, aPortamentoStartX, aPortamentoStartY)
     {
         var portamentoStartPoint = find(aPortamentoStartPointId);
-        var noteId = portamentoEndoPoint.noteId;
+        var noteId = portamentoStartPoint.noteId;
         var portamentoStartX = portamentoStartPoint.portamentoStartX;
         var portamentoStartY = portamentoStartPoint.portamentoStartY;
 

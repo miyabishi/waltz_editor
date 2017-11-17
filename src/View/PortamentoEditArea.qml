@@ -246,11 +246,12 @@ Rectangle {
                     var preControlX = portamentoStartX + 30
                     var preControlY = portamentoStartY;
 
-/*
-                    for (var index = 0; index < pitchChangingPointCount; ++index)
+
+                    for (var index = 0; index < pitch_changing_point_list_model_containter.count(); ++index)
                     {
-                        var changingPointX = note.pitchChangingPointXArray[index];
-                        var changingPointY = note.pitchChangingPointYArray[index];
+                        var changingPoint = pitch_changing_point_list_model_containter.findByIndex();
+                        var changingPointX = note.positionX + changingPoint.pitchChangingPointX;
+                        var changingPointY = note.positionY + changingPoint.pitchChangingPointY;
 
                         aCtx.bezierCurveTo(preControlX,         preControlY,
                                            changingPointX - 10, changingPointY,
@@ -259,7 +260,6 @@ Rectangle {
                         preControlX = changingPointX + 10;
                         preControlY = changingPointY;
                     }
-*/
 
                     aCtx.bezierCurveTo(preControlX, preControlY,
                                        portamentoEndX - 30, portamentoEndY,
