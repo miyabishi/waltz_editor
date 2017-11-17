@@ -28,14 +28,12 @@ Item {
     {
         var portamentoEndPoint = find(aPortamentoEndPointId);
         var noteId = portamentoEndPoint.noteId;
-        var portamentoEndX = portamentoEndPoint.portamentoEndX;
-        var portamentoEndY = portamentoEndPoint.portamentoEndY;
         portamentoEndPointListModel.set(findIndexByPortamentoEndPointId(aPortamentoEndPointId),
                                         {
                                             "portamentoEndPointId": aPortamentoEndPointId,
                                              "noteId": noteId,
-                                             "portamentoEndX": portamentoEndX,
-                                             "portamentoEndY": portamentoEndY,
+                                             "portamentoEndX": aPortamentoEndX,
+                                             "portamentoEndY": aPortamentoEndY,
                                              "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
                                         });
 

@@ -26,17 +26,17 @@ Item {
 
     function updateBasePoint(aPortamentoStartPointId, aPortamentoStartX, aPortamentoStartY)
     {
+        console.log("update start point");
+
         var portamentoStartPoint = find(aPortamentoStartPointId);
         var noteId = portamentoStartPoint.noteId;
-        var portamentoStartX = portamentoStartPoint.portamentoStartX;
-        var portamentoStartY = portamentoStartPoint.portamentoStartY;
 
         portamentoStartPointListModel.set(findIndexByPortamentoStartPointId(aPortamentoStartPointId),
                                         {
                                             "portamentoStartPointId": aPortamentoStartPointId,
                                             "noteId": noteId,
-                                            "portamentoStartX": portamentoStartX,
-                                            "portamentoStartY": portamentoStartY,
+                                            "portamentoStartX": aPortamentoStartX,
+                                            "portamentoStartY": aPortamentoStartY,
                                             "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
                                         });
         modelUpdated();
