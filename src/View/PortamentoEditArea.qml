@@ -89,6 +89,13 @@ Rectangle {
                 }
             }
 
+            Connections{
+                target: pitch_changing_point_list_model_containter
+                onModelUpdated:{
+                    pitch_curve_canvas.requestPaint();
+                }
+            }
+
 
             Repeater{
                 model: edit_area.numberOfRow
@@ -249,7 +256,9 @@ Rectangle {
 
                     for (var index = 0; index < pitch_changing_point_list_model_containter.count(); ++index)
                     {
-                        var changingPoint = pitch_changing_point_list_model_containter.findByIndex();
+                        var changingPoint = pitch_changing_point_list_model_containter.findByIndex(index);
+                        if (changingPoint.noteId !== note.noteId) continue;
+
                         var changingPointX = note.positionX + changingPoint.pitchChangingPointX;
                         var changingPointY = note.positionY + changingPoint.pitchChangingPointY;
 
@@ -264,7 +273,7 @@ Rectangle {
                     aCtx.bezierCurveTo(preControlX, preControlY,
                                        portamentoEndX - 30, portamentoEndY,
                                        portamentoEndX, portamentoEndY);
-                    aCtx.lineWidth = 2;
+                    aCtx.lineWidth = 1;
                     aCtx.stroke();
                     aCtx.restore();
                 }

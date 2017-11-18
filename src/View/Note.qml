@@ -33,21 +33,13 @@ Rectangle{
 
     function updateNote()
     {
-        portamentoStartX = x - 30;
-        portamentoStartY = note_list_model_container.yPositionOfPreviousNote(root.x - 1,
-                                                                             root.y + root.height / 2,
-                                                                             root.pNoteId_);
-
         positionX = x;
         positionY = y;
-
         note_list_model_container.updateNote({"noteId": pNoteId_,
                                               "noteText": pNoteText_,
                                               "positionX":positionX,
                                               "positionY":positionY,
                                               "noteWidth": width,
-                                              "portamentoStartX": portamentoStartX,
-                                              "portamentoStartY": portamentoStartY,
                                               "vibratoAmplitude": vibratoAmplitude,
                                               "vibratoFrequency": vibratoFrequency,
                                               "vibratoLength": vibratoLength});

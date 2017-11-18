@@ -1,12 +1,13 @@
 import QtQuick 2.0
 
-Rectangle{
+//Rectangle{
+Item{
     id: root
-    color: "#ffffff"
+//    color: "#ffffff"
     property int pitchChangingPointId
 
-    border.color: "#ccddff"
-    border.width: 1
+//    border.color: "#ccddff"
+//    border.width: 1
 
 
     Drag.hotSpot.x: width/2
@@ -19,6 +20,14 @@ Rectangle{
         }
     }
 
+    Connections{
+        target: note_list_model_container
+        onModelUpdated:{
+            reload();
+        }
+    }
+
+
     function reload()
     {
         var pitchChangingPoint = pitch_changing_point_list_model_containter.findPoint(pitchChangingPointId);
@@ -28,9 +37,30 @@ Rectangle{
 
     function updatePitchChangingPoint()
     {
-        pitch_changing_point_list_model_containter.update(pitchChangingPointId,
-                                                          root.x + root.width / 2,
-                                                          root.y + root.height / 2);
+        pitch_changing_point_list_model_containter.updatePitchChangingPoint(pitchChangingPointId,
+                                                                            root.x + root.width / 2,
+                                                                            root.y + root.height / 2);
+    }
+
+    Canvas{
+        id: pitch_changing_point_canvas
+        anchors.fill: parent
+        onPaint: {
+            var ctx = pitch_changing_point_canvas.getContext('2d');
+            ctx.clearRect(0,0,pitch_changing_point_canvas.width, pitch_changing_point_canvas.height);
+
+            ctx.strokeStyle = Qt.rgba(.6,.8,1);
+            ctx.beginPath();
+            ctx.moveTo(0,0);
+            ctx.lineTo(width, 0);
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.lineTo(0,0);
+
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+        }
     }
 
     MouseArea{
@@ -42,9 +72,19 @@ Rectangle{
         drag.target: root
         drag.axis: Drag.XAndYAxis
 
+        onPositionChanged: {
+            updatePitchChangingPoint();
+        }
+
         onReleased: {
             updatePitchChangingPoint();
             root.Drag.drop();
+        }
+        onClicked: {
+            if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+            {
+                pitch_changing_point_list_model_containter.removePitchChangingPoint(pitchChangingPointId);
+            }
         }
     }
 }

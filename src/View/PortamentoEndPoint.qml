@@ -1,13 +1,10 @@
 import QtQuick 2.0
 
-Rectangle{
+Item{
     id: root
-    color: "#ffffff"
     property int noteId
     property int portamentoEndPointId
 
-    border.color: "#ccddff"
-    border.width: 1
     Drag.hotSpot.x: width/2
     Drag.hotSpot.y: height/2
     Drag.active: true
@@ -45,9 +42,32 @@ Rectangle{
         root.y = portamentoEndPoint.portamentoEndY - root.height / 2;
     }
 
-    function updatePortamentoEndPoint(aOffset)
+    function updatePortamentoEndPoint()
     {
-        portamento_end_point_list_model_container.updateOffset(portamentoEndPointId, aOffset);
+        var portamentoEndPoint = portamento_end_point_list_model_container.find(portamentoEndPointId);
+        portamento_end_point_list_model_container.updateOffset(portamentoEndPointId,
+                                                               root.x + root.width / 2 - portamentoEndPoint.portamentoEndX);
+    }
+
+    Canvas{
+        id: pitch_changing_point_canvas
+        anchors.fill: parent
+        onPaint: {
+            var ctx = pitch_changing_point_canvas.getContext('2d');
+            ctx.clearRect(0,0,pitch_changing_point_canvas.width, pitch_changing_point_canvas.height);
+
+            ctx.strokeStyle = Qt.rgba(.6,.8,1);
+            ctx.beginPath();
+            ctx.moveTo(0,0);
+            ctx.lineTo(width, 0);
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.lineTo(0,0);
+
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.restore();
+        }
     }
 
     MouseArea{
@@ -59,13 +79,12 @@ Rectangle{
         drag.target: root
         drag.axis: Drag.XAxis
 
-        onPressed: {
-            clickedPointX = root.x
+        onPositionChanged: {
+            updatePortamentoEndPoint();
         }
 
         onReleased: {
-            var dropX = root.x;
-            updatePortamentoEndPoint(dropX - clickedPointX);
+            updatePortamentoEndPoint();
             root.Drag.drop();
         }
     }

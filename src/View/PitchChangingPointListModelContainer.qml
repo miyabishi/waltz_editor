@@ -27,15 +27,20 @@ Item {
         return pitchChangingPointListModel;
     }
 
-    function update(aPitchChangingPointId, aPitchChangingPointX, aPitchChangingPointY)
+    function removePitchChangingPoint(aPitchChangingPointId)
+    {
+        pitchChangingPointListModel.remove(findIndexByPitchChangingPointId(aPitchChangingPointId));
+    }
+
+    function updatePitchChangingPoint(aPitchChangingPointId, aPitchChangingPointX, aPitchChangingPointY)
     {
         var pitchChangingPoint = find(aPitchChangingPointId);
         var noteId = pitchChangingPoint.noteId;
         var note = note_list_model_container.find(noteId);
         if (note === 0) return;
 
-        var pitchChangingPointX = note.positionX - aPitchChangingPointX;
-        var pitchChangingPointY = note.positionY - aPitchChangingPointY;
+        var pitchChangingPointX = aPitchChangingPointX - note.positionX;
+        var pitchChangingPointY = aPitchChangingPointY - note.positionY;
 
 
         pitchChangingPointListModel.set(findIndexByPitchChangingPointId(aPitchChangingPointId),
@@ -61,7 +66,10 @@ Item {
     function findPoint(aPitchChangingPointId)
     {
         var pitchChangingPoint = find(aPitchChangingPointId);
-        return Qt.point(pitchChangingPoint.pitchChangingPointX, pitchChangingPoint.pitchChangingPointY);
+        var note = note_list_model_container.find(pitchChangingPoint.noteId)
+
+        return Qt.point(note.positionX + pitchChangingPoint.pitchChangingPointX,
+                        note.positionY + pitchChangingPoint.pitchChangingPointY);
     }
 
     function findIndexByPitchChangingPointId(aPitchChangingPointId)

@@ -52,8 +52,7 @@ Item {
                                             "noteId": portamentoStartPoint.noteId,
                                             "portamentoStartX": portamentoStartPoint.portamentoStartX,
                                             "portamentoStartY": portamentoStartPoint.portamentoStartY,
-                                            "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
-                                                                      + aOffset
+                                            "portamentoStartXOffset": aOffset
                                         });
         modelUpdated();
     }
