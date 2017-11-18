@@ -32,7 +32,7 @@ Item{
                                                                                  root.pNoteId_);
         portamento_start_point_list_model_container.updateBasePoint(portamentoStartPointId,
                                                                     portamentoStartX,
-                                                                    portamentoStartY)
+                                                                    portamentoStartY);
     }
 
     function reload()

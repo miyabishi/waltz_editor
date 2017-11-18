@@ -4,6 +4,7 @@ Item {
     id: root
     property ListModel noteListModel: ListModel{}
     signal modelUpdated()
+    signal noteRemoved(real aNoteId)
 
     function append(aObject)
     {
@@ -43,9 +44,27 @@ Item {
         return 0;
     }
 
+    function containsNote(aNoteId)
+    {
+        for(var index = 0; index < noteListModel.count; ++index)
+        {
+            var note = noteListModel.get(index);
+            if (note.noteId !== aNoteId) continue;
+            return true;
+        }
+        return false;
+    }
+
     function find(aNoteId)
     {
         return noteListModel.get(findIndexByNoteId(aNoteId));
+    }
+
+    function removeNote(aNoteId)
+    {
+        noteListModel.remove(findIndexByNoteId(aNoteId));
+        noteRemoved(aNoteId);
+        modelUpdated();
     }
 
     function findByIndex(aIndex)

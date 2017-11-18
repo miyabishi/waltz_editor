@@ -6,6 +6,24 @@ Item {
     property int portamentoEndPointIdCounter: 0;
     signal modelUpdated()
 
+    Connections{
+        target: note_list_model_container
+        onNoteRemoved:{
+            removeIfPortamentoEndPointHasNoteId(aNoteId)
+        }
+    }
+
+    function removeIfPortamentoEndPointHasNoteId(aNoteId)
+    {
+        for(var index = 0; index < portamentoEndPointListModel.count; ++index)
+        {
+            var portamentoEndPoint = portamentoEndPointListModel.get(index);
+            if (portamentoEndPoint.noteId !== aNoteId) continue;
+            portamentoEndPointListModel.remove(index);
+            return;
+        }
+    }
+
     function append(aNoteId, aX, aY)
     {
         portamentoEndPointListModel.append({
@@ -52,6 +70,11 @@ Item {
                                              "portamentoEndXOffset": aOffset
                                         });
         modelUpdated();
+    }
+
+    function removePortamentoEndPoint(aPortamentoEndPointId)
+    {
+        portamentoEndPointListModel.remove(findIndexByPortamentoEndPointId(aPortamentoEndPointId))
     }
 
     function findByNoteId(aNoteId)

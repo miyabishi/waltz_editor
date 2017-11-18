@@ -1,18 +1,13 @@
 import QtQuick 2.0
 
-//Rectangle{
 Item{
     id: root
-//    color: "#ffffff"
     property int pitchChangingPointId
-
-//    border.color: "#ccddff"
-//    border.width: 1
-
 
     Drag.hotSpot.x: width/2
     Drag.hotSpot.y: height/2
     Drag.active: true
+
     Connections{
         target: pitch_changing_point_list_model_containter
         onModelUpdated:{
@@ -26,7 +21,6 @@ Item{
             reload();
         }
     }
-
 
     function reload()
     {
@@ -80,6 +74,7 @@ Item{
             updatePitchChangingPoint();
             root.Drag.drop();
         }
+
         onClicked: {
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {

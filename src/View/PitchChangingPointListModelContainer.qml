@@ -5,6 +5,23 @@ Item {
     property ListModel pitchChangingPointListModel: ListModel{}
     signal modelUpdated()
 
+    Connections{
+        target: note_list_model_container
+        onNoteRemoved:{
+            removeIfChangingPointHasNoteId(aNoteId);
+        }
+    }
+
+    function removeIfChangingPointHasNoteId(aNoteId)
+    {
+        for(var index = 0; index < pitchChangingPointListModel.count; ++index)
+        {
+            var pitchChangingPoint = pitchChangingPointListModel.get(index);
+            if (pitchChangingPoint.noteId !== aNoteId) continue;
+            pitchChangingPointListModel.remove(index);
+        }
+    }
+
     function append(aX, aY)
     {
         var note = note_list_model_container.findNoteWithPitchChangingPoint(aX)

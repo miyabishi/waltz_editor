@@ -5,7 +5,23 @@ Item {
     property ListModel portamentoStartPointListModel: ListModel{}
     property int portamentoStartPointIdCounter: 0
     signal modelUpdated()
+    Connections{
+        target: note_list_model_container
+        onNoteRemoved:{
+            removeIfPortamentoStartPointHasNoteId(aNoteId)
+        }
+    }
 
+    function removeIfPortamentoStartPointHasNoteId(aNoteId)
+    {
+        for(var index = 0; index < portamentoStartPointListModel.count; ++index)
+        {
+            var portamentoStartPoint = portamentoStartPointListModel.get(index);
+            if (portamentoStartPoint.noteId !== aNoteId) continue;
+            portamentoStartPointListModel.remove(index);
+            return;
+        }
+    }
     function append(aNoteId, aX, aY)
     {
         portamentoStartPointListModel.append({
@@ -26,8 +42,6 @@ Item {
 
     function updateBasePoint(aPortamentoStartPointId, aPortamentoStartX, aPortamentoStartY)
     {
-        console.log("update start point");
-
         var portamentoStartPoint = find(aPortamentoStartPointId);
         var noteId = portamentoStartPoint.noteId;
 
@@ -55,6 +69,11 @@ Item {
                                             "portamentoStartXOffset": aOffset
                                         });
         modelUpdated();
+    }
+
+    function removePortamentoStartPoint(aPortamentoStartPointId)
+    {
+        portamentoStartPointListModel.remove(findIndexByPortamentoStartPointId(aPortamentoStartPointId));
     }
 
     function find(aPortamentoStartPointId)

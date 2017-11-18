@@ -7,11 +7,9 @@ Rectangle{
     property string pNoteText_
     property bool pEditing_: false
     property bool pStretching_: false
+
     property int positionX
     property int positionY
-
-    property int portamentoStartX
-    property int portamentoStartY
 
     property double vibratoAmplitude
     property double vibratoFrequency
@@ -84,6 +82,13 @@ Rectangle{
         onReleased: {
             root.updateNote()
             root.Drag.drop()
+        }
+
+        onClicked: {
+            if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+            {
+                note_list_model_container.removeNote(pNoteId_);
+            }
         }
 
         onDoubleClicked: {
