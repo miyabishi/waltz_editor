@@ -231,11 +231,14 @@ Rectangle {
                 }
 
 
+                // TODO リファクタリング　コードが汚い
                 function drawPortamento(aCtx, aIndex)
                 {
                     aCtx.strokeStyle = Qt.rgba(.6,.8,1);
                     aCtx.beginPath();
                     var note = note_list_model_container.findByIndex(aIndex);
+                    var pitchChangingPointListModel =
+                            pitch_changing_point_list_model_containter.createChangingPointListModelByNoteId(note.noteId);
 
                     var portamentoStartPoint = portamento_start_point_list_model_container.findByNoteId(note.noteId);
                     var portamentoStartX = portamentoStartPoint.portamentoStartX
@@ -250,29 +253,57 @@ Rectangle {
                     aCtx.moveTo(portamentoStartX,
                                 portamentoStartY);
 
-                    var preControlX = portamentoStartX + 30
+                    var preControlX = 0;
                     var preControlY = portamentoStartY;
 
 
-                    for (var index = 0; index < pitch_changing_point_list_model_containter.count(); ++index)
+                    if (pitchChangingPointListModel.count === 0)
                     {
-                        var changingPoint = pitch_changing_point_list_model_containter.findByIndex(index);
+                        preControlX = portamentoStartX +
+                                      (portamentoEndX - portamentoStartX) / 2;
+                    }
+                    else
+                    {
+                        var firstChangingPoint = pitchChangingPointListModel.get(0);
+                        var firstChangingPointX = note.positionX + firstChangingPoint.pitchChangingPointX;
+                        preControlX = portamentoStartX +
+                                      (firstChangingPointX - portamentoStartX) / 2;
+                    }
+
+                    for (var index = 0; index < pitchChangingPointListModel.count; ++index)
+                    {
+                        var changingPoint = pitchChangingPointListModel.get(index);
                         if (changingPoint.noteId !== note.noteId) continue;
 
                         var changingPointX = note.positionX + changingPoint.pitchChangingPointX;
                         var changingPointY = note.positionY + changingPoint.pitchChangingPointY;
 
                         aCtx.bezierCurveTo(preControlX,         preControlY,
-                                           changingPointX - 10, changingPointY,
+                                           preControlX, changingPointY,
                                            changingPointX,      changingPointY);
 
-                        preControlX = changingPointX + 10;
+                        if (index + 1  === pitchChangingPointListModel.count)
+                        {
+                            preControlX = changingPointX +
+                                          (portamentoEndX - changingPointX) / 2;
+                        }
+                        else
+                        {
+                            var nextChangingPoint = pitchChangingPointListModel.get(index + 1);
+                            var nextChangingPointX = note.positionX + nextChangingPoint.pitchChangingPointX;
+                            preControlX = changingPointX +
+                                          (nextChangingPointX - changingPointX) / 2;
+                        }
+
+
                         preControlY = changingPointY;
                     }
 
                     aCtx.bezierCurveTo(preControlX, preControlY,
-                                       portamentoEndX - 30, portamentoEndY,
+                                       preControlX, portamentoEndY,
                                        portamentoEndX, portamentoEndY);
+
+                    pitchChangingPointListModel.destroy();
                     aCtx.lineWidth = 1;
                     aCtx.stroke();
                     aCtx.restore();

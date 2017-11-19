@@ -39,6 +39,18 @@ Item {
         modelUpdated();
     }
 
+    function createChangingPointListModelByNoteId(aNoteId)
+    {
+        var model = Qt.createQmlObject('import QtQuick 2.0; ListModel {}', root);
+        for(var index = 0; index < pitchChangingPointListModel.count; ++index)
+        {
+            var pitchChangingPoint = pitchChangingPointListModel.get(index);
+            if (pitchChangingPoint.noteId !== aNoteId) continue;
+            model.append(pitchChangingPoint);
+        }
+        return model;
+    }
+
     function getModel()
     {
         return pitchChangingPointListModel;
