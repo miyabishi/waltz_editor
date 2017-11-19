@@ -30,13 +30,39 @@ Item {
         var pitchChangingPointX = aX - note.positionX;
         var pitchChangingPointY = aY - note.positionY;
 
-        pitchChangingPointListModel.append({
-                                               "pitchChangingPointId": MainWindowModel.publishPitchChangingPointId(),
-                                               "noteId": note.noteId,
-                                               "pitchChangingPointX": pitchChangingPointX,
-                                               "pitchChangingPointY": pitchChangingPointY
-                                           });
+        var item = {
+                       "pitchChangingPointId": MainWindowModel.publishPitchChangingPointId(),
+                       "noteId": note.noteId,
+                       "pitchChangingPointX": pitchChangingPointX,
+                       "pitchChangingPointY": pitchChangingPointY
+        };
+
+        var insertIndex = insertPosition(item);
+        pitchChangingPointListModel.insert(insertIndex, item);
         modelUpdated();
+    }
+
+    function lessThan(aItemA, aItemB)
+    {
+        console.log("conpare(" + aItemA.pitchChangingPointX + ":" + aItemB.pitchChangingPointX + ")");
+        console.log("result:" + (aItemA.pitchChangingPointX < aItemB.pitchChangingPointX));
+        return aItemA.pitchChangingPointX <= aItemB.pitchChangingPointX;
+    }
+
+    function insertPosition(aInsertItem)
+    {
+        if (pitchChangingPointListModel.count === 0) return 0;
+        for(var index = 1; index < pitchChangingPointListModel.count; ++index)
+        {
+            var item = pitchChangingPointListModel.get(index);
+            if (lessThan(item, aInsertItem)) continue;
+            var ret = index - 1;
+            console.log("insert position is " + ret );
+            return ret;
+
+        }
+        console.log("insert end position");
+        return pitchChangingPointListModel.count - 1;
     }
 
     function createChangingPointListModelByNoteId(aNoteId)
@@ -71,14 +97,25 @@ Item {
         var pitchChangingPointX = aPitchChangingPointX - note.positionX;
         var pitchChangingPointY = aPitchChangingPointY - note.positionY;
 
+        var item = {
+            "pitchChangingPointId": aPitchChangingPointId,
+            "noteId": noteId,
+            "pitchChangingPointX": pitchChangingPointX,
+            "pitchChangingPointY": pitchChangingPointY
+        };
 
-        pitchChangingPointListModel.set(findIndexByPitchChangingPointId(aPitchChangingPointId),
-                                        {
-                                               "pitchChangingPointId": aPitchChangingPointId,
-                                               "noteId": noteId,
-                                               "pitchChangingPointX": pitchChangingPointX,
-                                               "pitchChangingPointY": pitchChangingPointY
-                                        });
+        var insertIndex = insertPosition(item);
+        var currentIndex = findIndexByPitchChangingPointId(aPitchChangingPointId)
+
+        if (currentIndex !== insertIndex)
+        {
+            pitchChangingPointListModel.move(currentIndex, insertIndex, 1);
+            pitchChangingPointListModel.set(findIndexByPitchChangingPointId(aPitchChangingPointId), item);
+        }
+        else
+        {
+            pitchChangingPointListModel.set(currentIndex, item);
+        }
         modelUpdated();
     }
 
