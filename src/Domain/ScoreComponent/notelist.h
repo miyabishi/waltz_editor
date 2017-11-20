@@ -32,6 +32,7 @@ namespace waltz
                 NotePointer find(const NoteId& aNoteId) const;
                 NotePointer findPreviousNote(const NoteRectPositionPointer aNoteRect,
                                              const NoteId aCurrentNoteId = NoteId(-1)) const;
+                void clearNote();
 
             private:
                 QList<NotePointer> mNoteList_;

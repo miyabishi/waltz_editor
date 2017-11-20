@@ -11,7 +11,6 @@
 #include "src/Domain/LibraryComponent/description.h"
 
 #include "src/Domain/ScoreComponent/noteinformation.h"
-#include "src/Domain/ScoreComponent/portamentoinformation.h"
 #include "src/Domain/ScoreComponent/vibratoinformation.h"
 
 using namespace waltz::common::Communicator;
@@ -98,19 +97,11 @@ int MainWindowModel::supportOctave() const
     return mEditAreaInformation_->supportOctave();
 }
 
-// 　リファクタ対象：引数が多い
 void MainWindowModel::appendNote(int aNoteId,
                                  const QString& aNoteText,
                                  int aPositionX,
                                  int aPositionY,
-                                 int aNoteWidth,
-                                 int aPortamentoStartX,
-                                 int aPortamentoStartY,
-                                 int aPortamentoEndX,
-                                 int aPortamentoEndY,
-                                 double aVibratoAmplitude,
-                                 int aVibratoFrecuency,
-                                 int aVibratoLength)
+                                 int aNoteWidth)
 {
     NoteInformationPointer noteInformation(
                 new NoteInformation(aNoteId,
@@ -120,19 +111,7 @@ void MainWindowModel::appendNote(int aNoteId,
                                     aNoteWidth,
                                     mEditAreaInformation_->rowHeight()));
 
-    PortamentoInformationPointer portamentoInformation(
-                new PortamentoInformation(aPortamentoStartX,
-                                          aPortamentoStartY,
-                                          QList<int>(),
-                                          QList<int>(),
-                                          aPortamentoEndX,
-                                          aPortamentoEndY));
-
-    VibratoInformationPointer vibratoInformation(new VibratoInformation(aVibratoAmplitude,
-                                                                        aVibratoFrecuency,
-                                                                        aVibratoLength));
-
-    NotePointer note(noteInformation->note(portamentoInformation, vibratoInformation));
+    NotePointer note(noteInformation->note());
 
     mScore_->appendNote(note);
     mClient_->sendMessage(Message(COMMAND_ID_PLAY_NOTE,
@@ -141,6 +120,17 @@ void MainWindowModel::appendNote(int aNoteId,
                                                      mEditAreaInformation_)));
     scoreUpdated();
 }
+
+void MainWindowModel::appendPitchChangingPoint(int aX, int aY)
+{
+
+}
+
+void MainWindowModel::clearScore()
+{
+    mScore_->clearNote();
+}
+
 
 QString MainWindowModel::vocalFileExtention() const
 {
@@ -194,60 +184,6 @@ void MainWindowModel::play()
 
 }
 
-void MainWindowModel::updateNote(int aNoteId,
-                            const QString& aNoteText,
-                            int aPositionX,
-                            int aPositionY,
-                            int aNoteWidth,
-                            int aPortamentoStartX,
-                            int aPortamentoStartY,
-                            QList<int> aPitchChangingPointXArray,
-                            QList<int> aPitchChangingPointYArray,
-                            int aPortamentoEndX,
-                            int aPortamentoEndY,
-                            double aVibratoAmplitude,
-                            int aVibratoFrecuency,
-                            int aVibratoLength)
-{
-
-    NoteInformationPointer noteInformation(
-                new NoteInformation(aNoteId,
-                                    aNoteText,
-                                    aPositionX,
-                                    aPositionY,
-                                    aNoteWidth,
-                                    mEditAreaInformation_->rowHeight()));
-
-    PortamentoInformationPointer portamentoInformation(
-                new PortamentoInformation(aPortamentoStartX,
-                                          aPortamentoStartY,
-                                          aPitchChangingPointXArray,
-                                          aPitchChangingPointYArray,
-                                          aPortamentoEndX,
-                                          aPortamentoEndY));
-
-    VibratoInformationPointer vibratoInformation(new VibratoInformation(aVibratoAmplitude,
-                                                                        aVibratoFrecuency,
-                                                                        aVibratoLength));
-
-    NotePointer note(noteInformation->note(portamentoInformation, vibratoInformation));
-    mScore_->updateNote(note);
-    scoreUpdated();
-}
-
-
-int MainWindowModel::publishNoteId()
-{
-    mNoteIdCounter_++;
-    return mNoteIdCounter_;
-}
-
-int MainWindowModel::publishPitchChangingPointId()
-{
-    mPitchChangingPointIdCounter_++;
-    return mPitchChangingPointIdCounter_;
-}
-
 int MainWindowModel::findNotePositionX(int aIndex) const
 {
     return mScore_->noteList()->at(aIndex)->xPosition();
@@ -272,8 +208,6 @@ MainWindowModel::MainWindowModel(QObject *aParent)
           waltz::editor::LibraryComponent::CharacterImage(),
           waltz::editor::LibraryComponent::Description(),
           waltz::editor::LibraryComponent::LibraryName())
-    , mNoteIdCounter_(0)
-    , mPitchChangingPointIdCounter_(0)
 {
 }
 

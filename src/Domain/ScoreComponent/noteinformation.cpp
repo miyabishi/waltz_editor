@@ -17,14 +17,11 @@ NoteInformation::NoteInformation(int            aNoteId,
 {
 }
 
-NotePointer NoteInformation::note(const PortamentoInformationPointer aPortamentoInforamtion,
-                                  const VibratoInformationPointer aVibratoInformation) const
+NotePointer NoteInformation::note() const
 {
     return NotePointer(new Note(noteId(),
                                 syllable(),
-                                noteRect(),
-                                aPortamentoInforamtion->portamento(),
-                                aVibratoInformation->vibrato()));
+                                noteRect()));
 }
 
 NoteId NoteInformation::noteId() const

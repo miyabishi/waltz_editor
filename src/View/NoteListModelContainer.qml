@@ -3,12 +3,31 @@ import QtQuick 2.0
 Item {
     id: root
     property ListModel noteListModel: ListModel{}
+    property int noteIdCounter: 0
     signal modelUpdated()
     signal noteRemoved(real aNoteId)
 
-    function append(aObject)
+    function append(noteText, positionX, positionY, noteWidth)
     {
-        noteListModel.append(aObject)
+        noteListModel.append({
+                                 "noteId": noteIdCounter,
+                                 "noteText": noteText,
+                                 "positionX": positionX,
+                                 "positionY": positionY,
+                                 "noteWidth": noteWidth
+                             });
+
+        var portamentoStartX = positionX - 30;
+        var portamentoStartY = note_list_model_container.yPositionOfPreviousNote(positionX - 1,
+                                                                                 positionY + edit_area.rowHeight / 2,
+                                                                                 noteIdCounter);
+        var portamentoEndX = positionX + 30;
+        var portamentoEndY = positionY + edit_area.rowHeight / 2;
+
+        portamento_start_point_list_model_container.append(noteIdCounter, portamentoStartX, portamentoStartY);
+        portamento_end_point_list_model_container.append(noteIdCounter, portamentoEndX, portamentoEndY);
+
+        noteIdCounter++;
         modelUpdated();
     }
 
@@ -36,7 +55,8 @@ Item {
             var portamentoStartPoint = portamento_start_point_list_model_container.findByNoteId(note.noteId);
             var portamentoEndPoint = portamento_end_point_list_model_container.findByNoteId(note.noteId);
 
-            if (portamentoStartPoint.portamentoStartX < aX && aX < portamentoEndPoint.portamentoEndX)
+            if ((portamentoStartPoint.portamentoStartX + portamentoStartPoint.portamentoStartXOffset) < aX
+                    && aX < (portamentoEndPoint.portamentoEndX + portamentoEndPoint.portamentoEndXOffset))
             {
                 return note;
             }
@@ -120,5 +140,20 @@ Item {
        }
 
        return previousNoteIndex;
+   }
+
+   function reflect()
+   {
+       MainWindowModel.clearScore();
+       for(var index = 0; index < noteListModel.count; ++index)
+       {
+           var note = noteListModel.get(index);
+           MainWindowModel.appendNote(note.noteId,
+                                      note.noteText,
+                                      note.positionX,
+                                      note.positionY,
+                                      note.noteWidth);
+       }
+
    }
 }

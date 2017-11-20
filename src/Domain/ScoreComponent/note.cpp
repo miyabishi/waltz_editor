@@ -7,14 +7,10 @@ using namespace waltz::common::Commands;
 
 Note::Note(const NoteId&           aNoteId,
            const Syllable&         aSyllable,
-           const NoteRectPointer   aNoteRect,
-           const PortamentoPointer aPortament,
-           const VibratoPointer    aVibrato)
+           const NoteRectPointer   aNoteRect)
     : mNoteId_(aNoteId)
     , mSyllable_(aSyllable)
     , mNoteRect_(aNoteRect)
-    , mPortamento_(aPortament)
-    , mVibrato_(aVibrato)
 {
 }
 
@@ -36,30 +32,6 @@ bool Note::xPositionIs(int aX)
 int Note::xPosition() const
 {
     return mNoteRect_->x();
-}
-
-PortamentoPointer Note::portamento() const
-{
-    return mPortamento_;
-}
-
-VibratoPointer Note::vibrato() const
-{
-    return mVibrato_;
-}
-
-VibratoStartPointPointer Note::vibratoStartPoint() const
-{
-    return VibratoStartPointPointer(
-                new VibratoStartPoint(mNoteRect_->rightX() - mVibrato_->length()->value(),
-                                      mNoteRect_->center()->y()));
-}
-
-VibratoEndPointPointer Note::vibratoEndPoint() const
-{
-    return VibratoEndPointPointer(
-                new VibratoEndPoint(mNoteRect_->rightX(),
-                                    mNoteRect_->center()->y()));
 }
 
 Parameters Note::toParameters(Beat aBeat,

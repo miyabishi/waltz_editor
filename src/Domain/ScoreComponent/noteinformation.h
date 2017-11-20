@@ -6,7 +6,6 @@
 #include "syllable.h"
 #include "noterect.h"
 #include "note.h"
-#include "portamentoinformation.h"
 #include "vibratoinformation.h"
 
 namespace waltz
@@ -24,15 +23,12 @@ namespace waltz
                                 int            aPositionY,
                                 int            aNoteWidth,
                                 int            aNoteHeight);
-                NotePointer note(const PortamentoInformationPointer aPortamento,
-                                 const VibratoInformationPointer aVibrato) const;
+                NotePointer note() const;
 
             private:
                 NoteId noteId() const;
                 Syllable syllable() const;
                 NoteRectPointer noteRect() const;
-
-
 
             private:
                 int     mNoteId_;

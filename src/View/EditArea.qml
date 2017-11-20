@@ -117,31 +117,15 @@ Rectangle{
                         var positionX = piano_roll_edit_area.calcX(mouseX);
                         var positionY = piano_roll_edit_area.calcY(mouseY);
                         var noteText = "あ";
-                        var noteId = MainWindowModel.publishNoteId();
-
                         var noteWidth = edit_area.columnWidth;
-                        var portamentoStartX = positionX - 30;
-                        var portamentoStartY = note_list_model_container.yPositionOfPreviousNote(positionX - 1,
-                                                                                                 positionY + edit_area.rowHeight / 2,
-                                                                                                 noteId);
-                        var portamentoEndX = positionX + 30;
-                        var portamentoEndY = positionY + edit_area.rowHeight / 2;
 
-                        var vibratoAmplitude = 1.2;
-                        var vibratoFrequency = 4;
-                        var vibratoLength = edit_area.columnWidth /2 ;
 
-                        note_list_model_container.append({"noteId": noteId,
-                                                "noteText": noteText,
-                                                "positionX": positionX,
-                                                "positionY": positionY,
-                                                "noteWidth": noteWidth,
-                                                "vibratoAmplitude": vibratoAmplitude,
-                                                "vibratoFrequency": vibratoFrequency,
-                                                "vibratoLength": vibratoLength});
 
-                        portamento_start_point_list_model_container.append(noteId, portamentoStartX, portamentoStartY);
-                        portamento_end_point_list_model_container.append(noteId, portamentoEndX, portamentoEndY);
+                        //var vibratoAmplitude = 1.2;
+                        //var vibratoFrequency = 4;
+                        //var vibratoLength = edit_area.columnWidth /2 ;
+
+                        note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                     }
                 }
             }
@@ -159,9 +143,9 @@ Rectangle{
                             pEditing_: false
                             positionX: positionX
                             positionY: positionY
-                            vibratoAmplitude: vibratoAmplitude
-                            vibratoFrequency: vibratoFrequency
-                            vibratoLength: vibratoLength
+                            //vibratoAmplitude: vibratoAmplitude
+                            //vibratoFrequency: vibratoFrequency
+                            //vibratoLength: vibratoLength
                             width: noteWidth
                             height: edit_area.rowHeight
                         }
@@ -172,9 +156,9 @@ Rectangle{
                         item.positionX = positionX;
                         item.positionY = positionY;
                         item.visible = true;
-                        item.vibratoLength = vibratoLength;
-                        item.vibratoAmplitude = vibratoAmplitude;
-                        item.vibratoFrequency = vibratoFrequency;
+                        //item.vibratoLength = vibratoLength;
+                        //item.vibratoAmplitude = vibratoAmplitude;
+                        //item.vibratoFrequency = vibratoFrequency;
                     }
                 }
             }

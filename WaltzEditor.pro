@@ -27,19 +27,15 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/noterect.cpp \
     src/Domain/ScoreComponent/noterectposition.cpp \
     src/Domain/ScoreComponent/noterectwidth.cpp \
-    src/Domain/ScoreComponent/portamento.cpp \
     src/Domain/ScoreComponent/vibrato.cpp \
     src/Domain/ScoreComponent/vibratoamplitude.cpp \
     src/Domain/ScoreComponent/vibratofrequency.cpp \
     src/Domain/ScoreComponent/pitchchangingpoint.cpp \
     src/Domain/ScoreComponent/pitchcurve.cpp \
-    src/Domain/ScoreComponent/pitchcurvestartpoint.cpp \
-    src/Domain/ScoreComponent/pitchcurveendpoint.cpp \
     src/Domain/ScoreComponent/point.cpp \
     src/Domain/ScoreComponent/noterectheight.cpp \
     src/Domain/ScoreComponent/vibratolength.cpp \
     src/Domain/ScoreComponent/noteinformation.cpp \
-    src/Domain/ScoreComponent/portamentoinformation.cpp \
     src/Domain/ScoreComponent/vibratoinformation.cpp \
     src/Domain/ScoreComponent/vibratostartpoint.cpp \
     src/Domain/ScoreComponent/vibratoendpoint.cpp
@@ -94,19 +90,15 @@ HEADERS += \
     src/Domain/ScoreComponent/noterect.h \
     src/Domain/ScoreComponent/noterectposition.h \
     src/Domain/ScoreComponent/noterectwidth.h \
-    src/Domain/ScoreComponent/portamento.h \
     src/Domain/ScoreComponent/vibrato.h \
     src/Domain/ScoreComponent/vibratoamplitude.h \
     src/Domain/ScoreComponent/vibratofrequency.h \
     src/Domain/ScoreComponent/pitchchangingpoint.h \
     src/Domain/ScoreComponent/pitchcurve.h \
-    src/Domain/ScoreComponent/pitchcurvestartpoint.h \
-    src/Domain/ScoreComponent/pitchcurveendpoint.h \
     src/Domain/ScoreComponent/point.h \
     src/Domain/ScoreComponent/noterectheight.h \
     src/Domain/ScoreComponent/vibratolength.h \
     src/Domain/ScoreComponent/noteinformation.h \
-    src/Domain/ScoreComponent/portamentoinformation.h \
     src/Domain/ScoreComponent/vibratoinformation.h \
     src/Domain/ScoreComponent/vibratostartpoint.h \
     src/Domain/ScoreComponent/vibratoendpoint.h

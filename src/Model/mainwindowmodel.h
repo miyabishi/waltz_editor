@@ -39,35 +39,13 @@ namespace waltz
                                             const QString& aNoteText,
                                             int aPositionX,
                                             int aPositionY,
-                                            int noteWidth,
-                                            int aPortamentStartX,
-                                            int aPortamentStartY,
-                                            int aPortamentEndX,
-                                            int aPortamentEndY,
-                                            double aVibratoAmplitude,
-                                            int aVibratoFrequency,
-                                            int aVibratoLength);
-
-                Q_INVOKABLE void updateNote(int aNoteId,
-                                            const QString& aNoteText,
-                                            int aPositionX,
-                                            int aPositionY,
-                                            int noteWidth,
-                                            int aPortamentStartX,
-                                            int aPortamentStartY,
-                                            QList<int> aPitchChangingPointX,
-                                            QList<int> aPitchChangingPointY,
-                                            int aPortamentEndX,
-                                            int aPortamentEndY,
-                                            double aVibratoAmplitude,
-                                            int aVibratoFrequency,
-                                            int aVibratoLength);
+                                            int noteWidth);
+                Q_INVOKABLE void appendPitchChangingPoint(int aX, int aY);
 
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;
                 Q_INVOKABLE int beatParent() const;
-                Q_INVOKABLE int publishNoteId();
-                Q_INVOKABLE int publishPitchChangingPointId();
+                Q_INVOKABLE void clearScore();
 
                 // for EditArea
                 Q_INVOKABLE int editAreaWidth() const;
@@ -104,8 +82,6 @@ namespace waltz
                 EditAreaInformationPointer           mEditAreaInformation_;
                 Communicator::Client*                mClient_;
                 LibraryComponent::LibraryInformation mLibraryInformation_;
-                int                                  mNoteIdCounter_;
-                int                                  mPitchChangingPointIdCounter_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

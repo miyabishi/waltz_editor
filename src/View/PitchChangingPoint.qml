@@ -59,14 +59,41 @@ Item{
 
     MouseArea{
         id: pitch_changing_point_mouse_area
-        property int clickedPointX
+        property int rangeMin
+        property int rangeMax
 
         anchors.fill: root
         acceptedButtons: Qt.LeftButton
         drag.target: root
         drag.axis: Drag.XAndYAxis
 
+        onPressed: {
+            /*
+            var pitchChangingPoint = pitch_changing_point_list_model_containter.findPoint(pitchChangingPointId);
+
+            var portamentoStartPoint = portamento_start_point_list_model_container.findByNoteId(pitchChangingPoint.noteId);
+            var portamentoEndPoint = portamento_end_point_list_model_container.findByNoteId(pitchChangingPoint.noteId);
+
+            rangeMax = portamentoEndPoint.portamentoEndX
+                                       + portamentoEndPoint.portamentoEndXOffset
+                                       - root.width/2;
+            rangeMin = portamentoStartPoint.portamentoStartX
+                    + portamentoStartPoint.portamentoStartXOffset
+                    - root.width/2;
+                    */
+        }
         onPositionChanged: {
+            /*
+            if ( root.x > (rangeMax))
+            {
+                root.x = rangeMax;
+            }
+
+            if ( root.x < (rangeMin))
+            {
+                root.x = rangeMin;
+            }*/
+
             updatePitchChangingPoint();
         }
 

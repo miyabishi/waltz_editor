@@ -75,6 +75,11 @@ NotePointer NoteList::find(const NoteId& aNoteId) const
     return NotePointer();
 }
 
+void NoteList::clearNote()
+{
+    mNoteList_.clear();
+}
+
 NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition,
                                        const NoteId aCurrentNoteId) const
 {

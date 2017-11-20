@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
     id: root
     property ListModel pitchChangingPointListModel: ListModel{}
+    property int pitchChangingPointIdCounter: 0
     signal modelUpdated()
 
     Connections{
@@ -31,12 +32,13 @@ Item {
         var pitchChangingPointY = aY - note.positionY;
 
         var item = {
-                       "pitchChangingPointId": MainWindowModel.publishPitchChangingPointId(),
+                       "pitchChangingPointId": pitchChangingPointIdCounter,
                        "noteId": note.noteId,
                        "pitchChangingPointX": pitchChangingPointX,
                        "pitchChangingPointY": pitchChangingPointY
         };
 
+        pitchChangingPointIdCounter++;
         var insertIndex = insertPosition(item);
         pitchChangingPointListModel.insert(insertIndex, item);
         modelUpdated();
@@ -61,7 +63,6 @@ Item {
             return ret;
 
         }
-        console.log("insert end position");
         return pitchChangingPointListModel.count - 1;
     }
 

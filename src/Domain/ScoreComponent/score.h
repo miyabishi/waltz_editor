@@ -8,6 +8,8 @@
 #include "tempo.h"
 #include "beat.h"
 #include "note.h"
+#include "pitchcurve.h"
+#include "pitchchangingpoint.h"
 
 namespace waltz
 {
@@ -21,7 +23,7 @@ namespace waltz
                 Score();
 
                 void setTempo(int aTempo);
-                Tempo  tempo() const;
+                Tempo tempo() const;
                 void setBeatParent(int aBeatParent);
                 void setBeatChild(int aBeatChild);
                 Beat beat();
@@ -29,14 +31,16 @@ namespace waltz
                 int beatParent();
                 NoteListPointer noteList() const;
                 void appendNote(const NotePointer aNote);
-                void updateNote(const NotePointer aNote);
+                void appendPitchChangingPoint(const PitchChangingPointPointer aPitchChangingPoint);
                 waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;
+                void clearNote();
 
             private:
                 Tempo mTempo_;
                 Beat  mBeat_;
                 NoteListPointer mNoteList_;
+                PitchCurvePointer mPitchCurve_;
             };
             typedef std::shared_ptr<Score> ScorePointer;
         }

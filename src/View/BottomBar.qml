@@ -64,6 +64,7 @@ Rectangle{
                 onClicked: {
                     if (play_button.pIsActive_)
                     {
+                        note_list_model_container.reflect();
                         MainWindowModel.play();
                         play_button.pIsActive_ = false
                     }

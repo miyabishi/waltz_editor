@@ -4,8 +4,6 @@
 #include <QSharedPointer>
 #include <QList>
 #include "pitchchangingpoint.h"
-#include "pitchcurvestartpoint.h"
-#include "pitchcurveendpoint.h"
 
 namespace waltz
 {
@@ -17,19 +15,11 @@ namespace waltz
             class PitchCurve
             {
             public:
-                PitchCurve(const PitchCurveStartPointPointer aStartPoint,
-                           const PitchCurveEndPointPointer aEndPoint);
-
-                PitchCurveStartPointPointer startPoint() const;
+                PitchCurve();
                 void appendChangingPoint(PitchChangingPointPointer aChangingPoint);
-                int changingPointCount() const;
-                PitchChangingPointPointer changingPoint(int aIndex) const;
-                PitchCurveEndPointPointer endPoint() const;
 
             private:
-                PitchCurveStartPointPointer      mStartPoint_;
                 QList<PitchChangingPointPointer> mPitchCurve_;
-                PitchCurveEndPointPointer        mEndPoint_;
 
             private:
                 PitchCurve(const PitchCurve& aOther);

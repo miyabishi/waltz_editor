@@ -11,9 +11,9 @@ Rectangle{
     property int positionX
     property int positionY
 
-    property double vibratoAmplitude
-    property double vibratoFrequency
-    property int vibratoLength
+//    property double vibratoAmplitude
+//    property double vibratoFrequency
+//    property int vibratoLength
 
     border.color: "#000000"
     border.width: 1
@@ -37,10 +37,7 @@ Rectangle{
                                               "noteText": pNoteText_,
                                               "positionX":positionX,
                                               "positionY":positionY,
-                                              "noteWidth": width,
-                                              "vibratoAmplitude": vibratoAmplitude,
-                                              "vibratoFrequency": vibratoFrequency,
-                                              "vibratoLength": vibratoLength});
+                                              "noteWidth": width});
 
     }
 
@@ -58,9 +55,9 @@ Rectangle{
         root.positionY = note.positionY;
         root.width = note.noteWidth;
 
-        root.vibratoAmplitude = note.vibratoAmplitude;
-        root.vibratoFrequency = note.vibratoFrequency;
-        root.vibratoLength = note.vibratoLength;
+        //root.vibratoAmplitude = note.vibratoAmplitude;
+        //root.vibratoFrequency = note.vibratoFrequency;
+        //root.vibratoLength = note.vibratoLength;
     }
 
     Text{

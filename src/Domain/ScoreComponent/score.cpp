@@ -7,6 +7,7 @@ Score::Score()
  : mTempo_(Tempo(120))
  , mBeat_(Beat(4,4))
  , mNoteList_(new NoteList())
+ , mPitchCurve_(new PitchCurve())
 {
 }
 
@@ -57,14 +58,19 @@ void Score::appendNote(const NotePointer aNote)
     mNoteList_->append(aNote);
 }
 
-void Score::updateNote(const NotePointer aNote)
+void Score::appendPitchChangingPoint(const PitchChangingPointPointer aPitchChangingPoint)
 {
-    mNoteList_->updateNote(aNote);
+    mPitchCurve_->appendChangingPoint(aPitchChangingPoint);
 }
 
 int Score::noteCount() const
 {
     return mNoteList_->count();
+}
+
+void Score::clearNote()
+{
+    mNoteList_->clearNote();
 }
 
 NoteListPointer Score::noteList() const
