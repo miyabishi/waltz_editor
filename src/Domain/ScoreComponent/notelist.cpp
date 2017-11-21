@@ -1,5 +1,3 @@
-#include <QDebug>
-
 #include "notelist.h"
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;

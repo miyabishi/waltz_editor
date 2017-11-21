@@ -2,6 +2,7 @@
 #define PITCHCHANGINGPOINT_H
 
 #include <QSharedPointer>
+#include <waltz_common/parameters.h>
 #include "point.h"
 
 namespace waltz
@@ -15,7 +16,7 @@ namespace waltz
             public:
                 PitchChangingPoint(const int aX,
                                    const int aY);
-
+                common::Commands::Parameters toParameters(aBeat, aTempo, aEditAreaInformation);
             private:
                 PitchChangingPoint(const PitchChangingPoint& aOther);
                 PitchChangingPoint& operator=(const PitchChangingPoint& aOther);
