@@ -1,9 +1,9 @@
+
 #include "pitchchangingpoint.h"
 
 using namespace waltz::common::Commands;
 using namespace waltz::editor::ScoreComponent;
-
-
+using namespace waltz::editor::model;
 
 PitchChangingPoint::PitchChangingPoint(const int aX,
                                        const int aY)
@@ -11,14 +11,15 @@ PitchChangingPoint::PitchChangingPoint(const int aX,
 {
 }
 
-Parameters PitchChangingPoint::toParameters(aBeat, aTempo, aEditAreaInformation)
+Parameters PitchChangingPoint::toParameters(Beat aBeat,
+                                            Tempo aTempo,
+                                            EditAreaInformationPointer aEditAreaInformation)
 {
     Parameters parameters;
 
     parameters.append(Parameter("Time", aEditAreaInformation->calculateNoteStartTime(x(),
                                                                                      aBeat,
                                                                                      aTempo)));
-    //TODO
     parameters.append(Parameter("Frequency", ""));
     return parameters;
 }

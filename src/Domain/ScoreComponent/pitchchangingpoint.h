@@ -3,6 +3,9 @@
 
 #include <QSharedPointer>
 #include <waltz_common/parameters.h>
+#include "src/Model/editareainformation.h"
+#include "beat.h"
+#include "tempo.h"
 #include "point.h"
 
 namespace waltz
@@ -16,7 +19,9 @@ namespace waltz
             public:
                 PitchChangingPoint(const int aX,
                                    const int aY);
-                common::Commands::Parameters toParameters(aBeat, aTempo, aEditAreaInformation);
+                common::Commands::Parameters toParameters(Beat aBeat,
+                                                          Tempo aTempo,
+                                                          model::EditAreaInformationPointer aEditAreaInformation);
             private:
                 PitchChangingPoint(const PitchChangingPoint& aOther);
                 PitchChangingPoint& operator=(const PitchChangingPoint& aOther);

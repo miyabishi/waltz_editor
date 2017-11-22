@@ -3,6 +3,7 @@
 
 #include <QSharedPointer>
 #include "src/Domain/ScoreComponent/notestarttime.h"
+#include "src/Domain/ScoreComponent/pitchchangingpointtime.h"
 #include "src/Domain/ScoreComponent/pitch.h"
 #include "src/Domain/ScoreComponent/beat.h"
 #include "src/Domain/ScoreComponent/tempo.h"
@@ -33,6 +34,10 @@ namespace waltz
                 ScoreComponent::NoteStartTimePointer calculateNoteStartTime(int aX,
                                                                             ScoreComponent::Beat aBeat,
                                                                             ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::PitchChangingPointTimePointer calculatePitchChangningPointTime(int aX,
+                                                                                               ScoreComponent::Beat aBeat,
+                                                                                               ScoreComponent::Tempo aTempo) const;
+
                 ScoreComponent::NoteLengthPointer calculateNoteLength(int aWidth,
                                                                       ScoreComponent::Beat aBeat,
                                                                       ScoreComponent::Tempo aTempo) const;

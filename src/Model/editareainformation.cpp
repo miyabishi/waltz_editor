@@ -77,6 +77,14 @@ NoteLengthPointer EditAreaInformation::calculateNoteLength(int aWidth,
     return NoteLengthPointer(new NoteLength(calculateSec(aWidth, aBeat, aTempo)));
 }
 
+
+ScoreComponent::PitchChangingPointTimePointer EditAreaInformation::calculatePitchChangningPointTime(int aX,
+                                                                                                    ScoreComponent::Beat aBeat,
+                                                                                                    ScoreComponent::Tempo aTempo) const
+{
+    return PitchChangingPointTimePointer(new PitchChangingPointTime(calculateSec(aX, aBeat, aTempo)));
+}
+
 PitchPointer EditAreaInformation::calculatePitch(int aY) const
 {
     int octave = calculateBelongingOctave(aY);
