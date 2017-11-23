@@ -1,7 +1,6 @@
 #ifndef NOTEID_H
 #define NOTEID_H
 
-#include <QDebug>
 namespace waltz
 {
     namespace editor

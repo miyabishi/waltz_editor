@@ -3,7 +3,7 @@
 
 using namespace waltz::editor::ScoreComponent;
 
-PitchChangingPointFrequency::PitchChangingPointFrequency()
+PitchChangingPointFrequency::PitchChangingPointFrequency(double aValue)
+    : mValue_(aValue)
 {
-
 }

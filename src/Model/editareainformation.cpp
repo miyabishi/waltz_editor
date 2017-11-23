@@ -7,6 +7,7 @@ namespace
 {
     const int BASE_COLUMN_WIDTH = 150;
     const int BASE_ROW_HEIGHT   = 20;
+    const double BASE_PITCH_A = 440.0;
 }
 
 EditAreaInformation::EditAreaInformation(double aWidthRate,
@@ -77,12 +78,20 @@ NoteLengthPointer EditAreaInformation::calculateNoteLength(int aWidth,
     return NoteLengthPointer(new NoteLength(calculateSec(aWidth, aBeat, aTempo)));
 }
 
-
-ScoreComponent::PitchChangingPointTimePointer EditAreaInformation::calculatePitchChangningPointTime(int aX,
-                                                                                                    ScoreComponent::Beat aBeat,
-                                                                                                    ScoreComponent::Tempo aTempo) const
+PitchChangingPointTimePointer EditAreaInformation::calculatePitchChangningPointTime(int aX,
+                                                                                    Beat aBeat,
+                                                                                    Tempo aTempo) const
 {
     return PitchChangingPointTimePointer(new PitchChangingPointTime(calculateSec(aX, aBeat, aTempo)));
+}
+
+PitchChangingPointFrequencyPointer calculatePitchChangningPointFrequency(int aY) const
+{
+
+    // TODO 計算式を考えること
+    double frequency = BASE_PITCH_A * qPow(2,double((int)(mValue_) + (mOctave_.value() - 7) * 12 ) /12.0);
+
+    return PitchChangingPointFrequencyPointer(new PitchChangingPointFrequency(frequency));
 }
 
 PitchPointer EditAreaInformation::calculatePitch(int aY) const
@@ -118,6 +127,10 @@ double EditAreaInformation::calculateSec(int aX,
 int EditAreaInformation::barWidth(Beat aBeat) const
 {
     return columnWidth(aBeat.parentValue()) * aBeat.childValue();
+}
+int EditAreaInformation::editAreaHeight() const
+{
+    return mSupportOctarve_ * octaveHeight();
 }
 
 double EditAreaInformation::timeLengthOfABar(Tempo aTempo) const

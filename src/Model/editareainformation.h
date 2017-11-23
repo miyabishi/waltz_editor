@@ -4,6 +4,7 @@
 #include <QSharedPointer>
 #include "src/Domain/ScoreComponent/notestarttime.h"
 #include "src/Domain/ScoreComponent/pitchchangingpointtime.h"
+#include "src/Domain/ScoreComponent/pitchchangingpointfrequency.h"
 #include "src/Domain/ScoreComponent/pitch.h"
 #include "src/Domain/ScoreComponent/beat.h"
 #include "src/Domain/ScoreComponent/tempo.h"
@@ -37,7 +38,7 @@ namespace waltz
                 ScoreComponent::PitchChangingPointTimePointer calculatePitchChangningPointTime(int aX,
                                                                                                ScoreComponent::Beat aBeat,
                                                                                                ScoreComponent::Tempo aTempo) const;
-
+                ScoreComponent::PitchChangingPointFrequencyPointer calculatePitchChangningPointFrequency(int aY) const;
                 ScoreComponent::NoteLengthPointer calculateNoteLength(int aWidth,
                                                                       ScoreComponent::Beat aBeat,
                                                                       ScoreComponent::Tempo aTempo) const;
@@ -52,6 +53,7 @@ namespace waltz
                 waltz::editor::ScoreComponent::Tone calculateTone(int aY) const;
                 int barWidth(waltz::editor::ScoreComponent::Beat aBeat) const;
                 double timeLengthOfABar(waltz::editor::ScoreComponent::Tempo aTempo) const;
+                int editAreaHeight() const;
 
             private:
                 double mWidthRate_;

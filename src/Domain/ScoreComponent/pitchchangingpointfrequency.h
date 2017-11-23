@@ -12,7 +12,10 @@ namespace waltz
             class PitchChangingPointFrequency
             {
             public:
-                PitchChangingPointFrequency();
+                PitchChangingPointFrequency(double aValue);
+
+            private:
+                double mValue_;
 
             private:
                 PitchChangingPointFrequency(const PitchChangingPointFrequency& aOther);

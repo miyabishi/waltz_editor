@@ -2,6 +2,7 @@
 #define PITCHCHANGINGPOINTTIME_H
 
 #include <QSharedPointer>
+#include <waltz_common/parameter.h>
 
 namespace waltz
 {
@@ -14,6 +15,9 @@ namespace waltz
             {
             public:
                 PitchChangingPointTime(double aValue);
+
+            public:
+                common::Commands::Parameter toParameter();
 
             private:
                 double mValue_;
