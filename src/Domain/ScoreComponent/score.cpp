@@ -50,6 +50,7 @@ Parameters Score::toParameters(const model::EditAreaInformationPointer aEditArea
 {
     Parameters parameters;
     parameters.append(mNoteList_->toParameter(mBeat_, mTempo_, aEditAreaInformation));
+    parameters.append(mPitchCurve_->toParameter(mBeat_, mTempo_, aEditAreaInformation));
     return parameters;
 }
 

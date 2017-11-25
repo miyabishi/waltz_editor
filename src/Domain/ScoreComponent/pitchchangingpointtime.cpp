@@ -20,6 +20,6 @@ PitchChangingPointTime::~PitchChangingPointTime()
 
 Parameter PitchChangingPointTime::toParameter()
 {
-    return Parameter(PARAMETER_NAME, mValue_);
+    return mParameter_;
 }
 

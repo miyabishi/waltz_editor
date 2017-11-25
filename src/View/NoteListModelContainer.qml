@@ -144,7 +144,6 @@ Item {
 
    function reflect()
    {
-       MainWindowModel.clearScore();
        for(var index = 0; index < noteListModel.count; ++index)
        {
            var note = noteListModel.get(index);
@@ -154,6 +153,5 @@ Item {
                                       note.positionY,
                                       note.noteWidth);
        }
-
    }
 }

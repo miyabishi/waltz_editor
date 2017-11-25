@@ -24,7 +24,9 @@ void PitchCurve::appendChangingPoint(PitchChangingPointPointer aChangingPoint)
     mPitchCurve_.append(aChangingPoint);
 }
 
-Parameter PitchCurve::toParameter(mBeat_, mTempo_, aEditAreaInformation)
+Parameter PitchCurve::toParameter(Beat aBeat,
+                                  Tempo aTempo,
+                                  waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const
 {
     QJsonArray pitchChangingPointListArray;
     QList<PitchChangingPointPointer> pitchCurve = mPitchCurve_;

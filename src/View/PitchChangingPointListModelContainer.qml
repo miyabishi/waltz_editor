@@ -13,6 +13,18 @@ Item {
         }
     }
 
+    function reflect()
+    {
+        for(var index = 0; index < pitchChangingPointListModel.count; ++index)
+        {
+            var pitchChangingPoint = pitchChangingPointListModel.get(index);
+            var note = note_list_model_container.find(pitchChangingPoint.noteId);
+            MainWindowModel.appendPitchChangingPoint(
+                        note.positionX + pitchChangingPoint.pitchChangingPointX,
+                        note.positionY + pitchChangingPoint.pitchChangingPointY);
+        }
+    }
+
     function removeIfChangingPointHasNoteId(aNoteId)
     {
         for(var index = 0; index < pitchChangingPointListModel.count; ++index)

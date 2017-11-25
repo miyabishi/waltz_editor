@@ -1,3 +1,5 @@
+#include <QDebug>
+#include <qmath.h>
 #include "editareainformation.h"
 
 using namespace waltz::editor::model;

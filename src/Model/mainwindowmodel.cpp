@@ -124,7 +124,7 @@ void MainWindowModel::appendNote(int aNoteId,
 void MainWindowModel::appendPitchChangingPoint(int aX, int aY)
 {
     mScore_->appendPitchChangingPoint(
-                PitchChangingPoint(new PitchChangingPoint(aX, aY)));
+                PitchChangingPointPointer(new PitchChangingPoint(aX, aY)));
 }
 
 void MainWindowModel::clearScore()

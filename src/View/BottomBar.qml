@@ -64,7 +64,12 @@ Rectangle{
                 onClicked: {
                     if (play_button.pIsActive_)
                     {
+                        MainWindowModel.clearScore();
                         note_list_model_container.reflect();
+                        pitch_changing_point_list_model_containter.reflect();
+                        portamento_start_point_list_model_container.reflect();
+                        portamento_end_point_list_model_container.reflect();
+
                         MainWindowModel.play();
                         play_button.pIsActive_ = false
                     }

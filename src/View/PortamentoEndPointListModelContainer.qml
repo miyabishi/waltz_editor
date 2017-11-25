@@ -58,6 +58,17 @@ Item {
         modelUpdated();
     }
 
+    function reflect()
+    {
+        for(var index = 0; index < portamentoEndPointListModel.count; ++index)
+        {
+            var portamentoEndPoint = portamentoEndPointListModel.get(index);
+            MainWindowModel.appendPitchChangingPoint(
+                                    portamentoEndPoint.portamentoEndX + portamentoEndPoint.portamentoEndXOffset,
+                                    portamentoEndPoint.portamentoEndY);
+        }
+    }
+
     function updateOffset(aPortamentoEndPointId,aOffset)
     {
         var portamentoEndPoint = find(aPortamentoEndPointId);

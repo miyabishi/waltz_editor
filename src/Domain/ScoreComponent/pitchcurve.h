@@ -4,6 +4,9 @@
 #include <QSharedPointer>
 #include <QList>
 #include <waltz_common/parameter.h>
+#include "beat.h"
+#include "tempo.h"
+#include "src/Model/editareainformation.h"
 #include "pitchchangingpoint.h"
 
 namespace waltz
@@ -18,8 +21,10 @@ namespace waltz
             public:
                 PitchCurve();
                 void appendChangingPoint(PitchChangingPointPointer aChangingPoint);
-                common::Commands::Parameter toParameter(mBeat_, mTempo_, aEditAreaInformation);
-
+                waltz::common::Commands::Parameter toParameter(
+                        Beat aBeat,
+                        Tempo aTempo,
+                        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
             private:
                 QList<PitchChangingPointPointer> mPitchCurve_;
 

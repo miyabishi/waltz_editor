@@ -22,6 +22,18 @@ Item {
             return;
         }
     }
+
+    function reflect()
+    {
+        for(var index = 0; index < portamentoStartPointListModel.count; ++index)
+        {
+            var portamentoStartPoint = portamentoStartPointListModel.get(index);
+            MainWindowModel.appendPitchChangingPoint(
+                                    portamentoStartPoint.portamentoStartX + portamentoStartPoint.portamentoStartXOffset,
+                                    portamentoStartPoint.portamentoStartY);
+        }
+    }
+
     function append(aNoteId, aX, aY)
     {
         portamentoStartPointListModel.append({
