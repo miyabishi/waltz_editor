@@ -5,6 +5,7 @@ using namespace waltz::editor::ScoreComponent;
 
 namespace
 {
+    const int NUMBER_OF_TONE_IN_OCTAVE = 12;
     const int BASE_COLUMN_WIDTH = 150;
     const int BASE_ROW_HEIGHT   = 20;
     const double BASE_PITCH_A = 440.0;
@@ -85,11 +86,11 @@ PitchChangingPointTimePointer EditAreaInformation::calculatePitchChangningPointT
     return PitchChangingPointTimePointer(new PitchChangingPointTime(calculateSec(aX, aBeat, aTempo)));
 }
 
-PitchChangingPointFrequencyPointer calculatePitchChangningPointFrequency(int aY) const
+PitchChangingPointFrequencyPointer EditAreaInformation::calculatePitchChangningPointFrequency(int aY) const
 {
-
-    // TODO 計算式を考えること
-    double frequency = BASE_PITCH_A * qPow(2,double((int)(mValue_) + (mOctave_.value() - 7) * 12 ) /12.0);
+    int baseAPosition = rowHeight() * (NUMBER_OF_TONE_IN_OCTAVE * 4 - (TONE_A - TONE_C + 1));
+    double frequency = BASE_PITCH_A * qPow(2, (double)(aY - baseAPosition)/editAreaHeight());
+    qDebug() << Q_FUNC_INFO << __LINE__ << "create pitch changing point frequency:" << frequency;
 
     return PitchChangingPointFrequencyPointer(new PitchChangingPointFrequency(frequency));
 }

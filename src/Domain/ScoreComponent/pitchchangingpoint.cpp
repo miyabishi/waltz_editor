@@ -16,11 +16,11 @@ Parameters PitchChangingPoint::toParameters(Beat aBeat,
                                             EditAreaInformationPointer aEditAreaInformation)
 {
     Parameters parameters;
+    parameters.append(aEditAreaInformation->calculatePitchChangningPointTime(x(),
+                                                                             aBeat,
+                                                                             aTempo)->toParameter());
+    parameters.append(aEditAreaInformation->calculatePitchChangningPointFrequency(y())->toParameter());
 
-    parameters.append(Parameter("Time", aEditAreaInformation->calculateNoteStartTime(x(),
-                                                                                     aBeat,
-                                                                                     aTempo)));
-    parameters.append(Parameter("Frequency", ""));
     return parameters;
 }
 

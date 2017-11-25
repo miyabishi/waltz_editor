@@ -2,6 +2,7 @@
 #define PITCHCHANGINGPOINTFREQUENCY_H
 
 #include <QSharedPointer>
+#include <waltz_common/parameter.h>
 
 namespace waltz
 {
@@ -13,9 +14,14 @@ namespace waltz
             {
             public:
                 PitchChangingPointFrequency(double aValue);
+                ~PitchChangingPointFrequency();
+
+
+            public:
+                common::Commands::Parameter toParameter() const;
 
             private:
-                double mValue_;
+                common::Commands::Parameter& mParameter_;
 
             private:
                 PitchChangingPointFrequency(const PitchChangingPointFrequency& aOther);

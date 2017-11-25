@@ -15,12 +15,13 @@ namespace waltz
             {
             public:
                 PitchChangingPointTime(double aValue);
+                ~PitchChangingPointTime();
 
             public:
                 common::Commands::Parameter toParameter();
 
             private:
-                double mValue_;
+                common::Commands::Parameter& mParameter_;
 
             private:
                 PitchChangingPointTime(const PitchChangingPointTime& aOther);

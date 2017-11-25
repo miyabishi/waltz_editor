@@ -3,13 +3,23 @@
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::common::Commands;
 
-PitchChangingPointTime::PitchChangingPointTime(const double aValue)
-    : mValue_(aValue)
+namespace
 {
+    const QString PARAMETER_NAME = "Time";
+}
+
+PitchChangingPointTime::PitchChangingPointTime(const double aValue)
+    : mParameter_( * (new Parameter(PARAMETER_NAME, aValue)))
+{
+}
+
+PitchChangingPointTime::~PitchChangingPointTime()
+{
+    delete &mParameter_;
 }
 
 Parameter PitchChangingPointTime::toParameter()
 {
-    return Parameter("Time", mValue_);
+    return Parameter(PARAMETER_NAME, mValue_);
 }
 
