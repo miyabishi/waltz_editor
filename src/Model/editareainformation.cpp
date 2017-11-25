@@ -8,9 +8,9 @@ using namespace waltz::editor::ScoreComponent;
 namespace
 {
     const int NUMBER_OF_TONE_IN_OCTAVE = 12;
-    const int BASE_COLUMN_WIDTH = 150;
-    const int BASE_ROW_HEIGHT   = 20;
-    const double BASE_PITCH_A = 440.0;
+    const int BASE_COLUMN_WIDTH        = 150;
+    const int BASE_ROW_HEIGHT          = 20;
+    const double BASE_PITCH_A          = 440.0;
 }
 
 EditAreaInformation::EditAreaInformation(double aWidthRate,
@@ -90,9 +90,9 @@ PitchChangingPointTimePointer EditAreaInformation::calculatePitchChangningPointT
 
 PitchChangingPointFrequencyPointer EditAreaInformation::calculatePitchChangningPointFrequency(int aY) const
 {
-    int baseAPosition = rowHeight() * (NUMBER_OF_TONE_IN_OCTAVE * 4 - (TONE_A - TONE_C + 1));
-    double frequency = BASE_PITCH_A * qPow(2, (double)(aY - baseAPosition)/editAreaHeight());
-    qDebug() << Q_FUNC_INFO << __LINE__ << "create pitch changing point frequency:" << frequency;
+    int baseAPositionOffset = octaveHeight() * 4  + rowHeight() * 7 + rowHeight() / 2;
+    int yPosition = editAreaHeight() - aY;
+    double frequency = BASE_PITCH_A * qPow(2, (double)(yPosition - baseAPositionOffset) / octaveHeight());
 
     return PitchChangingPointFrequencyPointer(new PitchChangingPointFrequency(frequency));
 }
@@ -131,6 +131,7 @@ int EditAreaInformation::barWidth(Beat aBeat) const
 {
     return columnWidth(aBeat.parentValue()) * aBeat.childValue();
 }
+
 int EditAreaInformation::editAreaHeight() const
 {
     return mSupportOctarve_ * octaveHeight();
