@@ -41,6 +41,22 @@ Item {
             color: edit_area.isBlackKey(index) ? "#333333" : "#eeeeee"
             border.color: "#333333"
             visible: y > -(root.y + edit_area.rowHeight * 2)
+            Text{
+                function keyboardText(aIndex)
+                {
+                    if (aIndex%12 === 11)
+                    {
+                        return "C" + Math.round(7 - aIndex/12);
+                    }
+                    return "";
+                }
+                text: keyboardText(index);
+                x: root.width - 30;
+                y: edit_area.rowHeight / 2;
+                font.pointSize: 11
+                font.family: "Meiryo"
+
+            }
         }
     }
 }
