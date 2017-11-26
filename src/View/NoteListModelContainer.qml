@@ -4,7 +4,7 @@ Item {
     id: root
     property ListModel noteListModel: ListModel{}
     property int noteIdCounter: 0
-    signal modelUpdated()
+    signal modelUpdated(real aNoteId);
     signal noteRemoved(real aNoteId)
 
     function append(noteText, positionX, positionY, noteWidth)
@@ -27,19 +27,19 @@ Item {
         portamento_start_point_list_model_container.append(noteIdCounter, portamentoStartX, portamentoStartY);
         portamento_end_point_list_model_container.append(noteIdCounter, portamentoEndX, portamentoEndY);
 
+        modelUpdated(noteIdCounter);
         noteIdCounter++;
-        modelUpdated();
     }
 
     function emitModelUpdated()
     {
-        modelUpdated();
+        modelUpdated(-1);
     }
 
     function updateNote(aObject)
     {
         noteListModel.set(findIndexByNoteId(aObject.noteId), aObject);
-        modelUpdated();
+        modelUpdated(aObject.noteId);
     }
 
     function getModel()
@@ -84,7 +84,7 @@ Item {
     {
         noteListModel.remove(findIndexByNoteId(aNoteId));
         noteRemoved(aNoteId);
-        modelUpdated();
+        modelUpdated(aNoteId);
     }
 
     function findByIndex(aIndex)

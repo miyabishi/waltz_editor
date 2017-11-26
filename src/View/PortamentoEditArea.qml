@@ -72,6 +72,7 @@ Rectangle {
                 target: note_list_model_container
                 onModelUpdated:{
                     pitch_curve_canvas.requestPaint();
+                    scrollToNote(aNoteId);
                 }
             }
 
@@ -96,6 +97,10 @@ Rectangle {
                 }
             }
 
+            function scrollToNote()
+            {
+                // TODO
+            }
 
             Repeater{
                 model: edit_area.numberOfRow

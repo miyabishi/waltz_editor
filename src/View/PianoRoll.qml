@@ -55,7 +55,6 @@ Item {
                 y: edit_area.rowHeight / 2;
                 font.pointSize: 11
                 font.family: "Meiryo"
-
             }
         }
     }
