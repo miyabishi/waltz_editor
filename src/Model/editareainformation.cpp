@@ -1,4 +1,3 @@
-#include <QDebug>
 #include <qmath.h>
 #include "editareainformation.h"
 

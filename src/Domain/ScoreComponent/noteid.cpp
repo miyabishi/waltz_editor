@@ -1,4 +1,3 @@
-#include <QDebug>
 #include "noteid.h"
 
 using namespace waltz::editor::ScoreComponent;

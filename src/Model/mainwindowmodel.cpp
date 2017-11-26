@@ -1,4 +1,3 @@
-#include <QDebug>
 #include <QString>
 #include <QUrl>
 #include <waltz_common/commandid.h>
