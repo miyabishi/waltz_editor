@@ -129,7 +129,7 @@ void MainWindowModel::appendPitchChangingPoint(int aX, int aY)
 
 void MainWindowModel::clearScore()
 {
-    mScore_->clearNote();
+    mScore_->clearScore();
 }
 
 

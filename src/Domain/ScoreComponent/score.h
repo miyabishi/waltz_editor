@@ -34,7 +34,11 @@ namespace waltz
                 void appendPitchChangingPoint(const PitchChangingPointPointer aPitchChangingPoint);
                 waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;
+                void clearScore();
+
+            private:
                 void clearNote();
+                void clearPitchCurve();
 
             private:
                 Tempo mTempo_;

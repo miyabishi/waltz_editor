@@ -91,7 +91,6 @@ PitchChangingPointTimePointer EditAreaInformation::calculatePitchChangningPointT
 PitchChangingPointFrequencyPointer EditAreaInformation::calculatePitchChangningPointFrequency(int aY) const
 {
     int baseAPositionOffset = octaveHeight() * 2  + rowHeight() * 9 + rowHeight() / 2;
-    qDebug() << Q_FUNC_INFO << baseAPositionOffset;
     int yPosition = editAreaHeight() - aY;
     double frequency = BASE_PITCH_A * qPow(2, (double)(yPosition - baseAPositionOffset) / octaveHeight());
 

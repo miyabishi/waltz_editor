@@ -13,7 +13,7 @@ namespace waltz
             class PitchChangingPointFrequency
             {
             public:
-                PitchChangingPointFrequency(double aValue);
+                explicit PitchChangingPointFrequency(double aValue);
                 ~PitchChangingPointFrequency();
 
 

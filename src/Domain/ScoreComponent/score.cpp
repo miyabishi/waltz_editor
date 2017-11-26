@@ -69,9 +69,20 @@ int Score::noteCount() const
     return mNoteList_->count();
 }
 
+void Score::clearScore()
+{
+    clearNote();
+    clearPitchCurve();
+}
+
 void Score::clearNote()
 {
     mNoteList_->clearNote();
+}
+
+void Score::clearPitchCurve()
+{
+    mPitchCurve_->clearPitchCurve();
 }
 
 NoteListPointer Score::noteList() const

@@ -11,10 +11,6 @@ Rectangle{
     property int positionX
     property int positionY
 
-//    property double vibratoAmplitude
-//    property double vibratoFrequency
-//    property int vibratoLength
-
     border.color: "#000000"
     border.width: 1
     color: "#ffd700"
@@ -136,8 +132,9 @@ Rectangle{
         text: parent.pNoteText_
         width: 60
         onAccepted: {
-            parent.pEditing_ = false
-            root.updateNote()
+            parent.pEditing_ = false;
+            parent.pNoteText_ = text;
+            root.updateNote();
         }
         onFocusChanged: {
             piano_roll_mouse_area.enabled = !focus

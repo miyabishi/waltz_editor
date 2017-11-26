@@ -25,6 +25,8 @@ namespace waltz
                         Beat aBeat,
                         Tempo aTempo,
                         waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
+                void clearPitchCurve();
+
             private:
                 QList<PitchChangingPointPointer> mPitchCurve_;
 

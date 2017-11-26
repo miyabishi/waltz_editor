@@ -19,6 +19,11 @@ PitchCurve::PitchCurve()
 {
 }
 
+void PitchCurve::clearPitchCurve()
+{
+    mPitchCurve_.clear();
+}
+
 void PitchCurve::appendChangingPoint(PitchChangingPointPointer aChangingPoint)
 {
     mPitchCurve_.append(aChangingPoint);

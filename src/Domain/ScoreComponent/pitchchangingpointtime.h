@@ -14,7 +14,7 @@ namespace waltz
             class PitchChangingPointTime
             {
             public:
-                PitchChangingPointTime(double aValue);
+                explicit PitchChangingPointTime(double aValue);
                 ~PitchChangingPointTime();
 
             public:
