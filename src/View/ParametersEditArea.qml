@@ -8,14 +8,14 @@ Item {
         width: parent.width
         height: parent.height
         currentIndex: bar.currentIndex
-        VibratoEditArea{
-            id: vibrato_edit_area
-        }
         VolumeEditArea {
             id: volume_edit_area
         }
         EnvelopeEditArea {
             id: envelope_edit_area
+        }
+        VibratoEditArea{
+            id: vibrato_edit_area
         }
     }
 
@@ -29,24 +29,23 @@ Item {
             color: "#000000"
         }
 
-        ParameterEditAreaTabButton{
-            id: vibrato_button
-            text: "Vibrato"
+        ParameterEditAreaTabButton {
+            text: "Volume"
             height: 25
             width: 200
             index: 0
         }
 
-
         ParameterEditAreaTabButton {
-            text: "Volume"
+            text: "Envelope"
             height: 25
             width: 200
             index: 1
         }
 
-        ParameterEditAreaTabButton {
-            text: "Envelope"
+        ParameterEditAreaTabButton{
+            id: vibrato_button
+            text: "Vibrato"
             height: 25
             width: 200
             index: 2
