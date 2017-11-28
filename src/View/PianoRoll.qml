@@ -40,7 +40,7 @@ Item {
             z: edit_area.isBlackKey(index) ? 10 : 5
             color: edit_area.isBlackKey(index) ? "#333333" : "#eeeeee"
             border.color: "#333333"
-            visible: y > -(root.y + edit_area.rowHeight * 2)
+            visible: y > -(root.y + edit_area.rowHeight)
             Text{
                 function keyboardText(aIndex)
                 {

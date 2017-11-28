@@ -212,7 +212,7 @@ Rectangle{
 
     Rectangle{
         id: beat_axis_view
-        height: 40
+        height: 20
         color: "#222222"
         anchors.top: parent.top
         anchors.left: parent.left
@@ -245,7 +245,7 @@ Rectangle{
                     text: index
                     color: "#ffffff"
                     font.family: "Meiryo"
-                    font.pointSize: 9
+                    font.pointSize: 7
                 }
             }
         }

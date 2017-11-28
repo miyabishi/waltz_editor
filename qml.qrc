@@ -26,5 +26,11 @@
         <file>src/View/PitchChangingPoint.qml</file>
         <file>src/View/PortamentoStartPointListModelContainer.qml</file>
         <file>src/View/PortamentoEndPointListModelContainer.qml</file>
+        <file>src/View/MainWindowMenu.qml</file>
+        <file>src/View/ParametersEditArea.qml</file>
+        <file>src/View/VibratoEditArea.qml</file>
+        <file>src/View/ParameterEditAreaTabButton.qml</file>
+        <file>src/View/EnvelopeEditArea.qml</file>
+        <file>src/View/VolumeEditArea.qml</file>
     </qresource>
 </RCC>

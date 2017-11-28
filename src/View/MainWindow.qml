@@ -9,6 +9,7 @@ ApplicationWindow {
     width: 1280
     height: 940
     title: qsTr("Waltz Editor")
+    menuBar: MainWindowMenu{}
 
     NoteListModelContainer{
         id: note_list_model_container
@@ -71,6 +72,7 @@ ApplicationWindow {
 
             PortamentoEditArea{
                 id: portamento_edit_area
+                height: 300
                 xOffset: edit_area.xOffset
                 onXOffsetChanged: {
                     if (edit_area.xOffset === xOffset)
@@ -81,6 +83,13 @@ ApplicationWindow {
                 }
 
                 anchors.top: edit_area.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
+
+            ParametersEditArea{
+                id: parameters_edit_area
+                anchors.top: portamento_edit_area.bottom
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
