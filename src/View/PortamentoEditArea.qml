@@ -72,7 +72,7 @@ Rectangle {
                 target: note_list_model_container
                 onModelUpdated:{
                     pitch_curve_canvas.requestPaint();
-                    scrollToNote(aNoteId);
+                    portamento_edit_area.scrollToNote(aNoteId);
                 }
             }
 
@@ -99,7 +99,11 @@ Rectangle {
 
             function scrollToNote(aNoteId)
             {
-                // TODO
+                var note = note_list_model_container.find(aNoteId);
+                if (! note) return;
+
+                var scrollPosition = note.positionY
+                portamento_edit_area_scroll_view.flickableItem.contentY = scrollPosition;
             }
 
             Repeater{

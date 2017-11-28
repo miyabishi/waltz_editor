@@ -204,7 +204,6 @@ Rectangle{
 
                 onDropped: {
                     //drag.source.updateNote();
-
                 }
             }
         }

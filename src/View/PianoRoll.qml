@@ -4,6 +4,10 @@ import QtQuick.Controls 1.4
 Item {
     id:root
     height:edit_area.numberOfRow * edit_area.rowHeight
+    onYChanged:{
+        console.log ("on y changed: y=" + y);
+    }
+
     Repeater{
         model:edit_area.numberOfRow
         Rectangle{
@@ -40,7 +44,8 @@ Item {
             z: edit_area.isBlackKey(index) ? 10 : 5
             color: edit_area.isBlackKey(index) ? "#333333" : "#eeeeee"
             border.color: "#333333"
-            visible: y > -(root.y + edit_area.rowHeight)
+            visible: y > -(root.y + 40)
+
             Text{
                 function keyboardText(aIndex)
                 {
