@@ -58,8 +58,6 @@ Item {
 
     function lessThan(aItemA, aItemB)
     {
-        console.log("conpare(" + aItemA.pitchChangingPointX + ":" + aItemB.pitchChangingPointX + ")");
-        console.log("result:" + (aItemA.pitchChangingPointX < aItemB.pitchChangingPointX));
         return aItemA.pitchChangingPointX <= aItemB.pitchChangingPointX;
     }
 
@@ -71,7 +69,6 @@ Item {
             var item = pitchChangingPointListModel.get(index);
             if (lessThan(item, aInsertItem)) continue;
             var ret = index - 1;
-            console.log("insert position is " + ret );
             return ret;
 
         }

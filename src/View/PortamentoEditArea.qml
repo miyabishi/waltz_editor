@@ -39,14 +39,22 @@ Rectangle {
         pitch_curve_canvas.requestPaint();
     }
 
-    Rectangle{
+    ScrollView{
         id:portament_area_piano_view
         anchors.top:beat_axis_view.bottom
         width:80
+        height: parent.height
+
+        flickableItem.onContentYChanged: {
+            portamento_edit_area_scroll_view.flickableItem.contentY = flickableItem.contentY
+        }
+        verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+
         PianoRoll{
             id: portamento_piano_roll
-            width: parent.width
-            y: -portamento_edit_area_scroll_view.flickableItem.contentY
+            width:80
+            height: parent.height
         }
     }
 
@@ -61,7 +69,9 @@ Rectangle {
         flickableItem.onContentXChanged: {
             xOffset = flickableItem.contentX;
         }
-
+        flickableItem.onContentYChanged: {
+            portament_area_piano_view.flickableItem.contentY = flickableItem.contentY
+        }
 
         Rectangle{
             id: portamento_edit_area
@@ -102,7 +112,7 @@ Rectangle {
                 var note = note_list_model_container.find(aNoteId);
                 if (! note) return;
 
-                var scrollPosition = note.positionY - root.height / 2 - edit_area.rowHeight / 2;
+                var scrollPosition = note.positionY - root.height / 2 + edit_area.rowHeight / 2;
                 portamento_edit_area_scroll_view.flickableItem.contentY = scrollPosition;
             }
 

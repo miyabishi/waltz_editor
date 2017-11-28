@@ -46,7 +46,6 @@ Rectangle{
         return false
     }
 
-
     Rectangle{
         id:piano_view
         anchors.top:beat_axis_view.bottom

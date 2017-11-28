@@ -1,12 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
 
-Item {
+Rectangle {
     id:root
     height:edit_area.numberOfRow * edit_area.rowHeight
-    onYChanged:{
-        console.log ("on y changed: y=" + y);
-    }
+    color: "#ffffff"
 
     Repeater{
         model:edit_area.numberOfRow
@@ -41,10 +39,9 @@ Item {
             width: edit_area.isBlackKey(index) ? parent.width * 0.6 : parent.width
             height: calculateKeyHeight(index)
             y: calculateYPosition(index)
-            z: edit_area.isBlackKey(index) ? 10 : 5
+            z: edit_area.isBlackKey(index) ? 20 : 10
             color: edit_area.isBlackKey(index) ? "#333333" : "#eeeeee"
             border.color: "#333333"
-            visible: y > -(root.y + 40)
 
             Text{
                 function keyboardText(aIndex)
