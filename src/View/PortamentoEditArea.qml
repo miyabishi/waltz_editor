@@ -102,7 +102,7 @@ Rectangle {
                 var note = note_list_model_container.find(aNoteId);
                 if (! note) return;
 
-                var scrollPosition = note.positionY
+                var scrollPosition = note.positionY - root.height / 2 - edit_area.rowHeight / 2;
                 portamento_edit_area_scroll_view.flickableItem.contentY = scrollPosition;
             }
 
