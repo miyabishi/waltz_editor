@@ -175,9 +175,9 @@ Rectangle{
                     {
                         var otherNote = note_list_model_container.findByIndex(index)
                         var otherNoteHead = otherNote.positionX;
-                        var otherNoteTail = otherNoteHead + otherNote.width;
+                        var otherNoteTail = otherNoteHead + otherNote.noteWidth;
 
-                        if (otherNote.pNoteId_ === source.pNoteId_) continue;
+                        if (otherNote.noteId === source.noteId) continue;
 
                         if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
                         {
@@ -201,9 +201,7 @@ Rectangle{
                     drag.source.x = calculateDropX(drag.source);
                 }
 
-                onDropped: {
-                    //drag.source.updateNote();
-                }
+                onDropped: {}
             }
         }
     }
@@ -211,7 +209,7 @@ Rectangle{
     Rectangle{
         id: beat_axis_view
         height: 20
-        color: "#222222"
+        color:"#222222"
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
