@@ -86,7 +86,8 @@ Rectangle {
 
         Rectangle {
             color: "#111111"
-            width: edit_area.width
+            width: edit_area.editAreaWidth
+            height: parent.height
             Connections{
                 target: edit_area
                 onXOffsetChanged:{
@@ -94,11 +95,18 @@ Rectangle {
                 }
             }
 
+            Connections{
+                target: note_volume_list_model_container
+                onModelUpdated:{
+                    note_volume_canvas.requestPaint();
+                }
+            }
+
             Rectangle{
                 color: "#555555"
                 x: 0
                 y: root.min
-                width : edit_area.width
+                width : edit_area.editAreaWidth
                 height: 2
             }
 
@@ -106,15 +114,41 @@ Rectangle {
                 color: "#555555"
                 x: 0
                 y: calculateY(100)
-                width : edit_area.width
+                width : edit_area.editAreaWidth
                 height: 1
             }
             Rectangle{
                 color: "#555555"
                 x: 0
                 y: root.max
-                width : edit_area.width
+                width : edit_area.editAreaWidth
                 height: 2
+            }
+
+            Canvas{
+                id: note_volume_canvas
+                anchors.fill: parent
+                onPaint: {
+                    console.log("on paint!!");
+                    var ctx = note_volume_canvas.getContext('2d');
+                    ctx.clearRect(0,0,note_volume_canvas.width, note_volume_canvas.height);
+
+                    for (var index = 0; index < note_list_model_container.count(); ++index)
+                    {
+                        drawNoteVolume(ctx, index)
+                    }
+                }
+
+                function drawNoteVolume(aCtx, aIndex)
+                {
+                    console.log("drawNoteVolume:" + aIndex);
+                    aCtx.fillStyle = Qt.rgba(.9,.5,.7);
+                    var note = note_list_model_container.findByIndex(aIndex);
+                    console.log("drawNoteVolume note id:" + note.noteId);
+                    var noteVolume = note_volume_list_model_container.findByNoteId(note.noteId);
+                    aCtx.rect(note.positionX, root.calculateY(noteVolume.volume),
+                              note.positionX + 10, root.min);
+                }
             }
         }
     }

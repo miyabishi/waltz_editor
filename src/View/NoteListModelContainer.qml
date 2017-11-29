@@ -26,6 +26,7 @@ Item {
 
         portamento_start_point_list_model_container.append(noteIdCounter, portamentoStartX, portamentoStartY);
         portamento_end_point_list_model_container.append(noteIdCounter, portamentoEndX, portamentoEndY);
+        note_volume_list_model_container.append(noteIdCounter, 100);
 
         modelUpdated(noteIdCounter);
         noteIdCounter++;

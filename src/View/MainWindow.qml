@@ -15,6 +15,10 @@ ApplicationWindow {
         id: note_list_model_container
     }
 
+    NoteVolumeListModelContainer{
+        id: note_volume_list_model_container
+    }
+
     PortamentoStartPointListModelContainer{
         id: portamento_start_point_list_model_container
     }
