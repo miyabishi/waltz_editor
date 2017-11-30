@@ -10,6 +10,14 @@ Item {
         currentIndex: bar.currentIndex
         VolumeEditArea {
             id: volume_edit_area
+            xOffset: edit_area.xOffset
+            onXOffsetChanged: {
+                if (edit_area.xOffset === xOffset)
+                {
+                    return;
+                }
+                edit_area.xOffset = xOffset;
+            }
         }
         EnvelopeEditArea {
             id: envelope_edit_area

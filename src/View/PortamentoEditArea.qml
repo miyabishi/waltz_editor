@@ -61,7 +61,7 @@ Rectangle {
     ScrollView{
         id: portamento_edit_area_scroll_view
         verticalScrollBarPolicy: Qt.ScrollBarAlwaysOn
-        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
+        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
         anchors.left: portament_area_piano_view.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom

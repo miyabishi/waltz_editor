@@ -6,10 +6,24 @@ Rectangle {
     color: "#222222"
     property int max: 20
     property int min: height - 35
+    property int xOffset:0
+
+    onXOffsetChanged: {
+        if (volume_edit_area_scroll_view.flickableItem.contentX === xOffset)
+        {
+            return;
+        }
+        volume_edit_area_scroll_view.flickableItem.contentX = xOffset
+    }
+
 
     function calculateY(aValue)
     {
         return min - (min - max) * (aValue / 150);
+    }
+    function noteVolumeBarHeight(aValue)
+    {
+        return min - calculateY(aValue);
     }
 
     Rectangle {
@@ -80,6 +94,9 @@ Rectangle {
         anchors.left: volume_axis.right
         anchors.right: root.right
         height: root.height
+        flickableItem.onContentXChanged: {
+            root.xOffset = flickableItem.contentX;
+        }
 
         verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
         horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
@@ -92,13 +109,6 @@ Rectangle {
                 target: edit_area
                 onXOffsetChanged:{
                     volume_edit_area_scroll_view.flickableItem.contentX = edit_area.xOffset;
-                }
-            }
-
-            Connections{
-                target: note_volume_list_model_container
-                onModelUpdated:{
-                    note_volume_canvas.requestPaint();
                 }
             }
 
@@ -125,29 +135,24 @@ Rectangle {
                 height: 2
             }
 
-            Canvas{
-                id: note_volume_canvas
-                anchors.fill: parent
-                onPaint: {
-                    console.log("on paint!!");
-                    var ctx = note_volume_canvas.getContext('2d');
-                    ctx.clearRect(0,0,note_volume_canvas.width, note_volume_canvas.height);
-
-                    for (var index = 0; index < note_list_model_container.count(); ++index)
-                    {
-                        drawNoteVolume(ctx, index)
+            Repeater{
+                id: note_volume_repeater
+                model:note_volume_list_model_container.getModel()
+                Loader{
+                    id:noteloader
+                    sourceComponent: Component{
+                        id: note_volume_bar
+                        NoteVolumeBar{
+                            width: 10
+                            height: noteVolumeBarHeight(volume)
+                        }
                     }
-                }
-
-                function drawNoteVolume(aCtx, aIndex)
-                {
-                    console.log("drawNoteVolume:" + aIndex);
-                    aCtx.fillStyle = Qt.rgba(.9,.5,.7);
-                    var note = note_list_model_container.findByIndex(aIndex);
-                    console.log("drawNoteVolume note id:" + note.noteId);
-                    var noteVolume = note_volume_list_model_container.findByNoteId(note.noteId);
-                    aCtx.rect(note.positionX, root.calculateY(noteVolume.volume),
-                              note.positionX + 10, root.min);
+                    onLoaded: {
+                        var note = note_list_model_container.find(noteId);
+                        item.x = note.positionX;
+                        item.y = root.calculateY(volume);
+                        item.visible = true;
+                    }
                 }
             }
         }
