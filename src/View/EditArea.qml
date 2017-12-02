@@ -22,6 +22,10 @@ Rectangle{
         edit_area_scroll_view.flickableItem.contentX = xOffset
     }
 
+    function barLength()
+    {
+        return edit_area.columnWidth * edit_area.beatChild;
+    }
 
 
     function updateProperty(){
@@ -160,6 +164,11 @@ Rectangle{
                 }
             }
 
+            SeekBar{
+                width: 2
+                height: edit_area.height
+            }
+
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
@@ -227,14 +236,14 @@ Rectangle{
                     height: parent.height /2
                     anchors.bottom: parent.bottom
                     color: "#cccccc"
-                    x: piano_view.width + index * edit_area.columnWidth * edit_area.beatChild
+                    x: piano_view.width + index * edit_area.barLength()
                 }
             }
 
             Repeater{
                 model: parent.width / edit_area.columnWidth * edit_area.beatChild
                 Text{
-                    x: piano_view.width + index * edit_area.columnWidth * edit_area.beatChild + 10
+                    x: piano_view.width + index * edit_area.barLength() + 10
                     anchors.bottom: parent.bottom
                     text: index
                     color: "#ffffff"

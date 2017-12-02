@@ -43,7 +43,9 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/pitchchangingpointfrequency.cpp \
     src/Domain/ScoreComponent/abstractnoteparameter.cpp \
     src/Domain/ScoreComponent/notevolume.cpp \
-    src/Domain/ScoreComponent/noteparameterlist.cpp
+    src/Domain/ScoreComponent/noteparameterlist.cpp \
+    src/Domain/Commands/startseekbarcommand.cpp \
+    src/Domain/Commands/resetseekbarcommand.cpp
 
 RESOURCES += qml.qrc
 
@@ -111,7 +113,9 @@ HEADERS += \
     src/Domain/ScoreComponent/pitchchangingpointfrequency.h \
     src/Domain/ScoreComponent/abstractnoteparameter.h \
     src/Domain/ScoreComponent/notevolume.h \
-    src/Domain/ScoreComponent/noteparameterlist.h
+    src/Domain/ScoreComponent/noteparameterlist.h \
+    src/Domain/Commands/startseekbarcommand.h \
+    src/Domain/Commands/resetseekbarcommand.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

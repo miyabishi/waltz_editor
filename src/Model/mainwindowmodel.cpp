@@ -201,6 +201,17 @@ void MainWindowModel::emitActivePlayButton()
     emit activePlayButton();
 }
 
+void MainWindowModel::emitStartSeekBar()
+{
+    emit startSeekBar();
+}
+
+void MainWindowModel::emitResetSeekBar()
+{
+    emit resetSeekBar();
+}
+
+
 NotePointer MainWindowModel::findNote(int aNoteId) const
 {
     return mScore_->noteList()->find(NoteId(aNoteId));

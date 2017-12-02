@@ -28,6 +28,8 @@ namespace waltz
                         const waltz::editor::LibraryComponent::LibraryInformation& aLibraryInformation);
                 void emitErrorOccurred(const QString& aErrorMessage);
                 void emitActivePlayButton();
+                void emitStartSeekBar();
+                void emitResetSeekBar();
 
             public:
                 // Invocable Methods
@@ -74,6 +76,8 @@ namespace waltz
                 void activePlayButton();
                 void libraryInformationUpdated();
                 void scoreUpdated();
+                void startSeekBar();
+                void resetSeekBar();
 
             private:
                 ScoreComponent::NotePointer findNote(int aNoteId)const;

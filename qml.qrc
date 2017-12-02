@@ -34,5 +34,6 @@
         <file>src/View/VolumeEditArea.qml</file>
         <file>src/View/NoteVolumeListModelContainer.qml</file>
         <file>src/View/NoteVolumeBar.qml</file>
+        <file>src/View/SeekBar.qml</file>
     </qresource>
 </RCC>
