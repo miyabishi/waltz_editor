@@ -20,4 +20,3 @@ NoteParameterPointer NoteParameterList::at(int index) const
 {
     return mNoteParameterList_.at(index);
 }
-
