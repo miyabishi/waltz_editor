@@ -16,6 +16,8 @@ namespace waltz
             public:
                 NoteParameterList();
                 void append(const NoteParameterPointer aNoteParameter);
+                NoteParameterPointer at(int index) const;
+                int count() const;
 
             private:
                 QList <NoteParameterPointer> mNoteParameterList_;

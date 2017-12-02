@@ -53,6 +53,11 @@ Parameters Note::toParameters(Beat aBeat,
     parameters.append(Parameter("NoteStartTime", mNoteRect_->noteStartTime(aBeat, aTempo, aEditAreaInformation)->value()));
     parameters.append(Parameter("NoteLength",    mNoteRect_->noteLength(aBeat, aTempo, aEditAreaInformation)->value()));
 
+    for(int index = 0; index < mNoteParameterList_.count(); ++index)
+    {
+        parameters.append(mNoteParameterList_.at(index)->toParameter());
+    }
+
     return parameters;
 }
 
