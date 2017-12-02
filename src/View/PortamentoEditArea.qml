@@ -111,9 +111,15 @@ Rectangle {
             {
                 var note = note_list_model_container.find(aNoteId);
                 if (! note) return;
+                var visibleRangeYPositionMin = portamento_edit_area_scroll_view.flickableItem.contentY;
+                var visibleRangeYPositionMax = visibleRangeYPositionMin + root.height;
 
-                var scrollPosition = note.positionY - root.height / 2 + edit_area.rowHeight / 2;
-                portamento_edit_area_scroll_view.flickableItem.contentY = scrollPosition;
+                if (visibleRangeYPositionMin > note.positionY ||
+                    visibleRangeYPositionMax < (note.positionY + edit_area.rowHeight))
+                {
+                    var scrollPosition = note.positionY - root.height / 2 + edit_area.rowHeight / 2;
+                    portamento_edit_area_scroll_view.flickableItem.contentY = scrollPosition;
+                }
             }
 
             Repeater{

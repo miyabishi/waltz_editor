@@ -40,7 +40,10 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/vibratostartpoint.cpp \
     src/Domain/ScoreComponent/vibratoendpoint.cpp \
     src/Domain/ScoreComponent/pitchchangingpointtime.cpp \
-    src/Domain/ScoreComponent/pitchchangingpointfrequency.cpp
+    src/Domain/ScoreComponent/pitchchangingpointfrequency.cpp \
+    src/Domain/ScoreComponent/abstractnoteparameter.cpp \
+    src/Domain/ScoreComponent/notevolume.cpp \
+    src/Domain/ScoreComponent/noteparameterlist.cpp
 
 RESOURCES += qml.qrc
 
@@ -105,7 +108,10 @@ HEADERS += \
     src/Domain/ScoreComponent/vibratostartpoint.h \
     src/Domain/ScoreComponent/vibratoendpoint.h \
     src/Domain/ScoreComponent/pitchchangingpointtime.h \
-    src/Domain/ScoreComponent/pitchchangingpointfrequency.h
+    src/Domain/ScoreComponent/pitchchangingpointfrequency.h \
+    src/Domain/ScoreComponent/abstractnoteparameter.h \
+    src/Domain/ScoreComponent/notevolume.h \
+    src/Domain/ScoreComponent/noteparameterlist.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

@@ -40,6 +40,8 @@ namespace waltz
                                             int aPositionX,
                                             int aPositionY,
                                             int noteWidth);
+                Q_INVOKABLE void appendNoteVolume(int aNoteId,
+                                                  int aVolume);
                 Q_INVOKABLE void appendPitchChangingPoint(int aX, int aY);
 
                 Q_INVOKABLE int tempo() const;

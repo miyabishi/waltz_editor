@@ -5,6 +5,25 @@ Item {
     property int noteVolumeIdCounter: 0
     signal modelUpdated()
 
+    Connections{
+        target: note_list_model_container
+        onNoteRemoved:{
+            removeIfNoteVolumeHasNoteId(aNoteId);
+        }
+    }
+
+    function removeIfNoteVolumeHasNoteId(aNoteId)
+    {
+        for(var index = 0; index < noteVolumeListModel.count; ++index)
+        {
+            var noteVolume = noteVolumeListModel.get(index);
+            if (noteVolume.noteId !== aNoteId) continue;
+            noteVolumeListModel.remove(index);
+            return;
+        }
+    }
+
+
     function append(aNoteId, aVolume)
     {
         noteVolumeListModel.append({
@@ -14,6 +33,31 @@ Item {
                                    });
         ++noteVolumeIdCounter;
         modelUpdated();
+    }
+
+    function updateNoteVolume(aNoteVolumeId, aVolume)
+    {
+        var noteVolumeIndex = findIndexByNoteVolumeId(aNoteVolumeId);
+        var noteVolume = find(aNoteVolumeId);
+        var noteId = noteVolume.noteId;
+        noteVolumeListModel.set(noteVolumeIndex,
+                                {
+                                    "noteVolumeId": aNoteVolumeId,
+                                    "noteId": noteId,
+                                    "volume": aVolume
+                                });
+    }
+
+    function findIndexByNoteVolumeId(aNoteVolumeId)
+    {
+        for(var index = 0; index < noteVolumeListModel.count; ++index)
+        {
+            var noteVolume = noteVolumeListModel.get(index);
+            if (noteVolume.noteVolumeId !== aNoteVolumeId) continue;
+            return index;
+        }
+
+        return -1;
     }
 
     function getModel()

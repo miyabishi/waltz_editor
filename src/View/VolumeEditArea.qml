@@ -7,6 +7,11 @@ Rectangle {
     property int max: 20
     property int min: height - 35
     property int xOffset:0
+    signal toUpdateNoteVolume()
+
+    onMinChanged: {
+        toUpdateNoteVolume();
+    }
 
     onXOffsetChanged: {
         if (volume_edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -16,14 +21,24 @@ Rectangle {
         volume_edit_area_scroll_view.flickableItem.contentX = xOffset
     }
 
-
     function calculateY(aValue)
     {
-        return min - (min - max) * (aValue / 150);
+        return min - noteVolumeBarHeight(aValue);
     }
+
+    function calculateVolume(aHeight)
+    {
+        return 150 * aHeight / maxHeight();
+    }
+
     function noteVolumeBarHeight(aValue)
     {
-        return min - calculateY(aValue);
+        return  maxHeight() * (aValue / 150);
+    }
+
+    function maxHeight()
+    {
+        return (min - max);
     }
 
     Rectangle {
@@ -34,6 +49,8 @@ Rectangle {
         height: root.height
         color: "#333333"
         border.color: "#111111"
+
+        onStateChanged: {}
 
         Text{
             y: root.max - 10
@@ -149,6 +166,7 @@ Rectangle {
                     }
                     onLoaded: {
                         var note = note_list_model_container.find(noteId);
+                        item.noteVolumeId = noteVolumeId;
                         item.x = note.positionX;
                         item.y = root.calculateY(volume);
                         item.visible = true;
