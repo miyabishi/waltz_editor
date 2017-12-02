@@ -120,6 +120,11 @@ void MainWindowModel::appendNote(int aNoteId,
     scoreUpdated();
 }
 
+void MainWindowModel::appendNoteVolume(int aNoteId, int aVolume)
+{
+
+}
+
 void MainWindowModel::appendPitchChangingPoint(int aX, int aY)
 {
     mScore_->appendPitchChangingPoint(

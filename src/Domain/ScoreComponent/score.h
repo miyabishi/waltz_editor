@@ -4,10 +4,12 @@
 #include <memory>
 #include <waltz_common/parameters.h>
 #include "src/Model/editareainformation.h"
+#include "abstractnoteparameter.h"
 #include "notelist.h"
 #include "tempo.h"
 #include "beat.h"
 #include "note.h"
+#include "noteid.h"
 #include "pitchcurve.h"
 #include "pitchchangingpoint.h"
 
@@ -31,6 +33,8 @@ namespace waltz
                 int beatParent();
                 NoteListPointer noteList() const;
                 void appendNote(const NotePointer aNote);
+                void appendNoteParameter(const NoteId aNoteId,
+                                         const NoteParameterPointer aParameter);
                 void appendPitchChangingPoint(const PitchChangingPointPointer aPitchChangingPoint);
                 waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;

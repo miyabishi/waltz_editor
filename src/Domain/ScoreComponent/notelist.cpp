@@ -78,6 +78,17 @@ void NoteList::clearNote()
     mNoteList_.clear();
 }
 
+void NoteList::appendNoteParameter(const NoteId aNoteId,
+                                   const NoteParameterPointer aNoteParameter)
+{
+    for (int index = 0; index < mNoteList_.size(); ++index)
+    {
+        if (! mNoteList_.at(index)->noteIdEquals(aNoteId)) continue;
+        mNoteList_.at(index)->appendNoteParameter(aNoteParameter);
+        return;
+    }
+}
+
 NotePointer NoteList::findPreviousNote(const NoteRectPositionPointer aNoteRectPosition,
                                        const NoteId aCurrentNoteId) const
 {

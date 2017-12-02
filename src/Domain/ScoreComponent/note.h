@@ -16,6 +16,7 @@
 #include "src/Model/editareainformation.h"
 #include "vibratoendpoint.h"
 #include "vibratostartpoint.h"
+#include "noteparameterlist.h"
 
 
 namespace waltz
@@ -47,11 +48,13 @@ namespace waltz
                 bool noteIdEquals(const NoteId& aOtherNoteId) const;
                 NoteRectPointer noteRect() const;
                 Syllable syllable() const;
+                void appendNoteParameter(const NoteParameterPointer aNoteParameter);
 
             private:
                 NoteId            mNoteId_;
                 Syllable          mSyllable_;
                 NoteRectPointer   mNoteRect_;
+                NoteParameterList mNoteParameterList_;
 
             private:
                 Note(const Note& aOther);

@@ -9,7 +9,9 @@
 #include "beat.h"
 #include "tempo.h"
 #include "note.h"
+#include "noteid.h"
 #include "noterectposition.h"
+#include "abstractnoteparameter.h"
 
 namespace waltz
 {
@@ -33,6 +35,8 @@ namespace waltz
                 NotePointer findPreviousNote(const NoteRectPositionPointer aNoteRect,
                                              const NoteId aCurrentNoteId = NoteId(-1)) const;
                 void clearNote();
+                void appendNoteParameter(const NoteId aNoteId,
+                                         const NoteParameterPointer aNoteParameter) const;
 
             private:
                 QList<NotePointer> mNoteList_;

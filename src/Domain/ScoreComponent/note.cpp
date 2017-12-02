@@ -11,12 +11,18 @@ Note::Note(const NoteId&           aNoteId,
     : mNoteId_(aNoteId)
     , mSyllable_(aSyllable)
     , mNoteRect_(aNoteRect)
+    , mNoteParameterList_()
 {
 }
 
 NoteId Note::noteId() const
 {
     return mNoteId_;
+}
+
+void Note::appendNoteParameter(const NoteParameterPointer aNoteParameter)
+{
+    mNoteParameterList_.append(aNoteParameter);
 }
 
 bool Note::noteIdEquals(const NoteId& aOtherNoteId) const
