@@ -11,6 +11,7 @@
 
 #include "src/Domain/ScoreComponent/noteinformation.h"
 #include "src/Domain/ScoreComponent/vibratoinformation.h"
+#include "src/Domain/ScoreComponent/notevolume.h"
 
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
@@ -122,7 +123,8 @@ void MainWindowModel::appendNote(int aNoteId,
 
 void MainWindowModel::appendNoteVolume(int aNoteId, int aVolume)
 {
-
+    mScore_->appendNoteParameter(NoteId(aNoteId),
+                                 NoteParameterPointer(new NoteVolume(aVolume)));
 }
 
 void MainWindowModel::appendPitchChangingPoint(int aX, int aY)

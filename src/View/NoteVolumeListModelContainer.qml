@@ -23,6 +23,14 @@ Item {
         }
     }
 
+    function reflect()
+    {
+        for(var index = 0; index < noteVolumeListModel.count; ++index)
+        {
+            var noteVolume = noteVolumeListModel.get(index);
+            MainWindowModel.appendNoteVolume(noteVolume.noteId, noteVolume.volume);
+        }
+    }
 
     function append(aNoteId, aVolume)
     {

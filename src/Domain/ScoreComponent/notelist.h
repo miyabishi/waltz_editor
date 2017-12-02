@@ -36,7 +36,7 @@ namespace waltz
                                              const NoteId aCurrentNoteId = NoteId(-1)) const;
                 void clearNote();
                 void appendNoteParameter(const NoteId aNoteId,
-                                         const NoteParameterPointer aNoteParameter) const;
+                                         const NoteParameterPointer aNoteParameter);
 
             private:
                 QList<NotePointer> mNoteList_;

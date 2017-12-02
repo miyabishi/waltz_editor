@@ -69,6 +69,7 @@ Rectangle{
                         pitch_changing_point_list_model_containter.reflect();
                         portamento_start_point_list_model_container.reflect();
                         portamento_end_point_list_model_container.reflect();
+                        note_volume_list_model_container.reflect();
 
                         MainWindowModel.play();
                         play_button.pIsActive_ = false

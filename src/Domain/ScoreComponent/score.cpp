@@ -66,7 +66,7 @@ void Score::appendPitchChangingPoint(const PitchChangingPointPointer aPitchChang
 
 void Score::appendNoteParameter(const NoteId aNoteId, const NoteParameterPointer aParameter)
 {
-
+    mNoteList_->appendNoteParameter(aNoteId, aParameter);
 }
 
 int Score::noteCount() const
