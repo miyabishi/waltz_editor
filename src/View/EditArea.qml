@@ -166,7 +166,7 @@ Rectangle{
 
             SeekBar{
                 width: 2
-                height: edit_area.height
+                height: piano_roll_edit_area.height
             }
 
             DropArea{
