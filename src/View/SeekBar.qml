@@ -5,7 +5,8 @@ Rectangle {
     width: 2
     color: "#ff88ff"
     property int seekBase: 0
-    property int timerInterval: 10
+    property double seekBarOffset: 0.0
+    property int timerInterval: 100
 
     Connections{
         target: MainWindowModel
@@ -19,12 +20,14 @@ Rectangle {
 
     function startSeekBar()
     {
+        edit_area.xOffset = 0;
         seek_bar_timer.start();
     }
 
     function resetSeekBar()
     {
         seek_bar_timer.stop();
+        root.seekBarOffset = 0;
         root.x = root.seekBase;
     }
 
@@ -32,7 +35,7 @@ Rectangle {
     {
         var bpm = MainWindowModel.tempo();
 
-        return bpm * edit_area.barLength() / 240.0 / 1000 * root.timerInterval;
+        return bpm * edit_area.barLength() / 240.0 / 1000.0 * root.timerInterval;
     }
 
     Timer{
@@ -41,7 +44,13 @@ Rectangle {
         running: false;
         repeat: true
         onTriggered: {
-            root.x += velocity()
+            root.seekBarOffset += velocity();
+            root.x = root.seekBase + root.seekBarOffset;
+            if ( (edit_area.xOffset + edit_area.width/2) < root.x &&
+                 root.x < (edit_area.xOffset + edit_area.width) )
+            {
+                edit_area.xOffset += velocity();
+            }
         }
     }
 }
