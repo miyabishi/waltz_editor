@@ -165,9 +165,8 @@ Rectangle {
                         }
                     }
                     onLoaded: {
-                        var note = note_list_model_container.find(noteId);
                         item.noteVolumeId = noteVolumeId;
-                        item.x = note.positionX;
+                        item.x = positionX;
                         item.y = root.calculateY(volume);
                         item.visible = true;
                     }

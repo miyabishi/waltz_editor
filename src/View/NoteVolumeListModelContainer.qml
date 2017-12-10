@@ -10,7 +10,27 @@ Item {
         onNoteRemoved:{
             removeIfNoteVolumeHasNoteId(aNoteId);
         }
+        onModelUpdated:{
+            console.log("model Updated")
+            reload(aNoteId);
+        }
     }
+
+    function reload(aNoteId)
+    {
+        var note = note_list_model_container.find(aNoteId);
+        var noteVolume = findByNoteId(aNoteId)
+        var noteVolumeIndex = findIndexByNoteVolumeId(noteVolume.noteVolumeId);
+
+        noteVolumeListModel.set(noteVolumeIndex,
+                                {
+                                    "noteVolumeId": noteVolume.noteVolumeId,
+                                    "noteId": noteVolume.noteId,
+                                    "positionX": note.positionX,
+                                    "volume": noteVolume.volume
+                                });
+    }
+
 
     function removeIfNoteVolumeHasNoteId(aNoteId)
     {
@@ -34,9 +54,11 @@ Item {
 
     function append(aNoteId, aVolume)
     {
+        var note = note_list_model_container.find(aNoteId);
         noteVolumeListModel.append({
                                        "noteVolumeId": noteVolumeIdCounter,
                                        "noteId": aNoteId,
+                                       "positionX": note.positionX,
                                        "volume": aVolume
                                    });
         ++noteVolumeIdCounter;
@@ -48,10 +70,12 @@ Item {
         var noteVolumeIndex = findIndexByNoteVolumeId(aNoteVolumeId);
         var noteVolume = find(aNoteVolumeId);
         var noteId = noteVolume.noteId;
+        var note = note_list_model_container.find(noteId);
         noteVolumeListModel.set(noteVolumeIndex,
                                 {
                                     "noteVolumeId": aNoteVolumeId,
                                     "noteId": noteId,
+                                    "positionX": note.positionX,
                                     "volume": aVolume
                                 });
     }
