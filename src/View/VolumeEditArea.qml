@@ -162,11 +162,11 @@ Rectangle {
                         NoteVolumeBar{
                             width: 10
                             height: noteVolumeBarHeight(volume)
+                            x: positionX
                         }
                     }
                     onLoaded: {
                         item.noteVolumeId = noteVolumeId;
-                        item.x = positionX;
                         item.y = root.calculateY(volume);
                         item.visible = true;
                     }

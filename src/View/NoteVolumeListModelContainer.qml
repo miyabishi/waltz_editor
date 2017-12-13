@@ -11,7 +11,6 @@ Item {
             removeIfNoteVolumeHasNoteId(aNoteId);
         }
         onModelUpdated:{
-            console.log("model Updated")
             reload(aNoteId);
         }
     }
@@ -29,6 +28,7 @@ Item {
                                     "positionX": note.positionX,
                                     "volume": noteVolume.volume
                                 });
+        modelUpdated();
     }
 
 
