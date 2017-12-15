@@ -5,7 +5,7 @@ Rectangle {
     id: root
     color: "#222222"
     property int max: 20
-    property int min: height - 35
+    property int min: root.height - 35
     property int xOffset:0
 //    signal toUpdateNoteVolume()
 
@@ -24,12 +24,12 @@ Rectangle {
 
     function calculateY(aValue)
     {
-        return rangeWidth() / 2 + rangeWidth() * (aValue / 4.0) + root.max;
+        return root.rangeWidth() / 2 + root.rangeWidth() * (aValue / 4.0) + root.max;
     }
 
     function rangeWidth()
     {
-        return (min - max);
+        return (root.min - root.max);
     }
 
     Rectangle {
@@ -160,29 +160,31 @@ Rectangle {
                 height: 2
             }
 
-            /*
+
             Repeater{
-                id: note_volume_repeater
-                model:note_volume_list_model_container.getModel()
+                id: vibrato_note_repeater
+                model:note_list_model_container.getModel()
                 Loader{
                     id:noteloader
                     sourceComponent: Component{
                         id: note_volume_bar
-                        NoteVolumeBar{
-                            width: 10
-                            height: noteVolumeBarHeight(volume)
+                        UndraggableNoteOnXAxis{
+                            noteId: noteId
+                            noteText: noteText
+                            y: -root.calculateY(1)
+                            height: 10 //(calculateY(-0.5) - calculateY(0.5))
+                            opacity: 0.5
                         }
                     }
                     onLoaded: {
                         var note = note_list_model_container.find(noteId);
-                        item.noteVolumeId = noteVolumeId;
-                        item.x = note.positionX;
-                        item.y = root.calculateY(volume);
+                        item.x = positionX;
+                        console.log("calculateY result:" + calculateY(1));
+                        console.log("item y:" + item.y)
                         item.visible = true;
                     }
                 }
             }
-            */
         }
     }
 }
