@@ -178,8 +178,6 @@ Rectangle {
                         }
                     }
                     onLoaded: {
-                        console.log("calculateY result:" + calculateY(1));
-                        console.log("item y:" + item.y)
                         item.visible = true;
                     }
                 }

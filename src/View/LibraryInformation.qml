@@ -7,8 +7,11 @@ import QtQuick.Dialogs 1.2
 
 
 Rectangle{
-    id: library_information
+    id: root
+    property bool showDetail: true
+
     color:"#222222"
+    width: showDetail ? 320 : 32
 
     property string character_image: MainWindowModel.characterImageUrl()
     property string library_description: MainWindowModel.libraryDescription()
@@ -17,16 +20,28 @@ Rectangle{
     Connections{
         target: MainWindowModel
         onLibraryInformationUpdated: {
-            library_information.library_description = MainWindowModel.libraryDescription()
-            library_information.character_image = MainWindowModel.characterImageUrl()
-            library_information.library_name = MainWindowModel.libraryName()
+            root.library_description = MainWindowModel.libraryDescription()
+            root.character_image = MainWindowModel.characterImageUrl()
+            root.library_name = MainWindowModel.libraryName()
         }
     }
 
     ColumnLayout{
         anchors.fill:parent
         Image{
-            z:0
+            Layout.alignment: Qt.AlignLeft
+            Layout.preferredHeight: 32
+            Layout.preferredWidth: 32
+            source:"qrc:/image/expand_less.png"
+
+            WButtonMouseArea{
+                anchors.fill: parent
+                onClicked: {
+                }
+            }
+        }
+
+        Image{
             Layout.alignment: Qt.AlignLeft
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
@@ -39,7 +54,7 @@ Rectangle{
                     MainWindowModel.loadVoiceLibrary(vocalOpenDialog.fileUrl)
                 }
             }
-            MouseArea{
+            WButtonMouseArea{
                 anchors.fill: parent
                 onClicked: {
                     vocalOpenDialog.open()
@@ -49,9 +64,9 @@ Rectangle{
 
         Text{
             id: vocal_name
-            z:0
+            visible: showDetail
             Layout.alignment: Qt.AlignCenter
-            text: library_information.library_name
+            text: root.library_name
             font.pointSize: 14
             Layout.preferredHeight: 50
             color: "#ffffff"
@@ -59,22 +74,23 @@ Rectangle{
         }
 
         Item{
-            z:0
             id: vocal
+            visible: showDetail
             Layout.alignment: Qt.AlignCenter
             Layout.preferredHeight: 350
             Layout.preferredWidth: 200
             Image{
                 id: vocal_image
                 fillMode: Image.PreserveAspectFit
+                visible: showDetail
                 anchors.fill: parent
-                source: library_information.character_image
+                source: root.character_image
                 smooth: true
-                visible: false
             }
 
             DropShadow {
                 anchors.fill: vocal_image
+                visible: showDetail
                 horizontalOffset: -20
                 verticalOffset: 0
                 radius: 4.0
@@ -85,16 +101,17 @@ Rectangle{
         }
 
         Rectangle{
-            z:0
             Layout.alignment: Qt.AlignCenter
             Layout.preferredHeight: 200
             Layout.preferredWidth: parent.width
             color:"#222222"
+            visible: showDetail
 
             TextArea{
+                visible: showDetail
                 anchors.fill:parent
                 anchors.margins: 10
-                text: library_information.library_description
+                text: root.library_description
                 textColor: "#ffffff"
                 backgroundVisible:false
                 readOnly: true

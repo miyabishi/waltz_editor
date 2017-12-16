@@ -36,5 +36,7 @@
         <file>src/View/NoteVolumeBar.qml</file>
         <file>src/View/SeekBar.qml</file>
         <file>src/View/UndraggableNoteOnXAxis.qml</file>
+        <file>image/expand_less.png</file>
+        <file>image/expand_more.png</file>
     </qresource>
 </RCC>

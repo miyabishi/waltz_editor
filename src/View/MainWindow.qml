@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
 
 
@@ -39,7 +40,8 @@ ApplicationWindow {
         z: 10
     }
 
-    SplitView{
+    RowLayout{
+        id: main_split_view
         anchors.top: top_bar.bottom
         anchors.left: parent.left
         anchors.right:parent.right
@@ -47,8 +49,8 @@ ApplicationWindow {
 
         LibraryInformation{
             id: library_information
-            width: 320
-            z:1
+            color:"#222222"
+            anchors.left: parent.left
             anchors.top:parent.top
             anchors.bottom: parent.bottom
         }
