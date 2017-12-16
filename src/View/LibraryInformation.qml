@@ -28,24 +28,35 @@ Rectangle{
 
     ColumnLayout{
         anchors.fill:parent
-        Image{
+        Rectangle{
+            color:"#222222"
             Layout.alignment: Qt.AlignLeft
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
-            source:"qrc:/image/expand_less.png"
-
-            WButtonMouseArea{
+            Image{
+                id: expand_button_image
                 anchors.fill: parent
+                source: root.showDetail ? "qrc:/image/expand_less.png" : "qrc:/image/expand_more.png"
+            }
+            WButtonMouseArea{
+                anchors.fill: expand_button_image
+                backgroundColor: "#222222"
                 onClicked: {
+                    if(root.showDetail)
+                    {
+                        root.showDetail = false;
+                        return;
+                    }
+                    root.showDetail = true;
                 }
             }
         }
 
-        Image{
+        Rectangle{
             Layout.alignment: Qt.AlignLeft
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
-            source:"qrc:/image/open.png"
+            color:"#222222"
             FileDialog{
                 id:vocalOpenDialog
                 nameFilters: ["Vocal File(*." + MainWindowModel.vocalFileExtention() + ")"]
@@ -54,8 +65,15 @@ Rectangle{
                     MainWindowModel.loadVoiceLibrary(vocalOpenDialog.fileUrl)
                 }
             }
-            WButtonMouseArea{
+
+            Image{
+                id: library_open_button_image
                 anchors.fill: parent
+                source:"qrc:/image/open.png"
+            }
+            WButtonMouseArea{
+                anchors.fill: library_open_button_image
+                backgroundColor: "#222222"
                 onClicked: {
                     vocalOpenDialog.open()
                 }
