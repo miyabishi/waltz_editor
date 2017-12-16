@@ -24,7 +24,7 @@ Rectangle {
 
     function calculateY(aValue)
     {
-        return root.rangeWidth() / 2 + root.rangeWidth() * (aValue / 4.0) + root.max;
+        return root.rangeWidth() / 2 - root.rangeWidth() * (aValue / 4.0) + root.max;
     }
 
     function rangeWidth()
@@ -171,14 +171,13 @@ Rectangle {
                         UndraggableNoteOnXAxis{
                             noteId: noteId
                             noteText: noteText
-                            y: -root.calculateY(1)
-                            height: 10 //(calculateY(-0.5) - calculateY(0.5))
-                            opacity: 0.5
+                            x: positionX
+                            y: root.calculateY(0.5)
+                            height: (calculateY(-0.5) - calculateY(0.5))
+                            opacity: 0.8
                         }
                     }
                     onLoaded: {
-                        var note = note_list_model_container.find(noteId);
-                        item.x = positionX;
                         console.log("calculateY result:" + calculateY(1));
                         console.log("item y:" + item.y)
                         item.visible = true;

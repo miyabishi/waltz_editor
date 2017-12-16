@@ -21,12 +21,12 @@ Rectangle {
         var note = note_list_model_container.find(root.noteId)
         root.noteText = note.noteText;
         root.x = note.positionX;
-        root.y = 0;
         root.width = note.noteWidth;
     }
 
     Text{
         text: noteText
+        anchors.verticalCenter: parent.verticalCenter
         font.family: "Meiryo"
         font.pointSize: 10
     }
