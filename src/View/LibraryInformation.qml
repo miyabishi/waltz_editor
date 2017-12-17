@@ -30,9 +30,12 @@ Rectangle{
         anchors.fill:parent
         Rectangle{
             color:"#222222"
-            Layout.alignment: Qt.AlignLeft
+            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
+            Layout.maximumHeight: 32
+            Layout.maximumWidth: 32
+
             Image{
                 id: expand_button_image
                 anchors.fill: parent
@@ -53,7 +56,7 @@ Rectangle{
         }
 
         Rectangle{
-            Layout.alignment: Qt.AlignLeft
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
             color:"#222222"
@@ -79,16 +82,28 @@ Rectangle{
                 }
             }
         }
-
-        Text{
-            id: vocal_name
-            visible: showDetail
-            Layout.alignment: Qt.AlignCenter
-            text: root.library_name
-            font.pointSize: 14
+        Rectangle{
+            Layout.alignment: showDetail ? Qt.AlignCenter : Qt.AlignLeft
+            Layout.preferredWidth: root.width
             Layout.preferredHeight: 50
-            color: "#ffffff"
-            font.family: "Meiryo"
+            Layout.fillHeight: ! showDetail
+            color: root.color
+
+            Text{
+                id: vocal_name
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                anchors.fill: parent
+                text: root.library_name
+                font.pointSize: 14
+                color: "#ffffff"
+                font.family: "Meiryo"
+
+                transform: Rotation{
+                    origin{x: vocal_name.width / 2; y: vocal_name.height / 2}
+                    angle:showDetail ? 0:-90
+                }
+            }
         }
 
         Item{
