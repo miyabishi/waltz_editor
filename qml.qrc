@@ -38,5 +38,6 @@
         <file>src/View/UndraggableNoteOnXAxis.qml</file>
         <file>image/expand_less.png</file>
         <file>image/expand_more.png</file>
+        <file>src/View/VibratoListModelContainer.qml</file>
     </qresource>
 </RCC>

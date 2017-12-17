@@ -179,8 +179,76 @@ Rectangle {
                     }
                     onLoaded: {
                         item.visible = true;
+                        item.noteId = noteId
                     }
                 }
+            }
+
+            Canvas{
+                id: vibrato_curve_canvas
+                anchors.fill: parent
+                onPaint: {
+                    var ctx = vibrato_canvas.getContext('2d');
+                    ctx.clearRect(0,0,vibrato_canvas.width, vibrato_canvas.height);
+
+                    /*
+                    for (var index = 0; index < note_list_model_container.count(); ++index)
+                    {
+                        //drawVibrato(ctx, index);
+                    }
+                    */
+                }
+/*
+                function drawVibrato(aCtx, aIndex)
+                {
+                    aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
+                    aCtx.beginPath();
+
+                    var note = note_list_model_container.findByIndex(aIndex);
+                    var positionY = calculateY(0);
+
+                    var vibratoStartX = note.positionX + note.noteWidth - note.vibratoLength;
+                    var vibratoStartY =  positionY + edit_area.rowHeight / 2;
+
+                    var vibratoEndX = note.positionX + note.noteWidth;
+                    var vibratoEndY = positionY + edit_area.rowHeight / 2;
+
+                    var length = vibratoEndX - vibratoStartX;
+
+
+                    var frequency = note.vibratoFrequency
+                    var halfWaveLength = length / frequency / 2;
+                    var amplitude = note.vibratoAmplitude * edit_area.rowHeight / 2;
+
+                    aCtx.moveTo(vibratoStartX - 10,
+                                vibratoStartY);
+
+                    var preControlX = vibratoStartX - 5;
+                    var preControlY = vibratoStartY;
+
+                    for (var index = 0; index < frequency * 2; ++index)
+                    {
+                        var direction = (index%2 == 0) ? 1 : -1;
+
+                        aCtx.bezierCurveTo(preControlX,
+                                           preControlY,
+                                           vibratoStartX + halfWaveLength * index- 5,
+                                           vibratoStartY + amplitude * direction,
+                                           vibratoStartX + halfWaveLength * index ,
+                                           vibratoStartY + amplitude * direction);
+
+                        preControlX = vibratoStartX + halfWaveLength * index + 5;
+                        preControlY = vibratoStartY + amplitude * direction;
+
+                    }
+
+                    aCtx.bezierCurveTo(preControlX,     preControlY,
+                                       vibratoEndX -5 , vibratoEndY,
+                                       vibratoEndX, vibratoEndY);
+                    aCtx.lineWidth = 2;
+                    aCtx.stroke();
+                    aCtx.restore();
+                }*/
             }
         }
     }
