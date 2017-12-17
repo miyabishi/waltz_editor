@@ -18,6 +18,8 @@ Item {
     function reload(aNoteId)
     {
         var note = note_list_model_container.find(aNoteId);
+        if(! note) return;
+
         var noteVolume = findByNoteId(aNoteId)
         var noteVolumeIndex = findIndexByNoteVolumeId(noteVolume.noteVolumeId);
 
@@ -34,12 +36,18 @@ Item {
 
     function removeIfNoteVolumeHasNoteId(aNoteId)
     {
+        var removeIndex = -1;
         for(var index = 0; index < noteVolumeListModel.count; ++index)
         {
             var noteVolume = noteVolumeListModel.get(index);
             if (noteVolume.noteId !== aNoteId) continue;
-            noteVolumeListModel.remove(index);
-            return;
+            removeIndex = index;
+            break;
+        }
+
+        if (removeIndex >= 0)
+        {
+            noteVolumeListModel.remove(removeIndex);
         }
     }
 

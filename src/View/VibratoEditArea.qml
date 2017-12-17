@@ -7,13 +7,7 @@ Rectangle {
     property int max: 20
     property int min: root.height - 35
     property int xOffset:0
-//    signal toUpdateNoteVolume()
 
-    /*
-    onMinChanged: {
-        toUpdateNoteVolume();
-    }
-*/
     onXOffsetChanged: {
         if (vibrato_edit_area_scroll_view.flickableItem.contentX === xOffset)
         {
@@ -30,6 +24,11 @@ Rectangle {
     function rangeWidth()
     {
         return (root.min - root.max);
+    }
+
+    function baseWidth()
+    {
+        return (calculateY(-1) - calculateY(1));
     }
 
     Rectangle {
@@ -189,36 +188,37 @@ Rectangle {
                 anchors.fill: parent
                 onPaint: {
                     var ctx = vibrato_canvas.getContext('2d');
-                    ctx.clearRect(0,0,vibrato_canvas.width, vibrato_canvas.height);
+                    ctx.clearRect(0, 0, vibrato_canvas.width, vibrato_canvas.height);
 
-                    /*
-                    for (var index = 0; index < note_list_model_container.count(); ++index)
+
+                    for (var index = 0; index < vibrato_list_model_container.count(); ++index)
                     {
-                        //drawVibrato(ctx, index);
+                        drawVibrato(ctx, index);
                     }
-                    */
+
                 }
-/*
+
                 function drawVibrato(aCtx, aIndex)
                 {
                     aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
                     aCtx.beginPath();
 
-                    var note = note_list_model_container.findByIndex(aIndex);
+                    var vibrato = vibrato_list_model_container.findByIndex(aIndex);
+                    var note = note_list_model_container.find(vibrato.noteId);
                     var positionY = calculateY(0);
 
-                    var vibratoStartX = note.positionX + note.noteWidth - note.vibratoLength;
-                    var vibratoStartY =  positionY + edit_area.rowHeight / 2;
+                    var vibratoStartX = note.positionX + note.noteWidth - vibrato.length;
+                    var vibratoStartY =  positionY;
 
                     var vibratoEndX = note.positionX + note.noteWidth;
-                    var vibratoEndY = positionY + edit_area.rowHeight / 2;
+                    var vibratoEndY = positionY;
 
                     var length = vibratoEndX - vibratoStartX;
 
 
-                    var frequency = note.vibratoFrequency
+                    var frequency = vibrato.frequency
                     var halfWaveLength = length / frequency / 2;
-                    var amplitude = note.vibratoAmplitude * edit_area.rowHeight / 2;
+                    var amplitude = vibrato.amplitude * baseWidth();
 
                     aCtx.moveTo(vibratoStartX - 10,
                                 vibratoStartY);
@@ -248,7 +248,7 @@ Rectangle {
                     aCtx.lineWidth = 2;
                     aCtx.stroke();
                     aCtx.restore();
-                }*/
+                }
             }
         }
     }

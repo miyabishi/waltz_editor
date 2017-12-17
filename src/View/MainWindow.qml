@@ -32,6 +32,10 @@ ApplicationWindow {
         id: portamento_end_point_list_model_container
     }
 
+    VibratoListModelContainer{
+        id: vibrato_list_model_container
+    }
+
     TopBar{
         id: top_bar
         width: parent.width
