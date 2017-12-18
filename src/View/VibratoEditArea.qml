@@ -7,6 +7,9 @@ Rectangle {
     property int max: 20
     property int min: root.height - 35
     property int xOffset:0
+    onVisibleChanged: {
+        console.log ("vibrato edit area visible changed");
+    }
 
     onXOffsetChanged: {
         if (vibrato_edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -109,13 +112,24 @@ Rectangle {
         horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
 
         Rectangle {
+            id: sample
             color: "#111111"
             width: edit_area.editAreaWidth
             height: parent.height
+
             Connections{
                 target: edit_area
                 onXOffsetChanged:{
                     vibrato_edit_area_scroll_view.flickableItem.contentX = edit_area.xOffset;
+                }
+            }
+
+            Connections{
+                target: vibrato_list_model_container
+                onModelUpdated:{
+                    console.log("request paint");
+                    vibrato_canvas.requestPaint();
+                    sample.draw();
                 }
             }
 
@@ -159,47 +173,44 @@ Rectangle {
                 height: 2
             }
 
+            function draw()
+            {
+                var ctx = vibrato_canvas.getContext('2d');
+                ctx.clearRect(0, 0, vibrato_canvas.width, vibrato_canvas.height);
+                console.log("vibrato count: ", vibrato_list_model_container.count());
 
-            Repeater{
-                id: vibrato_note_repeater
-                model:note_list_model_container.getModel()
-                Loader{
-                    id:noteloader
-                    sourceComponent: Component{
-                        id: note_volume_bar
-                        UndraggableNoteOnXAxis{
-                            noteId: noteId
-                            noteText: noteText
-                            x: positionX
-                            y: root.calculateY(0.5)
-                            height: (calculateY(-0.5) - calculateY(0.5))
-                            opacity: 0.8
-                        }
-                    }
-                    onLoaded: {
-                        item.visible = true;
-                        item.noteId = noteId
-                    }
+                for (var index = 0; index < vibrato_list_model_container.count(); ++index)
+                {
+                    console.log("paint index:" + index);
+                    vibrato_canvas.drawVibrato(ctx, index);
                 }
             }
-
             Canvas{
-                id: vibrato_curve_canvas
+                id: vibrato_canvas
                 anchors.fill: parent
+                visible: root.visible
+
+                onVisibleChanged: {
+                    console.log("canvas visible changed");
+                    vibrato_canvas.requestPaint();
+                    console.log("abailable:" + vibrato_canvas.available);
+
+                }
                 onPaint: {
                     var ctx = vibrato_canvas.getContext('2d');
                     ctx.clearRect(0, 0, vibrato_canvas.width, vibrato_canvas.height);
-
+                    console.log("vibrato count: ", vibrato_list_model_container.count());
 
                     for (var index = 0; index < vibrato_list_model_container.count(); ++index)
                     {
+                        console.log("paint index:" + index);
                         drawVibrato(ctx, index);
                     }
-
                 }
 
                 function drawVibrato(aCtx, aIndex)
                 {
+                    console.log("draw vibrato index:" + aIndex);
                     aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
                     aCtx.beginPath();
 
@@ -214,7 +225,6 @@ Rectangle {
                     var vibratoEndY = positionY;
 
                     var length = vibratoEndX - vibratoStartX;
-
 
                     var frequency = vibrato.frequency
                     var halfWaveLength = length / frequency / 2;
@@ -248,6 +258,42 @@ Rectangle {
                     aCtx.lineWidth = 2;
                     aCtx.stroke();
                     aCtx.restore();
+                }
+            }
+
+            Repeater{
+                id: vibrato_note_repeater
+                model:note_list_model_container.getModel()
+                Loader{
+                    id:noteloader
+                    sourceComponent: Component{
+                        id: note_volume_bar
+                        UndraggableNoteOnXAxis{
+                            noteId: noteId
+                            noteText: noteText
+                            x: positionX
+                            y: root.calculateY(0.5)
+                            height: (calculateY(-0.5) - calculateY(0.5))
+                            opacity: 0.8
+                            MouseArea{
+                                anchors.fill: parent
+                                onClicked: {
+                                    console.log("clicked!");
+                                    if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                                    {
+                                        vibrato_list_model_container.append(parent.noteId,
+                                                                            parent.width / 3,
+                                                                            5,
+                                                                            0.5);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    onLoaded: {
+                        item.visible = true;
+                        item.noteId = noteId
+                    }
                 }
             }
         }

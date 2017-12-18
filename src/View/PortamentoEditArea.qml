@@ -74,7 +74,7 @@ Rectangle {
         }
 
         Rectangle{
-            id: portamento_edit_area
+            id: portamento_edit_area_in
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
 
@@ -82,7 +82,7 @@ Rectangle {
                 target: note_list_model_container
                 onModelUpdated:{
                     pitch_curve_canvas.requestPaint();
-                    portamento_edit_area.scrollToNote(aNoteId);
+                    portamento_edit_area_in.scrollToNote(aNoteId);
                 }
             }
 

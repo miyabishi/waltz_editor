@@ -8,6 +8,11 @@ Item {
 
     function append(aNoteId, aLength, aFrequency, aAmplitude)
     {
+        console.log("apend");
+        console.log("note id: " + aNoteId);
+        console.log("length: " + aLength);
+        console.log("frequency: " + aFrequency);
+        console.log("amplitude: " + aAmplitude);
         vibratoListModel.append({
                                     "vibratoId": vibratoIdCounter,
                                     "noteId": aNoteId,
@@ -16,6 +21,7 @@ Item {
                                     "amplitude": aAmplitude
                                 });
         ++vibratoIdCounter;
+        modelUpdated();
     }
 
     function find(aVibratoId)
@@ -36,7 +42,7 @@ Item {
 
     function findByIndex(aIndex)
     {
-        return vibratoListModel.get(index);
+        return vibratoListModel.get(aIndex);
     }
 
     function getModel()
