@@ -128,8 +128,8 @@ Rectangle {
                 target: vibrato_list_model_container
                 onModelUpdated:{
                     console.log("request paint");
+                    vibrato_canvas.markDirty(Qt.rect(0,0,vibrato_canvas.width, vibrato_canvas.height));
                     vibrato_canvas.requestPaint();
-                    sample.draw();
                 }
             }
 
@@ -173,18 +173,7 @@ Rectangle {
                 height: 2
             }
 
-            function draw()
-            {
-                var ctx = vibrato_canvas.getContext('2d');
-                ctx.clearRect(0, 0, vibrato_canvas.width, vibrato_canvas.height);
-                console.log("vibrato count: ", vibrato_list_model_container.count());
 
-                for (var index = 0; index < vibrato_list_model_container.count(); ++index)
-                {
-                    console.log("paint index:" + index);
-                    vibrato_canvas.drawVibrato(ctx, index);
-                }
-            }
             Canvas{
                 id: vibrato_canvas
                 anchors.fill: parent
