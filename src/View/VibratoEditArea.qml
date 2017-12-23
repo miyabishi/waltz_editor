@@ -129,6 +129,12 @@ Rectangle {
                     vibrato_edit_area_canvas.requestPaint();
                 }
             }
+            Connections{
+                target: note_list_model_container
+                onModelUpdated:{
+                    vibrato_edit_area_canvas.requestPaint();
+                }
+            }
 
             Rectangle{
                 color: "#555555"
@@ -184,18 +190,6 @@ Rectangle {
                             y: root.calculateY(0.5)
                             height: (calculateY(-0.5) - calculateY(0.5))
                             opacity: 0.8
-                            MouseArea{
-                                anchors.fill: parent
-                                onClicked: {
-                                    if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-                                    {
-                                        vibrato_list_model_container.append(parent.noteId,
-                                                                            parent.width / 3,
-                                                                            20,
-                                                                            0.5);
-                                    }
-                                }
-                            }
                         }
                     }
                     onLoaded: {

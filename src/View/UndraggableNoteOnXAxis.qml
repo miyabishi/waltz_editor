@@ -30,4 +30,24 @@ Rectangle {
         font.family: "Meiryo"
         font.pointSize: 10
     }
+
+    MouseArea{
+        anchors.fill: parent
+        onClicked: {
+            if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+            {
+                if(vibrato_list_model_container.doesNoteHaveVibrato(parent.noteId))
+                {
+                    console.log("delete vibrato");
+                    vibrato_list_model_container.removeByNoteId(parent.noteId)
+                    return;
+                }
+
+                vibrato_list_model_container.append(parent.noteId,
+                                                    parent.width / 3,
+                                                    20,
+                                                    0.5);
+            }
+        }
+    }
 }

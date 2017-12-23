@@ -6,13 +6,24 @@ Item {
     property int vibratoIdCounter: 0;
     signal modelUpdated()
 
+    Connections{
+        target: note_list_model_container
+        onNoteRemoved:{
+            removeIfVibratoHasNoteId(aNoteId)
+        }
+    }
+
+    function removeIfVibratoHasNoteId(aNoteId)
+    {
+        var index = findIndexByNoteId(aNoteId);
+        if(index >= 0)
+        {
+            vibratoListModel.remove(index);
+        }
+    }
+
     function append(aNoteId, aLength, aWavelength, aAmplitude)
     {
-        console.log("apend");
-        console.log("note id: " + aNoteId);
-        console.log("length: " + aLength);
-        console.log("wavelength: " + aWavelength);
-        console.log("amplitude: " + aAmplitude);
         vibratoListModel.append({
                                     "vibratoId": vibratoIdCounter,
                                     "noteId": aNoteId,
@@ -22,6 +33,42 @@ Item {
                                 });
         ++vibratoIdCounter;
         modelUpdated();
+    }
+
+    function contains(aVibratoId)
+    {
+        for(var index = 0; index < vibratoListModel.count; ++index)
+        {
+            var vibrato = vibratoListModel.get(index);
+            if(vibrato.vibratoId !== aVibratoId) continue;
+            return true;
+        }
+        return false;
+    }
+
+    function removeByNoteId(aNoteId)
+    {
+        var index = findIndexByNoteId(aNoteId);
+        vibratoListModel.remove(index);
+        modelUpdated();
+    }
+
+    function doesNoteHaveVibrato(aNoteId)
+    {
+        return findIndexByNoteId(aNoteId) >= 0;
+    }
+
+    function findIndexByNoteId(aNoteId)
+    {
+        for(var index = 0; index < vibratoListModel.count; ++index)
+        {
+            console.log("search "+ index);
+            var vibrato = vibratoListModel.get(index);
+            if(vibrato.noteId !== aNoteId) continue;
+            return index;
+        }
+        console.log("not found");
+        return -1;
     }
 
     function find(aVibratoId)
