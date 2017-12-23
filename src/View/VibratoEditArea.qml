@@ -191,7 +191,7 @@ Rectangle {
                                     {
                                         vibrato_list_model_container.append(parent.noteId,
                                                                             parent.width / 3,
-                                                                            3,
+                                                                            20,
                                                                             0.5);
                                     }
                                 }
@@ -211,14 +211,11 @@ Rectangle {
                 height: root.height
 
                 onPaint: {
-                    console.log("on paint");
-                    console.log("vibrato count: ", vibrato_list_model_container.count());
                     var ctx = vibrato_edit_area_canvas.getContext('2d');
                     ctx.clearRect(0,0,vibrato_edit_area_canvas.width, vibrato_edit_area_canvas.height);
 
                     for (var index = 0; index < vibrato_list_model_container.count(); ++index)
                     {
-                        console.log("paint index:" + index);
                         drawVibrato(ctx, index);
                     }
                 }
@@ -241,29 +238,30 @@ Rectangle {
 
                     var length = vibratoEndX - vibratoStartX;
 
-                    var frequency = vibrato.frequency
-                    var halfWaveLength = length / frequency / 2;
+                    var halfWaveLength = vibrato.wavelength / 2;
                     var amplitude = vibrato.amplitude * baseWidth();
+                    var halfOfAmplitude = amplitude / 2;
 
                     aCtx.moveTo(vibratoStartX - 10,
                                 vibratoStartY);
 
                     var preControlX = vibratoStartX - 5;
                     var preControlY = vibratoStartY;
+                    var frequency = length / vibrato.wavelength
 
-                    for (var index = 0; index < frequency * 2; ++index)
+                    for (var index = 0; index < frequency * 2 ; ++index)
                     {
                         var direction = (index%2 == 0) ? 1 : -1;
 
                         aCtx.bezierCurveTo(preControlX,
                                            preControlY,
                                            vibratoStartX + halfWaveLength * index- 5,
-                                           vibratoStartY + amplitude * direction,
+                                           vibratoStartY + halfOfAmplitude * direction,
                                            vibratoStartX + halfWaveLength * index ,
-                                           vibratoStartY + amplitude * direction);
+                                           vibratoStartY + halfOfAmplitude * direction);
 
                         preControlX = vibratoStartX + halfWaveLength * index + 5;
-                        preControlY = vibratoStartY + amplitude * direction;
+                        preControlY = vibratoStartY + halfOfAmplitude * direction;
 
                     }
 
