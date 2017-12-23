@@ -216,7 +216,6 @@ Rectangle {
 
                 function drawVibrato(aCtx, aIndex)
                 {
-                    console.log("draw vibrato index:" + aIndex);
                     aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
                     aCtx.beginPath();
 
@@ -265,6 +264,21 @@ Rectangle {
                     aCtx.lineWidth = 2;
                     aCtx.stroke();
                     aCtx.restore();
+                }
+            }
+
+            Repeater{
+                id: vibrato_start_point_repeater
+                model:vibrato_list_model_container.getModel()
+                Loader{
+                    id:vibrato_start_point_loader
+                    sourceComponent: Component{
+                        VibratoStartPoint{
+                        }
+                    }
+                    onLoaded: {
+                        item.visible = true;
+                    }
                 }
             }
         }
