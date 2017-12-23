@@ -202,59 +202,7 @@ Rectangle {
                 function drawPitchCurve(aCtx, aIndex)
                 {
                     drawPortamento(aCtx, aIndex);
-                    //drawVibrato(aCtx, aIndex);
                 }
-
-                function drawVibrato(aCtx, aIndex)
-                {
-                    aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
-                    aCtx.beginPath();
-
-                    var note = note_list_model_container.findByIndex(aIndex);
-
-                    var vibratoStartX = note.positionX + note.noteWidth - note.vibratoLength;
-                    var vibratoStartY =  note.positionY + edit_area.rowHeight / 2;
-
-                    var vibratoEndX = note.positionX + note.noteWidth;
-                    var vibratoEndY = note.positionY + edit_area.rowHeight / 2;
-
-                    var length = vibratoEndX - vibratoStartX;
-
-
-                    var frequency = note.vibratoFrequency
-                    var halfWaveLength = length / frequency / 2;
-                    var amplitude = note.vibratoAmplitude * edit_area.rowHeight / 2;
-
-                    aCtx.moveTo(vibratoStartX - 10,
-                                vibratoStartY);
-
-                    var preControlX = vibratoStartX - 5;
-                    var preControlY = vibratoStartY;
-
-                    for (var index = 0; index < frequency * 2; ++index)
-                    {
-                        var direction = (index%2 == 0) ? 1 : -1;
-
-                        aCtx.bezierCurveTo(preControlX,
-                                           preControlY,
-                                           vibratoStartX + halfWaveLength * index- 5,
-                                           vibratoStartY + amplitude * direction,
-                                           vibratoStartX + halfWaveLength * index ,
-                                           vibratoStartY + amplitude * direction);
-
-                        preControlX = vibratoStartX + halfWaveLength * index + 5;
-                        preControlY = vibratoStartY + amplitude * direction;
-
-                    }
-
-                    aCtx.bezierCurveTo(preControlX,     preControlY,
-                                       vibratoEndX -5 , vibratoEndY,
-                                       vibratoEndX, vibratoEndY);
-                    aCtx.lineWidth = 2;
-                    aCtx.stroke();
-                    aCtx.restore();
-                }
-
 
                 // TODO リファクタリング　コードが汚い
                 function drawPortamento(aCtx, aIndex)

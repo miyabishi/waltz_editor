@@ -6,18 +6,18 @@ Item {
     property int vibratoIdCounter: 0;
     signal modelUpdated()
 
-    function append(aNoteId, aLength, aFrequency, aAmplitude)
+    function append(aNoteId, aLength, aWavelength, aAmplitude)
     {
         console.log("apend");
         console.log("note id: " + aNoteId);
         console.log("length: " + aLength);
-        console.log("frequency: " + aFrequency);
+        console.log("wavelength: " + aWavelength);
         console.log("amplitude: " + aAmplitude);
         vibratoListModel.append({
                                     "vibratoId": vibratoIdCounter,
                                     "noteId": aNoteId,
                                     "length": aLength,
-                                    "frequency": aFrequency,
+                                    "wavelength": aWavelength,
                                     "amplitude": aAmplitude
                                 });
         ++vibratoIdCounter;
