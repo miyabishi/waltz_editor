@@ -284,6 +284,27 @@ Rectangle {
                     }
                 }
             }
+            Repeater{
+                id: vibrato_second_turning_point_repeater
+                model:vibrato_list_model_container.getModel()
+                Loader{
+                    id:vibrato_second_turning_point_loader
+                    sourceComponent: VibratoStartPoint{
+                        id: vibrato_second_turning_point
+                        width: 10
+                        height: 10
+                    }
+
+                    onLoaded: {
+                        var note = note_list_model_container.find(noteId);
+                        item.noteId = noteId
+                        item.vibratoId = vibratoId
+                        item.x = note.positionX + note.noteWidth - length
+                                 + wavelength * 3.0 / 4 - width / 2;
+                        item.y = calculateY(-amplitude) - height / 2;
+                    }
+                }
+            }
         }
     }
 }

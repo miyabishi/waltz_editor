@@ -40,6 +40,6 @@
         <file>image/expand_more.png</file>
         <file>src/View/VibratoListModelContainer.qml</file>
         <file>src/View/VibratoStartPoint.qml</file>
-        <file>src/View/VibratoFirstWavelengthEndPoint.qml</file>
+        <file>src/View/VibratoSecondTurningPoint.qml</file>
     </qresource>
 </RCC>

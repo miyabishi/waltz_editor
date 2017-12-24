@@ -9,12 +9,13 @@ Item {
     Drag.hotSpot.y: height/2
     Drag.active: true
 
-    function updateVibratoStartPoint()
+    function updateVibratoSecondTurningPoint()
     {
     }
 
-    function calculateVibratoLength()
+    function calculateWavelength(aVibratoStartPointX)
     {
+        return aVibratoStartPointX *4/3;
     }
 
     Canvas{
@@ -44,7 +45,7 @@ Item {
 
         acceptedButtons: Qt.LeftButton
         drag.target: root
-        drag.axis: Drag.XAxis
+        drag.axis: Drag.XandYAxis
 
         onPositionChanged: {
             updateVibratoStartPoint();
