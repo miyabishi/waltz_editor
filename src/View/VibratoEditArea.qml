@@ -258,11 +258,6 @@ Rectangle {
 
                     }
 
-                    /*
-                    aCtx.bezierCurveTo(preControlX,     preControlY,
-                                       vibratoEndX -5 , vibratoEndY,
-                                       vibratoEndX, vibratoEndY);
-                    */
                     aCtx.lineWidth = 1;
                     aCtx.stroke();
                     aCtx.restore();

@@ -11,17 +11,14 @@ Item {
 
     function updateVibratoStartPoint()
     {
-        vibrato_list_model_container.updateVibratoLength(vibratoId, calculateVibratoLength());
     }
 
     function calculateVibratoLength()
     {
-        var note = note_list_model_container.find(noteId);
-        return (note.positionX + note.noteWidth) - (root.x + width / 2 );
     }
 
     Canvas{
-        id: vibrato_start_point_canvas
+        id: vibrato_first_wavelength_end_point_canvas
         anchors.fill: parent
         onPaint: {
             var ctx = vibrato_start_point_canvas.getContext('2d');
@@ -42,7 +39,7 @@ Item {
     }
 
     MouseArea{
-        id: vibrato_start_point_mouse_area
+        id: vibrato_first_wavelength_end_point_mouse_area
         anchors.fill: root
 
         acceptedButtons: Qt.LeftButton

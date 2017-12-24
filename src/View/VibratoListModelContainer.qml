@@ -35,6 +35,23 @@ Item {
         modelUpdated();
     }
 
+    function updateVibratoLength(aVibratoId, aLength)
+    {
+        var index = findIndexByVibratoId(aVibratoId);
+        var vibrato = vibratoListModel.get(index);
+        vibratoListModel.set(index,
+                             {
+                                 "vibratoId": vibrato.vibratoId,
+                                 "noteId": vibrato.noteId,
+                                 "length": aLength,
+                                 "wavelength": vibrato.wavelength,
+                                 "amplitude": vibrato.amplitude
+                             });
+        modelUpdated();
+    }
+
+
+
     function contains(aVibratoId)
     {
         for(var index = 0; index < vibratoListModel.count; ++index)
@@ -58,16 +75,25 @@ Item {
         return findIndexByNoteId(aNoteId) >= 0;
     }
 
+    function findIndexByVibratoId(aVibratoId)
+    {
+        for(var index = 0; index < vibratoListModel.count; ++index)
+        {
+            var vibrato = vibratoListModel.get(index);
+            if(vibrato.vibratoId !== aVibratoId) continue;
+            return index;
+        }
+        return;
+    }
+
     function findIndexByNoteId(aNoteId)
     {
         for(var index = 0; index < vibratoListModel.count; ++index)
         {
-            console.log("search "+ index);
             var vibrato = vibratoListModel.get(index);
             if(vibrato.noteId !== aNoteId) continue;
             return index;
         }
-        console.log("not found");
         return -1;
     }
 
