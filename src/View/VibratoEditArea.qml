@@ -235,14 +235,14 @@ Rectangle {
                     var amplitude = vibrato.amplitude * baseWidth();
                     var halfOfAmplitude = amplitude / 2;
 
-                    aCtx.moveTo(vibratoStartX - 10,
+                    aCtx.moveTo(vibratoStartX,
                                 vibratoStartY);
 
-                    var preControlX = vibratoStartX - 5;
-                    var preControlY = vibratoStartY;
+                    var preControlX = vibratoStartX;
+                    var preControlY = vibratoStartY + vibrato.wavelength/4;
                     var frequency = length / vibrato.wavelength
 
-                    for (var index = 0; index < frequency * 2 ; ++index)
+                    for (var index = 1; index < frequency * 2 + 1; ++index)
                     {
                         var direction = (index%2 == 0) ? 1 : -1;
 
@@ -258,10 +258,12 @@ Rectangle {
 
                     }
 
+                    /*
                     aCtx.bezierCurveTo(preControlX,     preControlY,
                                        vibratoEndX -5 , vibratoEndY,
                                        vibratoEndX, vibratoEndY);
-                    aCtx.lineWidth = 2;
+                    */
+                    aCtx.lineWidth = 1;
                     aCtx.stroke();
                     aCtx.restore();
                 }
@@ -272,12 +274,18 @@ Rectangle {
                 model:vibrato_list_model_container.getModel()
                 Loader{
                     id:vibrato_start_point_loader
-                    sourceComponent: Component{
-                        VibratoStartPoint{
-                        }
+                    sourceComponent: VibratoStartPoint{
+                        id: vibrato_start_point
+                        width: 10
+                        height: 10
                     }
+
                     onLoaded: {
-                        item.visible = true;
+                        var note = note_list_model_container.find(noteId);
+                        item.noteId = noteId
+                        item.vibratoId = vibratoId
+                        item.x = note.positionX + note.noteWidth - length - width / 2;
+                        item.y = calculateY(0) - height / 2;
                     }
                 }
             }

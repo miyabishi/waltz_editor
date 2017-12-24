@@ -2,9 +2,13 @@ import QtQuick 2.0
 
 Item {
     id: root
+    property int vibratoId
+    property int noteId
+
     Drag.hotSpot.x: width/2
     Drag.hotSpot.y: height/2
     Drag.active: true
+
     Canvas{
         id: vibrato_start_point_canvas
         anchors.fill: parent
