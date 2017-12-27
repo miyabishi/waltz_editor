@@ -19,11 +19,11 @@ Item {
     }
 
     Canvas{
-        id: vibrato_first_wavelength_end_point_canvas
+        id: vibrato_wavelength_end_point_canvas
         anchors.fill: parent
         onPaint: {
-            var ctx = vibrato_start_point_canvas.getContext('2d');
-            ctx.clearRect(0,0,vibrato_start_point_canvas.width, vibrato_start_point_canvas.height);
+            var ctx = vibrato_wavelength_end_point_canvas.getContext('2d');
+            ctx.clearRect(0,0,vibrato_wavelength_end_point_canvas.width, vibrato_wavelength_end_point_canvas.height);
             ctx.strokeStyle = Qt.rgba(.5,.9,.7);
 
             ctx.beginPath();
@@ -45,7 +45,7 @@ Item {
 
         acceptedButtons: Qt.LeftButton
         drag.target: root
-        drag.axis: Drag.XandYAxis
+        drag.axis: Drag.XAxis
 
         onPositionChanged: {
             updateVibratoStartPoint();

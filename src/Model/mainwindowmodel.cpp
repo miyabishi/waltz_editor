@@ -1,5 +1,6 @@
 #include <QString>
 #include <QUrl>
+#include <QMessageBox>
 #include <waltz_common/commandid.h>
 #include <waltz_common/parameter.h>
 #include <waltz_common/parameters.h>

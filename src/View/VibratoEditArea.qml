@@ -289,8 +289,8 @@ Rectangle {
                 model:vibrato_list_model_container.getModel()
                 Loader{
                     id:vibrato_second_turning_point_loader
-                    sourceComponent: VibratoStartPoint{
-                        id: vibrato_second_turning_point
+                    sourceComponent: VibratoWevelengthEndPoint{
+                        id: vibrato_wavelength_end_point
                         width: 10
                         height: 10
                     }
@@ -299,9 +299,8 @@ Rectangle {
                         var note = note_list_model_container.find(noteId);
                         item.noteId = noteId
                         item.vibratoId = vibratoId
-                        item.x = note.positionX + note.noteWidth - length
-                                 + wavelength * 3.0 / 4 - width / 2;
-                        item.y = calculateY(-amplitude) - height / 2;
+                        item.x = note.positionX + note.noteWidth - length + wavelength - item.width / 2;
+                        item.y = calculateY(0) - item.height / 2;
                     }
                 }
             }

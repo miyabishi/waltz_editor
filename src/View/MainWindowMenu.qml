@@ -24,5 +24,10 @@ MenuBar {
 
     Menu{
         title: "&Help"
+        MenuItem{
+            text:"AboutQt..."
+            onTriggered: {
+            }
+        }
     }
 }
