@@ -11,12 +11,21 @@ Item {
 
     function updateVibratoWavelengthEndPoint()
     {
+        vibrato_list_model_container.updateVibratoWavelength(vibratoId,
+                                                             calculateVibratoWaveLength())
     }
 
-    function calculateWavelength(aVibratoStartPointX)
+
+
+    function calculateVibratoWaveLength()
     {
-        return aVibratoStartPointX *4/3;
+        var note = note_list_model_container.find(noteId);
+        var vibrato = vibrato_list_model_container.find(vibratoId);
+        var vibratoStartPointX = (note.positionX + note.noteWidth) - vibrato.length;
+        var vibratoEndPointX = root.x + width / 2;
+        return vibratoEndPointX - vibratoStartPointX;
     }
+
 
     Canvas{
         id: vibrato_wavelength_end_point_canvas

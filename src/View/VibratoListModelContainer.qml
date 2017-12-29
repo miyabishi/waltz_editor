@@ -50,6 +50,20 @@ Item {
         modelUpdated(vibrato.vibratoId);
     }
 
+    function updateVibratoWavelength(aVibratoId, aWavelength)
+    {
+        var index = findIndexByVibratoId(aVibratoId);
+        var vibrato = vibratoListModel.get(index);
+        vibratoListModel.set(index,
+                             {
+                                 "vibratoId": vibrato.vibratoId,
+                                 "noteId": vibrato.noteId,
+                                 "length": vibrato.length,
+                                 "wavelength": aWavelength,
+                                 "amplitude": vibrato.amplitude
+                             });
+        modelUpdated(vibrato.vibratoId);
+    }
 
 
     function contains(aVibratoId)
