@@ -48,6 +48,12 @@ Item {
         return noteListModel;
     }
 
+    function getWidth(aNoteId)
+    {
+        var note = find(aNoteId);
+        return note.noteWidth;
+    }
+
     function findNoteWithPitchChangingPoint(aX)
     {
         for (var index = 0; index < noteListModel.count; ++index)

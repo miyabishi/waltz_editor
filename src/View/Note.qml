@@ -33,7 +33,7 @@ Rectangle{
                                               "noteText": pNoteText_,
                                               "positionX":positionX,
                                               "positionY":positionY,
-                                              "noteWidth": width});
+                                              "noteWidth": root.width});
 
     }
 

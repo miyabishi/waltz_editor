@@ -12,21 +12,19 @@ Item {
     Connections{
         target: note_list_model_container
         onModelUpdated:{
-            reload(aNoteId);
+            reloadVibratoStartPoint(aNoteId);
         }
     }
 
-    function reload(aNoteId)
+    function reloadVibratoStartPoint(aNoteId)
     {
-        if (noteId !== aNoteId) return;
-        console.log("reload!");
+        if(noteId !== aNoteId) return;
+
         var vibrato = vibrato_list_model_container.find(vibratoId)
-        var note = note_volume_list_model_container.find(noteId)
-        root.x = note.positionX + note.noteWidth - vibrato.length - width / 2;
-        console.log("note x " + note.positionX);
-        console.log("note width " + note.noteWidth);
-        console.log("vibrato length " + vibrato.length);
-        console.log("x = " + root.x);
+        var note = note_list_model_container.find(noteId);
+
+        root.x = note.positionX + note_list_model_container.getWidth(noteId)
+                - vibrato.length - root.width / 2;
     }
 
     function updateVibratoStartPoint()

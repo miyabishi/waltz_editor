@@ -4,7 +4,7 @@ Item {
     id:root
     property ListModel vibratoListModel: ListModel{}
     property int vibratoIdCounter: 0;
-    signal modelUpdated()
+    signal modelUpdated(real aVibratoId)
 
     Connections{
         target: note_list_model_container
@@ -31,8 +31,8 @@ Item {
                                     "wavelength": aWavelength,
                                     "amplitude": aAmplitude
                                 });
+        modelUpdated(vibratoIdCounter);
         ++vibratoIdCounter;
-        modelUpdated();
     }
 
     function updateVibratoLength(aVibratoId, aLength)
@@ -47,7 +47,7 @@ Item {
                                  "wavelength": vibrato.wavelength,
                                  "amplitude": vibrato.amplitude
                              });
-        modelUpdated();
+        modelUpdated(vibrato.vibratoId);
     }
 
 
@@ -66,8 +66,10 @@ Item {
     function removeByNoteId(aNoteId)
     {
         var index = findIndexByNoteId(aNoteId);
+        var vibrato = vibratoListModel.get(index);
+        var vibratoId = vibrato.vibratoId;
         vibratoListModel.remove(index);
-        modelUpdated();
+        modelUpdated(vibratoId);
     }
 
     function doesNoteHaveVibrato(aNoteId)
