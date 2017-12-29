@@ -9,7 +9,7 @@ Item {
     Drag.hotSpot.y: height/2
     Drag.active: true
 
-    function updateVibratoSecondTurningPoint()
+    function updateVibratoWavelengthEndPoint()
     {
     }
 
@@ -40,7 +40,7 @@ Item {
     }
 
     MouseArea{
-        id: vibrato_first_wavelength_end_point_mouse_area
+        id: vibrato_wavelength_end_point_mouse_area
         anchors.fill: root
 
         acceptedButtons: Qt.LeftButton
@@ -48,7 +48,7 @@ Item {
         drag.axis: Drag.XAxis
 
         onPositionChanged: {
-            updateVibratoStartPoint();
+            updateVibratoWevelengthEndPoint();
         }
 
         onReleased: {

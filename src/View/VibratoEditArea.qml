@@ -231,31 +231,32 @@ Rectangle {
 
                     var length = vibratoEndX - vibratoStartX;
 
-                    var halfWaveLength = vibrato.wavelength / 2;
+                    var halfWavelength = vibrato.wavelength / 2;
+                    var quarterOfWavelength = vibrato.wavelength / 4;
+
                     var amplitude = vibrato.amplitude * baseWidth();
                     var halfOfAmplitude = amplitude / 2;
 
-                    aCtx.moveTo(vibratoStartX,
-                                vibratoStartY);
-
+                    aCtx.moveTo(vibratoStartX, vibratoStartY);
                     var preControlX = vibratoStartX;
-                    var preControlY = vibratoStartY + vibrato.wavelength/4;
+                    var preControlY = vibratoStartY;
+
                     var frequency = length / vibrato.wavelength
 
-                    for (var index = 1; index < frequency * 2 + 1; ++index)
+                    for (var index = 0; index < frequency * 2; ++index)
                     {
                         var direction = (index%2 == 0) ? 1 : -1;
+                        var yPosition = vibratoStartY + halfOfAmplitude * direction;
+                        var xPosition = vibratoStartX + index * halfWavelength + quarterOfWavelength;
 
                         aCtx.bezierCurveTo(preControlX,
                                            preControlY,
-                                           vibratoStartX + halfWaveLength * index- 5,
-                                           vibratoStartY + halfOfAmplitude * direction,
-                                           vibratoStartX + halfWaveLength * index ,
-                                           vibratoStartY + halfOfAmplitude * direction);
-
-                        preControlX = vibratoStartX + halfWaveLength * index + 5;
-                        preControlY = vibratoStartY + halfOfAmplitude * direction;
-
+                                           xPosition - quarterOfWavelength,
+                                           yPosition,
+                                           xPosition,
+                                           yPosition);
+                        preControlX = xPosition + quarterOfWavelength;
+                        preControlY = yPosition;
                     }
 
                     aCtx.lineWidth = 1;

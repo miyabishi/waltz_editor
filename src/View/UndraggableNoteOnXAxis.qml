@@ -44,7 +44,7 @@ Rectangle {
 
                 vibrato_list_model_container.append(parent.noteId,
                                                     parent.width / 3,
-                                                    100,
+                                                    30,
                                                     0.5);
             }
         }
