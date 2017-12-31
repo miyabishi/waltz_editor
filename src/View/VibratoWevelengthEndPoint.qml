@@ -9,13 +9,32 @@ Item {
     Drag.hotSpot.y: height/2
     Drag.active: true
 
+    Connections{
+        target: note_list_model_container
+        onModelUpdated:{
+            if (aNoteId !== root.noteId) return;
+            reloadVibratoEndPoint(aNoteId);
+        }
+    }
+
+    Connections{
+        target: vibrato_list_model_container
+        onModelUpdated:{
+            if (aVibratoId !== root.vibratoId) return;
+            reloadVibratoEndPoint();
+        }
+    }
+
+    function reloadVibratoEndPoint()
+    {
+        root.x = vibrato_list_model_container.calculateVibratoWavelengthEndPoint(vibratoId, noteId) - root.width / 2;
+    }
+
     function updateVibratoWavelengthEndPoint()
     {
         vibrato_list_model_container.updateVibratoWavelength(vibratoId,
                                                              calculateVibratoWaveLength())
     }
-
-
 
     function calculateVibratoWaveLength()
     {
@@ -25,7 +44,6 @@ Item {
         var vibratoEndPointX = root.x + width / 2;
         return vibratoEndPointX - vibratoStartPointX;
     }
-
 
     Canvas{
         id: vibrato_wavelength_end_point_canvas
@@ -57,7 +75,7 @@ Item {
         drag.axis: Drag.XAxis
 
         onPositionChanged: {
-            updateVibratoWevelengthEndPoint();
+            updateVibratoWavelengthEndPoint();
         }
 
         onReleased: {

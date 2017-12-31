@@ -243,9 +243,9 @@ Rectangle {
 
                     var frequency = length / vibrato.wavelength
 
-                    for (var index = 0; index < frequency * 2; ++index)
+                    for (var index = 0; index < frequency * 2 + 1; ++index)
                     {
-                        var direction = (index%2 == 0) ? 1 : -1;
+                        var direction = (index%2 == 0) ? -1 : 1;
                         var yPosition = vibratoStartY + halfOfAmplitude * direction;
                         var xPosition = vibratoStartX + index * halfWavelength + quarterOfWavelength;
 

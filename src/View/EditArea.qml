@@ -216,7 +216,7 @@ Rectangle{
     Rectangle{
         id: beat_axis_view
         height: 20
-        color:"#222222"
+        color: "#222222"
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right

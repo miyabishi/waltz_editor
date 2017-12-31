@@ -134,6 +134,19 @@ Item {
         return vibratoListModel.get(aIndex);
     }
 
+    function calculateVibratoStartPoint(aVibratoId, aNoteId)
+    {
+        var vibrato = root.find(aVibratoId)
+        var note = note_list_model_container.find(aNoteId);
+        return note.positionX + note_list_model_container.getWidth(aNoteId) - vibrato.length - root.width / 2;
+    }
+
+    function calculateVibratoWavelengthEndPoint(aVibratoId, aNoteId)
+    {
+        var vibrato = find(aVibratoId);
+        return calculateVibratoStartPoint(aVibratoId, aNoteId) + vibrato.wavelength
+    }
+
     function getModel()
     {
         return vibratoListModel;

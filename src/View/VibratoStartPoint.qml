@@ -19,12 +19,7 @@ Item {
     function reloadVibratoStartPoint(aNoteId)
     {
         if(noteId !== aNoteId) return;
-
-        var vibrato = vibrato_list_model_container.find(vibratoId)
-        var note = note_list_model_container.find(noteId);
-
-        root.x = note.positionX + note_list_model_container.getWidth(noteId)
-                - vibrato.length - root.width / 2;
+        root.x = vibrato_list_model_container.calculateVibratoStartPoint(vibratoId, noteId) - root.width / 2;
     }
 
     function updateVibratoStartPoint()
