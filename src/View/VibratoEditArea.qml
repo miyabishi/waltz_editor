@@ -214,6 +214,22 @@ Rectangle {
                     }
                 }
 
+                function calculateAmplitude(aPosition, aLength, aMaxAmplitude)
+                {
+                    var fadeLength = 10;
+                    if (aPosition < fadeLength)
+                    {
+                        return aMaxAmplitude / fadeLength * aPosition;
+                    }
+
+                    if (aPosition > (aLength - fadeLength))
+                    {
+                        return - aMaxAmplitude/ fadeLength * (aPosition - aLength);
+                    }
+
+                    return aMaxAmplitude;
+                }
+
                 function drawVibrato(aCtx, aIndex)
                 {
                     aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
@@ -243,21 +259,30 @@ Rectangle {
 
                     var frequency = length / vibrato.wavelength
 
-                    for (var index = 0; index < frequency * 2 + 1; ++index)
+                    for (var index = 0; index < frequency * 2; ++index)
                     {
                         var direction = (index%2 == 0) ? -1 : 1;
-                        var yPosition = vibratoStartY + halfOfAmplitude * direction;
                         var xPosition = vibratoStartX + index * halfWavelength + quarterOfWavelength;
+
+                        if (xPosition > vibratoEndX) break;
 
                         aCtx.bezierCurveTo(preControlX,
                                            preControlY,
                                            xPosition - quarterOfWavelength,
-                                           yPosition,
+                                           vibratoStartY + calculateAmplitude(xPosition - vibratoStartX - quarterOfWavelength, length, amplitude)/2 * direction,
                                            xPosition,
-                                           yPosition);
+                                           vibratoStartY + calculateAmplitude(xPosition - vibratoStartX, length, amplitude)/2 * direction);
+
                         preControlX = xPosition + quarterOfWavelength;
-                        preControlY = yPosition;
+                        preControlY = vibratoStartY + calculateAmplitude(xPosition - vibratoStartX, length, amplitude) * direction / 2;
                     }
+
+                    aCtx.bezierCurveTo(vibratoEndX,
+                                       preControlY,
+                                       vibratoEndX,
+                                       vibratoEndY,
+                                       vibratoEndX,
+                                       vibratoEndY);
 
                     aCtx.lineWidth = 1;
                     aCtx.stroke();
