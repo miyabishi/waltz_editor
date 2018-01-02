@@ -9,6 +9,9 @@
 #include "src/Domain/ScoreComponent/beat.h"
 #include "src/Domain/ScoreComponent/tempo.h"
 #include "src/Domain/ScoreComponent/notelength.h"
+#include "src/Domain/ScoreComponent/vibratolength.h";
+#include "src/Domain/ScoreComponent/vibratowavelength.h";
+
 
 namespace waltz
 {
@@ -43,6 +46,13 @@ namespace waltz
                                                                       ScoreComponent::Beat aBeat,
                                                                       ScoreComponent::Tempo aTempo) const;
                 ScoreComponent::PitchPointer calculatePitch(int aY) const;
+
+                ScoreComponent::VibratoLength calculateVibratoLength(int aLength,
+                                                                     ScoreComponent::Beat aBeat,
+                                                                     ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::VibratoWavelength calculateVibratoWavelength(int aWavelength,
+                                                                             ScoreComponent::Beat aBeat,
+                                                                             ScoreComponent::Tempo aTempo) const;
 
             private:
                 double calculateSec(int aX,

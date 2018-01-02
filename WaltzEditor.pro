@@ -29,23 +29,21 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/noterectwidth.cpp \
     src/Domain/ScoreComponent/vibrato.cpp \
     src/Domain/ScoreComponent/vibratoamplitude.cpp \
-    src/Domain/ScoreComponent/vibratofrequency.cpp \
     src/Domain/ScoreComponent/pitchchangingpoint.cpp \
     src/Domain/ScoreComponent/pitchcurve.cpp \
     src/Domain/ScoreComponent/point.cpp \
     src/Domain/ScoreComponent/noterectheight.cpp \
     src/Domain/ScoreComponent/vibratolength.cpp \
     src/Domain/ScoreComponent/noteinformation.cpp \
-    src/Domain/ScoreComponent/vibratoinformation.cpp \
-    src/Domain/ScoreComponent/vibratostartpoint.cpp \
-    src/Domain/ScoreComponent/vibratoendpoint.cpp \
     src/Domain/ScoreComponent/pitchchangingpointtime.cpp \
     src/Domain/ScoreComponent/pitchchangingpointfrequency.cpp \
     src/Domain/ScoreComponent/abstractnoteparameter.cpp \
     src/Domain/ScoreComponent/notevolume.cpp \
     src/Domain/ScoreComponent/noteparameterlist.cpp \
     src/Domain/Commands/startseekbarcommand.cpp \
-    src/Domain/Commands/resetseekbarcommand.cpp
+    src/Domain/Commands/resetseekbarcommand.cpp \
+    src/Domain/ScoreComponent/vibratowavelength.cpp \
+    src/Domain/ScoreComponent/vibratolist.cpp
 
 RESOURCES += qml.qrc
 
@@ -99,23 +97,21 @@ HEADERS += \
     src/Domain/ScoreComponent/noterectwidth.h \
     src/Domain/ScoreComponent/vibrato.h \
     src/Domain/ScoreComponent/vibratoamplitude.h \
-    src/Domain/ScoreComponent/vibratofrequency.h \
     src/Domain/ScoreComponent/pitchchangingpoint.h \
     src/Domain/ScoreComponent/pitchcurve.h \
     src/Domain/ScoreComponent/point.h \
     src/Domain/ScoreComponent/noterectheight.h \
     src/Domain/ScoreComponent/vibratolength.h \
     src/Domain/ScoreComponent/noteinformation.h \
-    src/Domain/ScoreComponent/vibratoinformation.h \
-    src/Domain/ScoreComponent/vibratostartpoint.h \
-    src/Domain/ScoreComponent/vibratoendpoint.h \
     src/Domain/ScoreComponent/pitchchangingpointtime.h \
     src/Domain/ScoreComponent/pitchchangingpointfrequency.h \
     src/Domain/ScoreComponent/abstractnoteparameter.h \
     src/Domain/ScoreComponent/notevolume.h \
     src/Domain/ScoreComponent/noteparameterlist.h \
     src/Domain/Commands/startseekbarcommand.h \
-    src/Domain/Commands/resetseekbarcommand.h
+    src/Domain/Commands/resetseekbarcommand.h \
+    src/Domain/ScoreComponent/vibratowavelength.h \
+    src/Domain/ScoreComponent/vibratolist.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

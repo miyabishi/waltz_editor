@@ -12,6 +12,7 @@
 #include "noteid.h"
 #include "pitchcurve.h"
 #include "pitchchangingpoint.h"
+#include "vibratowavelength.h"
 
 namespace waltz
 {
@@ -36,6 +37,11 @@ namespace waltz
                 void appendNoteParameter(const NoteId aNoteId,
                                          const NoteParameterPointer aParameter);
                 void appendPitchChangingPoint(const PitchChangingPointPointer aPitchChangingPoint);
+                void appendVibrato(NoteId aNoteId,
+                                   VibratoLengthPointer aVibratoLength,
+                                   VibratoWavelengthPointer aWavelength,
+                                   VibratoAmplitudePointer aAmplitude);
+
                 waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;
                 void clearScore();
