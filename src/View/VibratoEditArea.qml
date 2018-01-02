@@ -7,9 +7,6 @@ Rectangle {
     property int max: 20
     property int min: root.height - 35
     property int xOffset:0
-    onVisibleChanged: {
-        console.log ("vibrato edit area visible changed");
-    }
 
     onXOffsetChanged: {
         if (vibrato_edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -22,6 +19,11 @@ Rectangle {
     function calculateY(aValue)
     {
         return root.rangeWidth() / 2 - root.rangeWidth() * (aValue / 4.0) + root.max;
+    }
+
+    function calculateValue(aY)
+    {
+        return 2 + 4 * (root.max - aY) / rangeWidth();
     }
 
     function rangeWidth()
@@ -232,8 +234,6 @@ Rectangle {
 
                 function drawVibrato(aCtx, aIndex)
                 {
-                    aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
-                    aCtx.beginPath();
 
                     var vibrato = vibrato_list_model_container.findByIndex(aIndex);
                     var note = note_list_model_container.find(vibrato.noteId);
@@ -253,9 +253,25 @@ Rectangle {
                     var amplitude = vibrato.amplitude * baseWidth();
                     var halfOfAmplitude = amplitude / 2;
 
+                    // draw square
+                    aCtx.strokeStyle = Qt.rgba(.4,.6,.9);
+                    aCtx.beginPath();
+                    aCtx.moveTo(vibratoStartX, vibratoStartY + amplitude / 2);
+                    aCtx.lineTo(vibratoEndX, vibratoStartY + amplitude / 2);
+                    aCtx.lineTo(vibratoEndX, vibratoStartY - amplitude / 2);
+                    aCtx.lineTo(vibratoStartX, vibratoStartY - amplitude / 2);
+                    aCtx.lineTo(vibratoStartX, vibratoStartY + amplitude / 2);
+                    aCtx.lineWidth = 1;
+                    aCtx.stroke();
+                    aCtx.restore();
+
+                    // draw wave
+                    aCtx.strokeStyle = Qt.rgba(.5,.9,.7);
+                    aCtx.beginPath();
                     aCtx.moveTo(vibratoStartX, vibratoStartY);
                     var preControlX = vibratoStartX;
                     var preControlY = vibratoStartY;
+
 
                     var frequency = length / vibrato.wavelength
 
@@ -311,10 +327,10 @@ Rectangle {
                 }
             }
             Repeater{
-                id: vibrato_second_turning_point_repeater
-                model:vibrato_list_model_container.getModel()
+                id: vibrato_wavelengtth_end_point_repeater
+                model: vibrato_list_model_container.getModel()
                 Loader{
-                    id:vibrato_second_turning_point_loader
+                    id:vibrato_wavelength_end_point_loader
                     sourceComponent: VibratoWevelengthEndPoint{
                         id: vibrato_wavelength_end_point
                         width: 10
@@ -328,6 +344,27 @@ Rectangle {
                         item.x = note.positionX + note.noteWidth - length + wavelength - item.width / 2;
                         item.y = calculateY(0) - item.height / 2;
                     }
+                }
+            }
+
+            Repeater {
+                id: vibrato_amplitude_control_point_repeater
+                model: vibrato_list_model_container.getModel()
+                Loader{
+                    id: vibrato_amplitude_control_point_loader
+                    sourceComponent: VibratoAmplitudeControlPoint{
+                        id: vibrato_amplitude_control_point
+                        width: 10
+                        height: 10
+                    }
+                    onLoaded: {
+                        var note = note_list_model_container.find(noteId);
+                        item.noteId = noteId
+                        item.vibratoId = vibratoId
+                        item.x = vibrato_list_model_container.calculateVibratoAmplitudeControlPointX(vibratoId, noteId);
+                        item.y = root.calculateY(amplitude) - item.height / 2;
+                    }
+
                 }
             }
         }

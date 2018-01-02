@@ -13,6 +13,11 @@ Item {
         }
     }
 
+    function reflect()
+    {
+
+    }
+
     function removeIfVibratoHasNoteId(aNoteId)
     {
         var index = findIndexByNoteId(aNoteId);
@@ -65,6 +70,20 @@ Item {
         modelUpdated(vibrato.vibratoId);
     }
 
+    function updateVibratoAmplitude(aVibratoId, aAmplitude)
+    {
+        var index = findIndexByVibratoId(aVibratoId);
+        var vibrato = vibratoListModel.get(index);
+        vibratoListModel.set(index,
+                             {
+                                 "vibratoId": vibrato.vibratoId,
+                                 "noteId": vibrato.noteId,
+                                 "length": vibrato.length,
+                                 "wavelength": vibrato.wavelength,
+                                 "amplitude": aAmplitude
+                             });
+        modelUpdated(vibrato.vibratoId);
+    }
 
     function contains(aVibratoId)
     {
@@ -134,11 +153,24 @@ Item {
         return vibratoListModel.get(aIndex);
     }
 
+    function getAmplitude(aVibratoId)
+    {
+        var vibrato = find(aVibratoId);
+        return vibrato.amplitude;
+    }
+
     function calculateVibratoStartPoint(aVibratoId, aNoteId)
     {
         var vibrato = root.find(aVibratoId)
         var note = note_list_model_container.find(aNoteId);
-        return note.positionX + note_list_model_container.getWidth(aNoteId) - vibrato.length - root.width / 2;
+        return note.positionX + note_list_model_container.getWidth(aNoteId) - vibrato.length;
+    }
+
+    function calculateVibratoAmplitudeControlPointX(aVibratoId, aNoteId)
+    {
+        var note = note_list_model_container.find(aNoteId);
+
+        return note.positionX + note_list_model_container.getWidth(aNoteId);
     }
 
     function calculateVibratoWavelengthEndPoint(aVibratoId, aNoteId)

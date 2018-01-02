@@ -41,5 +41,6 @@
         <file>src/View/VibratoListModelContainer.qml</file>
         <file>src/View/VibratoStartPoint.qml</file>
         <file>src/View/VibratoWevelengthEndPoint.qml</file>
+        <file>src/View/VibratoAmplitudeControlPoint.qml</file>
     </qresource>
 </RCC>

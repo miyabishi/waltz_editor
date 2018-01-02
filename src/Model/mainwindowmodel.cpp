@@ -192,6 +192,14 @@ void MainWindowModel::play()
 
 }
 
+void MainWindowModel::appendVibrato(int aNoteId,
+                                    int aLength,
+                                    int aWavelength,
+                                    int aAmplitude)
+{
+
+}
+
 int MainWindowModel::findNotePositionX(int aIndex) const
 {
     return mScore_->noteList()->at(aIndex)->xPosition();

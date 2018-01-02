@@ -46,6 +46,11 @@ namespace waltz
                                                   int aVolume);
                 Q_INVOKABLE void appendPitchChangingPoint(int aX, int aY);
 
+                Q_INVOKABLE void appendVibrato(int aNoteId,
+                                               int aLength,
+                                               int aWaveLength,
+                                               int aAmplitude);
+
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;
                 Q_INVOKABLE int beatParent() const;
