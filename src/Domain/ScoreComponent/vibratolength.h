@@ -2,6 +2,7 @@
 #define VIBRATOLENGTH_H
 
 #include <QSharedPointer>
+#include <waltz_common/parameter.h>
 
 namespace waltz
 {
@@ -12,12 +13,13 @@ namespace waltz
             class VibratoLength
             {
             public:
-                VibratoLength(int aValue);
+                explicit VibratoLength(const double aValue);
+                ~VibratoLength();
 
-                int value() const;
+                common::Commands::Parameter toParameter() const;
 
             private:
-                int mValue_;
+                common::Commands::Parameter& mParameter_;
 
             private:
                 VibratoLength(VibratoLength& aOther);

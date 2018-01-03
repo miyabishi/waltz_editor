@@ -331,7 +331,7 @@ Rectangle {
                 model: vibrato_list_model_container.getModel()
                 Loader{
                     id:vibrato_wavelength_end_point_loader
-                    sourceComponent: VibratoWevelengthEndPoint{
+                    sourceComponent: VibratoWavelengthEndPoint{
                         id: vibrato_wavelength_end_point
                         width: 10
                         height: 10

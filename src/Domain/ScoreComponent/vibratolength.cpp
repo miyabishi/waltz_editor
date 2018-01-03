@@ -1,14 +1,25 @@
 #include "vibratolength.h"
 
+using namespace waltz::common::Commands;
 using namespace waltz::editor::ScoreComponent;
 
-VibratoLength::VibratoLength(int aValue)
-    :mValue_(aValue)
+namespace
+{
+    const QString PARAMETER_NAME("VibratoLength");
+}
+
+VibratoLength::VibratoLength(const double aValue)
+    :mParameter_(* new Parameter(PARAMETER_NAME, aValue))
 {
 }
 
-
-int VibratoLength::value() const
+VibratoLength::~VibratoLength()
 {
-    return mValue_;
+    delete &mParameter_;
+}
+
+
+Parameter VibratoLength::toParameter() const
+{
+    return mParameter_;
 }

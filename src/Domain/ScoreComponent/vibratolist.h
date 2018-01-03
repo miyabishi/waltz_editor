@@ -3,7 +3,12 @@
 
 #include <QSharedPointer>
 #include <QList>
+#include "waltz_common/parameter.h"
+#include "beat.h"
+#include "tempo.h"
+#include "src/Model/editareainformation.h"
 #include "vibrato.h"
+
 
 namespace waltz
 {
@@ -17,6 +22,9 @@ namespace waltz
                 VibratoList();
                 void append(const VibratoPointer aVibrato);
                 void clearVibrato();
+                common::Commands::Parameter toParameter(const Beat aBeat,
+                                                        const Tempo aTempo,
+                                                        const model::EditAreaInformationPointer aEditAreaInfromation) const;
 
             private:
                 QList<VibratoPointer> mVibratoList_;

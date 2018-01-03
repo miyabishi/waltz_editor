@@ -9,8 +9,8 @@
 #include "src/Domain/ScoreComponent/beat.h"
 #include "src/Domain/ScoreComponent/tempo.h"
 #include "src/Domain/ScoreComponent/notelength.h"
-#include "src/Domain/ScoreComponent/vibratolength.h";
-#include "src/Domain/ScoreComponent/vibratowavelength.h";
+#include "src/Domain/ScoreComponent/vibratowavelength.h"
+#include "src/Domain/ScoreComponent/vibratolength.h"
 
 
 namespace waltz
@@ -53,7 +53,6 @@ namespace waltz
                 ScoreComponent::VibratoWavelengthPointer calculateVibratoWavelength(int aWavelength,
                                                                                     ScoreComponent::Beat aBeat,
                                                                                     ScoreComponent::Tempo aTempo) const;
-
             private:
                 double calculateSec(int aX,
                                     waltz::editor::ScoreComponent::Beat aBeat,

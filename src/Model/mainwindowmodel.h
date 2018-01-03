@@ -49,7 +49,7 @@ namespace waltz
                 Q_INVOKABLE void appendVibrato(int aNoteId,
                                                int aLength,
                                                int aWaveLength,
-                                               int aAmplitude);
+                                               double aAmplitude);
 
                 Q_INVOKABLE int tempo() const;
                 Q_INVOKABLE int beatChild() const;

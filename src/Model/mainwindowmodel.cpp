@@ -11,7 +11,6 @@
 #include "src/Domain/LibraryComponent/description.h"
 
 #include "src/Domain/ScoreComponent/noteinformation.h"
-#include "src/Domain/ScoreComponent/vibratoinformation.h"
 #include "src/Domain/ScoreComponent/notevolume.h"
 
 using namespace waltz::common::Communicator;
@@ -194,7 +193,7 @@ void MainWindowModel::play()
 void MainWindowModel::appendVibrato(int aNoteId,
                                     int aLength,
                                     int aWavelength,
-                                    int aAmplitude)
+                                    double aAmplitude)
 {
     VibratoFormPointer form(new VibratoForm(aLength, aWavelength, aAmplitude));
 

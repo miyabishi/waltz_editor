@@ -12,13 +12,19 @@ namespace waltz
             class VibratoForm
             {
             public:
-                VibratoForm(int aLength,
-                            int aWavelength,
-                            int aAmplitude);
+                VibratoForm(const int aLength,
+                            const int aWavelength,
+                            const double aAmplitude);
+
+                int length() const;
+                int wavelength() const;
+                double amplitude() const;
+
+
             private:
                 int mLength_;
                 int mWavelength_;
-                int mAmplitude_;
+                double mAmplitude_;
 
             private:
                 VibratoForm(const VibratoForm& aOther);

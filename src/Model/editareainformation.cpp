@@ -145,7 +145,7 @@ VibratoLengthPointer EditAreaInformation::calculateVibratoLength(int aLength,
                                                                  ScoreComponent::Beat aBeat,
                                                                  ScoreComponent::Tempo aTempo) const
 {
-    return VibratoLengthPointer( new VibratoLength(calculateSec(aLength, aBeat, aTempo)));
+    return VibratoLengthPointer(new VibratoLength(calculateSec(aLength, aBeat, aTempo)));
 }
 
 VibratoWavelengthPointer EditAreaInformation::calculateVibratoWavelength(int aWavelength,

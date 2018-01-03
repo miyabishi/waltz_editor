@@ -2,9 +2,12 @@
 #define VIBRATO_H
 
 #include <QSharedPointer>
+#include <waltz_common/parameters.h>
 #include "vibratoform.h"
 #include "noteid.h"
-
+#include "beat.h"
+#include "tempo.h"
+#include "src/Model/editareainformation.h"
 
 namespace waltz
 {
@@ -18,6 +21,9 @@ namespace waltz
                 Vibrato(const NoteId aNoteId,
                         const VibratoFormPointer aVibratoForm);
 
+                common::Commands::Parameters toParameters(const Beat aBeat,
+                                                          const Tempo aTempo,
+                                                          const model::EditAreaInformationPointer aEditAreaInformation) const;
             private:
                 NoteId mNoteId_;
                 VibratoFormPointer mVibratoForm_;

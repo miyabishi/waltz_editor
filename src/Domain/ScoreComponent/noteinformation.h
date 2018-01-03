@@ -6,7 +6,6 @@
 #include "syllable.h"
 #include "noterect.h"
 #include "note.h"
-#include "vibratoinformation.h"
 
 namespace waltz
 {

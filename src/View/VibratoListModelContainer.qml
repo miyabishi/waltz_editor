@@ -15,7 +15,14 @@ Item {
 
     function reflect()
     {
-
+        for(var index = 0; index < vibratoListModel.count; ++index)
+        {
+            var vibrato = vibratoListModel.get(index);
+            MainWindowModel.appendVibrato(vibrato.noteId,
+                                          vibrato.length,
+                                          vibrato.wavelength,
+                                          vibrato.amplitude);
+        }
     }
 
     function removeIfVibratoHasNoteId(aNoteId)

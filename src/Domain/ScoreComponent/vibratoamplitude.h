@@ -1,6 +1,7 @@
 #ifndef VIBRATOAMPLITUDE_H
 #define VIBRATOAMPLITUDE_H
 
+#include <waltz_common/parameter.h>
 #include <QSharedPointer>
 
 namespace waltz
@@ -12,11 +13,13 @@ namespace waltz
             class VibratoAmplitude
             {
             public:
-                VibratoAmplitude(const double aValue);
-                double value() const;
+                explicit VibratoAmplitude(const double aValue);
+                ~VibratoAmplitude();
+
+                common::Commands::Parameter toParameter() const;
 
             private:
-                double mValue_;
+                common::Commands::Parameter& mParameter_;
 
             private:
                 VibratoAmplitude(const VibratoAmplitude& aOther);

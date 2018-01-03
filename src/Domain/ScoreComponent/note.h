@@ -14,8 +14,6 @@
 #include "beat.h"
 #include "vibrato.h"
 #include "src/Model/editareainformation.h"
-#include "vibratoendpoint.h"
-#include "vibratostartpoint.h"
 #include "noteparameterlist.h"
 
 
