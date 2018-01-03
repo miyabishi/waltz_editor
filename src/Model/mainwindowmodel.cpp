@@ -163,7 +163,6 @@ void MainWindowModel::saveWav(const QUrl &aUrl)
                                   parameters));
 }
 
-
 QString MainWindowModel::characterImageUrl() const
 {
     return mLibraryInformation_.characterImage().url().toString();
@@ -197,12 +196,10 @@ void MainWindowModel::appendVibrato(int aNoteId,
                                     int aWavelength,
                                     int aAmplitude)
 {
+    VibratoFormPointer form(new VibratoForm(aLength, aWavelength, aAmplitude));
 
-}
-
-int MainWindowModel::findNotePositionX(int aIndex) const
-{
-    return mScore_->noteList()->at(aIndex)->xPosition();
+    return mScore_->appendVibrato(
+                VibratoPointer(new Vibrato(NoteId(aNoteId), form)));
 }
 
 void MainWindowModel::emitActivePlayButton()
@@ -218,12 +215,6 @@ void MainWindowModel::emitStartSeekBar()
 void MainWindowModel::emitResetSeekBar()
 {
     emit resetSeekBar();
-}
-
-
-NotePointer MainWindowModel::findNote(int aNoteId) const
-{
-    return mScore_->noteList()->find(NoteId(aNoteId));
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

@@ -47,12 +47,12 @@ namespace waltz
                                                                       ScoreComponent::Tempo aTempo) const;
                 ScoreComponent::PitchPointer calculatePitch(int aY) const;
 
-                ScoreComponent::VibratoLength calculateVibratoLength(int aLength,
-                                                                     ScoreComponent::Beat aBeat,
-                                                                     ScoreComponent::Tempo aTempo) const;
-                ScoreComponent::VibratoWavelength calculateVibratoWavelength(int aWavelength,
-                                                                             ScoreComponent::Beat aBeat,
-                                                                             ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::VibratoLengthPointer calculateVibratoLength(int aLength,
+                                                                            ScoreComponent::Beat aBeat,
+                                                                            ScoreComponent::Tempo aTempo) const;
+                ScoreComponent::VibratoWavelengthPointer calculateVibratoWavelength(int aWavelength,
+                                                                                    ScoreComponent::Beat aBeat,
+                                                                                    ScoreComponent::Tempo aTempo) const;
 
             private:
                 double calculateSec(int aX,

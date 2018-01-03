@@ -2,26 +2,8 @@
 
 using namespace waltz::editor::ScoreComponent;
 
-Vibrato::Vibrato(const VibratoAmplitudePointer aAmplitude,
-                 const VibratoFrequencyPointer aFrequency,
-                 const VibratoLengthPointer    aLength)
-    : mAmplitude_(aAmplitude)
-    , mFrequency_(aFrequency)
-    , mLength_(aLength)
+Vibrato::Vibrato(const NoteId aNoteId, const VibratoForm aVibratoForm)
+  : mNoteId_(aNoteId)
+  , mVibratoForm_(aVibratoForm)
 {
-}
-
-VibratoLengthPointer Vibrato::length() const
-{
-    return mLength_;
-}
-
-VibratoAmplitudePointer Vibrato::amplitude() const
-{
-    return mAmplitude_;
-}
-
-VibratoFrequencyPointer Vibrato::frequency() const
-{
-    return mFrequency_;
 }

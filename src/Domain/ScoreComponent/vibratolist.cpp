@@ -11,3 +11,7 @@ void VibratoList::append(const VibratoPointer aVibrato)
     mVibratoList_.append(aVibrato);
 }
 
+void VibratoList::clearVibrato()
+{
+    mVibratoList_.clear();
+}

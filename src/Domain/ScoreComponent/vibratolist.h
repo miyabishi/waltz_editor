@@ -16,11 +16,10 @@ namespace waltz
             public:
                 VibratoList();
                 void append(const VibratoPointer aVibrato);
+                void clearVibrato();
 
             private:
                 QList<VibratoPointer> mVibratoList_;
-
-
 
             private:
                 VibratoList(const VibratoList& aOther);
