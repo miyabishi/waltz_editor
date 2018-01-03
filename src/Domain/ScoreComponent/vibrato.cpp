@@ -18,6 +18,7 @@ Parameters Vibrato::toParameters(const Beat aBeat,
 {
     Parameters parameters;
     VibratoAmplitudePointer amplitude(new VibratoAmplitude(mVibratoForm_->amplitude()));
+    parameters.append(mNoteId_.toParameter());
     parameters.append(aEditAreaInformation->calculateVibratoLength(
                           mVibratoForm_->length(),
                           aBeat,
