@@ -8,18 +8,19 @@ namespace
     const QString PARAMETER_NAME("VibratoLength");
 }
 
-VibratoLength::VibratoLength(const double aValue)
-    :mParameter_(* new Parameter(PARAMETER_NAME, aValue))
+VibratoLength::VibratoLength(const int aValue)
+    :mValue_(aValue)
 {
 }
 
 VibratoLength::~VibratoLength()
 {
-    delete &mParameter_;
 }
 
 
-Parameter VibratoLength::toParameter() const
+Parameter VibratoLength::toParameter(Beat aBeat,
+                                     Tempo aTempo,
+                                     model::EditAreaInformationPointer aEditAreaInformation) const
 {
-    return mParameter_;
+    return Parameter(PARAMETER_NAME, aEditAreaInformation->calculateSec(mValue_, aBeat, aTempo));
 }

@@ -27,7 +27,6 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/noterect.cpp \
     src/Domain/ScoreComponent/noterectposition.cpp \
     src/Domain/ScoreComponent/noterectwidth.cpp \
-    src/Domain/ScoreComponent/vibrato.cpp \
     src/Domain/ScoreComponent/vibratoamplitude.cpp \
     src/Domain/ScoreComponent/pitchchangingpoint.cpp \
     src/Domain/ScoreComponent/pitchcurve.cpp \
@@ -42,9 +41,7 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/noteparameterlist.cpp \
     src/Domain/Commands/startseekbarcommand.cpp \
     src/Domain/Commands/resetseekbarcommand.cpp \
-    src/Domain/ScoreComponent/vibratowavelength.cpp \
-    src/Domain/ScoreComponent/vibratolist.cpp \
-    src/Domain/ScoreComponent/vibratoform.cpp
+    src/Domain/ScoreComponent/vibratowavelength.cpp
 
 RESOURCES += qml.qrc
 
@@ -96,7 +93,6 @@ HEADERS += \
     src/Domain/ScoreComponent/noterect.h \
     src/Domain/ScoreComponent/noterectposition.h \
     src/Domain/ScoreComponent/noterectwidth.h \
-    src/Domain/ScoreComponent/vibrato.h \
     src/Domain/ScoreComponent/vibratoamplitude.h \
     src/Domain/ScoreComponent/pitchchangingpoint.h \
     src/Domain/ScoreComponent/pitchcurve.h \
@@ -111,9 +107,7 @@ HEADERS += \
     src/Domain/ScoreComponent/noteparameterlist.h \
     src/Domain/Commands/startseekbarcommand.h \
     src/Domain/Commands/resetseekbarcommand.h \
-    src/Domain/ScoreComponent/vibratowavelength.h \
-    src/Domain/ScoreComponent/vibratolist.h \
-    src/Domain/ScoreComponent/vibratoform.h
+    src/Domain/ScoreComponent/vibratowavelength.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

@@ -12,7 +12,6 @@
 #include "noterect.h"
 #include "tempo.h"
 #include "beat.h"
-#include "vibrato.h"
 #include "src/Model/editareainformation.h"
 #include "noteparameterlist.h"
 

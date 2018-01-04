@@ -14,7 +14,9 @@ NoteVolume::~NoteVolume()
     delete &mParameter_;
 }
 
-Parameter NoteVolume::toParameter() const
+Parameter NoteVolume::toParameter(Beat /*aBeat*/,
+                                  Tempo /*aTempo*/,
+                                  waltz::editor::model::EditAreaInformationPointer /*aEditAreaInformation*/) const
 {
     return mParameter_;
 }

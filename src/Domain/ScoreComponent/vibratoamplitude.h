@@ -3,6 +3,10 @@
 
 #include <waltz_common/parameter.h>
 #include <QSharedPointer>
+#include "tempo.h"
+#include "beat.h"
+#include "src/Model/editareainformation.h"
+#include "abstractnoteparameter.h"
 
 namespace waltz
 {
@@ -10,16 +14,18 @@ namespace waltz
     {
         namespace ScoreComponent
         {
-            class VibratoAmplitude
+            class VibratoAmplitude : public AbstractNoteParameter
             {
             public:
                 explicit VibratoAmplitude(const double aValue);
                 ~VibratoAmplitude();
 
-                common::Commands::Parameter toParameter() const;
+                common::Commands::Parameter toParameter(Beat aBeat,
+                                                        Tempo aTempo,
+                                                        model::EditAreaInformationPointer aEditAreaInformation) const;
 
             private:
-                common::Commands::Parameter& mParameter_;
+                double mValue_;
 
             private:
                 VibratoAmplitude(const VibratoAmplitude& aOther);

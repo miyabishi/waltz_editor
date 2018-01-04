@@ -55,7 +55,7 @@ Parameters Note::toParameters(Beat aBeat,
 
     for(int index = 0; index < mNoteParameterList_.count(); ++index)
     {
-        parameters.append(mNoteParameterList_.at(index)->toParameter());
+        parameters.append(mNoteParameterList_.at(index)->toParameter(aBeat, aTempo, aEditAreaInformation));
     }
 
     return parameters;

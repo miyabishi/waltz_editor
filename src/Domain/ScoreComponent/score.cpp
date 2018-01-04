@@ -8,7 +8,6 @@ Score::Score()
  , mBeat_(Beat(4,4))
  , mNoteList_(new NoteList())
  , mPitchCurve_(new PitchCurve())
- , mVibratoList_(new VibratoList())
 {
 }
 
@@ -52,13 +51,8 @@ Parameters Score::toParameters(const model::EditAreaInformationPointer aEditArea
     Parameters parameters;
     parameters.append(mNoteList_->toParameter(mBeat_, mTempo_, aEditAreaInformation));
     parameters.append(mPitchCurve_->toParameter(mBeat_, mTempo_, aEditAreaInformation));
-    parameters.append(mVibratoList_->toParameter(mBeat_, mTempo_, aEditAreaInformation));
-    return parameters;
-}
 
-void Score::appendVibrato(const VibratoPointer aVibrato)
-{
-    mVibratoList_->append(aVibrato);
+    return parameters;
 }
 
 void Score::appendNote(const NotePointer aNote)
@@ -85,7 +79,6 @@ void Score::clearScore()
 {
     mNoteList_->clearNote();
     mPitchCurve_->clearPitchCurve();
-    mVibratoList_->clearVibrato();
 }
 
 NoteListPointer Score::noteList() const

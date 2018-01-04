@@ -16,7 +16,9 @@ namespace waltz
                 ~NoteVolume();
 
             public:
-                common::Commands::Parameter toParameter() const;
+                common::Commands::Parameter toParameter(Beat aBeat,
+                                                        Tempo aTempo,
+                                                        waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const;
 
             private:
                 common::Commands::Parameter& mParameter_;

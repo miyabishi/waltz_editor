@@ -9,16 +9,17 @@ namespace
 }
 
 VibratoAmplitude::VibratoAmplitude(const double aValue)
-    :mParameter_(* new Parameter(PARAMETER_NAME, aValue))
+ :mValue_(aValue)
 {
 }
 
 VibratoAmplitude::~VibratoAmplitude()
 {
-    delete &mParameter_;
 }
 
-Parameter VibratoAmplitude::toParameter() const
+Parameter VibratoAmplitude::toParameter(Beat /*aBeat*/,
+                                        Tempo /*aTempo*/,
+                                        model::EditAreaInformationPointer /*aEditAreaInformation*/) const
 {
-    return mParameter_;
+    return Parameter(PARAMETER_NAME, mValue_);
 }

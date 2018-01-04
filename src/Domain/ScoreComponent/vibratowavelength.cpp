@@ -8,19 +8,18 @@ namespace
     const QString PARAMETER_NAME("VibratoWavelength");
 }
 
-VibratoWavelength::VibratoWavelength(const double aSec)
-    :mParameter_( * new Parameter(PARAMETER_NAME, aSec))
+VibratoWavelength::VibratoWavelength(const int aValue)
+    :mValue_(aValue)
 {
 }
 
 VibratoWavelength::~VibratoWavelength()
 {
-    delete &mParameter_;
 }
 
-
-
-Parameter VibratoWavelength::toParameter() const
+Parameter VibratoWavelength::toParameter(Beat aBeat,
+                                         Tempo aTempo,
+                                         model::EditAreaInformationPointer aEditAreaInformation) const
 {
-    return mParameter_;
+    return Parameter(PARAMETER_NAME, aEditAreaInformation->calculateSec(mValue_, aBeat, aTempo));
 }

@@ -9,9 +9,12 @@
 #include "mainwindowmodel.h"
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
-
 #include "src/Domain/ScoreComponent/noteinformation.h"
 #include "src/Domain/ScoreComponent/notevolume.h"
+
+#include "src/Domain/ScoreComponent/vibratoamplitude.h"
+#include "src/Domain/ScoreComponent/vibratolength.h"
+#include "src/Domain/ScoreComponent/vibratowavelength.h"
 
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
@@ -138,7 +141,6 @@ void MainWindowModel::clearScore()
     mScore_->clearScore();
 }
 
-
 QString MainWindowModel::vocalFileExtention() const
 {
     return "wvocal";
@@ -195,10 +197,10 @@ void MainWindowModel::appendVibrato(int aNoteId,
                                     int aWavelength,
                                     double aAmplitude)
 {
-    VibratoFormPointer form(new VibratoForm(aLength, aWavelength, aAmplitude));
-
-    return mScore_->appendVibrato(
-                VibratoPointer(new Vibrato(NoteId(aNoteId), form)));
+    NoteId noteId (aNoteId);
+    mScore_->appendNoteParameter(noteId, NoteParameterPointer(new VibratoLength(aLength)));
+    mScore_->appendNoteParameter(noteId, NoteParameterPointer(new VibratoWavelength(aWavelength)));
+    mScore_->appendNoteParameter(noteId, NoteParameterPointer(new VibratoAmplitude(aAmplitude)));
 }
 
 void MainWindowModel::emitActivePlayButton()

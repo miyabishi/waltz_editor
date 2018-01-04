@@ -140,17 +140,3 @@ double EditAreaInformation::timeLengthOfABar(Tempo aTempo) const
 {
     return 60.0 / (double)aTempo.value() * 4;
 }
-
-VibratoLengthPointer EditAreaInformation::calculateVibratoLength(int aLength,
-                                                                 ScoreComponent::Beat aBeat,
-                                                                 ScoreComponent::Tempo aTempo) const
-{
-    return VibratoLengthPointer(new VibratoLength(calculateSec(aLength, aBeat, aTempo)));
-}
-
-VibratoWavelengthPointer EditAreaInformation::calculateVibratoWavelength(int aWavelength,
-                                                                         ScoreComponent::Beat aBeat,
-                                                                         ScoreComponent::Tempo aTempo) const
-{
-    return VibratoWavelengthPointer(new VibratoWavelength(calculateSec(aWavelength, aBeat, aTempo)));
-}

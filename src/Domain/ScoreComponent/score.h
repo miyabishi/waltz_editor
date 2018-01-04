@@ -12,8 +12,6 @@
 #include "noteid.h"
 #include "pitchcurve.h"
 #include "pitchchangingpoint.h"
-#include "vibratoform.h"
-#include "vibratolist.h"
 
 namespace waltz
 {
@@ -38,7 +36,6 @@ namespace waltz
                 void appendNoteParameter(const NoteId aNoteId,
                                          const NoteParameterPointer aParameter);
                 void appendPitchChangingPoint(const PitchChangingPointPointer aPitchChangingPoint);
-                void appendVibrato(const VibratoPointer aVibrato);
 
                 waltz::common::Commands::Parameters toParameters(const model::EditAreaInformationPointer aEditAreaInformation);
                 int noteCount() const;
@@ -49,7 +46,6 @@ namespace waltz
                 Beat  mBeat_;
                 NoteListPointer mNoteList_;
                 PitchCurvePointer mPitchCurve_;
-                VibratoListPointer mVibratoList_;
 
             };
             typedef std::shared_ptr<Score> ScorePointer;

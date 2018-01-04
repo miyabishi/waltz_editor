@@ -3,6 +3,9 @@
 
 #include <QSharedPointer>
 #include <waltz_common/parameter.h>
+#include "tempo.h"
+#include "beat.h"
+#include "src/Model/editareainformation.h"
 
 namespace waltz
 {
@@ -16,7 +19,9 @@ namespace waltz
             public:
                 AbstractNoteParameter();
             public:
-                virtual common::Commands::Parameter toParameter() const = 0;
+                virtual common::Commands::Parameter toParameter(Beat aBeat,
+                                                                Tempo aTempo,
+                                                                waltz::editor::model::EditAreaInformationPointer aEditAreaInformation) const = 0;
 
             private:
                 AbstractNoteParameter(const AbstractNoteParameter& aOther);
