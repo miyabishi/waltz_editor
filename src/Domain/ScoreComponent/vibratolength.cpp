@@ -17,7 +17,6 @@ VibratoLength::~VibratoLength()
 {
 }
 
-
 Parameter VibratoLength::toParameter(Beat aBeat,
                                      Tempo aTempo,
                                      model::EditAreaInformationPointer aEditAreaInformation) const

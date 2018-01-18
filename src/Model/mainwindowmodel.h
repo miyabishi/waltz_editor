@@ -74,6 +74,7 @@ namespace waltz
 
                 // for toolBar
                 Q_INVOKABLE void saveWav(const QUrl& aUrl);
+                Q_INVOKABLE void save(const QUrl& aUrl);
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);

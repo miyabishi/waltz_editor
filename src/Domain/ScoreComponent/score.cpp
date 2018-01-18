@@ -1,3 +1,5 @@
+#include <QFile>
+#include <QJsonDocument>
 #include "score.h"
 
 using namespace waltz::editor::ScoreComponent;
@@ -84,4 +86,21 @@ void Score::clearScore()
 NoteListPointer Score::noteList() const
 {
     return mNoteList_;
+}
+
+void Score::save(const QUrl &aUrl, const model::EditAreaInformationPointer aEditAreaInformation)
+{
+    QJsonArray jsonArray(toParameters(aEditAreaInformation).toJsonArray());
+    QJsonDocument jsonDocument(jsonArray);
+    QFile jsonFile(aUrl.toLocalFile());
+    jsonFile.open(QFile::WriteOnly);
+    jsonFile.write(jsonDocument.toJson());
+}
+
+void Score::load(const QUrl &aUrl, const model::EditAreaInformationPointer aEditAreaInformation)
+{
+    QFile jsonFile(aUrl.toLocalFile());
+    jsonFile.open(QFile::ReadOnly);
+    QJsonDocument().fromJson(jsonFile.readAll());
+    //TODO
 }

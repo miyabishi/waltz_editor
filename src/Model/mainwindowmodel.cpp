@@ -218,6 +218,11 @@ void MainWindowModel::emitResetSeekBar()
     emit resetSeekBar();
 }
 
+void MainWindowModel::save(const QUrl &aUrl)
+{
+
+}
+
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(new Score()))
