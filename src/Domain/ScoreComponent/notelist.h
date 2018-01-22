@@ -3,6 +3,7 @@
 
 #include <QSharedPointer>
 #include <QList>
+#include <QJsonObject>
 #include <waltz_common/parameters.h>
 
 #include "src/Model/editareainformation.h"

@@ -32,6 +32,7 @@ void NoteList::append(const NotePointer aNote)
     mNoteList_.append(aNote);
 }
 
+
 Parameter NoteList::toParameter(
         Beat aBeat,
         Tempo aTempo,

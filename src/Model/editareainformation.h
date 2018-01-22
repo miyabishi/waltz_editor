@@ -46,6 +46,8 @@ namespace waltz
                 double calculateSec(int aX,
                                     waltz::editor::ScoreComponent::Beat aBeat,
                                     waltz::editor::ScoreComponent::Tempo aTempo) const;
+
+
             private:
                 int octaveHeight() const;
                 int calculateBelongingOctave(int aY) const;

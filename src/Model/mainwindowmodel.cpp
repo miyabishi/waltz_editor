@@ -220,7 +220,6 @@ void MainWindowModel::emitResetSeekBar()
 
 void MainWindowModel::save(const QUrl &aUrl)
 {
-
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

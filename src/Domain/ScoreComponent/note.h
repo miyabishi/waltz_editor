@@ -35,6 +35,7 @@ namespace waltz
                 Note(const NoteId&           aNoteId,
                      const Syllable&         aSyllable,
                      const NoteRectPointer   aNoteRect);
+
             public:
                 waltz::common::Commands::Parameters toParameters(Beat aBeat,
                                                                  Tempo aTempo,
