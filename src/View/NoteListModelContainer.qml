@@ -161,4 +161,14 @@ Item {
                                       note.noteWidth);
        }
    }
+
+   function toArray()
+   {
+       var ary = new Array();
+       for(var index = 0; index < noteListModel.count; ++index)
+       {
+           var note = noteListModel.get(index);
+            ary[index] = note;
+       }
+   }
 }

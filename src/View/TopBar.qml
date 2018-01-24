@@ -13,12 +13,32 @@ Rectangle{
         anchors.verticalCenter: parent.verticalCenter
         width: 120
         height: 32
-        Image {
+        Rectangle {
             id: save_button
             anchors.left: parent.left
             height: parent.height
             width: height
-            source: "qrc:/image/save.png"
+            Image{
+                anchors.left: parent.left
+                height: parent.height
+                width: height
+                source: "qrc:/image/save.png"
+            }
+            FileDialog{
+                id:saveDialog
+                nameFilters: ["Waltz Song File(*.waltzSong)"]
+                selectMultiple: false
+                selectExisting: false
+                onAccepted: {
+                    MainWindowModel.save(saveDialog.fileUrl)
+                }
+            }
+            WButtonMouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    saveDialog.open()
+                }
+            }
         }
         Rectangle{
             id: wav_output_button
@@ -73,6 +93,5 @@ Rectangle{
             width: height
             source: "qrc:/image/cursor.png"
         }
-
     }
 }
