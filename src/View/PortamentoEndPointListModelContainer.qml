@@ -121,4 +121,15 @@ Item {
         }
         return 0;
     }
+
+    function toArray()
+    {
+        var ary = new Array;
+        for(var index = 0; index < portamentoEndPointListModel.count; ++index)
+        {
+            var note = portamentoEndPointListModel.get(index);
+             ary[index] = note;
+        }
+        return ary
+    }
 }

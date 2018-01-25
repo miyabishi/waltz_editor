@@ -163,4 +163,15 @@ Item {
     {
         return pitchChangingPointListModel.count
     }
+
+    function toArray()
+    {
+        var ary = new Array;
+        for(var index = 0; index < pitchChangingPointListModel.count; ++index)
+        {
+            var note = pitchChangingPointListModel.get(index);
+             ary[index] = note;
+        }
+        return ary
+    }
 }

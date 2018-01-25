@@ -218,8 +218,19 @@ void MainWindowModel::emitResetSeekBar()
     emit resetSeekBar();
 }
 
-void MainWindowModel::save(const QUrl &aUrl)
+void MainWindowModel::save(const QUrl &aUrl,
+                           const QVariantList& aNoteListModelArray,
+                           const QVariantList& aNoteVolumeListModelArray,
+                           const QVariantList& aPortamentStartPointModelArray,
+                           const QVariantList& aPitchChangingPointModelArray,
+                           const QVariantList& aPortamentEndPointModelArray)
 {
+    qDebug() << "aUrl:"                           << aUrl;
+    qDebug() << "aNoteListModelArray:"            << aNoteListModelArray;
+    qDebug() << "aNoteVolumeListModelArray:"      << aNoteVolumeListModelArray;
+    qDebug() << "aPortamentStartPointModelArray:" << aPortamentStartPointModelArray;
+    qDebug() << "aPitchChangingPointModelArray:"  << aPitchChangingPointModelArray;
+    qDebug() << "aPortamentEndPointModelArray:"   << aPortamentEndPointModelArray;
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

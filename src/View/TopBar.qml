@@ -13,8 +13,10 @@ Rectangle{
         anchors.verticalCenter: parent.verticalCenter
         width: 120
         height: 32
+
         Rectangle {
             id: save_button
+            color:parent.color
             anchors.left: parent.left
             height: parent.height
             width: height
@@ -30,7 +32,13 @@ Rectangle{
                 selectMultiple: false
                 selectExisting: false
                 onAccepted: {
-                    MainWindowModel.save(saveDialog.fileUrl)
+                    MainWindowModel.save(saveDialog.fileUrl,
+                                         note_list_model_container.toArray(),
+                                         note_volume_list_model_container.toArray(),
+                                         portamento_start_point_list_model_container.toArray(),
+                                         pitch_changing_point_list_model_containter.toArray(),
+                                         portamento_end_point_list_model_container.toArray(),
+                                         vibrato_list_model_container.toArray());
                 }
             }
             WButtonMouseArea{

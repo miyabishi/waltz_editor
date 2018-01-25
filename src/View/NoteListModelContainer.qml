@@ -164,11 +164,12 @@ Item {
 
    function toArray()
    {
-       var ary = new Array();
+       var ary = new Array;
        for(var index = 0; index < noteListModel.count; ++index)
        {
            var note = noteListModel.get(index);
             ary[index] = note;
        }
+       return ary
    }
 }

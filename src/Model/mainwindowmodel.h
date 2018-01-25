@@ -75,9 +75,11 @@ namespace waltz
                 // for toolBar
                 Q_INVOKABLE void saveWav(const QUrl& aUrl);
                 Q_INVOKABLE void save(const QUrl& aUrl,
-                                      const QVariantList,
-                                      const QVariantList,
-                                      const QVariantList);
+                                      const QVariantList& aNoteListModelArray,
+                                      const QVariantList& aNoteVolumeListModelArray,
+                                      const QVariantList& aPortamentStartPointModelArray,
+                                      const QVariantList& aPitchChangingPointModelArray,
+                                      const QVariantList& aPortamentEndPointModelArray);
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);

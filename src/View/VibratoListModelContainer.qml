@@ -190,4 +190,15 @@ Item {
     {
         return vibratoListModel;
     }
+
+    function toArray()
+    {
+        var ary = new Array;
+        for(var index = 0; index < vibratoListModel.count; ++index)
+        {
+            var note = vibratoListModel.get(index);
+             ary[index] = note;
+        }
+        return ary
+    }
 }

@@ -120,4 +120,16 @@ Item {
         }
         return 0;
     }
+
+    function toArray()
+    {
+        var ary = new Array;
+        for(var index = 0; index < portamentoStartPointListModel.count; ++index)
+        {
+            var note = portamentoStartPointListModel.get(index);
+             ary[index] = note;
+        }
+        return ary
+    }
+
 }
