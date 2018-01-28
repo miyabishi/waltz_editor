@@ -26,21 +26,25 @@ Rectangle{
                 width: height
                 source: "qrc:/image/save.png"
             }
+
             FileDialog{
                 id:saveDialog
                 nameFilters: ["Waltz Song File(*.waltzSong)"]
                 selectMultiple: false
                 selectExisting: false
                 onAccepted: {
-                    MainWindowModel.save(saveDialog.fileUrl,
-                                         note_list_model_container.toArray(),
-                                         note_volume_list_model_container.toArray(),
-                                         portamento_start_point_list_model_container.toArray(),
-                                         pitch_changing_point_list_model_containter.toArray(),
-                                         portamento_end_point_list_model_container.toArray(),
-                                         vibrato_list_model_container.toArray());
+                    var aData = {
+                        "note_list_model_container" : note_list_model_container.toArray(),
+                        "note_volume_list_model_container" : note_volume_list_model_container.toArray(),
+                        "portamento_start_point_list_model_container" : portamento_start_point_list_model_container.toArray(),
+                        "pitch_changing_point_list_model_containter" : pitch_changing_point_list_model_containter.toArray(),
+                        "portamento_end_point_list_model_container" : portamento_end_point_list_model_container.toArray(),
+                        "vibrato_list_model_container" : vibrato_list_model_container.toArray()
+                    }
+                    MainWindowModel.save(saveDialog.fileUrl, aData);
                 }
             }
+
             WButtonMouseArea{
                 anchors.fill: parent
                 onClicked: {

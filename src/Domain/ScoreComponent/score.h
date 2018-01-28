@@ -41,7 +41,6 @@ namespace waltz
                 int noteCount() const;
                 void clearScore();
 
-                void save(const QUrl& aUrl, const model::EditAreaInformationPointer aEditAreaInformation);
                 void load(const QUrl& aUrl, const model::EditAreaInformationPointer aEditAreaInformation);
 
             private:

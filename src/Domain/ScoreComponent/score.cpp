@@ -88,13 +88,3 @@ NoteListPointer Score::noteList() const
 {
     return mNoteList_;
 }
-
-void Score::save(const QUrl &aUrl, const model::EditAreaInformationPointer aEditAreaInformation)
-{
-
-}
-
-void Score::load(const QUrl &aUrl, const model::EditAreaInformationPointer aEditAreaInformation)
-{
-
-}

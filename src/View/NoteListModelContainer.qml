@@ -168,7 +168,12 @@ Item {
        for(var index = 0; index < noteListModel.count; ++index)
        {
            var note = noteListModel.get(index);
-            ary[index] = note;
+           ary[index] = {
+               "noteId": note.noteId,
+               "noteText": note.noteText,
+               "positionX": note.positionX,
+               "positionY": note.positionY,
+               "noteWidth": note.noteWidth};
        }
        return ary
    }

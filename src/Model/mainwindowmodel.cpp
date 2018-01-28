@@ -16,6 +16,8 @@
 #include "src/Domain/ScoreComponent/vibratolength.h"
 #include "src/Domain/ScoreComponent/vibratowavelength.h"
 
+#include "src/Domain/ExternalFile/waltzsongfile.h"
+
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
 
@@ -219,18 +221,13 @@ void MainWindowModel::emitResetSeekBar()
 }
 
 void MainWindowModel::save(const QUrl &aUrl,
-                           const QVariantList& aNoteListModelArray,
-                           const QVariantList& aNoteVolumeListModelArray,
-                           const QVariantList& aPortamentStartPointModelArray,
-                           const QVariantList& aPitchChangingPointModelArray,
-                           const QVariantList& aPortamentEndPointModelArray)
+                           const QVariantMap& aData)
 {
-    qDebug() << "aUrl:"                           << aUrl;
-    qDebug() << "aNoteListModelArray:"            << aNoteListModelArray;
-    qDebug() << "aNoteVolumeListModelArray:"      << aNoteVolumeListModelArray;
-    qDebug() << "aPortamentStartPointModelArray:" << aPortamentStartPointModelArray;
-    qDebug() << "aPitchChangingPointModelArray:"  << aPitchChangingPointModelArray;
-    qDebug() << "aPortamentEndPointModelArray:"   << aPortamentEndPointModelArray;
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "aUrl:" << aUrl;
+    qDebug() << "aData:" << aData;
+    ExternalFile::WaltzSongFile waltzSongFile(aUrl.toLocalFile());
+    waltzSongFile.save(aData);
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)
