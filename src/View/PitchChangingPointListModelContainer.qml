@@ -169,8 +169,13 @@ Item {
         var ary = new Array;
         for(var index = 0; index < pitchChangingPointListModel.count; ++index)
         {
-            var note = pitchChangingPointListModel.get(index);
-             ary[index] = note;
+            var pitchChangingPoint = pitchChangingPointListModel.get(index);
+            ary[index] = {
+                     "pitchChangingPointId": pitchChangingPoint.pitchChangingPointId,
+                     "noteId": pitchChangingPoint.noteId,
+                     "pitchChangingPointX": pitchChangingPoint.pitchChangingPointX,
+                     "pitchChangingPointY": pitchChangingPoint.pitchChangingPointY
+            };
         }
         return ary
     }

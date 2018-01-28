@@ -127,8 +127,14 @@ Item {
         var ary = new Array;
         for(var index = 0; index < portamentoEndPointListModel.count; ++index)
         {
-            var note = portamentoEndPointListModel.get(index);
-             ary[index] = note;
+            var portamentoEndPoint = portamentoEndPointListModel.get(index);
+            ary[index] = {
+                 "portamentoEndPointId": portamentoEndPoint.portamentoEndPointId,
+                 "noteId": portamentoEndPoint.noteId,
+                 "portamentoEndX": portamentoEndPoint.portamentoEndX,
+                 "portamentoEndY": portamentoEndPoint.portamentoEndY,
+                 "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
+            };
         }
         return ary
     }

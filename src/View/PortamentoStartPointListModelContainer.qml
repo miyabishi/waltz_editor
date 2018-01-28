@@ -126,8 +126,14 @@ Item {
         var ary = new Array;
         for(var index = 0; index < portamentoStartPointListModel.count; ++index)
         {
-            var note = portamentoStartPointListModel.get(index);
-             ary[index] = note;
+            var portamentoStartPoint = portamentoStartPointListModel.get(index);
+            ary[index] = {
+                "portamentoStartPointId": portamentoStartPoint.portamentoStartPointId,
+                "noteId": portamentoStartPoint.noteId,
+                "portamentoStartX": portamentoStartPoint.portamentoStartX,
+                "portamentoStartY": portamentoStartPoint.portamentoStartY,
+                "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
+            };
         }
         return ary
     }

@@ -132,8 +132,13 @@ Item {
         var ary = new Array;
         for(var index = 0; index < noteVolumeListModel.count; ++index)
         {
-            var note = noteVolumeListModel.get(index);
-             ary[index] = note;
+            var volume = noteVolumeListModel.get(index);
+            ary[index] = {
+                "noteVolumeId": volume.noteVolumeId,
+                "noteId": volume.noteId,
+                "positionX": volume.positionX,
+                "volume": volume.volume
+            };
         }
         return ary
     }

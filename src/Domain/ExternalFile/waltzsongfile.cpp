@@ -1,6 +1,7 @@
 #include <QDebug>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QBitArray>
 #include <QFile>
 
@@ -15,45 +16,15 @@ WaltzSongFile::WaltzSongFile(const QString& aFilePath)
 
 void WaltzSongFile::save(const QVariantMap& aData) const
 {
-    QMap<QString, QVariant>::const_iterator dataIterator = aData.constBegin();
-    while(dataIterator != aData.constEnd())
-    {
-        qDebug() << dataIterator.key();
-        if (! dataIterator.value().canConvert<QVariantList>())
-        {
-            qDebug() << "can't convert QVariantList";
-            ++dataIterator;
-            continue;
-        }
+    QJsonObject object = QJsonObject::fromVariantMap(aData);
+    QJsonDocument document(object);
+    qDebug() << document.toJson();
 
-        QVariantList subData = dataIterator.value().value<QVariantList>();
-
-        foreach(const QVariant& subSubData, subData )
-        {
-            if(! subSubData.canConvert<QVariantMap>())
-            {
-                qDebug() << "can't convert QVariantMap";
-                continue;
-            }
-            QVariantMap subSubDataMap = subSubData.value<QVariantMap>();
-            QMap<QString, QVariant>::const_iterator subSubDataIterator = subSubDataMap.constBegin();
-
-            while(subSubDataIterator != subSubDataMap.constEnd())
-            {
-                qDebug() << subSubDataIterator.key();
-                qDebug() << subSubDataIterator.value();
-                ++subSubDataIterator;
-            }
-
-        }
-        ++dataIterator;
-    }
-    /*
+    QByteArray data(document.toJson());
     QFile saveFile(mFilePath_);
     saveFile.open(QIODevice::WriteOnly);
     saveFile.write(data);
     saveFile.close();
-    */
 }
 
 QVariantMap WaltzSongFile::load() const

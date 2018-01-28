@@ -196,8 +196,14 @@ Item {
         var ary = new Array;
         for(var index = 0; index < vibratoListModel.count; ++index)
         {
-            var note = vibratoListModel.get(index);
-             ary[index] = note;
+            var vibrato = vibratoListModel.get(index);
+            ary[index] = {
+                "vibratoId": vibrato.vibratoId,
+                "noteId": vibrato.noteId,
+                "length": vibrato.length,
+                "wavelength": vibrato.wavelength,
+                "amplitude": vibrato.amplitude
+            };
         }
         return ary
     }
