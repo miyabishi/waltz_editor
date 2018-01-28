@@ -16,7 +16,7 @@ WaltzSongFile::WaltzSongFile(const QString& aFilePath)
 void WaltzSongFile::save(const QVariantMap& aData) const
 {
     QMap<QString, QVariant>::const_iterator dataIterator = aData.constBegin();
-    while(dataIterator != aData.end())
+    while(dataIterator != aData.constEnd())
     {
         qDebug() << dataIterator.key();
         if (! dataIterator.value().canConvert<QVariantList>())
@@ -38,7 +38,7 @@ void WaltzSongFile::save(const QVariantMap& aData) const
             QVariantMap subSubDataMap = subSubData.value<QVariantMap>();
             QMap<QString, QVariant>::const_iterator subSubDataIterator = subSubDataMap.constBegin();
 
-            while(subSubDataIterator != subSubDataMap.end())
+            while(subSubDataIterator != subSubDataMap.constEnd())
             {
                 qDebug() << subSubDataIterator.key();
                 qDebug() << subSubDataIterator.value();
