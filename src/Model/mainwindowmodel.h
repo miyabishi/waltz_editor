@@ -77,6 +77,8 @@ namespace waltz
                 Q_INVOKABLE void save(const QUrl& aUrl,
                                       const QVariantMap& aData);
 
+                Q_INVOKABLE QVariantMap load(const QUrl& aUrl);
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();

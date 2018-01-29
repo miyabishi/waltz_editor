@@ -32,6 +32,8 @@ QVariantMap WaltzSongFile::load() const
     QFile openFile(mFilePath_);
     openFile.open(QIODevice::ReadOnly);
     QByteArray data = openFile.readAll();
+    openFile.close();
+
     QJsonDocument jsonDoc(QJsonDocument::fromBinaryData(data));
     QJsonObject jsonObj(jsonDoc.object());
     return jsonObj.toVariantMap();

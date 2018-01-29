@@ -223,12 +223,16 @@ void MainWindowModel::emitResetSeekBar()
 void MainWindowModel::save(const QUrl &aUrl,
                            const QVariantMap& aData)
 {
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << "aUrl:" << aUrl;
-    qDebug() << "aData:" << aData;
     ExternalFile::WaltzSongFile waltzSongFile(aUrl.toLocalFile());
     waltzSongFile.save(aData);
 }
+
+QVariantMap MainWindowModel::load(const QUrl &aUrl)
+{
+    ExternalFile::WaltzSongFile waltzSongFile(aUrl.toLocalFile());
+    return waltzSongFile.load();
+}
+
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
