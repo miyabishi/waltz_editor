@@ -194,6 +194,8 @@ Item {
     function setArray(ary)
     {
         vibratoListModel.clear();
+        vibratoIdCounter = 0;
+
         for(var index = 0; index < ary.length; ++index)
         {
             var vibrato = ary[index];
@@ -204,7 +206,13 @@ Item {
                 "wavelength": vibrato.wavelength,
                 "amplitude": vibrato.amplitude
             });
+            modelUpdated(vibrato.vibratoId);
+            if(vibratoIdCounter <= vibrato.vibratoId)
+            {
+                vibratoIdCounter = vibrato.vibratoId;
+            }
         }
+        vibratoIdCounter++;
     }
 
     function toArray()

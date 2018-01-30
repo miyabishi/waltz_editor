@@ -165,8 +165,8 @@ Item {
    function setArray(ary)
    {
        noteListModel.clear();
-       console.log(ary);
-       console.log(ary.length);
+       root.noteIdCounter = 0;
+
        for(var index = 0; index < ary.length; ++index)
        {
            var note = ary[index];
@@ -177,7 +177,14 @@ Item {
                                     "positionY": note.positionY,
                                     "noteWidth": note.noteWidth
                                 });
+           modelUpdated(note.noteId);
+
+           if(root.noteIdCounter <= note.noteId)
+           {
+               root.noteIdCounter = note.noteId
+           }
        }
+       root.noteIdCounter++;
    }
 
    function toArray()

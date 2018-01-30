@@ -167,6 +167,8 @@ Item {
     function setArray(ary)
     {
         pitchChangingPointListModel.clear();
+        pitchChangingPointIdCounter = 0;
+
         for(var index = 0; index < ary.length; ++index)
         {
             var pitchChangingPoint = ary[index];
@@ -176,7 +178,13 @@ Item {
                      "pitchChangingPointX": pitchChangingPoint.pitchChangingPointX,
                      "pitchChangingPointY": pitchChangingPoint.pitchChangingPointY
             });
+            if(pitchChangingPointIdCounter <= pitchChangingPoint.pitchChangingPointId)
+            {
+                pitchChangingPointIdCounter = pitchChangingPoint.pitchChangingPointId;
+            }
         }
+        pitchChangingPointIdCounter++
+        modelUpdated();
     }
 
     function toArray()

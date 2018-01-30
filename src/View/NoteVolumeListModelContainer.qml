@@ -130,6 +130,8 @@ Item {
     function setArray(ary)
     {
         noteVolumeListModel.clear();
+        noteVolumeIdCounter = 0;
+
         for(var index = 0; index < ary.length; ++index)
         {
             var volume = ary[index];
@@ -139,7 +141,14 @@ Item {
                 "positionX": volume.positionX,
                 "volume": volume.volume
             });
+
+            if(noteVolumeIdCounter <= volume.noteVolumeId)
+            {
+                noteVolumeIdCounter = volume.noteVolumeId;
+            }
         }
+        noteVolumeIdCounter++;
+        modelUpdated();
     }
 
     function toArray()

@@ -125,6 +125,7 @@ Item {
     function setArray(ary)
     {
         portamentoEndPointListModel.clear();
+        portamentoEndPointIdCounter = 0;
         for(var index = 0; index < ary.length; ++index)
         {
             var portamentoEndPoint = ary[index];
@@ -135,7 +136,14 @@ Item {
                  "portamentoEndY": portamentoEndPoint.portamentoEndY,
                  "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
             });
+            if (portamentoEndPointIdCounter <= portamentoEndPoint.portamentoEndPointId)
+            {
+                portamentoEndPointIdCounter = portamentoEndPoint.portamentoEndPointId
+            }
         }
+        portamentoEndPointIdCounter++;
+
+        modelUpdated();
     }
 
 

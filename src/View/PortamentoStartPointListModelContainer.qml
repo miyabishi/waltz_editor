@@ -124,6 +124,8 @@ Item {
     function setArray(ary)
     {
         portamentoStartPointListModel.clear();
+        portamentoStartPointIdCounter = 0;
+
         for(var index = 0; index < ary.length; ++index)
         {
             var portamentoStartPoint = ary[index];
@@ -134,7 +136,15 @@ Item {
                 "portamentoStartY": portamentoStartPoint.portamentoStartY,
                 "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
             });
+
+            if (portamentoStartPointIdCounter <= portamentoStartPoint.portamentoStartPointId)
+            {
+                portamentoStartPointIdCounter =  portamentoStartPoint.portamentoStartPointId;
+            }
         }
+
+        portamentoStartPointIdCounter++;
+        modelUpdated();
     }
 
 
