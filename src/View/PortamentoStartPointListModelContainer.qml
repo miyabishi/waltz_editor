@@ -121,6 +121,23 @@ Item {
         return 0;
     }
 
+    function setArray(ary)
+    {
+        portamentoStartPointListModel.clear();
+        for(var index = 0; index < ary.length; ++index)
+        {
+            var portamentoStartPoint = ary[index];
+            portamentoStartPointListModel.append({
+                "portamentoStartPointId": portamentoStartPoint.portamentoStartPointId,
+                "noteId": portamentoStartPoint.noteId,
+                "portamentoStartX": portamentoStartPoint.portamentoStartX,
+                "portamentoStartY": portamentoStartPoint.portamentoStartY,
+                "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
+            });
+        }
+    }
+
+
     function toArray()
     {
         var ary = new Array;

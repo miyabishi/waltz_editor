@@ -191,6 +191,22 @@ Item {
         return vibratoListModel;
     }
 
+    function setArray(ary)
+    {
+        vibratoListModel.clear();
+        for(var index = 0; index < ary.length; ++index)
+        {
+            var vibrato = ary[index];
+            vibratoListModel.append({
+                "vibratoId": vibrato.vibratoId,
+                "noteId": vibrato.noteId,
+                "length": vibrato.length,
+                "wavelength": vibrato.wavelength,
+                "amplitude": vibrato.amplitude
+            });
+        }
+    }
+
     function toArray()
     {
         var ary = new Array;

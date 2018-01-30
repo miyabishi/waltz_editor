@@ -11,16 +11,6 @@ MenuBar {
             onTriggered: {
                 loadDialog.open();
             }
-
-            FileDialog{
-                id:loadDialog
-                nameFilters: ["Waltz Song File(*.waltzSong)"]
-                selectMultiple: false
-                selectExisting: false
-                onAccepted: {
-                    MainWindowModel.load(loadDialog.fileUrl);
-                }
-            }
         }
     }
     Menu{
@@ -48,3 +38,5 @@ MenuBar {
         }
     }
 }
+
+

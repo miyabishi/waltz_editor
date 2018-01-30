@@ -127,6 +127,21 @@ Item {
         return -1;
     }
 
+    function setArray(ary)
+    {
+        noteVolumeListModel.clear();
+        for(var index = 0; index < ary.length; ++index)
+        {
+            var volume = ary[index];
+            noteVolumeListModel.append({
+                "noteVolumeId": volume.noteVolumeId,
+                "noteId": volume.noteId,
+                "positionX": volume.positionX,
+                "volume": volume.volume
+            });
+        }
+    }
+
     function toArray()
     {
         var ary = new Array;

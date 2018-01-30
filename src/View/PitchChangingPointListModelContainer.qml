@@ -164,6 +164,21 @@ Item {
         return pitchChangingPointListModel.count
     }
 
+    function setArray(ary)
+    {
+        pitchChangingPointListModel.clear();
+        for(var index = 0; index < ary.length; ++index)
+        {
+            var pitchChangingPoint = ary[index];
+            pitchChangingPointListModel.append({
+                     "pitchChangingPointId": pitchChangingPoint.pitchChangingPointId,
+                     "noteId": pitchChangingPoint.noteId,
+                     "pitchChangingPointX": pitchChangingPoint.pitchChangingPointX,
+                     "pitchChangingPointY": pitchChangingPoint.pitchChangingPointY
+            });
+        }
+    }
+
     function toArray()
     {
         var ary = new Array;

@@ -122,6 +122,23 @@ Item {
         return 0;
     }
 
+    function setArray(ary)
+    {
+        portamentoEndPointListModel.clear();
+        for(var index = 0; index < ary.length; ++index)
+        {
+            var portamentoEndPoint = ary[index];
+            portamentoEndPointListModel.append({
+                 "portamentoEndPointId": portamentoEndPoint.portamentoEndPointId,
+                 "noteId": portamentoEndPoint.noteId,
+                 "portamentoEndX": portamentoEndPoint.portamentoEndX,
+                 "portamentoEndY": portamentoEndPoint.portamentoEndY,
+                 "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
+            });
+        }
+    }
+
+
     function toArray()
     {
         var ary = new Array;

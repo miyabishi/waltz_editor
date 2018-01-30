@@ -162,11 +162,29 @@ Item {
        }
    }
 
+   function setArray(ary)
+   {
+       noteListModel.clear();
+       console.log(ary);
+       console.log(ary.length);
+       for(var index = 0; index < ary.length; ++index)
+       {
+           var note = ary[index];
+           noteListModel.append({
+                                    "noteId": note.noteId,
+                                    "noteText": note.noteText,
+                                    "positionX": note.positionX,
+                                    "positionY": note.positionY,
+                                    "noteWidth": note.noteWidth
+                                });
+       }
+   }
+
    function toArray()
    {
        var ary = new Array;
        for(var index = 0; index < noteListModel.count; ++index)
-       {
+       {           
            var note = noteListModel.get(index);
            ary[index] = {
                "noteId": note.noteId,
