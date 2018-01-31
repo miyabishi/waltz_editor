@@ -28,7 +28,7 @@ namespace waltz
                 int columnWidth(int aBeatParent) const;
                 int rowHeight() const;
                 int supportOctave() const;
-                int editAreaWidth() const;
+                int editAreaWidth(int aBeatParent, int aBeatChild) const;
                 int calculatePositionX(ScoreComponent::NoteStartTimePointer aNoteStartTIme,
                                        ScoreComponent::Beat aBeat,
                                        ScoreComponent::Tempo aTempo) const;
@@ -60,7 +60,7 @@ namespace waltz
                 double mWidthRate_;
                 double mHeightRate_;
                 int    mSupportOctarve_;
-                int    mEditAreaWidth_;
+                int    mNumberOfDisplayBars_;
 
             private:
                 EditAreaInformation(const EditAreaInformation& aOther);

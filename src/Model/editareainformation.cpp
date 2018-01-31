@@ -15,11 +15,11 @@ namespace
 EditAreaInformation::EditAreaInformation(double aWidthRate,
                                          double aHeightRate,
                                          int aSupportOctave,
-                                         int aEditAreaWidth_)
+                                         int aNumberOfDisplayBars)
     : mWidthRate_(aWidthRate)
     , mHeightRate_(aHeightRate)
     , mSupportOctarve_(aSupportOctave)
-    , mEditAreaWidth_(aEditAreaWidth_)
+    , mNumberOfDisplayBars_(aNumberOfDisplayBars)
 {
 }
 
@@ -27,7 +27,7 @@ EditAreaInformation::EditAreaInformation(const EditAreaInformation& aOther)
     : mWidthRate_(aOther.mWidthRate_)
     , mHeightRate_(aOther.mHeightRate_)
     , mSupportOctarve_(aOther.mSupportOctarve_)
-    , mEditAreaWidth_(aOther.mEditAreaWidth_)
+    , mNumberOfDisplayBars_(aOther.mNumberOfDisplayBars_)
 {
 }
 
@@ -43,7 +43,7 @@ EditAreaInformation& EditAreaInformation::operator=(const EditAreaInformation& a
     mWidthRate_      = aOther.mWidthRate_;
     mHeightRate_     = aOther.mHeightRate_;
     mSupportOctarve_ = aOther.mSupportOctarve_;
-    mEditAreaWidth_  = aOther.mEditAreaWidth_;
+    mNumberOfDisplayBars_  = aOther.mNumberOfDisplayBars_;
     return (*this);
 }
 
@@ -61,9 +61,9 @@ int EditAreaInformation::supportOctave() const
     return mSupportOctarve_;
 }
 
-int EditAreaInformation::editAreaWidth() const
+int EditAreaInformation::editAreaWidth(int aBeatParent, int aBeatChild) const
 {
-    return mEditAreaWidth_;
+    return mNumberOfDisplayBars_ * columnWidth(aBeatParent) * aBeatChild;
 }
 
 NoteStartTimePointer EditAreaInformation::calculateNoteStartTime(int aX,

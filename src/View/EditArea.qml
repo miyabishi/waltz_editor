@@ -122,10 +122,6 @@ Rectangle{
                         var noteText = "あ";
                         var noteWidth = edit_area.columnWidth;
 
-                        //var vibratoAmplitude = 1.2;
-                        //var vibratoFrequency = 4;
-                        //var vibratoLength = edit_area.columnWidth /2 ;
-
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                     }
                 }

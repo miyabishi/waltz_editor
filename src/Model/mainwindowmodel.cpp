@@ -84,7 +84,7 @@ int MainWindowModel::beatParent() const
 
 int MainWindowModel::editAreaWidth() const
 {
-    return mEditAreaInformation_->editAreaWidth();
+    return mEditAreaInformation_->editAreaWidth(mScore_->beatParent(), mScore_->beatChild());
 }
 int MainWindowModel::columnWidth() const
 {
@@ -237,7 +237,7 @@ QVariantMap MainWindowModel::load(const QUrl &aUrl)
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(new Score()))
-    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 4000))
+    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 80))
     , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
     , mLibraryInformation_(
           waltz::editor::LibraryComponent::CharacterImage(),
