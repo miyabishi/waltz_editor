@@ -13,7 +13,7 @@ namespace waltz
             class PlaybackStartingTime
             {
             public:
-                explicit PlaybackStartingTime(double aValue);
+                explicit PlaybackStartingTime(double aSec);
                 ~PlaybackStartingTime();
                 common::Commands::Parameter toParameter() const;
             private:

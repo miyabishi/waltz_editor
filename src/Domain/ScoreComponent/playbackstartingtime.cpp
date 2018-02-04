@@ -8,8 +8,8 @@ namespace
     const QString PARAMETER_NAME("PlaybackStartingTime");
 }
 
-PlaybackStartingTime::PlaybackStartingTime(double aValue)
-    : mParameter_(* new Parameter(PARAMETER_NAME, aValue))
+PlaybackStartingTime::PlaybackStartingTime(double aSec)
+    : mParameter_(* new Parameter(PARAMETER_NAME, aSec))
 {
 }
 

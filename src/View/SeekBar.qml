@@ -31,6 +31,12 @@ Rectangle {
         root.x = root.seekBase;
     }
 
+    function pauseSeekBar()
+    {
+        seek_bar_timer.stop();
+        root.seekBarOffset = root.x;
+    }
+
     function velocity()
     {
         var bpm = MainWindowModel.tempo();

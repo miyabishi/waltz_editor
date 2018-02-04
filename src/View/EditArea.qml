@@ -27,6 +27,11 @@ Rectangle{
         return edit_area.columnWidth * edit_area.beatChild;
     }
 
+    function getSeekBarPosition()
+    {
+        return seek_bar.x;
+    }
+
 
     function updateProperty(){
         edit_area.supportOctarve = MainWindowModel.supportOctave();
@@ -161,6 +166,7 @@ Rectangle{
             }
 
             SeekBar{
+                id: seek_bar
                 width: 2
                 height: piano_roll_edit_area.height
             }

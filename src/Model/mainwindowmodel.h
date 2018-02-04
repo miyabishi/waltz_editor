@@ -70,7 +70,7 @@ namespace waltz
                 Q_INVOKABLE QString vocalFileExtention() const;
 
                 // for Controller
-                Q_INVOKABLE void play(double aStartTime = 0);
+                Q_INVOKABLE void play(int aSeekBarPosition = 0);
                 Q_INVOKABLE void stop();
                 Q_INVOKABLE void pause();
 
