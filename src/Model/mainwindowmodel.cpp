@@ -30,6 +30,8 @@ namespace
     const CommandId COMMAND_ID_LOAD_VOICE_LIBRARY("LoadVoiceLibrary");
     const CommandId COMMAND_ID_PLAY_NOTE("PlayNote");
     const CommandId COMMAND_ID_PLAY_SCORE("PlayScore");
+    const CommandId COMMAND_ID_STOP("Stop");
+    const CommandId COMMAND_ID_PAUSE("Pause");
     const CommandId COMMAND_ID_SAVE_WAV("SaveWav");
 }
 
@@ -233,6 +235,15 @@ QVariantMap MainWindowModel::load(const QUrl &aUrl)
     return waltzSongFile.load();
 }
 
+void MainWindowModel::stop()
+{
+    mClient_->sendMessage(Message(COMMAND_ID_STOP));
+}
+
+void MainWindowModel::pause()
+{
+    mClient_->sendMessage(Message(COMMAND_ID_PAUSE));
+}
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)

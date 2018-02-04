@@ -29,6 +29,9 @@ Rectangle{
             }
             WButtonMouseArea{
                 anchors.fill: parent
+                onClicked: {
+                    MainWindowModel.pause();
+                }
             }
         }
 
@@ -92,6 +95,9 @@ Rectangle{
             }
             WButtonMouseArea{
                 anchors.fill: parent
+                onClicked: {
+                    MainWindowModel.pause();
+                }
             }
         }
     }

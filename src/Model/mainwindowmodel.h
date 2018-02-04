@@ -79,6 +79,10 @@ namespace waltz
 
                 Q_INVOKABLE QVariantMap load(const QUrl& aUrl);
 
+                // for BottomBar
+                Q_INVOKABLE void stop();
+                Q_INVOKABLE void pause();
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();
