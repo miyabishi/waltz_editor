@@ -192,10 +192,13 @@ void MainWindowModel::emitErrorOccurred(const QString& aErrorMessage)
 
 void MainWindowModel::play(double aPlaybackStartingTime)
 {
+    PlaybackStartingTimePointer playbackStartTime(
+                new PlaybackStartingTime(aPlaybackStartingTime));
+    Parameters parameters(mScore_->toParameters(mEditAreaInformation_));
 
-    mClient_->sendMessage(
-                Message(COMMAND_ID_PLAY_SCORE,
-                        mScore_->toParameters(mEditAreaInformation_)));
+    parameters.append(playbackStartTime->toParameter());
+
+    mClient_->sendMessage(Message(COMMAND_ID_PLAY_SCORE, parameters));
 }
 
 void MainWindowModel::appendVibrato(int aNoteId,
