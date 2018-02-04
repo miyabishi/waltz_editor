@@ -70,7 +70,9 @@ namespace waltz
                 Q_INVOKABLE QString vocalFileExtention() const;
 
                 // for Controller
-                Q_INVOKABLE void play();
+                Q_INVOKABLE void play(double aStartTime = 0);
+                Q_INVOKABLE void stop();
+                Q_INVOKABLE void pause();
 
                 // for toolBar
                 Q_INVOKABLE void saveWav(const QUrl& aUrl);
@@ -78,10 +80,6 @@ namespace waltz
                                       const QVariantMap& aData);
 
                 Q_INVOKABLE QVariantMap load(const QUrl& aUrl);
-
-                // for BottomBar
-                Q_INVOKABLE void stop();
-                Q_INVOKABLE void pause();
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);

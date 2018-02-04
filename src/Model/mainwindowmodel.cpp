@@ -18,6 +18,8 @@
 
 #include "src/Domain/ExternalFile/waltzsongfile.h"
 
+#include "src/Domain/ScoreComponent/playbackstartingtime.h"
+
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
 
@@ -188,12 +190,12 @@ void MainWindowModel::emitErrorOccurred(const QString& aErrorMessage)
     emit errorOccurred(aErrorMessage);
 }
 
-void MainWindowModel::play()
+void MainWindowModel::play(double aPlaybackStartingTime)
 {
+
     mClient_->sendMessage(
                 Message(COMMAND_ID_PLAY_SCORE,
                         mScore_->toParameters(mEditAreaInformation_)));
-
 }
 
 void MainWindowModel::appendVibrato(int aNoteId,
