@@ -11,6 +11,7 @@
 #include "src/Domain/LibraryComponent/description.h"
 #include "src/Domain/ScoreComponent/noteinformation.h"
 #include "src/Domain/ScoreComponent/notevolume.h"
+#include "src/Domain/ScoreComponent/notestarttime.h"
 
 #include "src/Domain/ScoreComponent/vibratoamplitude.h"
 #include "src/Domain/ScoreComponent/vibratolength.h"
@@ -227,6 +228,11 @@ void MainWindowModel::emitStartSeekBar()
 void MainWindowModel::emitResetSeekBar()
 {
     emit resetSeekBar();
+}
+
+void MainWindowModel::emitPauseSeekBar(int aPosition)
+{
+    emit resetSeekBar(aPosition);
 }
 
 void MainWindowModel::save(const QUrl &aUrl,

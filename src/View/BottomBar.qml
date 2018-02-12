@@ -30,7 +30,7 @@ Rectangle{
             WButtonMouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    MainWindowModel.pause();
+                    MainWindowModel.stop();
                 }
             }
         }

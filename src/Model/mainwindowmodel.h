@@ -30,6 +30,7 @@ namespace waltz
                 void emitActivePlayButton();
                 void emitStartSeekBar();
                 void emitResetSeekBar();
+                void emitPauseSeekBar(int aPosition);
 
             public:
                 // Invocable Methods
@@ -88,6 +89,7 @@ namespace waltz
                 void scoreUpdated();
                 void startSeekBar();
                 void resetSeekBar();
+                void pauseSeekBar(int aPosition);
 
             private:
                 static MainWindowModel*              mInstance_;

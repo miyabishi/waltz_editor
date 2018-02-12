@@ -16,6 +16,9 @@ Rectangle {
         onResetSeekBar: {
             root.resetSeekBar();
         }
+        onPauseSeekBar: {
+            root.pauseSeekBar(aPosition);
+        }
     }
 
     function startSeekBar()
@@ -31,10 +34,11 @@ Rectangle {
         root.x = root.seekBase;
     }
 
-    function pauseSeekBar()
+    function pauseSeekBar(aPosition)
     {
         seek_bar_timer.stop();
-        root.seekBarOffset = root.x;
+        root.x = aPosition;
+        root.seekBarOffset = aPosition;
     }
 
     function velocity()

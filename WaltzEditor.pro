@@ -43,7 +43,8 @@ SOURCES += main.cpp \
     src/Domain/Commands/resetseekbarcommand.cpp \
     src/Domain/ScoreComponent/vibratowavelength.cpp \
     src/Domain/ExternalFile/waltzsongfile.cpp \
-    src/Domain/ScoreComponent/playbackstartingtime.cpp
+    src/Domain/ScoreComponent/playbackstartingtime.cpp \
+    src/Domain/Commands/pauseseekbarcommand.cpp
 
 RESOURCES += qml.qrc
 
@@ -111,7 +112,8 @@ HEADERS += \
     src/Domain/Commands/resetseekbarcommand.h \
     src/Domain/ScoreComponent/vibratowavelength.h \
     src/Domain/ExternalFile/waltzsongfile.h \
-    src/Domain/ScoreComponent/playbackstartingtime.h
+    src/Domain/ScoreComponent/playbackstartingtime.h \
+    src/Domain/Commands/pauseseekbarcommand.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
