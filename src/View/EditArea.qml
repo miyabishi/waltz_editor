@@ -192,6 +192,7 @@ Rectangle{
                         {
                             return otherNoteTail;
                         }
+
                         if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
                         {
                             return otherNoteHead - source.width;
