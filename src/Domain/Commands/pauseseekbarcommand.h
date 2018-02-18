@@ -1,6 +1,7 @@
 #ifndef PAUSESEEKBARCOMMAND_H
 #define PAUSESEEKBARCOMMAND_H
 
+#include <waltz_common/command.h>
 
 namespace waltz
 {

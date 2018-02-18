@@ -232,7 +232,7 @@ void MainWindowModel::emitResetSeekBar()
 
 void MainWindowModel::emitPauseSeekBar(int aPosition)
 {
-    emit resetSeekBar(aPosition);
+    emit pauseSeekBar(aPosition);
 }
 
 void MainWindowModel::save(const QUrl &aUrl,
