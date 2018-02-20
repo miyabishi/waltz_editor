@@ -4,43 +4,38 @@
 #include "activeplaybuttoncommand.h"
 #include "startseekbarcommand.h"
 #include "resetseekbarcommand.h"
+#include "pauseseekbarcommand.h"
 
 using namespace waltz::common::Commands;
 using namespace waltz::editor::Commands;
 
-namespace
-{
-    const CommandId UPDATE_LIBRARY_INFORMATION_ID("UpdateLibraryInformation");
-    const CommandId ACTIVE_PLAY_BUTTON_ID("ActivePlayButton");
-    const CommandId START_SEEK_BAR_ID("StartSeekBar");
-    const CommandId RESET_SEEK_BAR_ID("ResetSeekBar");
+CommandFactory* CommandFactory::mInstance_ = 0;
 
+CommandFactory& CommandFactory::getInstance()
+{
+    if (0 == mInstance_)
+    {
+        static CommandFactory instance;
+        mInstance_ = &instance;
+    }
+    return *mInstance_;
 }
 
 CommandPointer CommandFactory::createCommand(const CommandId& aCommandId)
 {
-    if(aCommandId == UPDATE_LIBRARY_INFORMATION_ID)
-    {
-        return CommandPointer(new UpdateLibraryInformationCommand());
-    }
-
-    if(aCommandId == ACTIVE_PLAY_BUTTON_ID)
-    {
-        return CommandPointer(new ActivePlayButtonCommand());
-    }
-
-    if(aCommandId == START_SEEK_BAR_ID)
-    {
-        return CommandPointer(new StartSeekBarCommand());
-    }
-    if(aCommandId == RESET_SEEK_BAR_ID)
-    {
-        return CommandPointer(new ResetSeekBarCommand());
+    foreach (waltz::common::Commands::CommandPointer command, mCommandList_) {
+        if (! command->commandIdEquals(aCommandId)) continue;
+        return command;
     }
     return CommandPointer();
 }
 
 CommandFactory::CommandFactory()
 {
+    mCommandList_ << CommandPointer(new UpdateLibraryInformationCommand());
+    mCommandList_ << CommandPointer(new ActivePlayButtonCommand());
+    mCommandList_ << CommandPointer(new StartSeekBarCommand());
+    mCommandList_ << CommandPointer(new ResetSeekBarCommand());
+    mCommandList_ << CommandPointer(new PauseSeekBarCommand());
 }
 

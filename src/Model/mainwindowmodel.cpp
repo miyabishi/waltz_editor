@@ -230,9 +230,9 @@ void MainWindowModel::emitResetSeekBar()
     emit resetSeekBar();
 }
 
-void MainWindowModel::emitPauseSeekBar(int aPosition)
+void MainWindowModel::emitPauseSeekBar()
 {
-    emit pauseSeekBar(aPosition);
+    emit pauseSeekBar();
 }
 
 void MainWindowModel::save(const QUrl &aUrl,
@@ -251,11 +251,12 @@ QVariantMap MainWindowModel::load(const QUrl &aUrl)
 void MainWindowModel::stop()
 {
     mClient_->sendMessage(Message(COMMAND_ID_STOP));
+    emit resetSeekBar();
 }
 
 void MainWindowModel::pause()
 {
-    mClient_->sendMessage(Message(COMMAND_ID_PAUSE));
+    mClient_->sendMessage(Message(COMMAND_ID_STOP));
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)
