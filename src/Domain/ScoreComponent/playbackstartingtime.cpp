@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "playbackstartingtime.h"
 
 using namespace waltz::editor::ScoreComponent;
@@ -11,6 +12,7 @@ namespace
 PlaybackStartingTime::PlaybackStartingTime(double aSec)
     : mParameter_(* new Parameter(PARAMETER_NAME, aSec))
 {
+    qDebug() << "playbackstartingtime:" << aSec;
 }
 
 PlaybackStartingTime::~PlaybackStartingTime()

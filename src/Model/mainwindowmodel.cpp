@@ -257,12 +257,13 @@ void MainWindowModel::stop()
 void MainWindowModel::pause()
 {
     mClient_->sendMessage(Message(COMMAND_ID_STOP));
+    emit pauseSeekBar();
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(new Score()))
-    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 80))
+    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 10))
     , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
     , mLibraryInformation_(
           waltz::editor::LibraryComponent::CharacterImage(),

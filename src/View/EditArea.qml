@@ -126,6 +126,7 @@ Rectangle{
                         var positionY = piano_roll_edit_area.calcY(mouseY);
                         var noteText = "あ";
                         var noteWidth = edit_area.columnWidth;
+                        console.log("try append")
 
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                     }
@@ -145,11 +146,9 @@ Rectangle{
                             pEditing_: false
                             positionX: positionX
                             positionY: positionY
-                            //vibratoAmplitude: vibratoAmplitude
-                            //vibratoFrequency: vibratoFrequency
-                            //vibratoLength: vibratoLength
                             width: noteWidth
                             height: edit_area.rowHeight
+                            visible: true
                         }
                     }
                     onLoaded: {
@@ -158,9 +157,7 @@ Rectangle{
                         item.positionX = positionX;
                         item.positionY = positionY;
                         item.visible = true;
-                        //item.vibratoLength = vibratoLength;
-                        //item.vibratoAmplitude = vibratoAmplitude;
-                        //item.vibratoFrequency = vibratoFrequency;
+                        console.log("note load")
                     }
                 }
             }
