@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.3
+
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.0 as Controls
 import QtGraphicalEffects 1.0
@@ -15,93 +17,154 @@ Rectangle{
         width: 180
         height: parent.height * 0.7
 
-        Rectangle{
-            id: stop_button
-            anchors.left: parent.left
-            height: parent.height
-            width:height
-            color: "#333333"
-            Image {
-                anchors.left: parent.left
-                height: parent.height
-                width: height
-                source: "qrc:/image/stop.png"
-            }
-            WButtonMouseArea{
-                anchors.fill: parent
-                onClicked: {
-                    MainWindowModel.stop();
+        RowLayout{
+            anchors.fill: parent
+            spacing: 6
+
+            Rectangle{
+                id: skip_previous_button
+
+                Layout.fillWidth: true
+                Layout.minimumWidth: 40
+                Layout.preferredWidth: 40
+                Layout.maximumWidth: 40
+                Layout.minimumHeight: 40
+
+                color: "#333333"
+                Image {
+                    height: parent.height
+                    width: height
+                    source: "qrc:/image/skip_previous.png"
                 }
-            }
-        }
+                WButtonMouseArea{
+                    anchors.fill: parent
+                    onClicked: {
 
-        Rectangle
-        {
-            id: play_button
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: parent.height
-            width: height
-            color: "#333333"
-            property bool pIsActive_: true
-
-            onPIsActive_Changed: {
-                play_button_image_brightness.brightness = pIsActive_ ? 0 : -0.50
-            }
-
-            Image {
-                id: play_button_image
-                height: parent.height
-                width: height
-                source: "qrc:/image/play.png"
-            }
-
-            BrightnessContrast{
-                id: play_button_image_brightness
-                source: play_button_image
-                anchors.fill: play_button_image
-            }
-
-            WButtonMouseArea{
-                anchors.fill: parent
-
-                onClicked: {
-                    if (! play_button.pIsActive_)
-                    {
-                        return;
                     }
+                }
+            }
 
-                    MainWindowModel.clearScore();
-                    note_list_model_container.reflect();
-                    pitch_changing_point_list_model_containter.reflect();
-                    portamento_start_point_list_model_container.reflect();
-                    portamento_end_point_list_model_container.reflect();
-                    vibrato_list_model_container.reflect();
-                    note_volume_list_model_container.reflect();
+            Rectangle{
+                id: stop_button
+                Layout.fillWidth: true
+                Layout.minimumWidth: 40
+                Layout.preferredWidth: 40
+                Layout.maximumWidth: 40
+                Layout.minimumHeight: 40
 
-                    MainWindowModel.play(edit_area.getSeekBarPosition());
-                    play_button.pIsActive_ = false
+                color: "#333333"
+                Image {
+                    anchors.left: parent.left
+                    height: parent.height
+                    width: height
+                    source: "qrc:/image/stop.png"
+                }
+                WButtonMouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        MainWindowModel.stop();
+                    }
+                }
+            }
+
+            Rectangle
+            {
+                id: play_button
+                Layout.fillWidth: true
+                Layout.minimumWidth: 40
+                Layout.preferredWidth: 40
+                Layout.maximumWidth: 40
+                Layout.minimumHeight: 40
+                color: "#333333"
+                property bool pIsActive_: true
+
+                onPIsActive_Changed: {
+                    play_button_image_brightness.brightness = pIsActive_ ? 0 : -0.50
+                }
+
+                Image {
+                    id: play_button_image
+                    height: parent.height
+                    width: height
+                    source: "qrc:/image/play.png"
+                }
+
+                BrightnessContrast{
+                    id: play_button_image_brightness
+                    source: play_button_image
+                    anchors.fill: play_button_image
+                }
+
+                WButtonMouseArea{
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (! play_button.pIsActive_)
+                        {
+                            return;
+                        }
+
+                        MainWindowModel.clearScore();
+                        note_list_model_container.reflect();
+                        pitch_changing_point_list_model_containter.reflect();
+                        portamento_start_point_list_model_container.reflect();
+                        portamento_end_point_list_model_container.reflect();
+                        vibrato_list_model_container.reflect();
+                        note_volume_list_model_container.reflect();
+
+                        MainWindowModel.play(edit_area.getSeekBarPosition());
+                        play_button.pIsActive_ = false
+                    }
+                }
+            }
+
+            Rectangle{
+                id: pause_button
+
+                Layout.fillWidth: true
+                Layout.minimumWidth: 40
+                Layout.preferredWidth: 40
+                Layout.maximumWidth: 40
+                Layout.minimumHeight: 40
+
+                color: "#333333"
+                Image {
+                    height: parent.height
+                    width: height
+                    source: "qrc:/image/pause.png"
+                }
+                WButtonMouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        MainWindowModel.pause();
+                    }
+                }
+            }
+
+            Rectangle{
+                id: skip_next_button
+
+                Layout.fillWidth: true
+                Layout.minimumWidth: 40
+                Layout.preferredWidth: 40
+                Layout.maximumWidth: 40
+                Layout.minimumHeight: 40
+
+                color: "#333333"
+                Image {
+                    height: parent.height
+                    width: height
+                    source: "qrc:/image/skip_next.png"
+                }
+                WButtonMouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+
+                    }
                 }
             }
         }
 
-        Rectangle{
-            id: pause_button
-            anchors.right: parent.right
-            height: parent.height
-            width: height
-            color: "#333333"
-            Image {
-                height: parent.height
-                width: height
-                source: "qrc:/image/pause.png"
-            }
-            WButtonMouseArea{
-                anchors.fill: parent
-                onClicked: {
-                    MainWindowModel.pause();
-                }
-            }
-        }
     }
 
     Rectangle{

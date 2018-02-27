@@ -42,5 +42,7 @@
         <file>src/View/VibratoStartPoint.qml</file>
         <file>src/View/VibratoAmplitudeControlPoint.qml</file>
         <file>src/View/VibratoWavelengthEndPoint.qml</file>
+        <file>image/skip_next.png</file>
+        <file>image/skip_previous.png</file>
     </qresource>
 </RCC>
