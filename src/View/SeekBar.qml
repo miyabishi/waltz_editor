@@ -47,6 +47,14 @@ Rectangle {
         return bpm * edit_area.barLength() / 240.0 / 1000.0 * root.timerInterval;
     }
 
+    function skipNextBar()
+    {
+    }
+
+    function skipPreviousBar()
+    {
+    }
+
     Timer{
         id:seek_bar_timer
         interval: root.timerInterval;
