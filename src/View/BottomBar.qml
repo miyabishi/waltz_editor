@@ -39,7 +39,7 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
-
+                        edit_area.skipToPreviousBar();
                     }
                 }
             }
@@ -159,7 +159,7 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
-
+                        edit_area.skipToNextBar();
                     }
                 }
             }

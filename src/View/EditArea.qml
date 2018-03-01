@@ -32,8 +32,32 @@ Rectangle{
         return seek_bar.x;
     }
 
+    function skipToNextBar()
+    {
+        seek_bar.moveTo(getNextBarPosition(seek_bar.x));
+    }
 
-    function updateProperty(){
+    function skipToPreviousBar()
+    {
+        seek_bar.moveTo(getPreviousBarPosition(seek_bar.x));
+    }
+
+    function getNextBarPosition(aX)
+    {
+        if (aX >= edit_area.editAreaWidth) return edit_area.editAreaWidth;
+        var barWidth = edit_area.columnWidth * edit_area.beatChild;
+        return (MathUtility.floor(aX/barWidth) + 1)* barWidth;
+    }
+
+    function getPreviousBarPosition(aX)
+    {
+        if (aX <= 0) return 0;
+        var barWidth = edit_area.columnWidth * edit_area.beatChild;
+        return (MathUtility.floor(aX/barWidth) - 1) * barWidth;
+    }
+
+    function updateProperty()
+    {
         edit_area.supportOctarve = MainWindowModel.supportOctave();
         edit_area.numberOfRow    = 12 * supportOctarve;
         edit_area.rowHeight      = MainWindowModel.rowHeight();
