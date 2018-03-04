@@ -9,7 +9,6 @@ namespace waltz
     {
         namespace History
         {
-
             class HistoryData
             {
             public:
