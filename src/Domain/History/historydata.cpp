@@ -1,6 +1,6 @@
 #include "historydata.h"
 
-using namespace waltz::editor::ExternalFile;
+using namespace waltz::editor::History;
 
 HistoryData::HistoryData()
 {

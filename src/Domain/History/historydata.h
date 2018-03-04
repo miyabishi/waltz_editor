@@ -7,7 +7,7 @@ namespace waltz
 {
     namespace editor
     {
-        namespace ExternalFile
+        namespace History
         {
 
             class HistoryData

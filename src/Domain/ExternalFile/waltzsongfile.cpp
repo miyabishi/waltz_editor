@@ -18,7 +18,6 @@ void WaltzSongFile::save(const QVariantMap& aData) const
 {
     QJsonObject object = QJsonObject::fromVariantMap(aData);
     QJsonDocument document(object);
-    qDebug() << document.toJson();
 
     QByteArray data(document.toJson());
     QFile saveFile(mFilePath_);

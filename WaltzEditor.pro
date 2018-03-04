@@ -46,8 +46,8 @@ SOURCES += main.cpp \
     src/Domain/ScoreComponent/playbackstartingtime.cpp \
     src/Domain/Commands/pauseseekbarcommand.cpp \
     src/Model/mathutility.cpp \
-    src/Domain/ExternalFile/historydata.cpp \
-    src/Domain/ExternalFile/historydatarepository.cpp
+    src/Domain/History/historydata.cpp \
+    src/Domain/History/historydatarepository.cpp
 
 RESOURCES += qml.qrc
 
@@ -118,8 +118,8 @@ HEADERS += \
     src/Domain/ScoreComponent/playbackstartingtime.h \
     src/Domain/Commands/pauseseekbarcommand.h \
     src/Model/mathutility.h \
-    src/Domain/ExternalFile/historydata.h \
-    src/Domain/ExternalFile/historydatarepository.h
+    src/Domain/History/historydata.h \
+    src/Domain/History/historydatarepository.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
