@@ -47,8 +47,7 @@ SOURCES += main.cpp \
     src/Domain/Commands/pauseseekbarcommand.cpp \
     src/Model/mathutility.cpp \
     src/Domain/History/historydata.cpp \
-    src/Domain/History/historydatarepository.cpp \
-    src/Domain/History/historydataid.cpp
+    src/Domain/History/historydatarepository.cpp
 
 RESOURCES += qml.qrc
 
@@ -120,8 +119,7 @@ HEADERS += \
     src/Domain/Commands/pauseseekbarcommand.h \
     src/Model/mathutility.h \
     src/Domain/History/historydata.h \
-    src/Domain/History/historydatarepository.h \
-    src/Domain/History/historydataid.h
+    src/Domain/History/historydatarepository.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

@@ -1,7 +1,8 @@
 #ifndef HISTORYDATAREPOSITORY_H
 #define HISTORYDATAREPOSITORY_H
 
-#include <QSharedPointer>
+#include "historydata.h"
+#include <QList>
 
 namespace waltz
 {
@@ -12,13 +13,24 @@ namespace waltz
             class HistoryDataRepository
             {
             public:
-                HistoryDataRepository();
+                static HistoryDataRepository& getInstance();
+
+                void appendHistoryData(const HistoryDataPointer aData);
+                HistoryDataPointer moveHeadToNextData();
+                HistoryDataPointer moveHeadToPreviousData();
+                bool hasNextData() const;
+                bool hasPreviousData() const;
+
             private:
+                static HistoryDataRepository* mInstance_;
+                int                           mHeadPosition_;
+                QList<HistoryDataPointer>     mHistoryDataList_;
+
+            private:
+                HistoryDataRepository();
                 HistoryDataRepository(HistoryDataRepository& aOther);
                 HistoryDataRepository& operator=(HistoryDataRepository& aOther);
             };
-            typedef QSharedPointer<HistoryDataRepository> HistoryDataRepositoryPointer;
-
         } // namespace ExternalFile
     } // namespace editor
 } // namespace waltz

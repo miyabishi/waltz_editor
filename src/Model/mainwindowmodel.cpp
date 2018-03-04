@@ -18,6 +18,8 @@
 #include "src/Domain/ScoreComponent/vibratowavelength.h"
 #include "src/Domain/ScoreComponent/playbackstartingtime.h"
 
+#include "src/Domain/History/historydatarepository.h"
+
 #include "src/Domain/ExternalFile/waltzsongfile.h"
 
 using namespace waltz::common::Communicator;
@@ -258,6 +260,32 @@ void MainWindowModel::pause()
 {
     mClient_->sendMessage(Message(COMMAND_ID_STOP));
     emit pauseSeekBar();
+}
+
+void MainWindowModel::writeHistory(const QVariantMap& aData)
+{
+    History::HistoryDataRepository::getInstance().appendHistoryData(
+                History::HistoryDataPointer(new History::HistoryData(aData)));
+}
+
+QVariantMap MainWindowModel::readPreviousHistoryData()
+{
+    return History::HistoryDataRepository::getInstance().moveHeadToPreviousData()->value();
+}
+
+QVariantMap MainWindowModel::readNextHistoryData()
+{
+    return History::HistoryDataRepository::getInstance().moveHeadToNextData()->value();
+}
+
+bool MainWindowModel::hasPreviousHistoryData()
+{
+    return History::HistoryDataRepository::getInstance().hasPreviousData();
+}
+
+bool MainWindowModel::hasNextHistoryData()
+{
+    return History::HistoryDataRepository::getInstance().hasNextData();
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

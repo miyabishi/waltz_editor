@@ -82,6 +82,13 @@ namespace waltz
 
                 Q_INVOKABLE QVariantMap load(const QUrl& aUrl);
 
+                // for HistoryData
+                Q_INVOKABLE void writeHistory(const QVariantMap& aData);
+                Q_INVOKABLE QVariantMap readPreviousHistoryData();
+                Q_INVOKABLE QVariantMap readNextHistoryData();
+                Q_INVOKABLE bool hasPreviousHistoryData();
+                Q_INVOKABLE bool hasNextHistoryData();
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();

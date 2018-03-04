@@ -2,6 +2,7 @@
 #define HISTORYDATA_H
 
 #include <QSharedPointer>
+#include <QVariantMap>
 
 namespace waltz
 {
@@ -12,7 +13,12 @@ namespace waltz
             class HistoryData
             {
             public:
-                HistoryData();
+                explicit HistoryData(const QVariantMap& aData);
+                QVariantMap value() const;
+
+            private:
+                QVariantMap          mData_;
+
             private:
                 HistoryData(HistoryData& aOther);
                 HistoryData& operator=(HistoryData& aOther);
