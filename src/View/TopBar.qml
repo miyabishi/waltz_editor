@@ -1,25 +1,124 @@
 import QtQuick 2.0
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
+
 
 Rectangle{
     id: top_bar
     color: "#333333"
     height: 60
 
-    Rectangle{
-        id: file_buttons
-        color:parent.color
-        x: 10
-        anchors.verticalCenter: parent.verticalCenter
-        width: 120
-        height: 32
+    Connections{
+        target: MainWindowModel
+        onHistoryDataUpdated: {
+            undo_button.isEnabled = MainWindowModel.hasPreviousHistoryData();
+            redo_button.isEnabled = MainWindowModel.hasNextHistoryData();
+        }
+    }
+
+    RowLayout{
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        width: 200
+        spacing: 6
+
+        Rectangle {
+            id: undo_button
+            color:"#333333"
+            property bool isEnabled: MainWindowModel.hasPreviousHistoryData()
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
+            onIsEnabledChanged: {
+                undo_button_image_brightness.brightness = undo_button.isEnabled ? 0 : -0.50
+            }
+
+
+            Image{
+                id: undo_button_image
+                anchors.left: parent.left
+                height: parent.height
+                width: height
+                source: "qrc:/image/undo.png"
+            }
+
+            BrightnessContrast{
+                id: undo_button_image_brightness
+                source: undo_button_image
+                anchors.fill: undo_button_image
+            }
+
+
+            WButtonMouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    if(! undo_button.isEnabled) return;
+                    main_window.loadData(MainWindowModel.readPreviousHistoryData());
+                }
+            }
+        }
+
+        Rectangle {
+            id: redo_button
+            color:"#333333"
+            property bool isEnabled: MainWindowModel.hasPreviousHistoryData()
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
+            onIsEnabledChanged: {
+                redo_button_image_brightness.brightness = isEnabled ? 0 : -0.50
+            }
+
+
+            Image{
+                id: redo_button_image
+                anchors.left: parent.left
+                height: parent.height
+                width: height
+                source: "qrc:/image/redo.png"
+            }
+
+            BrightnessContrast{
+                id: redo_button_image_brightness
+                source: redo_button_image
+                anchors.fill: redo_button_image
+            }
+
+            WButtonMouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    if(! redo_button.isEnabled) return;
+                    main_window.loadData(MainWindowModel.readNextHistoryData());
+                }
+            }
+        }
 
         Rectangle {
             id: save_button
-            color:parent.color
-            anchors.left: parent.left
-            height: parent.height
-            width: height
+            color:"#333333"
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
             Image{
                 anchors.left: parent.left
                 height: parent.height
@@ -34,13 +133,19 @@ Rectangle{
                 }
             }
         }
+
         Rectangle{
             id: wav_output_button
-            color:parent.color
+            color:"#333333"
+
             anchors.verticalCenter: parent.verticalCenter
-            anchors.left: save_button.right
-            width: 32
-            height: 32
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
             Image {
                 anchors.left: parent.left
                 height: parent.height
@@ -62,30 +167,6 @@ Rectangle{
                     saveWavDialog.open()
                 }
             }
-        }
-    }
-
-    Rectangle{
-        id: tool_buttons
-        color:parent.color
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: file_buttons.right
-        width: 80
-        height: 32
-        Image {
-            id: edit_button
-            anchors.left: parent.left
-            height: parent.height
-            width: height
-            source: "qrc:/image/edit.png"
-        }
-
-        Image {
-            id: cursor_button
-            anchors.right: parent.right
-            height: parent.height
-            width: height
-            source: "qrc:/image/cursor.png"
         }
     }
 }

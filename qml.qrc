@@ -44,5 +44,7 @@
         <file>src/View/VibratoWavelengthEndPoint.qml</file>
         <file>image/skip_next.png</file>
         <file>image/skip_previous.png</file>
+        <file>image/redo.png</file>
+        <file>image/undo.png</file>
     </qresource>
 </RCC>

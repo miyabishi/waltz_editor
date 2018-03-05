@@ -127,3 +127,7 @@ else:unix: LIBS += -L$$PWD/../WaltzCommonLibrary/ -lWaltzCommonLibrary
 
 INCLUDEPATH += $$PWD/../WaltzCommonLibrary/include
 DEPENDPATH += $$PWD/../WaltzCommonLibrary/include
+
+DISTFILES += \
+    image/redo.png \
+    image/undo.png

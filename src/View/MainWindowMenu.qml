@@ -18,10 +18,6 @@ MenuBar {
         Connections{
             target: MainWindowModel
             onHistoryDataUpdated: {
-                console.log("history data updated");
-                console.log(MainWindowModel.hasPreviousHistoryData());
-                console.log(MainWindowModel.hasNextHistoryData());
-
                 menu_undo.enabled = MainWindowModel.hasPreviousHistoryData();
                 menu_redo.enabled = MainWindowModel.hasNextHistoryData();
             }
