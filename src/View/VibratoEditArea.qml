@@ -364,7 +364,6 @@ Rectangle {
                         item.x = vibrato_list_model_container.calculateVibratoAmplitudeControlPointX(vibratoId, noteId);
                         item.y = root.calculateY(amplitude) - item.height / 2;
                     }
-
                 }
             }
         }

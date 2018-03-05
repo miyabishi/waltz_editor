@@ -266,16 +266,21 @@ void MainWindowModel::writeHistory(const QVariantMap& aData)
 {
     History::HistoryDataRepository::getInstance().appendHistoryData(
                 History::HistoryDataPointer(new History::HistoryData(aData)));
+    historyDataUpdated();
 }
 
 QVariantMap MainWindowModel::readPreviousHistoryData()
 {
-    return History::HistoryDataRepository::getInstance().moveHeadToPreviousData()->value();
+    QVariantMap data = History::HistoryDataRepository::getInstance().moveHeadToPreviousData()->value();
+    historyDataUpdated();
+    return data;
 }
 
 QVariantMap MainWindowModel::readNextHistoryData()
 {
-    return History::HistoryDataRepository::getInstance().moveHeadToNextData()->value();
+    QVariantMap data = History::HistoryDataRepository::getInstance().moveHeadToNextData()->value();
+    historyDataUpdated();
+    return data;
 }
 
 bool MainWindowModel::hasPreviousHistoryData()

@@ -82,6 +82,7 @@ Item{
                     - root.width/2;
                     */
         }
+
         onPositionChanged: {
             /*
             if ( root.x > (rangeMax))
@@ -100,6 +101,7 @@ Item{
         onReleased: {
             updatePitchChangingPoint();
             root.Drag.drop();
+            MainWindowModel.writeHistory(main_window.createSaveData());
         }
 
         onClicked: {

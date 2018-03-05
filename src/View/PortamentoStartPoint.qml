@@ -88,6 +88,7 @@ Item{
         onReleased: {
             updatePortamentoStartPoint();
             root.Drag.drop();
+            MainWindowModel.writeHistory(main_window.createSaveData());
         }
     }
 }

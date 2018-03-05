@@ -74,6 +74,7 @@ Item {
 
         onReleased: {
             root.Drag.drop();
+            MainWindowModel.writeHistory(main_window.createSaveData());
         }
     }
 }

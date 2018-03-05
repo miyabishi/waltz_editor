@@ -44,6 +44,7 @@ Rectangle {
         onReleased: {
             var volume = volume_edit_area.calculateVolume(height);
             note_volume_list_model_container.updateNoteVolume(noteVolumeId, volume);
+            MainWindowModel.writeHistory(main_window.createSaveData());
         }
     }
 }

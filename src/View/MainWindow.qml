@@ -12,6 +12,43 @@ ApplicationWindow {
     title: qsTr("Waltz Editor")
     menuBar: MainWindowMenu{}
 
+    Component.onCompleted: {
+        MainWindowModel.writeHistory(main_window.createSaveData());
+    }
+
+    function loadData(aData)
+    {
+        note_list_model_container.setArray(aData.note_list_model_container);
+        note_volume_list_model_container.setArray(aData.note_volume_list_model_container);
+        portamento_start_point_list_model_container.setArray(aData.portamento_start_point_list_model_container);
+        pitch_changing_point_list_model_containter.setArray(aData.pitch_changing_point_list_model_containter);
+        portamento_end_point_list_model_container.setArray(aData.portamento_end_point_list_model_container);
+        vibrato_list_model_container.setArray(aData.vibrato_list_model_container);
+    }
+
+    function createSaveData()
+    {
+        var aData = {
+            "note_list_model_container" : note_list_model_container.toArray(),
+            "note_volume_list_model_container" : note_volume_list_model_container.toArray(),
+            "portamento_start_point_list_model_container" : portamento_start_point_list_model_container.toArray(),
+            "pitch_changing_point_list_model_containter" : pitch_changing_point_list_model_containter.toArray(),
+            "portamento_end_point_list_model_container" : portamento_end_point_list_model_container.toArray(),
+            "vibrato_list_model_container" : vibrato_list_model_container.toArray()
+        };
+        return aData;
+    }
+
+    function reflectData()
+    {
+        note_list_model_container.reflect();
+        pitch_changing_point_list_model_containter.reflect();
+        portamento_start_point_list_model_container.reflect();
+        portamento_end_point_list_model_container.reflect();
+        vibrato_list_model_container.reflect();
+        note_volume_list_model_container.reflect();
+    }
+
     NoteListModelContainer{
         id: note_list_model_container
     }
@@ -131,12 +168,15 @@ ApplicationWindow {
         selectExisting: true
         onAccepted: {
             var data = MainWindowModel.load(loadDialog.fileUrl);
+            main_window.loadData(data);
+            /*
             note_list_model_container.setArray(data.note_list_model_container);
             note_volume_list_model_container.setArray(data.note_volume_list_model_container);
             portamento_start_point_list_model_container.setArray(data.portamento_start_point_list_model_container);
             pitch_changing_point_list_model_containter.setArray(data.pitch_changing_point_list_model_containter);
             portamento_end_point_list_model_container.setArray(data.portamento_end_point_list_model_container);
             vibrato_list_model_container.setArray(data.vibrato_list_model_container);
+            */
         }
     }
 
@@ -146,6 +186,7 @@ ApplicationWindow {
         selectMultiple: false
         selectExisting: false
         onAccepted: {
+            /*
             var aData = {
                 "note_list_model_container" : note_list_model_container.toArray(),
                 "note_volume_list_model_container" : note_volume_list_model_container.toArray(),
@@ -153,8 +194,8 @@ ApplicationWindow {
                 "pitch_changing_point_list_model_containter" : pitch_changing_point_list_model_containter.toArray(),
                 "portamento_end_point_list_model_container" : portamento_end_point_list_model_container.toArray(),
                 "vibrato_list_model_container" : vibrato_list_model_container.toArray()
-            }
-            MainWindowModel.save(saveDialog.fileUrl, aData);
+            }*/
+            MainWindowModel.save(saveDialog.fileUrl, main_window.createSaveData());
         }
     }
 

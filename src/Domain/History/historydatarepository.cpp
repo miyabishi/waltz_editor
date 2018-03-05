@@ -1,4 +1,5 @@
 #include "historydatarepository.h"
+#include <QDebug>
 
 using namespace waltz::editor::History;
 
@@ -16,6 +17,7 @@ HistoryDataRepository& HistoryDataRepository::getInstance()
 
 void HistoryDataRepository::appendHistoryData(const HistoryDataPointer aData)
 {
+    qDebug() << Q_FUNC_INFO;
     mHistoryDataList_ = mHistoryDataList_.mid(0, mHeadPosition_ + 1);
     mHistoryDataList_.append(aData);
     mHeadPosition_ = mHistoryDataList_.size() - 1;

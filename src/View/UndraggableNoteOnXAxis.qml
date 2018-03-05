@@ -46,6 +46,7 @@ Rectangle {
                                                     parent.width / 3,
                                                     20,
                                                     0.5);
+                MainWindowModel.writeHistory(main_window.createSaveData());
             }
         }
     }

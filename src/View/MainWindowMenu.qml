@@ -15,6 +15,34 @@ MenuBar {
     }
     Menu{
         title: "&Edit"
+        Connections{
+            target: MainWindowModel
+            onHistoryDataUpdated: {
+                console.log("history data updated");
+                console.log(MainWindowModel.hasPreviousHistoryData());
+                console.log(MainWindowModel.hasNextHistoryData());
+
+                menu_undo.enabled = MainWindowModel.hasPreviousHistoryData();
+                menu_redo.enabled = MainWindowModel.hasNextHistoryData();
+            }
+        }
+
+        MenuItem{
+            id: menu_undo
+            text:"Undo"
+            enabled: MainWindowModel.hasPreviousHistoryData()
+            onTriggered: {
+                main_window.loadData(MainWindowModel.readPreviousHistoryData());
+            }
+        }
+        MenuItem{
+            id: menu_redo
+            text:"Redo"
+            enabled: MainWindowModel.hasNextHistoryData()
+            onTriggered: {
+                main_window.loadData(MainWindowModel.readNextHistoryData());
+            }
+        }
     }
 
     Menu {

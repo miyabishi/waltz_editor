@@ -94,6 +94,7 @@ namespace waltz
                 void activePlayButton();
                 void libraryInformationUpdated();
                 void scoreUpdated();
+                void historyDataUpdated();
                 void startSeekBar();
                 void resetSeekBar();
                 void pauseSeekBar();

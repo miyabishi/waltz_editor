@@ -153,6 +153,7 @@ Rectangle{
                         console.log("try append")
 
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
+                        MainWindowModel.writeHistory(main_window.createSaveData());
                     }
                 }
             }
@@ -181,7 +182,6 @@ Rectangle{
                         item.positionX = positionX;
                         item.positionY = positionY;
                         item.visible = true;
-                        console.log("note load")
                     }
                 }
             }
@@ -232,7 +232,9 @@ Rectangle{
                     drag.source.x = calculateDropX(drag.source);
                 }
 
-                onDropped: {}
+                onDropped: {
+                    MainWindowModel.writeHistory(main_window.createSaveData());
+                }
             }
         }
     }

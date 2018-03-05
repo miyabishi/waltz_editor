@@ -182,6 +182,7 @@ Rectangle {
                     if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
                     {
                         pitch_changing_point_list_model_containter.append(mouseX, mouseY)
+                        MainWindowModel.writeHistory(main_window.createSaveData());
                     }
                 }
             }
