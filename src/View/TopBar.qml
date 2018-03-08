@@ -27,7 +27,7 @@ Rectangle{
         Rectangle {
             id: undo_button
             color:"#333333"
-            property bool isEnabled: MainWindowModel.hasPreviousHistoryData()
+            property bool isEnabled: false
 
             anchors.verticalCenter: parent.verticalCenter
 
@@ -41,7 +41,6 @@ Rectangle{
                 undo_button_image_brightness.brightness = undo_button.isEnabled ? 0 : -0.50
             }
 
-
             Image{
                 id: undo_button_image
                 anchors.left: parent.left
@@ -54,8 +53,8 @@ Rectangle{
                 id: undo_button_image_brightness
                 source: undo_button_image
                 anchors.fill: undo_button_image
+                brightness: -0.50
             }
-
 
             WButtonMouseArea{
                 anchors.fill: parent
@@ -69,7 +68,7 @@ Rectangle{
         Rectangle {
             id: redo_button
             color:"#333333"
-            property bool isEnabled: MainWindowModel.hasPreviousHistoryData()
+            property bool isEnabled: false
 
             anchors.verticalCenter: parent.verticalCenter
 
@@ -96,6 +95,7 @@ Rectangle{
                 id: redo_button_image_brightness
                 source: redo_button_image
                 anchors.fill: redo_button_image
+                brightness: -0.50
             }
 
             WButtonMouseArea{
