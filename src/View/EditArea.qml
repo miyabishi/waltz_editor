@@ -109,7 +109,6 @@ Rectangle{
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
 
-            /*
             Repeater{
                 model: edit_area.numberOfRow
                 Rectangle{
@@ -129,8 +128,6 @@ Rectangle{
                     x: index * edit_area.columnWidth
                     color: (index%edit_area.beatChild == 0) ? "#ccccdd" : "#ddddee"
                 }
-            }*/
-            Canvas{
             }
 
             function calcX(aX){

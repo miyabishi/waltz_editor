@@ -296,7 +296,7 @@ bool MainWindowModel::hasNextHistoryData()
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(new Score()))
-    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 10))
+    , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 100))
     , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
     , mLibraryInformation_(
           waltz::editor::LibraryComponent::CharacterImage(),

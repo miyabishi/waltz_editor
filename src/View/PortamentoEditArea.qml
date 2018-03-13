@@ -190,6 +190,11 @@ Rectangle {
             Canvas{
                 id: pitch_curve_canvas
                 anchors.fill: parent
+                // TODO
+                canvasWindow: Qt.rect(0, 0,
+                                      portamento_edit_area_scroll_view.viewport.width,
+                                      portamento_edit_area_scroll_view.viewport.height)
+
                 onPaint: {
                     var ctx = pitch_curve_canvas.getContext('2d');
                     ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
@@ -210,7 +215,9 @@ Rectangle {
                 {
                     aCtx.strokeStyle = Qt.rgba(.6,.8,1);
                     aCtx.beginPath();
+
                     var note = note_list_model_container.findByIndex(aIndex);
+
                     var pitchChangingPointListModel =
                             pitch_changing_point_list_model_containter.createChangingPointListModelByNoteId(note.noteId);
 
