@@ -3,7 +3,6 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
-
 Rectangle{
     id: top_bar
     color: "#333333"
@@ -81,7 +80,6 @@ Rectangle{
             onIsEnabledChanged: {
                 redo_button_image_brightness.brightness = isEnabled ? 0 : -0.50
             }
-
 
             Image{
                 id: redo_button_image

@@ -40,6 +40,15 @@ Rectangle{
                     anchors.fill: parent
                     onClicked: {
                         edit_area.skipToPreviousBar();
+
+                        if (play_button.pIsActive_)
+                        {
+                            return;
+                        }
+
+                        MainWindowModel.clearScore();
+                        main_window.reflectData()
+                        MainWindowModel.play(edit_area.getSeekBarPosition());
                     }
                 }
             }
@@ -106,14 +115,6 @@ Rectangle{
 
                         MainWindowModel.clearScore();
                         main_window.reflectData()
-                        /*
-                        note_list_model_container.reflect();
-                        pitch_changing_point_list_model_containter.reflect();
-                        portamento_start_point_list_model_container.reflect();
-                        portamento_end_point_list_model_container.reflect();
-                        vibrato_list_model_container.reflect();
-                        note_volume_list_model_container.reflect();
-                        */
                         MainWindowModel.play(edit_area.getSeekBarPosition());
                         play_button.pIsActive_ = false
                     }
@@ -162,11 +163,19 @@ Rectangle{
                     anchors.fill: parent
                     onClicked: {
                         edit_area.skipToNextBar();
+
+                        if (play_button.pIsActive_)
+                        {
+                            return;
+                        }
+
+                        MainWindowModel.clearScore();
+                        main_window.reflectData()
+                        MainWindowModel.play(edit_area.getSeekBarPosition());
                     }
                 }
             }
         }
-
     }
 
     Rectangle{
@@ -211,6 +220,7 @@ Rectangle{
                 }
             }
         }
+
         Rectangle{
             id: beat_controller
             anchors.left: parent.left
@@ -312,6 +322,7 @@ Rectangle{
             }
         }
     }
+
     Connections{
         target: MainWindowModel
         onActivePlayButton: {
