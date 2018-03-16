@@ -188,13 +188,22 @@ Rectangle {
             }
 
             Canvas{
+                parent:portamento_edit_area_scroll_view
                 id: pitch_curve_canvas
+                contextType: "2d"
                 anchors.fill: parent
-                // TODO
-                canvasWindow: Qt.rect(0, 0,
-                                      portamento_edit_area_scroll_view.viewport.width,
-                                      portamento_edit_area_scroll_view.viewport.height)
 
+                canvasSize: Qt.size(portamento_edit_area_scroll_view.flickableItem.contentWidth,
+                                    portamento_edit_area_scroll_view.flickableItem.contentHeight)
+
+                canvasWindow: Qt.rect(portamento_edit_area_scroll_view.flickableItem.contentX,
+                                      portamento_edit_area_scroll_view.flickableItem.contentY,
+                                      portamento_edit_area_scroll_view.width,
+                                      portamento_edit_area_scroll_view.height)
+                tileSize: Qt.size(portamento_edit_area_scroll_view.width,
+                                  portamento_edit_area_scroll_view.height)
+
+                onCanvasWindowChanged: requestPaint()
                 onPaint: {
                     var ctx = pitch_curve_canvas.getContext('2d');
                     ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
