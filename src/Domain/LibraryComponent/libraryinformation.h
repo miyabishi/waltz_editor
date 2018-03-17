@@ -28,7 +28,7 @@ namespace waltz
             private:
                 CharacterImage mCharacterImage_;
                 Description    mDescription_;
-                LibraryName mLibraryName_;
+                LibraryName    mLibraryName_;
             };
         } // namespace LibraryComponent
     } // namespace editor
