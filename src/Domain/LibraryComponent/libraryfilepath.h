@@ -1,8 +1,11 @@
 #ifndef LIBRARYFILEPATH_H
 #define LIBRARYFILEPATH_H
 
+#include <waltz_common/parameter.h>
+
 #include <QSharedPointer>
 #include <QString>
+#include <QVariantMap>
 
 namespace waltz
 {
@@ -15,6 +18,10 @@ namespace waltz
             {
             public:
                 explicit LibraryFilePath(const QString& aValue);
+                QVariant toVariant() const;
+                QString toString() const;
+                static QSharedPointer<LibraryFilePath> fromVariantMap(const QVariantMap& aVariantMap);
+                static QString variantMapKey();
 
             private:
                 QString mValue_;

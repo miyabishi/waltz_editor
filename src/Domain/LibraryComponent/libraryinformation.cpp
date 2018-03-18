@@ -27,3 +27,10 @@ LibraryNamePointer LibraryInformation::libraryName()const
 {
     return mLibraryName_;
 }
+
+QVariantMap LibraryInformation::insertLibraryFilePathVariant(const QVariantMap& aVariantMap) const
+{
+    QVariantMap map = aVariantMap;
+    map.insert(LibraryFilePath::variantMapKey(), mLibraryFilePath_->toVariant());
+    return map;
+}

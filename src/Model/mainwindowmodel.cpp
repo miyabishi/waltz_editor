@@ -9,6 +9,8 @@
 #include "mainwindowmodel.h"
 #include "src/Domain/LibraryComponent/characterimage.h"
 #include "src/Domain/LibraryComponent/description.h"
+#include "src/Domain/LibraryComponent/libraryfilepath.h"
+
 #include "src/Domain/ScoreComponent/noteinformation.h"
 #include "src/Domain/ScoreComponent/notevolume.h"
 #include "src/Domain/ScoreComponent/notestarttime.h"
@@ -19,8 +21,8 @@
 #include "src/Domain/ScoreComponent/playbackstartingtime.h"
 
 #include "src/Domain/History/historydatarepository.h"
-
 #include "src/Domain/ExternalFile/waltzsongfile.h"
+
 
 using namespace waltz::common::Communicator;
 using namespace waltz::common::Commands;
@@ -252,14 +254,25 @@ void MainWindowModel::emitPauseSeekBar()
 void MainWindowModel::save(const QUrl &aUrl,
                            const QVariantMap& aData)
 {
+    QVariantMap data =  aData;
     ExternalFile::WaltzSongFile waltzSongFile(aUrl.toLocalFile());
-    waltzSongFile.save(aData);
+
+    if (! mLibraryInformation_.isNull())
+    {
+        data = mLibraryInformation_->insertLibraryFilePathVariant(data);
+    }
+
+    waltzSongFile.save(data);
 }
 
 QVariantMap MainWindowModel::load(const QUrl &aUrl)
 {
     ExternalFile::WaltzSongFile waltzSongFile(aUrl.toLocalFile());
-    return waltzSongFile.load();
+    QVariantMap data = waltzSongFile.load();
+
+    loadVoiceLibrary(QUrl::fromLocalFile(waltz::editor::LibraryComponent::LibraryFilePath::fromVariantMap(data)->toString()));
+
+    return data;
 }
 
 void MainWindowModel::stop()

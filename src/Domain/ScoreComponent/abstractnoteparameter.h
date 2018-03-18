@@ -18,6 +18,8 @@ namespace waltz
             {
             public:
                 AbstractNoteParameter();
+                virtual ~AbstractNoteParameter();
+
             public:
                 virtual common::Commands::Parameter toParameter(Beat aBeat,
                                                                 Tempo aTempo,

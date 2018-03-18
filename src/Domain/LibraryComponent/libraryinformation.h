@@ -6,6 +6,7 @@
 #include "libraryname.h"
 #include "libraryfilepath.h"
 
+#include <QVariant>
 #include <QSharedPointer>
 
 namespace waltz
@@ -26,6 +27,7 @@ namespace waltz
                 CharacterImagePointer characterImage() const;
                 DescriptionPointer description() const;
                 LibraryNamePointer libraryName() const;
+                QVariantMap insertLibraryFilePathVariant(const QVariantMap& aVariantMap) const;
 
             private:
                 CharacterImagePointer  mCharacterImage_;

@@ -5,6 +5,7 @@
 #include <QUrl>
 #include <QImage>
 #include <QString>
+
 #include "src/Domain/ScoreComponent/score.h"
 #include "src/Communicator/client.h"
 #include "src/Model/editareainformation.h"
