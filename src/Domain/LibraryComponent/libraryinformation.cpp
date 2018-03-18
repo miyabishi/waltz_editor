@@ -2,41 +2,28 @@
 
 using namespace waltz::editor::LibraryComponent;
 
-LibraryInformation::LibraryInformation(const CharacterImage& aCharacterImage,
-                                       const Description& aDescription,
-                                       const LibraryName& aLibraryName)
+LibraryInformation::LibraryInformation(const CharacterImagePointer aCharacterImage,
+                                       const DescriptionPointer aDescription,
+                                       const LibraryNamePointer aLibraryName,
+                                       const LibraryFilePathPointer aLibraryFilePath)
     : mCharacterImage_(aCharacterImage)
     , mDescription_(aDescription)
     , mLibraryName_(aLibraryName)
+    , mLibraryFilePath_(aLibraryFilePath)
 {
 }
 
-LibraryInformation::LibraryInformation(const LibraryInformation& aOther)
-    : mCharacterImage_(aOther.mCharacterImage_)
-    , mDescription_(aOther.mDescription_)
-    , mLibraryName_(aOther.mLibraryName_)
-{
-}
-
-LibraryInformation& LibraryInformation::operator=(const LibraryInformation& aOther)
-{
-    mCharacterImage_ = aOther.mCharacterImage_;
-    mDescription_ = aOther.mDescription_;
-    mLibraryName_ = aOther.mLibraryName_;
-    return (*this);
-}
-
-CharacterImage LibraryInformation::characterImage() const
+CharacterImagePointer LibraryInformation::characterImage() const
 {
     return mCharacterImage_;
 }
 
-Description LibraryInformation::description() const
+DescriptionPointer LibraryInformation::description() const
 {
     return mDescription_;
 }
 
-LibraryName LibraryInformation::libraryName()const
+LibraryNamePointer LibraryInformation::libraryName()const
 {
     return mLibraryName_;
 }

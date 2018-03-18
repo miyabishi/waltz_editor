@@ -2,11 +2,6 @@
 
 using namespace waltz::editor::LibraryComponent;
 
-Description::Description()
-    :mValue_("")
-{
-}
-
 Description::Description(const QString& aValue)
     :mValue_(aValue)
 {

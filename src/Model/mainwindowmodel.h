@@ -25,7 +25,7 @@ namespace waltz
 
             public:
                 void setLibraryInformation(
-                        const waltz::editor::LibraryComponent::LibraryInformation& aLibraryInformation);
+                        const waltz::editor::LibraryComponent::LibraryInformationPointer aLibraryInformation);
                 void emitErrorOccurred(const QString& aErrorMessage);
                 void emitActivePlayButton();
                 void emitStartSeekBar();
@@ -104,7 +104,7 @@ namespace waltz
                 ScoreComponent::ScorePointer         mScore_;
                 EditAreaInformationPointer           mEditAreaInformation_;
                 Communicator::Client*                mClient_;
-                LibraryComponent::LibraryInformation mLibraryInformation_;
+                LibraryComponent::LibraryInformationPointer mLibraryInformation_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

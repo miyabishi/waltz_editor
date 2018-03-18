@@ -52,7 +52,7 @@ MainWindowModel& MainWindowModel::getInstance()
 }
 
 void MainWindowModel::setLibraryInformation(
-        const waltz::editor::LibraryComponent::LibraryInformation& aLibraryInformation)
+        const waltz::editor::LibraryComponent::LibraryInformationPointer aLibraryInformation)
 {
     mLibraryInformation_ = aLibraryInformation;
     emit libraryInformationUpdated();
@@ -174,17 +174,29 @@ void MainWindowModel::saveWav(const QUrl &aUrl)
 
 QString MainWindowModel::characterImageUrl() const
 {
-    return mLibraryInformation_.characterImage().url().toString();
+    if (mLibraryInformation_.isNull())
+    {
+        return QString();
+    }
+    return mLibraryInformation_->characterImage()->url().toString();
 }
 
 QString MainWindowModel::libraryName() const
 {
-    return mLibraryInformation_.libraryName().value();
+    if (mLibraryInformation_.isNull())
+    {
+        return QString();
+    }
+    return mLibraryInformation_->libraryName()->value();
 }
 
 QString MainWindowModel::libraryDescription() const
 {
-    return mLibraryInformation_.description().value();
+    if (mLibraryInformation_.isNull())
+    {
+        return QString();
+    }
+    return mLibraryInformation_->description()->value();
 }
 
 void MainWindowModel::emitErrorOccurred(const QString& aErrorMessage)
@@ -298,10 +310,7 @@ MainWindowModel::MainWindowModel(QObject *aParent)
     , mScore_(ScorePointer(new Score()))
     , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 100))
     , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
-    , mLibraryInformation_(
-          waltz::editor::LibraryComponent::CharacterImage(),
-          waltz::editor::LibraryComponent::Description(),
-          waltz::editor::LibraryComponent::LibraryName())
+    , mLibraryInformation_()
 {
 }
 

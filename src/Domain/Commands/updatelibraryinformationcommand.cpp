@@ -19,6 +19,7 @@ namespace
     const QString PARAMETER_NAME_IMAGE_FILE_PATH("ImageFilePath");
     const QString PARAMETER_NAME_DESCRIPTION("Description");
     const QString PARAMETER_NAME_LIBRARY_NAME("LibraryName");
+    const QString PARAMETER_NAME_LIBRARY_FILE_PATH("LibraryFilePath");
 }
 
 
@@ -30,11 +31,19 @@ UpdateLibraryInformationCommand::UpdateLibraryInformationCommand()
 
 void UpdateLibraryInformationCommand::exec(const Parameters& aParameters)
 {
-    CharacterImage characterImage(aParameters.find(PARAMETER_NAME_IMAGE_FILE_PATH).value().toString());
-    Description description(aParameters.find(PARAMETER_NAME_DESCRIPTION).value().toString());
-    LibraryName libraryName(aParameters.find(PARAMETER_NAME_LIBRARY_NAME).value().toString());
+    CharacterImagePointer characterImage(
+                new CharacterImage(aParameters.find(PARAMETER_NAME_IMAGE_FILE_PATH).value().toString()));
+    DescriptionPointer description(
+                new Description(aParameters.find(PARAMETER_NAME_DESCRIPTION).value().toString()));
+    LibraryNamePointer libraryName(
+                new LibraryName(aParameters.find(PARAMETER_NAME_LIBRARY_NAME).value().toString()));
+    LibraryFilePathPointer libraryFilePath(
+                new LibraryFilePath(aParameters.find(PARAMETER_NAME_LIBRARY_FILE_PATH).value().toString()));
+
     MainWindowModel::getInstance().setLibraryInformation(
-                LibraryInformation(characterImage,
-                                   description,
-                                   libraryName));
+                LibraryInformationPointer(
+                    new LibraryInformation(characterImage,
+                                           description,
+                                           libraryName,
+                                           libraryFilePath)));
 }

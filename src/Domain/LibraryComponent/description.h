@@ -1,6 +1,7 @@
 #ifndef DESCRIPTION_H
 #define DESCRIPTION_H
 
+#include <QSharedPointer>
 #include <QString>
 
 namespace waltz
@@ -12,17 +13,19 @@ namespace waltz
             class Description
             {
             public:
-                Description();
                 explicit Description(const QString& aValue);
-                Description(const Description& aOther);
-                Description& operator=(const Description& aOther);
 
             public:
                 QString value() const;
 
             private:
                 QString mValue_;
+
+            private:
+                Description(const Description& aOther);
+                Description& operator=(const Description& aOther);
             };
+            typedef QSharedPointer<Description> DescriptionPointer;
         } // namespace LibraryComponent
     } // namespace editor
 } // namespace waltz

@@ -1,6 +1,7 @@
 #ifndef CHARACTERIMAGE_H
 #define CHARACTERIMAGE_H
 
+#include <QSharedPointer>
 #include <QUrl>
 
 namespace waltz
@@ -12,17 +13,18 @@ namespace waltz
             class CharacterImage
             {
             public:
-                CharacterImage();
                 explicit CharacterImage(const QString& aPath);
-                CharacterImage(const CharacterImage& aOther);
-                CharacterImage& operator=(const CharacterImage& aOther);
 
             public:
                 QUrl url() const;
 
             private:
                 QUrl mUrl_;
+            private:
+                CharacterImage(const CharacterImage& aOther);
+                CharacterImage& operator=(const CharacterImage& aOther);
             };
+            typedef QSharedPointer<CharacterImage> CharacterImagePointer;
         } // namespace LibraryComponent
     } // namespace editor
 } // namespace waltz

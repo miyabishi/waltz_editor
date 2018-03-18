@@ -2,11 +2,7 @@
 
 using namespace waltz::editor::LibraryComponent;
 
-LibraryFilePath::LibraryFilePath()
+LibraryFilePath::LibraryFilePath(const QString& aValue)
+    :mValue_(aValue)
 {
-
 }
-
-} // namespace LibraryComponent
-} // namespace editor
-} // namespace waltz

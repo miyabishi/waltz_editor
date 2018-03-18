@@ -4,6 +4,9 @@
 #include "characterimage.h"
 #include "description.h"
 #include "libraryname.h"
+#include "libraryfilepath.h"
+
+#include <QSharedPointer>
 
 namespace waltz
 {
@@ -14,22 +17,28 @@ namespace waltz
             class LibraryInformation
             {
             public:
-                LibraryInformation(const CharacterImage& aCharactorImage,
-                                   const Description& aDescription,
-                                   const LibraryName& aLibraryName);
-                LibraryInformation(const LibraryInformation& aOther);
-                LibraryInformation& operator=(const LibraryInformation& aOther);
+                LibraryInformation(const CharacterImagePointer  aCharactorImage,
+                                   const DescriptionPointer     aDescription,
+                                   const LibraryNamePointer     aLibraryName,
+                                   const LibraryFilePathPointer aLibraryFilePath);
 
             public:
-                CharacterImage characterImage() const;
-                Description description() const;
-                LibraryName libraryName() const;
+                CharacterImagePointer characterImage() const;
+                DescriptionPointer description() const;
+                LibraryNamePointer libraryName() const;
 
             private:
-                CharacterImage mCharacterImage_;
-                Description    mDescription_;
-                LibraryName    mLibraryName_;
+                CharacterImagePointer  mCharacterImage_;
+                DescriptionPointer     mDescription_;
+                LibraryNamePointer     mLibraryName_;
+                LibraryFilePathPointer mLibraryFilePath_;
+
+            private:
+                LibraryInformation(const LibraryInformation& aOther);
+                LibraryInformation& operator=(const LibraryInformation& aOther);
             };
+            typedef QSharedPointer<LibraryInformation> LibraryInformationPointer;
+
         } // namespace LibraryComponent
     } // namespace editor
 } // namespace waltz
