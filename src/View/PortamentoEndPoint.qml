@@ -79,6 +79,10 @@ Item{
         drag.target: root
         drag.axis: Drag.XAxis
 
+        onPressed: {
+
+        }
+
         onPositionChanged: {
             updatePortamentoEndPoint();
         }

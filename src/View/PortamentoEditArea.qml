@@ -350,6 +350,7 @@ Rectangle {
                     }
                     onLoaded: {
                         var note = note_list_model_container.find(noteId);
+                        item.noteId = noteId
                         item.x = note.positionX + pitchChangingPointX - 5;
                         item.y = note.positionY + pitchChangingPointY - 5;
                         item.pitchChangingPointId = pitchChangingPointId;

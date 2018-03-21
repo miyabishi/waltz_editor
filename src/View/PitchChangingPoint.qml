@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item{
     id: root
     property int pitchChangingPointId
+    property int noteId
 
     Drag.hotSpot.x: width/2
     Drag.hotSpot.y: height/2
@@ -68,33 +69,14 @@ Item{
         drag.axis: Drag.XAndYAxis
 
         onPressed: {
-            /*
-            var pitchChangingPoint = pitch_changing_point_list_model_containter.findPoint(pitchChangingPointId);
+            var startPoint = portamento_start_point_list_model_container.findByNoteId(noteId);
+            drag.minimumX = startPoint.portamentoStartX + startPoint.portamentoStartXOffset;
+            var endPoint = portamento_end_point_list_model_container.findByNoteId(noteId);
+            drag.maximumX = endPoint.portamentoEndX + endPoint.portamentoEndXOffset;
 
-            var portamentoStartPoint = portamento_start_point_list_model_container.findByNoteId(pitchChangingPoint.noteId);
-            var portamentoEndPoint = portamento_end_point_list_model_container.findByNoteId(pitchChangingPoint.noteId);
-
-            rangeMax = portamentoEndPoint.portamentoEndX
-                                       + portamentoEndPoint.portamentoEndXOffset
-                                       - root.width/2;
-            rangeMin = portamentoStartPoint.portamentoStartX
-                    + portamentoStartPoint.portamentoStartXOffset
-                    - root.width/2;
-                    */
         }
 
         onPositionChanged: {
-            /*
-            if ( root.x > (rangeMax))
-            {
-                root.x = rangeMax;
-            }
-
-            if ( root.x < (rangeMin))
-            {
-                root.x = rangeMin;
-            }*/
-
             updatePitchChangingPoint();
         }
 
