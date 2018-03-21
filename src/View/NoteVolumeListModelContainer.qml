@@ -18,10 +18,11 @@ Item {
     function reload(aNoteId)
     {
         var note = note_list_model_container.find(aNoteId);
-        if(! note) return;
+        if(note < 0) return;
 
         var noteVolume = findByNoteId(aNoteId)
         var noteVolumeIndex = findIndexByNoteVolumeId(noteVolume.noteVolumeId);
+        if (noteVolumeIndex >= noteVolumeListModel.count || noteVolumeIndex < 0) return;
 
         noteVolumeListModel.set(noteVolumeIndex,
                                 {
@@ -63,6 +64,8 @@ Item {
     function append(aNoteId, aVolume)
     {
         var note = note_list_model_container.find(aNoteId);
+        if (note < 0) return;
+
         noteVolumeListModel.append({
                                        "noteVolumeId": noteVolumeIdCounter,
                                        "noteId": aNoteId,
@@ -79,6 +82,9 @@ Item {
         var noteVolume = find(aNoteVolumeId);
         var noteId = noteVolume.noteId;
         var note = note_list_model_container.find(noteId);
+
+        if (noteVolumeIndex >= noteVolumeListModel.count || noteVolumeIndex < 0) return;
+
         noteVolumeListModel.set(noteVolumeIndex,
                                 {
                                     "noteVolumeId": aNoteVolumeId,

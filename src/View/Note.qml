@@ -16,7 +16,21 @@ Rectangle{
     color: "#ffd700"
     Drag.hotSpot.x: 0
     Drag.hotSpot.y: 0
-    Drag.active: note_move_mouse_area.drag.active
+
+    property bool dragActive: note_move_mouse_area.drag.active
+//    Drag.active: note_move_mouse_area.drag.active
+
+    onDragActiveChanged: {
+        if (dragActive) {
+            print("drag started")
+            Drag.start();
+        } else {
+            print("drag finished")
+            Drag.drop();
+        }
+    }
+
+    Drag.dragType: Drag.Automatic
 
     Connections{
         target: note_list_model_container
@@ -50,10 +64,6 @@ Rectangle{
         root.positionX = note.positionX;
         root.positionY = note.positionY;
         root.width = note.noteWidth;
-
-        //root.vibratoAmplitude = note.vibratoAmplitude;
-        //root.vibratoFrequency = note.vibratoFrequency;
-        //root.vibratoLength = note.vibratoLength;
     }
 
     Text{
@@ -72,10 +82,17 @@ Rectangle{
         propagateComposedEvents: pEditing_
         drag.target: root
 
+        onPressed: {
+            console.log("onpressed");
+            console.log(pEditing_)
+            console.log(drag.active)
+        }
+
         onReleased: {
             root.updateNote()
             root.Drag.drop()
         }
+
 
         onClicked: {
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))

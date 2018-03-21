@@ -79,6 +79,38 @@ Rectangle{
         return false
     }
 
+    function calculateDropX(source)
+    {
+        var sourceHead = source.x
+        var sourceTail = source.x + source.width
+
+        for(var index = 0; index < note_list_model_container.count(); ++index)
+        {
+            var otherNote = note_list_model_container.findByIndex(index)
+            var otherNoteHead = otherNote.positionX;
+            var otherNoteTail = otherNoteHead + otherNote.noteWidth;
+
+            if (otherNote.noteId === source.noteId) continue;
+
+            if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
+            {
+                return otherNoteTail;
+            }
+
+            if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
+            {
+                return otherNoteHead - source.width;
+            }
+        }
+        return sourceHead
+    }
+
+    function calculateDropY(source)
+    {
+        return source.y - source.y%edit_area.rowHeight
+    }
+
+
     Rectangle{
         id:piano_view
         anchors.top:beat_axis_view.bottom
@@ -150,11 +182,29 @@ Rectangle{
                         var positionY = piano_roll_edit_area.calcY(mouseY);
                         var noteText = "あ";
                         var noteWidth = edit_area.columnWidth;
-                        console.log("try append")
 
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                         MainWindowModel.writeHistory(main_window.createSaveData());
                     }
+                }
+            }
+
+            DropArea{
+                id: edit_drop_area
+                anchors.fill: parent
+                onEnabledChanged: {
+                    console.log("enabled changed");
+                    console.log(enabled);
+                }
+
+                onPositionChanged:{
+                    drag.source.y = calculateDropY(drag.source);
+                    drag.source.x = calculateDropX(drag.source);
+                }
+
+                onDropped: {
+                    console.log("drop area dropped");
+                    MainWindowModel.writeHistory(main_window.createSaveData());
                 }
             }
 
@@ -192,50 +242,7 @@ Rectangle{
                 height: piano_roll_edit_area.height
             }
 
-            DropArea{
-                id: edit_drop_area
-                anchors.fill: parent
 
-                function calculateDropX(source)
-                {
-                    var sourceHead = source.x
-                    var sourceTail = source.x + source.width
-
-                    for(var index = 0; index < note_list_model_container.count(); ++index)
-                    {
-                        var otherNote = note_list_model_container.findByIndex(index)
-                        var otherNoteHead = otherNote.positionX;
-                        var otherNoteTail = otherNoteHead + otherNote.noteWidth;
-
-                        if (otherNote.noteId === source.noteId) continue;
-
-                        if (sourceHead < (otherNoteTail + 10) && sourceHead > (otherNoteTail - 10))
-                        {
-                            return otherNoteTail;
-                        }
-
-                        if (sourceTail < (otherNoteHead + 10) && sourceTail > (otherNoteHead -10))
-                        {
-                            return otherNoteHead - source.width;
-                        }
-                    }
-                    return sourceHead
-                }
-
-                function calculateDropY(source)
-                {
-                    return source.y - source.y%edit_area.rowHeight
-                }
-
-                onPositionChanged:{
-                    drag.source.y = calculateDropY(drag.source);
-                    drag.source.x = calculateDropX(drag.source);
-                }
-
-                onDropped: {
-                    MainWindowModel.writeHistory(main_window.createSaveData());
-                }
-            }
         }
     }
 
