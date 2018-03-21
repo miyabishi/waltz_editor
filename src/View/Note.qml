@@ -16,9 +16,9 @@ Rectangle{
     color: "#ffd700"
     Drag.hotSpot.x: 0
     Drag.hotSpot.y: 0
+    Drag.keys: ["note"]
 
     property bool dragActive: note_move_mouse_area.drag.active
-//    Drag.active: note_move_mouse_area.drag.active
 
     onDragActiveChanged: {
         if (dragActive) {

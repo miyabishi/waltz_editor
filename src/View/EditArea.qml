@@ -192,10 +192,7 @@ Rectangle{
             DropArea{
                 id: edit_drop_area
                 anchors.fill: parent
-                onEnabledChanged: {
-                    console.log("enabled changed");
-                    console.log(enabled);
-                }
+                keys: ["note"]
 
                 onPositionChanged:{
                     drag.source.y = calculateDropY(drag.source);
@@ -203,7 +200,6 @@ Rectangle{
                 }
 
                 onDropped: {
-                    console.log("drop area dropped");
                     MainWindowModel.writeHistory(main_window.createSaveData());
                 }
             }
