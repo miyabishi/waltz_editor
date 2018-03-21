@@ -89,8 +89,6 @@ Item{
             }
 
             drag.minimumX = minimumX - width / 2;
-            console.log("noteId = " + noteId );
-            console.log("minimumX = " + drag.minimumX);
         }
 
         onPositionChanged: {

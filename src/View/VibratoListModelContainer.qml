@@ -186,6 +186,11 @@ Item {
         return calculateVibratoStartPoint(aVibratoId, aNoteId) + vibrato.wavelength
     }
 
+    function findByNoteId(aNoteId)
+    {
+        return findByIndex(findIndexByNoteId(aNoteId));
+    }
+
     function getModel()
     {
         return vibratoListModel;

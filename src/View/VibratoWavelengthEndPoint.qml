@@ -74,6 +74,11 @@ Item {
         drag.target: root
         drag.axis: Drag.XAxis
 
+        onPressed: {
+            var note = note_list_model_container.find(noteId);
+            drag.minimumX = vibrato_list_model_container.calculateVibratoStartPoint(vibratoId, noteId)
+        }
+
         onPositionChanged: {
             updateVibratoWavelengthEndPoint();
         }
