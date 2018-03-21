@@ -13,6 +13,35 @@ Item {
         }
     }
 
+    function minimumX(aNoteId)
+    {
+        var resultX = -1;
+        for(var index = 0; index < pitchChangingPointListModel.count; ++index)
+        {
+            var pitchChangingPoint = pitchChangingPointListModel.get(index);
+            if (pitchChangingPoint.noteId !== aNoteId) continue;
+            var note = note_list_model_container.find(aNoteId);
+            if (resultX >= 0 && (note.positionX + pitchChangingPoint.pitchChangingPointX) > resultX) continue;
+            resultX = (note.positionX + pitchChangingPoint.pitchChangingPointX);
+        }
+
+        return resultX
+    }
+
+    function maximumX(aNoteId)
+    {
+        var resultX = -1;
+        for(var index = 0; index < pitchChangingPointListModel.count; ++index)
+        {
+            var pitchChangingPoint = pitchChangingPointListModel.get(index);
+            if (pitchChangingPoint.noteId !== aNoteId) continue;
+            var note = note_list_model_container.find(aNoteId);
+            if ((note.positionX + pitchChangingPoint.pitchChangingPointX) < resultX) continue;
+            resultX = note.positionX + pitchChangingPoint.pitchChangingPointX;
+        }
+        return resultX;
+    }
+
     function reflect()
     {
         for(var index = 0; index < pitchChangingPointListModel.count; ++index)

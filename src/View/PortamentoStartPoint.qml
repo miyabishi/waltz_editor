@@ -80,6 +80,17 @@ Item{
         drag.target: root
         drag.axis: Drag.XAxis
 
+        onPressed: {
+            var maximumX = pitch_changing_point_list_model_containter.minimumX(noteId);
+            if (maximumX < 0)
+            {
+                var endPoint = portamento_end_point_list_model_container.findByNoteId(noteId);
+                maximumX = endPoint.portamentoEndX + endPoint.portamentoEndXOffset;
+            }
+            drag.maximumX = maximumX - width / 2;
+            console.log("maximumX = " + drag.maximumX);
+        }
+
         onPositionChanged: {
             var dropX = root.x;
             updatePortamentoStartPoint();

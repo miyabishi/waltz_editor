@@ -80,7 +80,17 @@ Item{
         drag.axis: Drag.XAxis
 
         onPressed: {
+            var minimumX = pitch_changing_point_list_model_containter.maximumX(noteId)
 
+            if (minimumX < 0)
+            {
+                var startPoint = portamento_start_point_list_model_container.findByNoteId(noteId);
+                minimumX = startPoint.portamentoStartX + startPoint.portamentoStartXOffset;
+            }
+
+            drag.minimumX = minimumX - width / 2;
+            console.log("noteId = " + noteId );
+            console.log("minimumX = " + drag.minimumX);
         }
 
         onPositionChanged: {
