@@ -14,6 +14,12 @@ Rectangle{
     property int editAreaWidth:  MainWindowModel.editAreaWidth()
     property int xOffset:0
 
+    property bool squareSelecting: false
+    property int  squareLeftTopX:0
+    property int  squareLeftTopY:0
+    property int  squareRightBottomX:0
+    property int  squareRightBottomY:0
+
     onXOffsetChanged: {
         if (edit_area_scroll_view.flickableItem.contentX === xOffset)
         {
@@ -131,6 +137,7 @@ Rectangle{
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: beat_axis_view.bottom
+        flickableItem.interactive: false
 
         flickableItem.onContentXChanged: {
             xOffset = flickableItem.contentX;
@@ -185,6 +192,11 @@ Rectangle{
 
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                         MainWindowModel.writeHistory(main_window.createSaveData());
+                    }
+                }
+                onPressed: {
+                    if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ShiftModifier))
+                    {
                     }
                 }
             }
