@@ -204,7 +204,7 @@ Rectangle {
             Canvas{
                 parent: vibrato_edit_area_scroll_view
                 id: vibrato_edit_area_canvas
-                width: edit_area.editAreaWidth
+                width: edit_area.width
                 height: root.height
                 contextType: "2d"
 
@@ -214,13 +214,18 @@ Rectangle {
                                       vibrato_edit_area_scroll_view.flickableItem.contentY,
                                       vibrato_edit_area_scroll_view.width,
                                       vibrato_edit_area_scroll_view.height)
+
                 tileSize: Qt.size(vibrato_edit_area_scroll_view.width,
                                   vibrato_edit_area_scroll_view.height)
 
                 onCanvasWindowChanged: requestPaint()
                 onPaint: {
                     var ctx = vibrato_edit_area_canvas.getContext('2d');
-                    ctx.clearRect(0,0,vibrato_edit_area_canvas.width, vibrato_edit_area_canvas.height);
+
+                    ctx.clearRect(vibrato_edit_area_scroll_view.flickableItem.contentX,
+                                  vibrato_edit_area_scroll_view.flickableItem.contentY,
+                                  vibrato_edit_area_scroll_view.width,
+                                  vibrato_edit_area_scroll_view.height);
 
                     for (var index = 0; index < vibrato_list_model_container.count(); ++index)
                     {

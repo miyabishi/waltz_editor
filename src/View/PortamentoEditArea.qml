@@ -200,13 +200,18 @@ Rectangle {
                                       portamento_edit_area_scroll_view.flickableItem.contentY,
                                       portamento_edit_area_scroll_view.width,
                                       portamento_edit_area_scroll_view.height)
+
                 tileSize: Qt.size(portamento_edit_area_scroll_view.width,
                                   portamento_edit_area_scroll_view.height)
 
                 onCanvasWindowChanged: requestPaint()
+
                 onPaint: {
                     var ctx = pitch_curve_canvas.getContext('2d');
-                    ctx.clearRect(0,0,pitch_curve_canvas.width, pitch_curve_canvas.height);
+                    ctx.clearRect(portamento_edit_area_scroll_view.flickableItem.contentX,
+                                  portamento_edit_area_scroll_view.flickableItem.contentY,
+                                  portamento_edit_area_scroll_view.width,
+                                  portamento_edit_area_scroll_view.height);
 
                     for (var index = 0; index < note_list_model_container.count(); ++index)
                     {

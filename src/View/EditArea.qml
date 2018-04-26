@@ -15,10 +15,10 @@ Rectangle{
     property int xOffset:0
 
     property bool squareSelecting: false
-    property int  squareLeftTopX:0
-    property int  squareLeftTopY:0
-    property int  squareRightBottomX:0
-    property int  squareRightBottomY:0
+    property int  squareStartX:0
+    property int  squareStartY:0
+    property int  squareEndX:0
+    property int  squareEndY:0
 
     onXOffsetChanged: {
         if (edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -194,10 +194,109 @@ Rectangle{
                         MainWindowModel.writeHistory(main_window.createSaveData());
                     }
                 }
-                onPressed: {
-                    if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ShiftModifier))
+
+                onPressed:{
+                    squareStartX    = mouseX
+                    squareStartY    = mouseY
+                    squareSelecting = true
+                }
+
+                onPositionChanged: {
+                    squareEndX      = mouseX
+                    squareEndY      = mouseY
+                    edit_area_canvas.requestPaint();
+                }
+
+                onReleased: {
+                    squareEndX      = mouseX
+                    squareEndY      = mouseY
+                    squareSelecting = false
+
+                    edit_area_canvas.requestPaint();
+                }
+            }
+
+            Canvas{
+                parent:edit_area_scroll_view
+                id: edit_area_canvas
+                anchors.fill: parent
+
+                canvasSize: Qt.size(edit_area_scroll_view.flickableItem.contentWidth,
+                                    edit_area_scroll_view.flickableItem.contentHeight)
+
+                canvasWindow: Qt.rect(edit_area_scroll_view.flickableItem.contentX,
+                                      edit_area_scroll_view.flickableItem.contentY,
+                                      edit_area_scroll_view.width,
+                                      edit_area_scroll_view.height)
+
+                tileSize: Qt.size(edit_area_scroll_view.width,
+                                  edit_area_scroll_view.height)
+
+                onCanvasWindowChanged: requestPaint()
+
+                onPaint: {
+                    var ctx = edit_area_canvas.getContext('2d');
+                    ctx.clearRect(edit_area_scroll_view.flickableItem.contentX,
+                                  edit_area_scroll_view.flickableItem.contentY,
+                                  edit_area_scroll_view.width,
+                                  edit_area_scroll_view.height);
+
+                    if (! squareSelecting)
                     {
+                        return;
                     }
+
+                    ctx.strokeStyle = Qt.rgba(.3,.4,1);
+                    ctx.beginPath();
+
+                    ctx.moveTo(squareStartX,
+                               squareStartY);
+
+                    ctx.lineTo(squareStartX,
+                               squareEndY);
+
+                    ctx.lineTo(squareEndX,
+                               squareEndY);
+
+                    ctx.lineTo(squareEndX,
+                               squareStartY);
+
+                    ctx.lineTo(squareStartX,
+                               squareStartY);
+
+                    ctx.moveTo(squareStartX-5,
+                               squareStartY-5);
+
+                    ctx.lineTo(squareStartX-5,
+                               squareStartY+5);
+
+                    ctx.lineTo(squareStartX+5,
+                               squareStartY+5);
+
+                    ctx.lineTo(squareStartX+5,
+                               squareStartY-5);
+
+                    ctx.lineTo(squareStartX-5,
+                               squareStartY-5);
+
+                    ctx.moveTo(squareEndX-5,
+                               squareEndY-5);
+
+                    ctx.lineTo(squareEndX-5,
+                               squareEndY+5);
+
+                    ctx.lineTo(squareEndX+5,
+                               squareEndY+5);
+
+                    ctx.lineTo(squareEndX+5,
+                               squareEndY-5);
+
+                    ctx.lineTo(squareEndX-5,
+                               squareEndY-5);
+
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                    ctx.restore();
                 }
             }
 
@@ -211,7 +310,7 @@ Rectangle{
                     drag.source.x = calculateDropX(drag.source);
                 }
 
-                onDropped: {
+                onDropped:{
                     MainWindowModel.writeHistory(main_window.createSaveData());
                 }
             }
@@ -249,8 +348,6 @@ Rectangle{
                 width: 2
                 height: piano_roll_edit_area.height
             }
-
-
         }
     }
 
