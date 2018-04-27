@@ -7,6 +7,7 @@ Rectangle{
     property string pNoteText_
     property bool pEditing_: false
     property bool pStretching_: false
+    property bool isSelected: false
 
     property int positionX
     property int positionY
@@ -19,6 +20,15 @@ Rectangle{
     Drag.keys: ["note"]
 
     property bool dragActive: note_move_mouse_area.drag.active
+
+    onIsSelectedChanged:{
+        if (isSelected)
+        {
+            root.color = "#00d7cc";
+            return;
+        }
+        root.color = "#ffd700";
+    }
 
     onDragActiveChanged: {
         if (dragActive) {
@@ -84,8 +94,7 @@ Rectangle{
 
         onPressed: {
             console.log("onpressed");
-            console.log(pEditing_)
-            console.log(drag.active)
+            root.isSelected = true;
         }
 
         onReleased: {

@@ -14,7 +14,7 @@ Item {
                                  "noteText": noteText,
                                  "positionX": positionX,
                                  "positionY": positionY,
-                                 "noteWidth": noteWidth
+                                 "noteWidth": noteWidth,
                              });
 
         var portamentoStartX = positionX - 30;
@@ -202,4 +202,5 @@ Item {
        }
        return ary
    }
+
 }

@@ -46,5 +46,6 @@
         <file>image/skip_previous.png</file>
         <file>image/redo.png</file>
         <file>image/undo.png</file>
+        <file>src/View/SelectedNoteListModelContainer.qml</file>
     </qresource>
 </RCC>
