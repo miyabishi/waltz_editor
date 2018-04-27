@@ -249,54 +249,39 @@ Rectangle{
                     ctx.strokeStyle = Qt.rgba(.3,.4,1);
                     ctx.beginPath();
 
-                    ctx.moveTo(squareStartX,
-                               squareStartY);
+                    drawSquare(ctx,
+                               squareStartX, squareStartY,
+                               squareEndX, squareEndY);
+                    drawSquare(ctx,
+                               squareStartX - 5, squareStartY - 5,
+                               squareStartX + 5, squareStartY + 5)
 
-                    ctx.lineTo(squareStartX,
-                               squareEndY);
+                    drawSquare(ctx,
+                               squareEndX - 5, squareEndY - 5,
+                               squareEndX + 5, squareEndY + 5)
 
-                    ctx.lineTo(squareEndX,
-                               squareEndY);
-
-                    ctx.lineTo(squareEndX,
-                               squareStartY);
-
-                    ctx.lineTo(squareStartX,
-                               squareStartY);
-
-                    ctx.moveTo(squareStartX-5,
-                               squareStartY-5);
-
-                    ctx.lineTo(squareStartX-5,
-                               squareStartY+5);
-
-                    ctx.lineTo(squareStartX+5,
-                               squareStartY+5);
-
-                    ctx.lineTo(squareStartX+5,
-                               squareStartY-5);
-
-                    ctx.lineTo(squareStartX-5,
-                               squareStartY-5);
-
-                    ctx.moveTo(squareEndX-5,
-                               squareEndY-5);
-
-                    ctx.lineTo(squareEndX-5,
-                               squareEndY+5);
-
-                    ctx.lineTo(squareEndX+5,
-                               squareEndY+5);
-
-                    ctx.lineTo(squareEndX+5,
-                               squareEndY-5);
-
-                    ctx.lineTo(squareEndX-5,
-                               squareEndY-5);
 
                     ctx.lineWidth = 1;
                     ctx.stroke();
                     ctx.restore();
+                }
+
+                function drawSquare(aCtx, topLeftX, topLeftY, bottomRightX, bottomRightY)
+                {
+                    aCtx.moveTo(topLeftX,
+                                topLeftY);
+
+                    aCtx.lineTo(topLeftX,
+                               bottomRightY);
+
+                    aCtx.lineTo(bottomRightX,
+                               bottomRightY);
+
+                    aCtx.lineTo(bottomRightX,
+                               topLeftY);
+
+                    aCtx.lineTo(topLeftX,
+                               topLeftY);
                 }
             }
 
