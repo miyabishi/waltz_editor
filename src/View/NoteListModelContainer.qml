@@ -233,7 +233,6 @@ Item {
        }
        root.noteIdCounter++;
        modelUpdatedAll();
-
    }
 
    function moveNote(aNoteId, aDeltaX, aDeltaY)

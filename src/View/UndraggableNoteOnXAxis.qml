@@ -14,6 +14,9 @@ Rectangle {
         onModelUpdated:{
             reload();
         }
+        onModelUpdatedAll:{
+            reload();
+        }
     }
 
     function reload()
