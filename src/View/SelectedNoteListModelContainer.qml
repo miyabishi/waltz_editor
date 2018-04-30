@@ -25,6 +25,7 @@ Item {
 
     function connectSelectedNotesToNextNote()
     {
+        if (selectedNoteListModel.count == 0) return;
         for (var index = 0; index < selectedNoteListModel.count; ++index)
         {
             var selectedNote = selectedNoteListModel.get(index);
@@ -35,6 +36,7 @@ Item {
 
     function connectSelectedNotesToPreviousNote()
     {
+        if (selectedNoteListModel.count == 0) return;
         for (var index = 0; index < selectedNoteListModel.count; ++index)
         {
             var selectedNote = selectedNoteListModel.get(index);

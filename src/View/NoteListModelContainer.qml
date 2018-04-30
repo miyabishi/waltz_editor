@@ -166,19 +166,11 @@ Item {
 
        for (var index = 0; index < noteListModel.count; ++index)
        {
-           console.log("loop");
            var otherNote = noteListModel.get(index);
            if (aCurrentNoteId === otherNote.noteId) continue;
-           console.log("aCurrentPositionX:", aCurrentPositionX);
-           console.log("otherNote.positionX:", otherNote.positionX);
-
            if (aCurrentPositionX >= otherNote.positionX) continue;
 
            var distance =  otherNote.positionX - aCurrentPositionX
-           console.log("distance", distance);
-           console.log("minimumDistance", minimumDistance);
-
-
            if (minimumDistance < 0)
            {
                minimumDistance = distance;
@@ -186,12 +178,10 @@ Item {
 
            if (distance <= minimumDistance)
            {
-               console.log("hit");
                nextNoteIndex = index;
                minimumDistance = distance;
            }
        }
-       console.log("next note index", nextNoteIndex);
 
        return nextNoteIndex;
    }

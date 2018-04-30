@@ -73,7 +73,6 @@ Item{
             drag.minimumX = startPoint.portamentoStartX + startPoint.portamentoStartXOffset - width / 2;
             var endPoint = portamento_end_point_list_model_container.findByNoteId(noteId);
             drag.maximumX = endPoint.portamentoEndX + endPoint.portamentoEndXOffset - width / 2;
-
         }
 
         onPositionChanged: {

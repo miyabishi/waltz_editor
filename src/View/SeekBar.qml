@@ -2,8 +2,8 @@ import QtQuick 2.0
 
 Rectangle {
     id: root
-    width: 2
-    color: "#ff88ff"
+    width: 3
+    color: "#ee77ee"
     property int seekBase: 0
     property double seekBarOffset: 0.0
     property int timerInterval: 100
