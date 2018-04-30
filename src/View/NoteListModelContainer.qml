@@ -125,25 +125,31 @@ Item {
        return previousNote.positionY + edit_area.rowHeight / 2;
    }
 
-   function findPreviousNoteIndex(aCurrentNoteId, aPositionX)
+   function findPreviousNoteIndex(aCurrentNoteId, aCurrentPositionX)
    {
        if (noteListModel.count === 0) return -1;
        if (noteListModel.count === 1) return 0;
 
        var minimumDistance = -1;
-       var previousNoteIndex = -1;
+       var previousNoteIndex = findIndexByNoteId(aCurrentNoteId);
 
        for (var index = 0; index < noteListModel.count; ++index)
        {
            var otherNote = noteListModel.get(index);
            if (aCurrentNoteId === otherNote.noteId) continue;
+           if (aCurrentPositionX <= otherNote.positionX) continue;
 
-           var distance = aPositionX - otherNote.positionX
-           if (distance < 0) continue;
-           if (minimumDistance < 0 || distance < minimumDistance)
+           var distance = aCurrentPositionX - otherNote.positionX
+
+           if (minimumDistance < 0)
            {
                minimumDistance = distance;
+           }
+
+           if (distance <= minimumDistance)
+           {
                previousNoteIndex = index;
+               minimumDistance = distance;
            }
        }
 

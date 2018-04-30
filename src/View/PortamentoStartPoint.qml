@@ -27,9 +27,9 @@ Item{
     {
         var note = note_list_model_container.find(noteId);
         var portamentoStartX = note.positionX - 30;
-        var portamentoStartY = note_list_model_container.yPositionOfPreviousNote(root.x - 1,
-                                                                                 root.y + root.height / 2,
-                                                                                 root.pNoteId_);
+        var portamentoStartY = note_list_model_container.yPositionOfPreviousNote(note.positionX,
+                                                                                 (note.positionY + edit_area.rowHeight)/2,
+                                                                                 root.noteId);
         portamento_start_point_list_model_container.updateBasePoint(portamentoStartPointId,
                                                                     portamentoStartX,
                                                                     portamentoStartY);

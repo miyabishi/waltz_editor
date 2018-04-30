@@ -181,6 +181,9 @@ Rectangle{
         }
         onEditingFinished: {
             parent.pEditing_ = false;
+            parent.pNoteText_ = text;
+            root.updateNote();
+            MainWindowModel.writeHistory(main_window.createSaveData());
         }
         onFocusChanged: {
             piano_roll_mouse_area.enabled = !focus
