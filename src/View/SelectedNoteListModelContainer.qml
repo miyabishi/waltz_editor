@@ -18,7 +18,6 @@ Item {
 
     function clear()
     {
-        console.log("clear")
         selectedNoteListModel.clear();
         selectedNoteIdCounter = 0;
         modelUpdated();
@@ -36,4 +35,16 @@ Item {
         return false;
     }
 
+    function moveSelectedNotes(aDeltaX, aDeltaY, aExceptNoteId)
+    {
+        console.log("except note id:", aExceptNoteId);
+        for (var index = 0; index < selectedNoteListModel.count; ++index)
+        {
+            var selectedNote = selectedNoteListModel.get(index);
+            if(selectedNote.noteId === aExceptNoteId) continue;
+            console.log("move! selected note");
+            console.log("noteId", selectedNote.noteId, "delta(", aDeltaX, ",",aDeltaY, ")");
+            note_list_model_container.moveNote(selectedNote.noteId, aDeltaX, aDeltaY);
+        }
+    }
 }

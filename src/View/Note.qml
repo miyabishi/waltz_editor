@@ -43,6 +43,10 @@ Rectangle{
     Connections{
         target: note_list_model_container
         onModelUpdated:{
+            if (aNoteId !== pNoteId_) return;
+            reload();
+        }
+        onModelUpdatedAll:{
             reload();
         }
     }
@@ -98,10 +102,9 @@ Rectangle{
         drag.target: root
 
         onPressed: {
-            if(! isSelected)
-            {
-                selected_note_list_model_container.clear();
-            }
+            if(isSelected) return;
+
+            selected_note_list_model_container.clear();
             selected_note_list_model_container.append(pNoteId_);
         }
 
@@ -123,7 +126,10 @@ Rectangle{
             {
                 return
             }
-            root.pEditing_ = true
+            selected_note_list_model_container.clear();
+            root.pEditing_ = true;
+            note_text_field.forceActiveFocus();
+            note_text_field.selectAll();
         }
     }
 
@@ -161,14 +167,20 @@ Rectangle{
     }
 
     TextField{
+        id:note_text_field
         visible: pEditing_
         focus: pEditing_
         text: parent.pNoteText_
         width: 60
+
         onAccepted: {
             parent.pEditing_ = false;
             parent.pNoteText_ = text;
             root.updateNote();
+            MainWindowModel.writeHistory(main_window.createSaveData());
+        }
+        onEditingFinished: {
+            parent.pEditing_ = false;
         }
         onFocusChanged: {
             piano_roll_mouse_area.enabled = !focus

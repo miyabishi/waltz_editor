@@ -4,7 +4,8 @@ Item {
     id: root
     property ListModel noteListModel: ListModel{}
     property int noteIdCounter: 0
-    signal modelUpdated(real aNoteId);
+    signal modelUpdated(real aNoteId)
+    signal modelUpdatedAll()
     signal noteRemoved(real aNoteId)
 
     function append(noteText, positionX, positionY, noteWidth)
@@ -177,7 +178,6 @@ Item {
                                     "positionY": note.positionY,
                                     "noteWidth": note.noteWidth
                                 });
-           modelUpdated(note.noteId);
 
            if(root.noteIdCounter <= note.noteId)
            {
@@ -185,6 +185,21 @@ Item {
            }
        }
        root.noteIdCounter++;
+       modelUpdatedAll();
+
+   }
+
+   function moveNote(aNoteId, aDeltaX, aDeltaY)
+   {
+       console.log("move note!! noteid:", aNoteId, "delta(", aDeltaX, ",", aDeltaY, ")")
+       var note = find(aNoteId);
+       updateNote({
+                      "noteId": note.noteId,
+                      "noteText": note.noteText,
+                      "positionX": note.positionX + aDeltaX,
+                      "positionY": note.positionY + aDeltaY,
+                      "noteWidth": note.noteWidth
+                  });
    }
 
    function toArray()

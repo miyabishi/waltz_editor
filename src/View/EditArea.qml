@@ -296,10 +296,35 @@ Rectangle{
                 id: edit_drop_area
                 anchors.fill: parent
                 keys: ["note"]
+                property int startX:0
+                property int startY:0
+
+                onEntered: {
+                    console.log("entered");
+                    startX = drag.source.x;
+                    startY = drag.source.y;
+                }
 
                 onPositionChanged:{
-                    drag.source.y = calculateDropY(drag.source);
                     drag.source.x = calculateDropX(drag.source);
+                    drag.source.y = calculateDropY(drag.source);
+
+                    var deltaX = drag.source.x - startX;
+                    var deltaY = drag.source.y - startY;
+                    var noteId = drag.source.pNoteId_;
+
+                    if (deltaX !== 0 || deltaY !== 0)
+                    {
+                        console.log("-----");
+                        console.log("position changed noteId:", noteId);
+                        console.log("deltaX:", deltaX);
+                        console.log("deltaY:", deltaY);
+                        selected_note_list_model_container.moveSelectedNotes(deltaX, deltaY, noteId);
+                        console.log("-----");
+                    }
+
+                    startX = drag.source.x;
+                    startY = drag.source.y;
                 }
 
                 onDropped:{
