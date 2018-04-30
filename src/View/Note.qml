@@ -32,10 +32,8 @@ Rectangle{
 
     onDragActiveChanged: {
         if (dragActive) {
-            print("drag started")
             Drag.start();
         } else {
-            print("drag finished")
             Drag.drop();
         }
     }
@@ -46,6 +44,13 @@ Rectangle{
         target: note_list_model_container
         onModelUpdated:{
             reload();
+        }
+    }
+
+    Connections{
+        target: selected_note_list_model_container
+        onModelUpdated:{
+            isSelected = selected_note_list_model_container.isSelected(pNoteId_);
         }
     }
 
@@ -93,8 +98,11 @@ Rectangle{
         drag.target: root
 
         onPressed: {
-            console.log("onpressed");
-            root.isSelected = true;
+            if(! isSelected)
+            {
+                selected_note_list_model_container.clear();
+            }
+            selected_note_list_model_container.append(pNoteId_);
         }
 
         onReleased: {

@@ -196,9 +196,11 @@ Rectangle{
                 }
 
                 onPressed:{
+                    console.log("pressed")
                     squareStartX    = mouseX
                     squareStartY    = mouseY
                     squareSelecting = true
+                    selected_note_list_model_container.clear();
                 }
 
                 onPositionChanged: {
@@ -211,6 +213,11 @@ Rectangle{
                     squareEndX      = mouseX
                     squareEndY      = mouseY
                     squareSelecting = false
+
+                    note_list_model_container.selectBySquare(squareStartX,
+                                                             squareStartY,
+                                                             squareEndX,
+                                                             squareEndY)
 
                     edit_area_canvas.requestPaint();
                 }

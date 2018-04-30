@@ -53,6 +53,10 @@ ApplicationWindow {
         id: note_list_model_container
     }
 
+    SelectedNoteListModelContainer{
+        id: selected_note_list_model_container
+    }
+
     NoteVolumeListModelContainer{
         id: note_volume_list_model_container
     }

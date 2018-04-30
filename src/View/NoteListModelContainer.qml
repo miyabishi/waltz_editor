@@ -203,4 +203,51 @@ Item {
        return ary
    }
 
+   // TODO:　リファクタ対象　長すぎる関数
+   function selectBySquare(aX1, aY1, aX2, aY2)
+   {
+       var topX = 0;
+       var topY = 0;
+       var bottomX = 0;
+       var bottomY = 0;
+
+       if (aX1 < aX2)
+       {
+           topX = aX1
+           bottomX = aX2
+       }
+       else
+       {
+           topX = aX2
+           bottomX = aX1
+       }
+
+       if (aY1 < aY2)
+       {
+           topY = aY1;
+           bottomY = aY2;
+       }
+       else
+       {
+           topY = aY2;
+           bottomY = aY1;
+       }
+
+       for(var index = 0; index < noteListModel.count; ++index)
+       {
+           var note = noteListModel.get(index);
+           // TODO: リファクタ酷い条件式　内容はnoteがsquare内にあるかどうかの判定
+           if (((topX < note.positionX && note.positionX < bottomX)
+                   || (topX < (note.positionX + note.noteWidth)
+                       && (note.positionX + note.noteWidth) < bottomX))
+               && ((topY < note.positionY && note.positionY < bottomY)
+                   || (topY < (note.positionY + edit_area.rowHeight)
+                           && (note.positionY + edit_area.rowHeight) < bottomY)))
+           {
+               selected_note_list_model_container.append(note.noteId);
+               continue;
+           }
+       }
+   }
+
 }
