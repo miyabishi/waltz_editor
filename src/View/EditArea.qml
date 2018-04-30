@@ -196,7 +196,6 @@ Rectangle{
                 }
 
                 onPressed:{
-                    console.log("pressed")
                     squareStartX    = mouseX
                     squareStartY    = mouseY
                     squareSelecting = true
@@ -300,7 +299,6 @@ Rectangle{
                 property int startY:0
 
                 onEntered: {
-                    console.log("entered");
                     startX = drag.source.x;
                     startY = drag.source.y;
                 }
@@ -315,12 +313,7 @@ Rectangle{
 
                     if (deltaX !== 0 || deltaY !== 0)
                     {
-                        console.log("-----");
-                        console.log("position changed noteId:", noteId);
-                        console.log("deltaX:", deltaX);
-                        console.log("deltaY:", deltaY);
-                        selected_note_list_model_container.moveSelectedNotes(deltaX, deltaY, noteId);
-                        console.log("-----");
+                        selected_note_list_model_container.moveSelectedNotes(deltaX, deltaY);
                     }
 
                     startX = drag.source.x;

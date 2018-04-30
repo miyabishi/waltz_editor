@@ -81,7 +81,6 @@ Item {
 
         pitchChangingPointIdCounter++;
         var insertIndex = insertPosition(item);
-        console.log("insert index" + insertIndex)
         if (insertIndex > 0)
         {
             insertIndex = insertIndex + 1;

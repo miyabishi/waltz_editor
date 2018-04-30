@@ -197,7 +197,6 @@ Item {
 
    function moveNote(aNoteId, aDeltaX, aDeltaY)
    {
-       console.log("move note!! noteid:", aNoteId, "delta(", aDeltaX, ",", aDeltaY, ")")
        var note = find(aNoteId);
        updateNote({
                       "noteId": note.noteId,

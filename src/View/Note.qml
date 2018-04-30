@@ -113,7 +113,6 @@ Rectangle{
             root.Drag.drop()
         }
 
-
         onClicked: {
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {

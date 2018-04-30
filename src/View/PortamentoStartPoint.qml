@@ -88,7 +88,6 @@ Item{
                 maximumX = endPoint.portamentoEndX + endPoint.portamentoEndXOffset;
             }
             drag.maximumX = maximumX - width / 2;
-            console.log("maximumX = " + drag.maximumX);
         }
 
         onPositionChanged: {
