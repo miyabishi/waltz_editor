@@ -23,6 +23,26 @@ Item {
         modelUpdated();
     }
 
+    function connectSelectedNotesToNextNote()
+    {
+        for (var index = 0; index < selectedNoteListModel.count; ++index)
+        {
+            var selectedNote = selectedNoteListModel.get(index);
+            note_list_model_container.connectNextNote(selectedNote.noteId);
+        }
+        MainWindowModel.writeHistory(main_window.createSaveData());
+    }
+
+    function connectSelectedNotesToPreviousNote()
+    {
+        for (var index = 0; index < selectedNoteListModel.count; ++index)
+        {
+            var selectedNote = selectedNoteListModel.get(index);
+            note_list_model_container.connectPreviousNote(selectedNote.noteId);
+        }
+        MainWindowModel.writeHistory(main_window.createSaveData());
+    }
+
     function isSelected(aNoteId)
     {
         for (var index = 0; index < selectedNoteListModel.count; ++index)

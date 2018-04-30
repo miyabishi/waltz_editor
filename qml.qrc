@@ -47,5 +47,7 @@
         <file>image/redo.png</file>
         <file>image/undo.png</file>
         <file>src/View/SelectedNoteListModelContainer.qml</file>
+        <file>image/connect_next_note.png</file>
+        <file>image/connect_previous_note.png</file>
     </qresource>
 </RCC>

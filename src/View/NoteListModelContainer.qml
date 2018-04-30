@@ -156,6 +156,47 @@ Item {
        return previousNoteIndex;
    }
 
+   function findNextNoteIndex(aCurrentNoteId, aCurrentPositionX)
+   {
+       if (noteListModel.count === 0) return -1;
+       if (noteListModel.count === 1) return 0;
+
+       var minimumDistance = -1;
+       var nextNoteIndex = findIndexByNoteId(aCurrentNoteId);
+
+       for (var index = 0; index < noteListModel.count; ++index)
+       {
+           console.log("loop");
+           var otherNote = noteListModel.get(index);
+           if (aCurrentNoteId === otherNote.noteId) continue;
+           console.log("aCurrentPositionX:", aCurrentPositionX);
+           console.log("otherNote.positionX:", otherNote.positionX);
+
+           if (aCurrentPositionX >= otherNote.positionX) continue;
+
+           var distance =  otherNote.positionX - aCurrentPositionX
+           console.log("distance", distance);
+           console.log("minimumDistance", minimumDistance);
+
+
+           if (minimumDistance < 0)
+           {
+               minimumDistance = distance;
+           }
+
+           if (distance <= minimumDistance)
+           {
+               console.log("hit");
+               nextNoteIndex = index;
+               minimumDistance = distance;
+           }
+       }
+       console.log("next note index", nextNoteIndex);
+
+       return nextNoteIndex;
+   }
+
+
    function reflect()
    {
        for(var index = 0; index < noteListModel.count; ++index)
@@ -206,6 +247,43 @@ Item {
                       "noteWidth": note.noteWidth
                   });
    }
+
+   function connectNextNote(aNoteId)
+   {
+       var note = find(aNoteId);
+       var nextNoteIndex = findNextNoteIndex(aNoteId, note.positionX);
+       if (nextNoteIndex < 0) return;
+
+       var nextNote = noteListModel.get(nextNoteIndex);
+       if (nextNote.noteId === note.noteId) return;
+
+       updateNote({
+                      "noteId": note.noteId,
+                      "noteText": note.noteText,
+                      "positionX": note.positionX,
+                      "positionY": note.positionY,
+                      "noteWidth": (nextNote.positionX - note.positionX),
+                  });
+   }
+
+   function connectPreviousNote(aNoteId)
+   {
+       var note = find(aNoteId);
+       var previousNoteIndex = findPreviousNoteIndex(aNoteId, note.positionX);
+       if (previousNoteIndex < 0) return;
+
+       var previousNote = noteListModel.get(previousNoteIndex);
+       if (previousNote.noteId === note.noteId) return;
+
+       updateNote({
+                      "noteId": note.noteId,
+                      "noteText": note.noteText,
+                      "positionX": previousNote.positionX + previousNote.noteWidth,
+                      "positionY": note.positionY,
+                      "noteWidth": (note.positionX - (previousNote.positionX + previousNote.noteWidth)) + note.noteWidth,
+                  });
+   }
+
 
    function toArray()
    {

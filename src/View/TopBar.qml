@@ -166,5 +166,76 @@ Rectangle{
                 }
             }
         }
+
+        Rectangle{ //empty
+            color:"#333333"
+            anchors.verticalCenter: parent.verticalCenter
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
+            Rectangle{
+                color:"#bbbbbb"
+                width:2
+                height:parent.height
+                anchors.centerIn: parent
+            }
+        }
+
+        Rectangle{
+            id: connect_next_note
+            color:"#333333"
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
+            Image {
+                anchors.left: parent.left
+                height: parent.height
+                width: height
+                source: "qrc:/image/connect_next_note.png"
+            }
+
+            WButtonMouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    selected_note_list_model_container.connectSelectedNotesToNextNote();
+                }
+            }
+        }
+        Rectangle{
+            id: connect_previous_note
+            color:"#333333"
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            Layout.fillWidth: false
+            Layout.minimumWidth: 40
+            Layout.preferredWidth: 40
+            Layout.maximumWidth: 40
+            Layout.minimumHeight: 40
+
+            Image {
+                anchors.left: parent.left
+                height: parent.height
+                width: height
+                source: "qrc:/image/connect_previous_note.png"
+            }
+
+            WButtonMouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    selected_note_list_model_container.connectSelectedNotesToPreviousNote();
+                }
+            }
+        }
     }
 }
