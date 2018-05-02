@@ -49,5 +49,9 @@
         <file>src/View/SelectedNoteListModelContainer.qml</file>
         <file>image/connect_next_note.png</file>
         <file>image/connect_previous_note.png</file>
+        <file>image/eighth_note.png</file>
+        <file>image/half_note.png</file>
+        <file>image/quarter_note.png</file>
+        <file>image/sixteenth_note.png</file>
     </qresource>
 </RCC>
