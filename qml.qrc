@@ -53,5 +53,8 @@
         <file>image/half_note.png</file>
         <file>image/quarter_note.png</file>
         <file>image/sixteenth_note.png</file>
+        <file>src/View/TempoController.qml</file>
+        <file>src/View/BeatController.qml</file>
+        <file>src/View/NoteLengthSelectBox.qml</file>
     </qresource>
 </RCC>

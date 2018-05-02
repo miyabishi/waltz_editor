@@ -172,10 +172,10 @@ Rectangle{
             anchors.verticalCenter: parent.verticalCenter
 
             Layout.fillWidth: false
-            Layout.minimumWidth: 40
-            Layout.preferredWidth: 40
-            Layout.maximumWidth: 40
-            Layout.minimumHeight: 40
+            Layout.minimumWidth: 10
+            Layout.preferredWidth: 10
+            Layout.maximumWidth: 10
+            Layout.minimumHeight: 30
 
             Rectangle{
                 color:"#bbbbbb"
@@ -222,6 +222,7 @@ Rectangle{
             Layout.preferredWidth: 40
             Layout.maximumWidth: 40
             Layout.minimumHeight: 40
+
 
             Image {
                 anchors.left: parent.left
