@@ -192,9 +192,9 @@ Rectangle{
                 color: "#333333"
 
                 Layout.fillWidth: false
-                Layout.minimumWidth: 60
+                Layout.minimumWidth: 100
                 Layout.preferredWidth: 60
-                Layout.maximumWidth: 60
+                Layout.maximumWidth: 100
                 Layout.minimumHeight: 40
                 Layout.margins: 2
 

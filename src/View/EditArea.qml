@@ -12,6 +12,7 @@ Rectangle{
     property int beatParent:     MainWindowModel.beatParent()
     property int columnWidth:    MainWindowModel.columnWidth()
     property int editAreaWidth:  MainWindowModel.editAreaWidth()
+    property int noteLength: 4;
     property int xOffset:0
 
     property bool squareSelecting: false
@@ -26,6 +27,19 @@ Rectangle{
             return;
         }
         edit_area_scroll_view.flickableItem.contentX = xOffset
+    }
+
+    function calculateNoteWidth()
+    {
+        if (edit_area.noteLength == 4)
+            return edit_area.columnWidth;
+        if (edit_area.noteLength == 8)
+            return edit_area.columnWidth / 2;
+        if (edit_area.noteLength == 16)
+            return edit_area.columnWidth / 4;
+        if (edit_area.noteLength == 2)
+            return edit_area.columnWidth * 2;
+        return edit_area.columnWidth;
     }
 
     function barLength()
@@ -170,7 +184,7 @@ Rectangle{
             }
 
             function calcX(aX){
-                return aX - aX%edit_area.columnWidth
+                return aX - aX%(calculateNoteWidth()/2);
             }
 
             function calcY(aY){
@@ -188,7 +202,7 @@ Rectangle{
                         var positionX = piano_roll_edit_area.calcX(mouseX);
                         var positionY = piano_roll_edit_area.calcY(mouseY);
                         var noteText = "あ";
-                        var noteWidth = edit_area.columnWidth;
+                        var noteWidth = calculateNoteWidth();
 
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                         MainWindowModel.writeHistory(main_window.createSaveData());
