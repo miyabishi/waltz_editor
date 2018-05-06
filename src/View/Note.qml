@@ -133,7 +133,6 @@ Rectangle{
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {
                 note_list_model_container.removeNote(pNoteId_);
-                MainWindowModel.writeHistory(main_window.createSaveData());
             }
         }
 
@@ -203,6 +202,7 @@ Rectangle{
         onEditingFinished: {
             parent.pEditing_ = false;
             parent.pNoteText_ = text;
+            edit_area.focus = true;
             root.updateNote();
         }
         onFocusChanged: {
