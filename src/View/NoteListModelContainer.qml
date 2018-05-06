@@ -8,6 +8,8 @@ Item {
     signal modelUpdatedAll()
     signal noteRemoved(real aNoteId)
 
+
+
     function append(noteText, positionX, positionY, noteWidth)
     {
         noteListModel.append({

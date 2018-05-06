@@ -8,6 +8,7 @@ Rectangle{
     property bool pEditing_: false
     property bool pStretching_: false
     property bool isSelected: false
+    focus: true;
 
     property int positionX
     property int positionY
@@ -117,6 +118,7 @@ Rectangle{
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {
                 note_list_model_container.removeNote(pNoteId_);
+                MainWindowModel.writeHistory(main_window.createSaveData());
             }
         }
 
@@ -182,7 +184,6 @@ Rectangle{
             parent.pEditing_ = false;
             parent.pNoteText_ = text;
             root.updateNote();
-            MainWindowModel.writeHistory(main_window.createSaveData());
         }
         onFocusChanged: {
             piano_roll_mouse_area.enabled = !focus

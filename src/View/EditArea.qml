@@ -3,8 +3,9 @@ import QtQuick.Controls 1.4
 
 Rectangle{
     id: edit_area
-
+    focus: true
     color: "#222222"
+
     property int supportOctarve: MainWindowModel.supportOctave()
     property int numberOfRow:    12 * supportOctarve
     property int rowHeight:      MainWindowModel.rowHeight()
@@ -14,7 +15,6 @@ Rectangle{
     property int editAreaWidth:  MainWindowModel.editAreaWidth()
     property int noteLength: 4;
     property int xOffset:0
-
     property bool squareSelecting: false
     property int  squareStartX:0
     property int  squareStartY:0
@@ -27,6 +27,10 @@ Rectangle{
             return;
         }
         edit_area_scroll_view.flickableItem.contentX = xOffset
+    }
+
+    Keys.onDeletePressed:{
+        selected_note_list_model_container.removeSelectedNotes();
     }
 
     function calculateNoteWidth()
@@ -129,7 +133,6 @@ Rectangle{
     {
         return source.y - source.y%edit_area.rowHeight
     }
-
 
     Rectangle{
         id:piano_view

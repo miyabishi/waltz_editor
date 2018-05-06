@@ -23,6 +23,18 @@ Item {
         modelUpdated();
     }
 
+    function removeSelectedNotes()
+    {
+        if (selectedNoteListModel.count == 0) return;
+        for (var index = 0; index < selectedNoteListModel.count; ++index)
+        {
+            var selectedNote = selectedNoteListModel.get(index);
+            note_list_model_container.removeNote(selectedNote.noteId);
+        }
+        selectedNoteListModel.clear();
+        MainWindowModel.writeHistory(main_window.createSaveData());
+    }
+
     function connectSelectedNotesToNextNote()
     {
         if (selectedNoteListModel.count == 0) return;
