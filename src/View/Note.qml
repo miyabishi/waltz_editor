@@ -186,6 +186,14 @@ Rectangle{
         text: parent.pNoteText_
         width: 60
 
+        Keys.onBacktabPressed: {
+            note_list_model_container.startEditPreviousNoteText(root.pNoteId_);
+        }
+
+        Keys.onTabPressed: {
+            note_list_model_container.startEditNextNoteText(root.pNoteId_);
+        }
+
         onAccepted: {
             parent.pEditing_ = false;
             parent.pNoteText_ = text;

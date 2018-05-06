@@ -9,9 +9,27 @@ Item {
     signal noteRemoved(real aNoteId)
     signal startEditNoteText(real aNoteId)
 
-    function notifyEditStartNoteText(aNoteId)
+
+    function notifyStartEditNoteText(aNoteId)
     {
         startEditNoteText(aNoteId)
+    }
+
+    function startEditNextNoteText(aCurrentNoteId)
+    {
+        var currentNote = find(aCurrentNoteId);
+        var index = findNextNoteIndex(aCurrentNoteId, currentNote.positionX)
+        var note = noteListModel.get(index);
+        startEditNoteText(note.noteId);
+    }
+
+    function startEditPreviousNoteText(aCurrentNoteId)
+    {
+        var currentNote = find(aCurrentNoteId);
+        var index = findPreviousNoteIndex(aCurrentNoteId, currentNote.positionX)
+        console.log("start edit previous note text index:" , index)
+        var note = noteListModel.get(index);
+        startEditNoteText(note.noteId);
     }
 
 

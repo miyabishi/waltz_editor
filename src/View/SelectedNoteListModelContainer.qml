@@ -39,7 +39,7 @@ Item {
     {
         if (selectedNoteListModel.count !== 1) return;
         var selectedNote = selectedNoteListModel.get(0);
-        note_list_model_container.notifyEditStartNoteText(selectedNote.noteId);
+        note_list_model_container.notifyStartEditNoteText(selectedNote.noteId);
     }
 
     function connectSelectedNotesToNextNote()
