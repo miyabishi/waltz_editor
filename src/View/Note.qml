@@ -50,6 +50,10 @@ Rectangle{
         onModelUpdatedAll:{
             reload();
         }
+        onStartEditNoteText:{
+            if(aNoteId !== pNoteId_) return;
+            startEditNoteText();
+        }
     }
 
     Connections{
@@ -57,6 +61,17 @@ Rectangle{
         onModelUpdated:{
             isSelected = selected_note_list_model_container.isSelected(pNoteId_);
         }
+    }
+
+    function startEditNoteText()
+    {
+        if (root.pEditing_ === true) return;
+
+        selected_note_list_model_container.clear();
+
+        root.pEditing_ = true;
+        note_text_field.forceActiveFocus();
+        note_text_field.selectAll();
     }
 
     function updateNote()
@@ -127,10 +142,7 @@ Rectangle{
             {
                 return
             }
-            selected_note_list_model_container.clear();
-            root.pEditing_ = true;
-            note_text_field.forceActiveFocus();
-            note_text_field.selectAll();
+            startEditNoteText();
         }
     }
 

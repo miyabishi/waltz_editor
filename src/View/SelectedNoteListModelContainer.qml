@@ -35,6 +35,13 @@ Item {
         MainWindowModel.writeHistory(main_window.createSaveData());
     }
 
+    function startEditNoteTextSelectedNote()
+    {
+        if (selectedNoteListModel.count !== 1) return;
+        var selectedNote = selectedNoteListModel.get(0);
+        note_list_model_container.notifyEditStartNoteText(selectedNote.noteId);
+    }
+
     function connectSelectedNotesToNextNote()
     {
         if (selectedNoteListModel.count == 0) return;

@@ -29,9 +29,19 @@ Rectangle{
         edit_area_scroll_view.flickableItem.contentX = xOffset
     }
 
-    Keys.onDeletePressed:{
-        selected_note_list_model_container.removeSelectedNotes();
+    Keys.onPressed:{
+        if (event.key === Qt.Key_Delete)
+        {
+            selected_note_list_model_container.removeSelectedNotes();
+            return;
+        }
+        if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
+        {
+            selected_note_list_model_container.startEditNoteTextSelectedNote();
+            return;
+        }
     }
+
 
     function calculateNoteWidth()
     {

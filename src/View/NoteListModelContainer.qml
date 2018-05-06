@@ -7,7 +7,12 @@ Item {
     signal modelUpdated(real aNoteId)
     signal modelUpdatedAll()
     signal noteRemoved(real aNoteId)
+    signal startEditNoteText(real aNoteId)
 
+    function notifyEditStartNoteText(aNoteId)
+    {
+        startEditNoteText(aNoteId)
+    }
 
 
     function append(noteText, positionX, positionY, noteWidth)
