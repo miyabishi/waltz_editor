@@ -20,6 +20,16 @@ Rectangle{
     Drag.hotSpot.y: 0
     Drag.keys: ["note"]
 
+    Keys.onReleased: {
+        if(pEditing_ === true) return;
+
+        if (event.key === Qt.Key_Enter ||
+                event.key === Qt.Key_Return){
+            selected_note_list_model_container.clear();
+            selected_note_list_model_container.append(pNoteId_);
+        }
+    }
+
     property bool dragActive: note_move_mouse_area.drag.active
 
     onIsSelectedChanged:{
@@ -199,12 +209,14 @@ Rectangle{
             root.updateNote();
             MainWindowModel.writeHistory(main_window.createSaveData());
         }
+
         onEditingFinished: {
             parent.pEditing_ = false;
             parent.pNoteText_ = text;
-            edit_area.focus = true;
             root.updateNote();
+            root.forceActiveFocus();
         }
+
         onFocusChanged: {
             piano_roll_mouse_area.enabled = !focus
             note_move_mouse_area.enabled = !focus
