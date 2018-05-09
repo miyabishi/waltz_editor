@@ -27,7 +27,32 @@ Rectangle{
                 event.key === Qt.Key_Return){
             selected_note_list_model_container.clear();
             selected_note_list_model_container.append(pNoteId_);
+            return;
         }
+
+        if (event.key === Qt.Key_Tab)
+        {
+            note_list_model_container.startEditNextNoteText(root.pNoteId_);
+            return;
+        }
+
+        if (event.key === Qt.Key_Backtab)
+        {
+            note_list_model_container.startEditPreviousNoteText(root.pNoteId_);
+            return;
+        }
+    }
+
+    Keys.onLeftPressed: {
+        if (! selected_note_list_model_container.canSwitchNoteByCursorKey()) return;
+        if (root.pEditing_ === true) return;
+        note_list_model_container.selectPreviousNote(root.pNoteId_);
+    }
+
+    Keys.onRightPressed: {
+        if (! selected_note_list_model_container.canSwitchNoteByCursorKey()) return;
+        if (root.pEditing_ === true) return;
+        note_list_model_container.selectNextNote(root.pNoteId_);
     }
 
     property bool dragActive: note_move_mouse_area.drag.active
@@ -129,7 +154,12 @@ Rectangle{
 
         onPressed: {
             if(isSelected) return;
-
+            root.forceActiveFocus();
+            if (mouse.modifiers & Qt.ShiftModifier)
+            {
+                selected_note_list_model_container.append(pNoteId_);
+                return;
+            }
             selected_note_list_model_container.clear();
             selected_note_list_model_container.append(pNoteId_);
         }
@@ -195,12 +225,11 @@ Rectangle{
         text: parent.pNoteText_
         width: 60
 
-        Keys.onBacktabPressed: {
-            note_list_model_container.startEditPreviousNoteText(root.pNoteId_);
-        }
+        property string preText
 
-        Keys.onTabPressed: {
-            note_list_model_container.startEditNextNoteText(root.pNoteId_);
+        onVisibleChanged: {
+            if (visible !== false) return;
+            preText = text
         }
 
         onAccepted: {

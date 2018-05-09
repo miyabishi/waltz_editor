@@ -27,11 +27,27 @@ Item {
     {
         var currentNote = find(aCurrentNoteId);
         var index = findPreviousNoteIndex(aCurrentNoteId, currentNote.positionX)
-        console.log("start edit previous note text index:" , index)
         var note = noteListModel.get(index);
         startEditNoteText(note.noteId);
     }
 
+    function selectNextNote(aCurrentNoteId)
+    {
+        var currentNote = find(aCurrentNoteId);
+        var index = findNextNoteIndex(aCurrentNoteId, currentNote.positionX)
+        var note = noteListModel.get(index);
+        selected_note_list_model_container.clear();
+        selected_note_list_model_container.append(note.noteId);
+    }
+
+    function selectPreviousNote(aCurrentNoteId)
+    {
+        var currentNote = find(aCurrentNoteId);
+        var index = findPreviousNoteIndex(aCurrentNoteId, currentNote.positionX)
+        var note = noteListModel.get(index);
+        selected_note_list_model_container.clear();
+        selected_note_list_model_container.append(note.noteId);
+    }
 
     function append(noteText, positionX, positionY, noteWidth)
     {

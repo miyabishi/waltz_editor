@@ -23,6 +23,11 @@ Item {
         modelUpdated();
     }
 
+    function canSwitchNoteByCursorKey()
+    {
+        return selectedNoteListModel.count === 1;
+    }
+
     function removeSelectedNotes()
     {
         if (selectedNoteListModel.count == 0) return;
