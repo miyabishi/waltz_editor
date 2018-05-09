@@ -89,6 +89,11 @@ Rectangle{
             if(aNoteId !== pNoteId_) return;
             startEditNoteText();
         }
+        onSetActiveFocus: {
+            if(aNoteId !== pNoteId_) return;
+            root.forceActiveFocus();
+        }
+
     }
 
     Connections{

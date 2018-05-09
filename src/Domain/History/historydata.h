@@ -15,6 +15,7 @@ namespace waltz
             public:
                 explicit HistoryData(const QVariantMap& aData);
                 QVariantMap value() const;
+                bool isSame(QSharedPointer<HistoryData> aOther) const;
 
             private:
                 QVariantMap          mData_;

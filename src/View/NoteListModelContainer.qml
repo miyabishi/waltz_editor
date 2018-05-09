@@ -8,6 +8,7 @@ Item {
     signal modelUpdatedAll()
     signal noteRemoved(real aNoteId)
     signal startEditNoteText(real aNoteId)
+    signal setActiveFocus(real aNoteId)
 
 
     function notifyStartEditNoteText(aNoteId)
@@ -38,6 +39,7 @@ Item {
         var note = noteListModel.get(index);
         selected_note_list_model_container.clear();
         selected_note_list_model_container.append(note.noteId);
+        setActiveFocus(note.noteId);
     }
 
     function selectPreviousNote(aCurrentNoteId)
@@ -47,6 +49,7 @@ Item {
         var note = noteListModel.get(index);
         selected_note_list_model_container.clear();
         selected_note_list_model_container.append(note.noteId);
+        setActiveFocus(note.noteId);
     }
 
     function append(noteText, positionX, positionY, noteWidth)

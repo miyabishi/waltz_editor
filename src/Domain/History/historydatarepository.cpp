@@ -18,6 +18,11 @@ HistoryDataRepository& HistoryDataRepository::getInstance()
 void HistoryDataRepository::appendHistoryData(const HistoryDataPointer aData)
 {
     qDebug() << Q_FUNC_INFO;
+    if (!mHistoryDataList_.isEmpty() && mHistoryDataList_.last()->isSame(aData))
+    {
+        qDebug() << "history data is same as last one.";
+        return;
+    }
     mHistoryDataList_ = mHistoryDataList_.mid(0, mHeadPosition_ + 1);
     mHistoryDataList_.append(aData);
     mHeadPosition_ = mHistoryDataList_.size() - 1;
