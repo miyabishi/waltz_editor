@@ -161,16 +161,13 @@ ApplicationWindow {
                     edit_area.xOffset = xOffset;
                 }
 
-                anchors.top: edit_area.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
             }
 
             ParametersEditArea{
                 id: parameters_edit_area
-                height: 100
-                anchors.top: portamento_edit_area.bottom
-                anchors.bottom: parent.bottom
+                height: 200
                 anchors.left: parent.left
                 anchors.right: parent.right
             }
