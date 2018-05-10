@@ -1,18 +1,45 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 
 MenuBar {
     id: root
+    style: MenuBarStyle{
+        font.family: "Meiryo"
+        font.pixelSize: 16
+    }
+
     Menu{
         title: "&File"
+
         MenuItem{
             text:"Open Song..."
             onTriggered: {
-                loadDialog.open();
+                command_container.load();
+            }
+        }
+        MenuItem{
+            text:"Save"
+            onTriggered: {
+                command_container.save();
+            }
+        }
+        MenuItem{
+            text:"Save As..."
+            onTriggered: {
+                command_container.saveAs();
+            }
+        }
+        MenuSeparator{}
+        MenuItem{
+            text:"Open Voice Library..."
+            onTriggered: {
+                command_container.openVocalLibrary();
             }
         }
     }
+
     Menu{
         title: "&Edit"
         Connections{
@@ -28,7 +55,7 @@ MenuBar {
             text:"Undo"
             enabled: MainWindowModel.hasPreviousHistoryData()
             onTriggered: {
-                main_window.loadData(MainWindowModel.readPreviousHistoryData());
+                command_container.undo();
             }
         }
         MenuItem{
@@ -36,21 +63,29 @@ MenuBar {
             text:"Redo"
             enabled: MainWindowModel.hasNextHistoryData()
             onTriggered: {
-                main_window.loadData(MainWindowModel.readNextHistoryData());
+                command_container.redo();
             }
         }
     }
 
-    Menu {
-        title: "&Song"
-    }
-
-    Menu {
-        title: "&Library"
-    }
-
     Menu{
         title: "&View"
+        MenuItem{
+            text:"Portamento Edit View"
+            checkable: true;
+            checked: true;
+            onToggled: {
+                portamento_edit_area.visible = checked;
+            }
+        }
+        MenuItem{
+            text:"Parameter Edit View"
+            checkable: true;
+            checked: true;
+            onToggled: {
+                parameters_edit_area.visible = checked;
+            }
+        }
     }
 
     Menu{

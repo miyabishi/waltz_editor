@@ -4,7 +4,12 @@ Item {
     id: root
     function saveAs()
     {
-        saveDialog.open()
+        saveDialog.open();
+    }
+
+    function load()
+    {
+        loadDialog.open();
     }
 
     function save()
@@ -22,4 +27,18 @@ Item {
     {
     }
 
+    function undo()
+    {
+        main_window.loadData(MainWindowModel.readPreviousHistoryData());
+    }
+
+    function redo()
+    {
+        main_window.loadData(MainWindowModel.readNextHistoryData());
+    }
+
+    function openVocalLibrary()
+    {
+        vocalOpenDialog.open();
+    }
 }

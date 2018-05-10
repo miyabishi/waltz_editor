@@ -60,14 +60,6 @@ Rectangle{
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
             color:"#222222"
-            FileDialog{
-                id:vocalOpenDialog
-                nameFilters: ["Vocal File(*." + MainWindowModel.vocalFileExtention() + ")"]
-                selectMultiple: false
-                onAccepted: {
-                    MainWindowModel.loadVoiceLibrary(vocalOpenDialog.fileUrl)
-                }
-            }
 
             Image{
                 id: library_open_button_image
@@ -78,7 +70,7 @@ Rectangle{
                 anchors.fill: library_open_button_image
                 backgroundColor: "#222222"
                 onClicked: {
-                    vocalOpenDialog.open()
+                    command_container.openVocalLibrary()
                 }
             }
         }

@@ -59,7 +59,7 @@ Rectangle{
                 anchors.fill: parent
                 onClicked: {
                     if(! undo_button.isEnabled) return;
-                    main_window.loadData(MainWindowModel.readPreviousHistoryData());
+                    command_container.undo();
                 }
             }
         }
@@ -100,7 +100,7 @@ Rectangle{
                 anchors.fill: parent
                 onClicked: {
                     if(! redo_button.isEnabled) return;
-                    main_window.loadData(MainWindowModel.readNextHistoryData());
+                    command_container.redo();
                 }
             }
         }

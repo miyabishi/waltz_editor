@@ -135,7 +135,9 @@ ApplicationWindow {
 
             EditArea{
                 id: edit_area
-                height: 300
+                height:300
+                Layout.fillHeight: true
+
                 anchors.left: parent.left
                 anchors.right: parent.right
                 onXOffsetChanged: {
@@ -166,6 +168,7 @@ ApplicationWindow {
 
             ParametersEditArea{
                 id: parameters_edit_area
+                width: 100
                 anchors.top: portamento_edit_area.bottom
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
@@ -216,6 +219,14 @@ ApplicationWindow {
         }
     }
 
+    FileDialog{
+        id:vocalOpenDialog
+        nameFilters: ["Vocal File(*." + MainWindowModel.vocalFileExtention() + ")"]
+        selectMultiple: false
+        onAccepted: {
+            MainWindowModel.loadVoiceLibrary(vocalOpenDialog.fileUrl)
+        }
+    }
     Connections{
         target: MainWindowModel
         onErrorOccurred: {
