@@ -127,7 +127,7 @@ Rectangle{
             WButtonMouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    saveDialog.open()
+                    command_container.save()
                 }
             }
         }

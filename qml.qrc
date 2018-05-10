@@ -56,5 +56,6 @@
         <file>src/View/TempoController.qml</file>
         <file>src/View/BeatController.qml</file>
         <file>src/View/NoteLengthSelectBox.qml</file>
+        <file>src/View/CommandContainer.qml</file>
     </qresource>
 </RCC>

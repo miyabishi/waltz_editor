@@ -12,6 +12,28 @@ ApplicationWindow {
     title: qsTr("Waltz Editor")
     menuBar: MainWindowMenu{}
 
+    property string editingFileName: ""
+    property bool isEdited: false;
+
+    onEditingFileNameChanged: {
+        main_window.title = createTitleText();
+    }
+
+    onIsEditedChanged: {
+        main_window.title = createTitleText();
+    }
+
+    function createTitleText()
+    {
+
+        var titleText = editingFileName + " - Waltz Editor";
+        if (isEdited)
+        {
+            titleText = "*" + titleText;
+        }
+        return titleText;
+    }
+
     Component.onCompleted: {
         MainWindowModel.writeHistory(main_window.createSaveData());
     }
@@ -51,6 +73,10 @@ ApplicationWindow {
 
     NoteListModelContainer{
         id: note_list_model_container
+    }
+
+    CommandContainer{
+        id: command_container
     }
 
     SelectedNoteListModelContainer{
@@ -173,6 +199,8 @@ ApplicationWindow {
         onAccepted: {
             var data = MainWindowModel.load(loadDialog.fileUrl);
             main_window.loadData(data);
+            main_window.editingFileName = loadDialog.fileUrl;
+            main_window.isEdited = false;
         }
     }
 
@@ -183,6 +211,8 @@ ApplicationWindow {
         selectExisting: false
         onAccepted: {
             MainWindowModel.save(saveDialog.fileUrl, main_window.createSaveData());
+            main_window.editingFileName = saveDialog.fileUrl;
+            main_window.isEdited = false;
         }
     }
 
@@ -191,6 +221,9 @@ ApplicationWindow {
         onErrorOccurred: {
             errorDialog.error_message = aErrorMessage
             errorDialog.open()
+        }
+        onHistoryDataUpdated:{
+            main_window.isEdited = true;
         }
     }
 }
