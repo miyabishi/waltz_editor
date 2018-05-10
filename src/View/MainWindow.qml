@@ -137,7 +137,6 @@ ApplicationWindow {
                 id: edit_area
                 height:300
                 Layout.fillHeight: true
-
                 anchors.left: parent.left
                 anchors.right: parent.right
                 onXOffsetChanged: {
@@ -151,8 +150,9 @@ ApplicationWindow {
 
             PortamentoEditArea{
                 id: portamento_edit_area
-                height: 300
                 xOffset: edit_area.xOffset
+                height:300
+
                 onXOffsetChanged: {
                     if (edit_area.xOffset === xOffset)
                     {
@@ -168,7 +168,7 @@ ApplicationWindow {
 
             ParametersEditArea{
                 id: parameters_edit_area
-                width: 100
+                height: 100
                 anchors.top: portamento_edit_area.bottom
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
