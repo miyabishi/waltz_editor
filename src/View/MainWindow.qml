@@ -12,7 +12,9 @@ ApplicationWindow {
     title: qsTr("Waltz Editor")
     menuBar: MainWindowMenu{}
 
+    signal songLoaded();
     property string editingFileName: ""
+    property string voiceLibraryPath: ""
     property bool isEdited: false;
 
     onEditingFileNameChanged: {
@@ -46,6 +48,11 @@ ApplicationWindow {
         pitch_changing_point_list_model_containter.setArray(aData.pitch_changing_point_list_model_containter);
         portamento_end_point_list_model_container.setArray(aData.portamento_end_point_list_model_container);
         vibrato_list_model_container.setArray(aData.vibrato_list_model_container);
+        MainWindowModel.setTempo(aData.tempo);
+        MainWindowModel.setBeatChild(aData.beat_child);
+        MainWindowModel.setBeatParent(aData.beat_parent);
+        MainWindowModel.loadVoiceLibrary(aData.voice_library_path);
+        songLoaded();
     }
 
     function createSaveData()
@@ -56,7 +63,11 @@ ApplicationWindow {
             "portamento_start_point_list_model_container" : portamento_start_point_list_model_container.toArray(),
             "pitch_changing_point_list_model_containter" : pitch_changing_point_list_model_containter.toArray(),
             "portamento_end_point_list_model_container" : portamento_end_point_list_model_container.toArray(),
-            "vibrato_list_model_container" : vibrato_list_model_container.toArray()
+            "vibrato_list_model_container" : vibrato_list_model_container.toArray(),
+            "tempo": MainWindowModel.tempo(),
+            "beat_parent": MainWindowModel.beatParent(),
+            "beat_child": MainWindowModel.beatChild(),
+            "voice_library_path": vocalOpenDialog.fileUrl,
         };
         return aData;
     }
@@ -196,6 +207,7 @@ ApplicationWindow {
         nameFilters: ["Waltz Song File(*.waltzSong)"]
         selectMultiple: false
         selectExisting: true
+
         onAccepted: {
             var data = MainWindowModel.load(loadDialog.fileUrl);
             main_window.loadData(data);
@@ -221,7 +233,8 @@ ApplicationWindow {
         nameFilters: ["Vocal File(*." + MainWindowModel.vocalFileExtention() + ")"]
         selectMultiple: false
         onAccepted: {
-            MainWindowModel.loadVoiceLibrary(vocalOpenDialog.fileUrl)
+            MainWindowModel.loadVoiceLibrary(vocalOpenDialog.fileUrl);
+            main_window.voiceLibraryPath = vocalOpenDialog.fileUrl;
         }
     }
     Connections{

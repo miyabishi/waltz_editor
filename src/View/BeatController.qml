@@ -5,6 +5,12 @@ import QtQuick.Controls 1.4
 Rectangle{
     id:root
 
+    function reload()
+    {
+        beat_box_child.value = MainWindowModel.beatChild();
+        beat_box_parent.value = MainWindowModel.beatParent();
+    }
+
     function updateBeat(child, parent)
     {
         MainWindowModel.setBeat(child, parent)

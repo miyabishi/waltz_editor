@@ -4,6 +4,11 @@ import QtQuick.Controls 1.4
 
 Rectangle{
     id:root
+    function reload()
+    {
+        tempo_box.value = MainWindowModel.tempo();
+    }
+
     Text{
         id: tempo_text
         text: "Tempo: "

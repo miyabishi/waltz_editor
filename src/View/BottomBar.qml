@@ -9,6 +9,14 @@ import QtGraphicalEffects 1.0
 Rectangle{
     id: root
     color: "#333333"
+    Connections{
+        target: main_window
+        onSongLoaded:{
+            tempo_controller.reload();
+            beat_controller.reload();
+        }
+    }
+
     Rectangle {
         id: player_controller
         color: "#333333"
