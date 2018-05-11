@@ -20,6 +20,7 @@ Rectangle{
     property int  squareStartY:0
     property int  squareEndX:0
     property int  squareEndY:0
+    property int contentY:edit_area_scroll_view.flickableItem.contentY
 
     onXOffsetChanged: {
         if (edit_area_scroll_view.flickableItem.contentX === xOffset)
@@ -168,6 +169,9 @@ Rectangle{
 
         flickableItem.onContentXChanged: {
             xOffset = flickableItem.contentX;
+        }
+        flickableItem.onContentYChanged: {
+            edit_area.contentY = flickableItem.contentY;
         }
 
         Rectangle{

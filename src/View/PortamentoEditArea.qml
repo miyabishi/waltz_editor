@@ -58,19 +58,36 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: updateContentDelay
+        interval: 200
+        repeat: false
+
+        onTriggered: {
+            portament_area_piano_view.flickableItem.contentY = edit_area.contentY;
+        }
+    }
+
     ScrollView{
         id: portamento_edit_area_scroll_view
         verticalScrollBarPolicy: Qt.ScrollBarAlwaysOn
         horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
+
         anchors.left: portament_area_piano_view.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: beat_axis_view.bottom
+
+        flickableItem.visibleArea.onHeightRatioChanged: {
+            updateContentDelay.restart();
+        }
+
         flickableItem.onContentXChanged: {
             xOffset = flickableItem.contentX;
         }
+
         flickableItem.onContentYChanged: {
-            portament_area_piano_view.flickableItem.contentY = flickableItem.contentY
+            portament_area_piano_view.flickableItem.contentY = flickableItem.contentY;
         }
 
         Rectangle{
