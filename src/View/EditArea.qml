@@ -36,9 +36,21 @@ Rectangle{
             selected_note_list_model_container.removeSelectedNotes();
             return;
         }
+
         if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
         {
             selected_note_list_model_container.startEditNoteTextSelectedNote();
+            return;
+        }
+
+        if (event.key === Qt.Key_Z && (event.modifiers & Qt.ControlModifier))
+        {
+            if (event.modifiers & Qt.ShiftModifier)
+            {
+                command_container.redo();
+                return;
+            }
+            command_container.undo();
             return;
         }
     }

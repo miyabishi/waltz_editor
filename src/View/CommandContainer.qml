@@ -29,11 +29,13 @@ Item {
 
     function undo()
     {
+        if (! MainWindowModel.hasPreviousHistoryData()) return;
         main_window.loadData(MainWindowModel.readPreviousHistoryData());
     }
 
     function redo()
     {
+        if (! MainWindowModel.hasNextHistoryData()) return;
         main_window.loadData(MainWindowModel.readNextHistoryData());
     }
 

@@ -137,54 +137,103 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
         }
 
-        SplitView{
+        ColumnLayout{
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: library_information.right
             anchors.right: parent.right
-            orientation: Qt.Vertical
 
-            EditArea{
-                id: edit_area
-                height:300
-                Layout.fillHeight: true
-                anchors.left: parent.left
+            SplitView{
+                anchors.top: parent.top
+                anchors.bottom: main_scroll_view.top
+                anchors.left: parent.left //library_information.right
+
                 anchors.right: parent.right
-                onXOffsetChanged: {
-                    if (portamento_edit_area.xOffset === xOffset)
-                    {
-                        return;
+                orientation: Qt.Vertical
+
+                EditArea{
+                    id: edit_area
+                    height:300
+                    Layout.fillHeight: true
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    onXOffsetChanged: {
+                        if (portamento_edit_area.xOffset === xOffset && main_scroll_view.xOffset === xOffset)
+                        {
+                            return;
+                        }
+                        portamento_edit_area.xOffset = xOffset;
+                        main_scroll_view.xOffset = xOffset
                     }
-                    portamento_edit_area.xOffset = xOffset;
+                }
+
+                PortamentoEditArea{
+                    id: portamento_edit_area
+                    xOffset: edit_area.xOffset
+                    height:300
+
+                    onXOffsetChanged: {
+                        if (edit_area.xOffset === xOffset)
+                        {
+                            return;
+                        }
+                        edit_area.xOffset = xOffset;
+                    }
+
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                }
+
+                ParametersEditArea{
+                    id: parameters_edit_area
+                    height: 200
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                 }
             }
 
-            PortamentoEditArea{
-                id: portamento_edit_area
-                xOffset: edit_area.xOffset
-                height:300
+            ScrollView{
+                  id: main_scroll_view
+                  anchors.right: parent.right
+                  anchors.left:parent.left
+                  anchors.bottom: parent.bottom
+                  flickableItem.interactive: false
+                  style: WaltzScrollViewStyle{}
 
-                onXOffsetChanged: {
-                    if (edit_area.xOffset === xOffset)
-                    {
-                        return;
-                    }
-                    edit_area.xOffset = xOffset;
-                }
+                  horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOn
+                  verticalScrollBarPolicy:  Qt.ScrollBarAlwaysOff
 
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
+                  width: 15
+                  Layout.minimumHeight: 15
+                  Layout.maximumHeight: 15
 
-            ParametersEditArea{
-                id: parameters_edit_area
-                height: 200
-                anchors.left: parent.left
-                anchors.right: parent.right
+                  property int xOffset: edit_area.xOffset
+
+                  onXOffsetChanged: {
+                      if (edit_area.xOffset === xOffset && flickableItem.contentX === xOffset)
+                      {
+                          return;
+                      }
+                      edit_area.xOffset = xOffset;
+                      flickableItem.contentX = xOffset
+                  }
+
+                  flickableItem.onContentXChanged: {
+                      xOffset = flickableItem.contentX;
+                  }
+
+                  Rectangle{
+                      id: main_scroll_view_in
+                      color: "#000000"
+                      anchors.top: parent.top
+                      anchors.bottom: parent.bottom
+                      height:100
+                      width: edit_area.editAreaWidth
+                  }
             }
         }
-    }
 
+    }
     BottomBar{
         id: bottom_bar
         height:71

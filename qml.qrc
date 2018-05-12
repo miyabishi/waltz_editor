@@ -57,5 +57,6 @@
         <file>src/View/BeatController.qml</file>
         <file>src/View/NoteLengthSelectBox.qml</file>
         <file>src/View/CommandContainer.qml</file>
+        <file>src/View/WaltzScrollViewStyle.qml</file>
     </qresource>
 </RCC>
