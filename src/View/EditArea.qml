@@ -235,6 +235,20 @@ Rectangle{
 
                         note_list_model_container.append(noteText, positionX, positionY, noteWidth);
                         MainWindowModel.writeHistory(main_window.createSaveData());
+                        return;
+                    }
+
+                    if(mouse.button === Qt.LeftButton)
+                    {
+                        edit_area_context_menu.closeMenu();
+                        return;
+                    }
+
+                    if(mouse.button === Qt.RightButton)
+                    {
+                        console.log("right button");
+                        edit_area_context_menu.openMenu(mouse.x, mouse.y);
+                        return;
                     }
                 }
 
@@ -400,6 +414,11 @@ Rectangle{
                 id: seek_bar
                 width: 2
                 height: piano_roll_edit_area.height
+            }
+            EditAreaContextMenu{
+                id: edit_area_context_menu
+                width: 200
+                height: 200
             }
         }
     }

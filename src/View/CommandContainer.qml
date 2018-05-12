@@ -23,10 +23,6 @@ Item {
         main_window.isEdited = false;
     }
 
-    function play()
-    {
-    }
-
     function undo()
     {
         if (! MainWindowModel.hasPreviousHistoryData()) return;
