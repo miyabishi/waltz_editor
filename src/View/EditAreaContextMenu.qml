@@ -5,9 +5,8 @@ Item{
     id: root
     visible: false
     property bool open: false
-
     width: 100
-    height: 100
+    height: 200
 
     function openMenu(aX, aY)
     {
@@ -25,44 +24,40 @@ Item{
 
     Item{
         id: actual_context_menu
-    //    color: "#eeeeee"
         width: parent.width - 3
         height: parent.height - 3
         Column{
-            Rectangle{
-                id: menu_background
-                height: 20
-                width: 100
-                color: "#eeeeee"
-
-                Text{
-                    width: actual_context_menu.width
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.family: "Meiryo"
-                    font.pixelSize: 16
-
-                    color:"black"
-                    text:"undo"
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-
-                        onEntered: {
-                            console.log("entered");
-                            menu_background.color = "#ccccff";
-                        }
-
-                        onClicked: {
-                            console.log("pressed! ");
-                            command_container.undo();
-                            edit_area_context_menu.closeMenu();
-                        }
-                    }
-                }
+            WaltzContextMenuItem{
+                id: context_menu_undo
+                text: "undo"
+                width: 200
+                height:20
             }
 
+            WaltzContextMenuItem{
+                id: context_menu_redo
+                text: "redo"
+                width: 200
+                height:20
 
+            }
+        }
 
+    }
+
+    Connections{
+        target:context_menu_redo
+        onMenuClicked:{
+            command_container.redo();
+            closeMenu();
+        }
+    }
+
+    Connections{
+        target:context_menu_undo
+        onMenuClicked:{
+            command_container.undo();
+            closeMenu();
         }
     }
 

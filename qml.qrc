@@ -59,5 +59,6 @@
         <file>src/View/CommandContainer.qml</file>
         <file>src/View/WaltzScrollViewStyle.qml</file>
         <file>src/View/EditAreaContextMenu.qml</file>
+        <file>src/View/WaltzContextMenuItem.qml</file>
     </qresource>
 </RCC>
