@@ -463,6 +463,12 @@ Rectangle{
                     font.pointSize: 7
                 }
             }
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    seek_bar.moveTo(mouse.x - piano_view.width);
+                }
+            }
         }
     }
 }
