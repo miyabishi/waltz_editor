@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include "src/Model/mainwindowmodel.h"
 #include "src/Model/mathutility.h"
+#include "src/Domain/VocalEngine/engine.h"
 
 
 using namespace waltz::editor::model;
@@ -10,6 +11,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
+
+    waltz::editor::VocalEngine::Engine vocalEngine;
+
+    vocalEngine.start();
 
     QQmlApplicationEngine engine;
 

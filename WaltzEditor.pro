@@ -48,7 +48,8 @@ SOURCES += main.cpp \
     src/Model/mathutility.cpp \
     src/Domain/History/historydata.cpp \
     src/Domain/History/historydatarepository.cpp \
-    src/Domain/LibraryComponent/libraryfilepath.cpp
+    src/Domain/LibraryComponent/libraryfilepath.cpp \
+    src/Domain/VocalEngine/engine.cpp
 
 RESOURCES += qml.qrc
 
@@ -121,7 +122,8 @@ HEADERS += \
     src/Model/mathutility.h \
     src/Domain/History/historydata.h \
     src/Domain/History/historydatarepository.h \
-    src/Domain/LibraryComponent/libraryfilepath.h
+    src/Domain/LibraryComponent/libraryfilepath.h \
+    src/Domain/VocalEngine/engine.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
