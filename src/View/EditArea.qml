@@ -241,6 +241,7 @@ Rectangle{
                     if(mouse.button === Qt.LeftButton)
                     {
                         edit_area_context_menu.closeMenu();
+                        note_context_menu.closeMenu();
                         return;
                     }
 
@@ -417,8 +418,9 @@ Rectangle{
             }
             EditAreaContextMenu{
                 id: edit_area_context_menu
-                width: 200
-                height: 200
+            }
+            NoteContextMenu{
+                id: note_context_menu
             }
         }
     }

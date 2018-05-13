@@ -153,7 +153,7 @@ Rectangle{
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: note_stretch_mouse_area.left
-        acceptedButtons: Qt.LeftButton
+        acceptedButtons: Qt.LeftButton| Qt.RightButton
         propagateComposedEvents: pEditing_
         drag.target: root
 
@@ -178,6 +178,12 @@ Rectangle{
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {
                 note_list_model_container.removeNote(pNoteId_);
+                return;
+            }
+            if (mouse.button === Qt.RightButton)
+            {
+                note_context_menu.openMenu(root.x + mouse.x, root.y + mouse.y);
+                return;
             }
         }
 

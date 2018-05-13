@@ -12,7 +12,7 @@ Rectangle{
         width: parent.width
         anchors.verticalCenter: parent.verticalCenter
         font.family: "Meiryo"
-        font.pixelSize: 16
+        font.pixelSize: 18
         text: root.text
         color:"black"
 

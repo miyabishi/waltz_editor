@@ -4,8 +4,7 @@ import QtGraphicalEffects 1.0
 Item{
     id: root
     visible: false
-    property bool open: false
-    width: 100
+    width: 400
     height: 200
 
     function openMenu(aX, aY)
@@ -13,32 +12,31 @@ Item{
         root.x = aX
         root.y = aY
         visible = true;
-        open = true;
     }
 
     function closeMenu()
     {
         visible = false;
-        open = false;
     }
 
     Item{
-        id: actual_context_menu
+        id: edit_area_actual_context_menu
         width: parent.width - 3
         height: parent.height - 3
+
         Column{
             WaltzContextMenuItem{
                 id: context_menu_undo
-                text: "undo"
-                width: 200
-                height:20
+                text: "Undo"
+                width: 300
+                height: 25
             }
 
             WaltzContextMenuItem{
                 id: context_menu_redo
-                text: "redo"
-                width: 200
-                height:20
+                text: "Redo"
+                width: 300
+                height: 25
 
             }
         }
@@ -62,13 +60,12 @@ Item{
     }
 
     DropShadow{
-        source: actual_context_menu
-        anchors.fill: actual_context_menu
+        source: edit_area_actual_context_menu
+        anchors.fill: edit_area_actual_context_menu
         horizontalOffset: 3
         verticalOffset: 3
         radius: 8.0
         samples: 17
         color: "#80000000"
     }
-
 }

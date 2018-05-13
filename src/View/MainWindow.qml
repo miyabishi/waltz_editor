@@ -286,6 +286,11 @@ ApplicationWindow {
             main_window.voiceLibraryPath = vocalOpenDialog.fileUrl;
         }
     }
+
+    PouringLyricsDialog{
+        id: pouring_lyrics_dialog
+    }
+
     Connections{
         target: MainWindowModel
         onErrorOccurred: {

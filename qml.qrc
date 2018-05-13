@@ -60,5 +60,7 @@
         <file>src/View/WaltzScrollViewStyle.qml</file>
         <file>src/View/EditAreaContextMenu.qml</file>
         <file>src/View/WaltzContextMenuItem.qml</file>
+        <file>src/View/NoteContextMenu.qml</file>
+        <file>src/View/PouringLyricsDialog.qml</file>
     </qresource>
 </RCC>
