@@ -19,42 +19,68 @@ Item{
         visible = false;
     }
 
-    Item{
+    Rectangle{
         id: note_actual_context_menu
-        width: parent.width - 3
-        height: parent.height - 3
+        border.color: "#999999"
+        border.width: 1
+        width: context_menu_column.width + border.width * 2
+        height: context_menu_column.height + border.width * 2
+
         Column{
-
+            id: context_menu_column
+            x: note_actual_context_menu.border.width
+            y: note_actual_context_menu.border.width
 
             WaltzContextMenuItem{
-                id: context_menu_pouring_lyrics
-                text: "Pouring lyrics"
+                id: context_menu_note_copy
+                text: "Copy"
                 width: 300
-                height:25
+                height:30
             }
 
             WaltzContextMenuItem{
-                id: context_menu_note_connect_to_previous
-                text: "Connect to previous"
+                id: context_menu_note_cut
+                text: "Cut"
                 width: 300
-                height:25
+                height:30
             }
 
             WaltzContextMenuItem{
-                id: context_menu_note_connect_to_next
-                text: "Connect to next"
+                id: context_menu_note_paste
+                text: "Paste"
                 width: 300
-                height:20
+                height:30
             }
 
             WaltzContextMenuItem{
                 id: context_menu_note_delete
                 text: "Delete"
                 width: 300
-                height:20
+                height:30
             }
-        }
 
+            WaltzContextMenuItem{
+                id: context_menu_pouring_lyrics
+                text: "Pouring lyrics..."
+                width: 300
+                height:30
+            }
+
+            WaltzContextMenuItem{
+                id: context_menu_note_connect_to_previous
+                text: "Connect to previous"
+                width: 300
+                height:30
+            }
+
+            WaltzContextMenuItem{
+                id: context_menu_note_connect_to_next
+                text: "Connect to next"
+                width: 300
+                height:30
+            }
+
+        }
     }
 
     Connections{
@@ -87,15 +113,5 @@ Item{
             pouring_lyrics_dialog.open();
             closeMenu();
         }
-    }
-
-    DropShadow{
-        source: note_actual_context_menu
-        anchors.fill: note_actual_context_menu
-        horizontalOffset: 3
-        verticalOffset: 3
-        radius: 8.0
-        samples: 17
-        color: "#80000000"
     }
 }

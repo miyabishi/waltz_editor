@@ -19,28 +19,32 @@ Item{
         visible = false;
     }
 
-    Item{
+    Rectangle{
         id: edit_area_actual_context_menu
-        width: parent.width - 3
-        height: parent.height - 3
+        border.color: "#999999"
+        border.width: 1
+        width:  edit_area_actual_context_column.width + border.width * 2
+        height: edit_area_actual_context_column.height + border.width * 2
 
         Column{
+            id: edit_area_actual_context_column
+            x: edit_area_actual_context_menu.border.width
+            y: edit_area_actual_context_menu.border.width
+
             WaltzContextMenuItem{
                 id: context_menu_undo
                 text: "Undo"
                 width: 300
-                height: 25
+                height: 30
             }
 
             WaltzContextMenuItem{
                 id: context_menu_redo
                 text: "Redo"
                 width: 300
-                height: 25
-
+                height: 30
             }
         }
-
     }
 
     Connections{
@@ -57,15 +61,5 @@ Item{
             command_container.undo();
             closeMenu();
         }
-    }
-
-    DropShadow{
-        source: edit_area_actual_context_menu
-        anchors.fill: edit_area_actual_context_menu
-        horizontalOffset: 3
-        verticalOffset: 3
-        radius: 8.0
-        samples: 17
-        color: "#80000000"
     }
 }

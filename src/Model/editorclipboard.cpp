@@ -36,7 +36,6 @@ QVariantMap EditorClipboard::load() const
         return jsonObj.toVariantMap();
     }
     return QVariantMap();
-
 }
 
 void EditorClipboard::save(const QVariantMap &aData)
