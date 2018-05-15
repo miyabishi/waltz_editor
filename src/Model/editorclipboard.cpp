@@ -39,17 +39,17 @@ QVariantMap EditorClipboard::load() const
 
 }
 
-void EditorClipboard::save(const QVariantMap &aData) const
+void EditorClipboard::save(const QVariantMap &aData)
 {
     QJsonObject object = QJsonObject::fromVariantMap(aData);
     QJsonDocument document(object);
 
     QByteArray data(document.toJson());
-    mMimeData_ = new QMimeData();
+    mMimeData_ = QSharedPointer<QMimeData>(new QMimeData());
     mMimeData_->setData(mimeType, data);
 
     QClipboard* clipbord = QApplication::clipboard();
     clipbord->clear();
-    clipbord->setMimeData(mMimeData_);
+    clipbord->setMimeData(mMimeData_.data());
 }
 

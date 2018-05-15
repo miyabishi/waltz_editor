@@ -320,12 +320,12 @@ bool MainWindowModel::hasNextHistoryData()
 
 void MainWindowModel::saveToClipboard(const QVariantMap& aData)
 {
-
+    mEditorClipboard_->save(aData);
 }
 
 QVariantMap MainWindowModel::loadFromClipboard() const
 {
-    return mEditorClipboard_;
+    return mEditorClipboard_->load();
 }
 
 
