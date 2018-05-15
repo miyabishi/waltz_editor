@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QString>
 
+#include "editorclipboard.h"
 #include "src/Domain/ScoreComponent/score.h"
 #include "src/Communicator/client.h"
 #include "src/Model/editareainformation.h"
@@ -90,6 +91,10 @@ namespace waltz
                 Q_INVOKABLE bool hasPreviousHistoryData();
                 Q_INVOKABLE bool hasNextHistoryData();
 
+                // for Clipboard
+                Q_INVOKABLE void saveToClipboard(const QVariantMap& aData);
+                Q_INVOKABLE QVariantMap loadFromClipboard() const;
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();
@@ -106,6 +111,7 @@ namespace waltz
                 EditAreaInformationPointer           mEditAreaInformation_;
                 Communicator::Client*                mClient_;
                 LibraryComponent::LibraryInformationPointer mLibraryInformation_;
+                EditorClipboardPointer               mEditorClipboard_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

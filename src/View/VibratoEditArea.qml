@@ -122,6 +122,7 @@ Rectangle {
                 target: edit_area
                 onXOffsetChanged:{
                     vibrato_edit_area_scroll_view.flickableItem.contentX = edit_area.xOffset;
+                    vibrato_edit_area_canvas.requestPaint();
                 }
             }
 
@@ -219,6 +220,9 @@ Rectangle {
                                   vibrato_edit_area_scroll_view.height)
 
                 onCanvasWindowChanged: requestPaint()
+
+
+
                 onPaint: {
                     var ctx = vibrato_edit_area_canvas.getContext('2d');
 
