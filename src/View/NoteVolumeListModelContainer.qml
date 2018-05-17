@@ -34,7 +34,6 @@ Item {
         modelUpdated();
     }
 
-
     function removeIfNoteVolumeHasNoteId(aNoteId)
     {
         var removeIndex = -1;

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Item {
+    id: root
     property ListModel selectedNoteListModel: ListModel{}
     property int selectedNoteIdCounter: 0
 
@@ -88,5 +89,52 @@ Item {
             var selectedNote = selectedNoteListModel.get(index);
             note_list_model_container.moveNote(selectedNote.noteId, aDeltaX, aDeltaY);
         }
+    }
+
+    function copyToClipboard()
+    {
+        var topOfNote = topOfSelectedNote();
+
+        var noteAry = new Array;
+        var portamentoStartPointAry = new Array;
+        var portamentoEndPointAry = new Array;
+        var pitchChangingPointAry = new Array;
+        var volumeAry = new Array;
+
+
+        for(var index = 0; index < selectedNoteListModel.count; ++index)
+        {
+            var selectedNote = selectedNoteListModel.get(index);
+            var note = note_list_model_container.find(selectedNote.noteId);
+
+            noteAry[index] = {
+                "noteId": note.noteId,
+                "noteText": note.noteText,
+                "positionX": note.positionX - topOfNote.positionX,
+                "positionY": note.positionY,
+                "noteWidth": note.noteWidth};
+        }
+
+        var data = {
+            "selectedNotes": noteAry
+        };
+        MainWindowModel.saveToClipboard(data);
+    }
+
+    function topOfSelectedNote()
+    {
+        var minimumX = -1;
+        var topOfSelectedNoteId = -1;
+        for (var index = 0; index < selectedNoteListModel.count; ++index)
+        {
+            var selectedNote = selectedNoteListModel.get(index);
+            var note = note_list_model_container.find(selectedNote.noteId);
+            if (minimumX > note.positionX || minimumX < 0)
+            {
+                topOfSelectedNoteId = note.noteId;
+                minimumX = note.positionX;
+            }
+        }
+        return note_list_model_container.find(topOfSelectedNoteId)
     }
 }

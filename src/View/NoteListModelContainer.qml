@@ -244,6 +244,7 @@ Item {
        }
    }
 
+
    function setArray(ary)
    {
        noteListModel.clear();
@@ -317,6 +318,26 @@ Item {
                   });
    }
 
+   function pasteFromClipboard(aX)
+   {
+       var data = MainWindowModel.loadFromClipboard();
+       var ary = data.selectedNotes
+
+       for(var index = 0; index < ary.length; ++index)
+       {
+           var note = ary[index];
+           noteListModel.append({
+                                    "noteId": root.noteIdCounter,
+                                    "noteText": note.noteText,
+                                    "positionX": note.positionX + aX,
+                                    "positionY": note.positionY,
+                                    "noteWidth": note.noteWidth
+                                });
+
+           root.noteIdCounter++;
+       }
+       modelUpdatedAll();
+   }
 
    function toArray()
    {

@@ -247,7 +247,6 @@ Rectangle{
 
                     if(mouse.button === Qt.RightButton)
                     {
-                        console.log("right button");
                         edit_area_context_menu.openMenu(mouse.x, mouse.y);
                         return;
                     }

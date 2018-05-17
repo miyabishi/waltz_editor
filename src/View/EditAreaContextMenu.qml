@@ -32,6 +32,13 @@ Item{
             y: edit_area_actual_context_menu.border.width
 
             WaltzContextMenuItem{
+                id: context_menu_paste
+                text: "Paste"
+                width: 300
+                height: 30
+            }
+
+            WaltzContextMenuItem{
                 id: context_menu_undo
                 text: "Undo"
                 width: 300
@@ -51,6 +58,14 @@ Item{
         target:context_menu_redo
         onMenuClicked:{
             command_container.redo();
+            closeMenu();
+        }
+    }
+
+    Connections{
+        target:context_menu_paste
+        onMenuClicked:{
+            note_list_model_container.pasteFromClipboard(edit_area.calculateDropX(root));
             closeMenu();
         }
     }

@@ -46,13 +46,6 @@ Item{
             }
 
             WaltzContextMenuItem{
-                id: context_menu_note_paste
-                text: "Paste"
-                width: 300
-                height:30
-            }
-
-            WaltzContextMenuItem{
                 id: context_menu_note_delete
                 text: "Delete"
                 width: 300
@@ -80,6 +73,23 @@ Item{
                 height:30
             }
 
+        }
+    }
+
+    Connections{
+        target:context_menu_note_copy
+        onMenuClicked:{
+            selected_note_list_model_container.copyToClipboard();
+            closeMenu();
+        }
+    }
+
+    Connections{
+        target:context_menu_note_cut
+        onMenuClicked:{
+            selected_note_list_model_container.copyToClipboard();
+            selected_note_list_model_container.removeSelectedNotes();
+            closeMenu();
         }
     }
 
