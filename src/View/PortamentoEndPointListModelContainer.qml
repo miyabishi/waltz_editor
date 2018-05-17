@@ -163,4 +163,25 @@ Item {
         }
         return ary
     }
+
+
+    function createClipboardData(aNoteIdArray, aXOffset)
+    {
+        var portamentoEndPointAry = new Array;
+        for (var index = 0; index < aNoteIdArray.size; index++)
+        {
+            var noteId = aNoteIdArray[index]
+            var portamentoEndPoint = findByNoteId(noteId);
+            portamentoEndPointAry[index] = {
+                 "portamentoEndPointId": portamentoEndPointIdCounter,
+                 "noteId": portamentoEndPoint.noteId,
+                 "portamentoEndX": portamentoEndPoint.portamentoEndX + aXOffset,
+                 "portamentoEndY": portamentoEndPoint.portamentoEndY,
+                 "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
+            };
+
+            portamentoEndPointIdCounter++;
+        }
+        return portamentoEndPointAry;
+    }
 }

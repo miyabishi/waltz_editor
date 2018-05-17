@@ -235,4 +235,28 @@ Item {
         }
         return ary
     }
+
+    function createClipboardData(aNoteIdArray, aXOffset)
+    {
+        var pitchChangingPointAry = new Array;
+        for (var index = 0; index < aNoteIdArray.size; index++)
+        {
+            var noteId = aNoteIdArray[index]
+            var pitchChangingPointModel  = createChangingPointListModelByNoteId(noteId);
+
+            for(var pitchChangingPointIndex = 0;
+                pitchChangingPointIndex < pitchChangingPointModel.size;
+                pitchChangingPointIndex++)
+            {
+                var pitchChangingPoint = pitchChangingPointModel.get[pitchChangingPointIndex];
+                pitchChangingPointAry[index] = {
+                    "pitchChangingPointId": pitchChangingPoint.pitchChangingPointId,
+                    "noteId": pitchChangingPoint.noteId,
+                    "pitchChangingPointX": pitchChangingPoint.pitchChangingPointX - aXOffset,
+                    "pitchChangingPointY": pitchChangingPoint.pitchChangingPointY
+                };
+            }
+        }
+        return pitchChangingPointAry;
+    }
 }

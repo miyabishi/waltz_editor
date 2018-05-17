@@ -171,4 +171,23 @@ Item {
         }
         return ary
     }
+
+    function createClipboardData(aNoteIdArray, aXOffset)
+    {
+        var volumeAry = new Array;
+        for (var index = 0; index < aNoteIdArray.size; index++)
+        {
+            var noteId = aNoteIdArray[index]
+            var volume = findByNoteId(noteId);
+            volumeAry[index] = {
+                "noteVolumeId": noteVolumeIdCounter,
+                "noteId": volume.noteId,
+                "positionX": volume.positionX + aXOffset,
+                "volume": volume.volume
+            };
+            noteVolumeIdCounter++;
+        }
+        return volumeAry;
+    }
+
 }

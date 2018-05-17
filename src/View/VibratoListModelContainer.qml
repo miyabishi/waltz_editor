@@ -236,4 +236,25 @@ Item {
         }
         return ary
     }
+
+    function createClipboardData(aNoteIdArray)
+    {
+        var vibratoAry = new Array;
+        for (var index = 0; index < aNoteIdArray.size; index++)
+        {
+            var noteId = aNoteIdArray[index]
+
+            var vibrato = findByNoteId(noteId);
+            vibratoAry[index] = {
+                "vibratoId": vibratoIdCounter,
+                "noteId": vibrato.noteId + index,
+                "length": vibrato.length,
+                "wavelength": vibrato.wavelength,
+                "amplitude": vibrato.amplitude
+            };
+            vibratoIdCounter++;
+
+        }
+        return vibratoAry;
+    }
 }

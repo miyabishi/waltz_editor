@@ -91,32 +91,25 @@ Item {
         }
     }
 
+    // TODO:リファクタ対象、巨大な関数
     function copyToClipboard()
     {
         var topOfNote = topOfSelectedNote();
-
-        var noteAry = new Array;
-        var portamentoStartPointAry = new Array;
-        var portamentoEndPointAry = new Array;
-        var pitchChangingPointAry = new Array;
-        var volumeAry = new Array;
-
+        var noteIdAry = new Array;
 
         for(var index = 0; index < selectedNoteListModel.count; ++index)
         {
             var selectedNote = selectedNoteListModel.get(index);
-            var note = note_list_model_container.find(selectedNote.noteId);
-
-            noteAry[index] = {
-                "noteId": note.noteId,
-                "noteText": note.noteText,
-                "positionX": note.positionX - topOfNote.positionX,
-                "positionY": note.positionY,
-                "noteWidth": note.noteWidth};
+            noteIdAry[index] = selectedNote.noteId;
         }
 
         var data = {
-            "selectedNotes": noteAry
+            "selectedNotes": note_list_model_container.createArrayByNoteIdArray(noteIdAry, topOfNote.positionX),
+            "portamentoStartPoints": portamento_start_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
+            "pitchChangingPoints":pitch_changing_point_list_model_containter.createClipboardData(noteIdAry, topOfNote.positionX),
+            "portamentoEndPoints": portamento_end_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
+            "vibrato": vibrato_list_model_container.createClipboardData(noteIdAry),
+            "volume": note_volume_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX)
         };
         MainWindowModel.saveToClipboard(data);
     }

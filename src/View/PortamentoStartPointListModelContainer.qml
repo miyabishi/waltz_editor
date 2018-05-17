@@ -164,4 +164,23 @@ Item {
         }
         return ary
     }
+
+    function createClipboardData(aNoteIdArray, aXOffset)
+    {
+        var portamentoStartPointAry = new Array;
+        for (var index = 0; index < aNoteIdArray.size; index++)
+        {
+            var noteId = aNoteIdArray[index]
+            var portamentoStartPoint = findByNoteId(noteId);
+            portamentoStartPointAry[index] = {
+                "portamentoStartPointId": portamentoStartPointIdCounter,
+                "noteId": portamentoStartPoint.noteId,
+                "portamentoStartX": portamentoStartPoint.portamentoStartX + aXOffset,
+                "portamentoStartY": portamentoStartPoint.portamentoStartY,
+                "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
+            };
+            portamentoStartPointIdCounter++;
+        }
+        return portamentoStartPointAry;
+    }
 }

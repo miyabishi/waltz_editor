@@ -355,6 +355,22 @@ Item {
        return ary
    }
 
+   function createArrayByNoteIdArray(aNoteIdArray)
+   {
+       var ary = new Array;
+       for(var index = 0; index < aNoteIdArray.count; ++index)
+       {
+           var note = noteListModel.get(aNoteIdArray[index]);
+           ary[index] = {
+               "noteId": note.noteId,
+               "noteText": note.noteText,
+               "positionX": note.positionX,
+               "positionY": note.positionY,
+               "noteWidth": note.noteWidth};
+       }
+       return ary
+   }
+
    // TODO:　リファクタ対象　長すぎる関数
    function selectBySquare(aX1, aY1, aX2, aY2)
    {
@@ -402,4 +418,22 @@ Item {
        }
    }
 
+   function createClipboardData(aNoteIdArray, aXOffset)
+   {
+       var noteAry = new Array;
+       for (var index = 0; index < aNoteIdArray.size; index++)
+       {
+           var noteId = aNoteIdArray[index]
+           var note= note_list_model_container.find(noteId);
+
+           noteAry[index] = {
+               "noteId": note.noteId,
+               "noteText": note.noteText,
+               "positionX": note.positionX - aXOffset,
+               "positionY": note.positionY,
+               "noteWidth": note.noteWidth};
+
+       }
+       return noteAry;
+   }
 }
