@@ -246,14 +246,12 @@ Item {
 
             var vibrato = findByNoteId(noteId);
             vibratoAry[index] = {
-                "vibratoId": vibratoIdCounter,
-                "noteId": vibrato.noteId + index,
+                "vibratoId": vibrato.vibratoId,
+                "noteId": vibrato.noteId,
                 "length": vibrato.length,
                 "wavelength": vibrato.wavelength,
                 "amplitude": vibrato.amplitude
             };
-            vibratoIdCounter++;
-
         }
         return vibratoAry;
     }

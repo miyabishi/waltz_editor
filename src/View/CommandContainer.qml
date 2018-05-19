@@ -39,4 +39,12 @@ Item {
     {
         vocalOpenDialog.open();
     }
+
+    function paste(aXOffset)
+    {
+        console.log("paste");
+        var data = MainWindowModel.loadFromClipboard();
+        var noteIdMap = note_list_model_container.pasteFromClipboard(data,aXOffset);
+        note_volume_list_model_container.pasteFromClipboard(data, aXOffset);
+    }
 }

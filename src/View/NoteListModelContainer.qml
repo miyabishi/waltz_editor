@@ -318,14 +318,24 @@ Item {
                   });
    }
 
-   function pasteFromClipboard(aX)
+   function pasteFromClipboard(aData, aX)
    {
        var data = MainWindowModel.loadFromClipboard();
        var ary = data.selectedNotes
+       var noteIdMap = {};
 
        for(var index = 0; index < ary.length; ++index)
        {
            var note = ary[index];
+           noteIdMap[note.noteId] = root.noteIdCounter;
+
+           console.log("--- paste --- ");
+           console.log("noteId:", root.noteIdCounter);
+           console.log("noteText:", note.noteText);
+           console.log("positionX:", note.positionX + aX);
+           console.log("aX:", aX);
+           console.log("positionY:", note.positionY);
+           console.log("noteWidth:", note.noteWidth);
            noteListModel.append({
                                     "noteId": root.noteIdCounter,
                                     "noteText": note.noteText,
@@ -337,6 +347,7 @@ Item {
            root.noteIdCounter++;
        }
        modelUpdatedAll();
+       return noteIdMap
    }
 
    function toArray()
@@ -345,22 +356,6 @@ Item {
        for(var index = 0; index < noteListModel.count; ++index)
        {           
            var note = noteListModel.get(index);
-           ary[index] = {
-               "noteId": note.noteId,
-               "noteText": note.noteText,
-               "positionX": note.positionX,
-               "positionY": note.positionY,
-               "noteWidth": note.noteWidth};
-       }
-       return ary
-   }
-
-   function createArrayByNoteIdArray(aNoteIdArray)
-   {
-       var ary = new Array;
-       for(var index = 0; index < aNoteIdArray.count; ++index)
-       {
-           var note = noteListModel.get(aNoteIdArray[index]);
            ary[index] = {
                "noteId": note.noteId,
                "noteText": note.noteText,
@@ -418,13 +413,23 @@ Item {
        }
    }
 
-   function createClipboardData(aNoteIdArray, aXOffset)
+   function createClipboardData(aXOffset)
    {
        var noteAry = new Array;
-       for (var index = 0; index < aNoteIdArray.size; index++)
+
+       console.log("selectedNotes.count:", selected_note_list_model_container.count());
+
+       for (var index = 0; index < selected_note_list_model_container.count(); index++)
        {
-           var noteId = aNoteIdArray[index]
+           var noteId = selected_note_list_model_container.findNoteIdByIndex(index);
            var note= note_list_model_container.find(noteId);
+
+           console.log("--- copy --- ");
+           console.log("noteId:",  note.noteId);
+           console.log("noteText:", note.noteText);
+           console.log("positionX:", note.positionX - aXOffset);
+           console.log("positionY:", note.positionY);
+           console.log("noteWidth:", note.noteWidth);
 
            noteAry[index] = {
                "noteId": note.noteId,

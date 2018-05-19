@@ -91,25 +91,29 @@ Item {
         }
     }
 
-    // TODO:リファクタ対象、巨大な関数
+    function count()
+    {
+        return selectedNoteListModel.count;
+    }
+
+    function findNoteIdByIndex(aIndex)
+    {
+        var selectedNote = selectedNoteListModel.get(aIndex);
+        return selectedNote.noteId;
+    }
+
     function copyToClipboard()
     {
+        console.log("copy to clipboard");
         var topOfNote = topOfSelectedNote();
-        var noteIdAry = new Array;
-
-        for(var index = 0; index < selectedNoteListModel.count; ++index)
-        {
-            var selectedNote = selectedNoteListModel.get(index);
-            noteIdAry[index] = selectedNote.noteId;
-        }
 
         var data = {
-            "selectedNotes": note_list_model_container.createArrayByNoteIdArray(noteIdAry, topOfNote.positionX),
-            "portamentoStartPoints": portamento_start_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
-            "pitchChangingPoints":pitch_changing_point_list_model_containter.createClipboardData(noteIdAry, topOfNote.positionX),
-            "portamentoEndPoints": portamento_end_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
-            "vibrato": vibrato_list_model_container.createClipboardData(noteIdAry),
-            "volume": note_volume_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX)
+              "selectedNotes": note_list_model_container.createClipboardData(topOfNote.positionX),
+//            "portamentoStartPoints": portamento_start_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
+//            "pitchChangingPoints":pitch_changing_point_list_model_containter.createClipboardData(noteIdAry, topOfNote.positionX),
+//            "portamentoEndPoints": portamento_end_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
+//            "vibrato": vibrato_list_model_container.createClipboardData(noteIdAry),
+            "volume": note_volume_list_model_container.createClipboardData(topOfNote.positionX)
         };
         MainWindowModel.saveToClipboard(data);
     }

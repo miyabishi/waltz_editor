@@ -65,7 +65,7 @@ Item{
     Connections{
         target:context_menu_paste
         onMenuClicked:{
-            note_list_model_container.pasteFromClipboard(edit_area.calculateDropX(root));
+            command_container.paste(edit_area.calculateDropX(root));
             closeMenu();
         }
     }

@@ -173,14 +173,13 @@ Item {
             var noteId = aNoteIdArray[index]
             var portamentoEndPoint = findByNoteId(noteId);
             portamentoEndPointAry[index] = {
-                 "portamentoEndPointId": portamentoEndPointIdCounter,
+                 "portamentoEndPointId": portamentoEndPoint.portamentoEndPointId,
                  "noteId": portamentoEndPoint.noteId,
                  "portamentoEndX": portamentoEndPoint.portamentoEndX + aXOffset,
                  "portamentoEndY": portamentoEndPoint.portamentoEndY,
                  "portamentoEndXOffset": portamentoEndPoint.portamentoEndXOffset
             };
 
-            portamentoEndPointIdCounter++;
         }
         return portamentoEndPointAry;
     }

@@ -172,22 +172,37 @@ Item {
         return ary
     }
 
-    function createClipboardData(aNoteIdArray, aXOffset)
+    function pasteFromClipboard(aData, aX, aNoteIdMap)
+    {
+        console.log("paste volume");
+        var ary = aData.volume;
+        for(var index = 0; index < ary.length; ++index)
+        {
+            var volume = ary[index];
+            noteVolumeListModel.append({
+                "noteVolumeId": volume.noteVolumeId,
+                "noteId": aNoteIdMap[volume.noteId],
+                "positionX": volume.positionX + aX,
+                "volume": volume.volume
+            });
+        }
+        modelUpdated();
+    }
+
+    function createClipboardData(aXOffset)
     {
         var volumeAry = new Array;
-        for (var index = 0; index < aNoteIdArray.size; index++)
+        for (var index = 0; index < selected_note_list_model_container.count(); index++)
         {
-            var noteId = aNoteIdArray[index]
+            var noteId = selected_note_list_model_container.findNoteIdByIndex(index);
             var volume = findByNoteId(noteId);
             volumeAry[index] = {
-                "noteVolumeId": noteVolumeIdCounter,
+                "noteVolumeId": volume.noteVolumeId,
                 "noteId": volume.noteId,
                 "positionX": volume.positionX + aXOffset,
                 "volume": volume.volume
             };
-            noteVolumeIdCounter++;
         }
         return volumeAry;
     }
-
 }
