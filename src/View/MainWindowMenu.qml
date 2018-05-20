@@ -71,6 +71,14 @@ MenuBar {
     Menu{
         title: "&View"
         MenuItem{
+            text:"Score Edit View"
+            checkable: true;
+            checked: true;
+            onToggled: {
+                edit_area.visible = checked;
+            }
+        }
+        MenuItem{
             text:"Portamento Edit View"
             checkable: true;
             checked: true;

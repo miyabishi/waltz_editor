@@ -157,6 +157,20 @@ ApplicationWindow {
                     Layout.fillHeight: true
                     anchors.left: parent.left
                     anchors.right: parent.right
+
+                    onVisibleChanged: {
+                        Layout.fillHeight = visible;
+                        if (visible === true)
+                        {
+                            edit_area.height = 300;
+                            parameters_edit_area.height = 200;
+                            if (portamento_edit_area.isFillHeight())
+                            {
+                                portamento_edit_area.changeFillHeight(false);
+                                portamento_edit_area.height = 300;
+                            }
+                        }
+                    }
                     onXOffsetChanged: {
                         if (portamento_edit_area.xOffset === xOffset && main_scroll_view.xOffset === xOffset)
                         {
@@ -171,6 +185,15 @@ ApplicationWindow {
                     id: portamento_edit_area
                     xOffset: edit_area.xOffset
                     height:300
+
+                    function changeFillHeight(aIsFillHeight)
+                    {
+                        Layout.fillHeight = aIsFillHeight;
+                    }
+                    function isFillHeight()
+                    {
+                        return Layout.fillHeight;
+                    }
 
                     onXOffsetChanged: {
                         if (edit_area.xOffset === xOffset)
@@ -189,6 +212,15 @@ ApplicationWindow {
                     height: 200
                     anchors.left: parent.left
                     anchors.right: parent.right
+
+                    onVisibleChanged: {
+                        if (parameters_edit_area.visible === false)
+                        {
+                            portamento_edit_area.changeFillHeight(true);
+                            return;
+                        }
+                        portamento_edit_area.changeFillHeight(false);
+                    }
                 }
             }
 
