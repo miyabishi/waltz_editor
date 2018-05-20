@@ -43,6 +43,14 @@ Rectangle{
         }
     }
 
+    Keys.onPressed: {
+        if (event.key === Qt.Key_C && (event.modifiers & Qt.ControlModifier))
+        {
+            selected_note_list_model_container.copyToClipboard();
+            return;
+        }
+    }
+
     Keys.onLeftPressed: {
         if (! selected_note_list_model_container.canSwitchNoteByCursorKey()) return;
         if (root.pEditing_ === true) return;

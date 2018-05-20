@@ -47,7 +47,7 @@ Item {
         portamento_start_point_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
         pitch_changing_point_list_model_containter.pasteFromClipboard(data, aXOffset, noteIdOffset);
         portamento_end_point_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
-        vibrato_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
+        vibrato_list_model_container.pasteFromClipboard(data, noteIdOffset);
         note_volume_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
     }
 }

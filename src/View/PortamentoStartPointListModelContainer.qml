@@ -186,6 +186,7 @@ Item {
     function pasteFromClipboard(aData, aX, aNoteIdOffset)
     {
         var ary = aData.portamentoStartPoints;
+        if(!ary) return;
 
         for(var index = 0; index < ary.length; ++index)
         {

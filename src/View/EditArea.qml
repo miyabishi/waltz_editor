@@ -53,6 +53,12 @@ Rectangle{
             command_container.undo();
             return;
         }
+
+        if (event.key === Qt.Key_V && (event.modifiers & Qt.ControlModifier))
+        {
+            command_container.paste(seek_bar.x);
+            return;
+        }
     }
 
 
@@ -250,6 +256,10 @@ Rectangle{
                         edit_area_context_menu.openMenu(mouse.x, mouse.y);
                         return;
                     }
+                }
+
+                onDoubleClicked: {
+                    seek_bar.moveTo(mouse.x);
                 }
 
                 onPressed:{

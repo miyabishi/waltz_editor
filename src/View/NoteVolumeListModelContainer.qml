@@ -175,6 +175,7 @@ Item {
     function pasteFromClipboard(aData, aX, aNoteIdOffset)
     {
         var ary = aData.volume;
+        if(!ary) return;
         for(var index = 0; index < ary.length; ++index)
         {
             var volume = ary[index];

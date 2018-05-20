@@ -321,7 +321,11 @@ Item {
    function pasteFromClipboard(aData, aX)
    {
        var data = MainWindowModel.loadFromClipboard();
+       if (!data) return;
        var ary = data.selectedNotes
+       if(!ary) return;
+
+       root.noteIdCounter++;
        var idOffset = root.noteIdCounter;
 
        for(var index = 0; index < ary.length; ++index)
@@ -336,7 +340,7 @@ Item {
                                 });
            if(root.noteIdCounter <= idOffset + note.noteId)
            {
-               root.noteIdCounter = note.noteId
+               root.noteIdCounter = idOffset + note.noteId;
            }
        }
        root.noteIdCounter++;

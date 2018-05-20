@@ -263,6 +263,7 @@ Item {
     function pasteFromClipboard(aData, aX, aNoteIdOffset)
     {
         var ary = aData.pitchChangingPoints;
+        if(!ary) return;
 
         for(var index = 0; index < ary.length; ++index)
         {
