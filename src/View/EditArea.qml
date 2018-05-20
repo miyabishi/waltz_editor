@@ -71,6 +71,19 @@ Rectangle{
             note_list_model_container.selectAll();
             return;
         }
+
+        if (event.key === Qt.Key_X && (event.modifiers & Qt.ControlModifier))
+        {
+            selected_note_list_model_container.copyToClipboard();
+            selected_note_list_model_container.removeSelectedNotes();
+            return;
+        }
+
+        if (event.key === Qt.Key_S && (event.modifiers & Qt.ControlModifier))
+        {
+            command_container.save();
+            return;
+        }
     }
 
 
