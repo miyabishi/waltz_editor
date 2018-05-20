@@ -39,6 +39,13 @@ Item{
             }
 
             WaltzContextMenuItem{
+                id: context_menu_select_all
+                text: "Select All"
+                width: 300
+                height: 30
+            }
+
+            WaltzContextMenuItem{
                 id: context_menu_undo
                 text: "Undo"
                 width: 300
@@ -66,6 +73,14 @@ Item{
         target:context_menu_paste
         onMenuClicked:{
             command_container.paste(edit_area.calculateDropX(root));
+            closeMenu();
+        }
+    }
+
+    Connections{
+        target:context_menu_select_all
+        onMenuClicked:{
+            note_list_model_container.selectAll();
             closeMenu();
         }
     }

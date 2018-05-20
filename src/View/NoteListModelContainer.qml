@@ -430,4 +430,14 @@ Item {
        }
        return noteAry;
    }
+
+   function selectAll()
+   {
+       selected_note_list_model_container.clear();
+       for (var index = 0; index < noteListModel.count; ++index)
+       {
+           var note = findByIndex(index);
+           selected_note_list_model_container.append(note.noteId);
+        }
+   }
 }

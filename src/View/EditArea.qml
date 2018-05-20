@@ -65,6 +65,12 @@ Rectangle{
             command_container.paste(seek_bar.x);
             return;
         }
+
+        if (event.key === Qt.Key_A && (event.modifiers & Qt.ControlModifier))
+        {
+            note_list_model_container.selectAll();
+            return;
+        }
     }
 
 
