@@ -327,14 +327,6 @@ Item {
        for(var index = 0; index < ary.length; ++index)
        {
            var note = ary[index];
-           console.log("--- paste --- ");
-           console.log("noteId:", idOffset + note.noteId);
-           console.log("idOffset", idOffset);
-           console.log("noteText:", note.noteText);
-           console.log("positionX:", note.positionX + aX);
-           console.log("aX:", aX);
-           console.log("positionY:", note.positionY);
-           console.log("noteWidth:", note.noteWidth);
            noteListModel.append({
                                     "noteId": idOffset + note.noteId,
                                     "noteText": note.noteText,
@@ -418,21 +410,10 @@ Item {
    function createClipboardData(aXOffset)
    {
        var noteAry = new Array;
-
-       console.log("selectedNotes.count:", selected_note_list_model_container.count());
-
        for (var index = 0; index < selected_note_list_model_container.count(); index++)
        {
            var noteId = selected_note_list_model_container.findNoteIdByIndex(index);
            var note= note_list_model_container.find(noteId);
-
-           console.log("--- copy --- ");
-           console.log("noteId:",  note.noteId);
-           console.log("noteText:", note.noteText);
-           console.log("positionX:", note.positionX - aXOffset);
-           console.log("positionY:", note.positionY);
-           console.log("noteWidth:", note.noteWidth);
-
            noteAry[index] = {
                "noteId": note.noteId,
                "noteText": note.noteText,

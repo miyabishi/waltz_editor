@@ -24,7 +24,7 @@ namespace waltz
                 QVariantMap load()const;
 
             private:
-                QSharedPointer<QMimeData> mMimeData_;
+                QPointer<QMimeData> mMimeData_;
             };
             typedef QSharedPointer<EditorClipboard> EditorClipboardPointer;
 

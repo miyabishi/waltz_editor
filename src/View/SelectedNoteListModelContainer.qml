@@ -104,7 +104,6 @@ Item {
 
     function copyToClipboard()
     {
-        console.log("copy to clipboard");
         var topOfNote = topOfSelectedNote();
 
         var data = {

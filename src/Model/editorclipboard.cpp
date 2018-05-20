@@ -19,6 +19,10 @@ EditorClipboard::EditorClipboard()
 
 EditorClipboard::~EditorClipboard()
 {
+    if (! mMimeData_.isNull())
+    {
+        delete mMimeData_;
+    }
 }
 
 QVariantMap EditorClipboard::load() const
@@ -44,11 +48,17 @@ void EditorClipboard::save(const QVariantMap &aData)
     QJsonDocument document(object);
 
     QByteArray data(document.toJson());
-    mMimeData_ = QSharedPointer<QMimeData>(new QMimeData());
+
+    if (! mMimeData_.isNull())
+    {
+        delete mMimeData_;
+    }
+    mMimeData_ = new QMimeData();
+
     mMimeData_->setData(mimeType, data);
 
     QClipboard* clipbord = QApplication::clipboard();
     clipbord->clear();
-    clipbord->setMimeData(mMimeData_.data());
+    clipbord->setMimeData(mMimeData_);
 }
 
