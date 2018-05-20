@@ -49,6 +49,11 @@ Rectangle{
             selected_note_list_model_container.copyToClipboard();
             return;
         }
+        if (event.key === Qt.Key_Delete)
+        {
+            selected_note_list_model_container.removeSelectedNotes();
+            return;
+        }
     }
 
     Keys.onLeftPressed: {
