@@ -49,5 +49,6 @@ Item {
         portamento_end_point_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
         vibrato_list_model_container.pasteFromClipboard(data, noteIdOffset);
         note_volume_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
+        MainWindowModel.writeHistory(main_window.createSaveData());
     }
 }

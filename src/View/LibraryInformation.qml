@@ -13,6 +13,27 @@ Rectangle{
     color:"#222222"
     width: showDetail ? 320 : 32
 
+    onWidthChanged: {
+        if (showDetail === true && width !== 320)
+        {
+            width = 320;
+            return;
+        }
+        if (showDetail === false && width !== 32)
+        {
+            width = 32;
+            return;
+        }
+    }
+    onShowDetailChanged: {
+        if (showDetail)
+        {
+            width = 320;
+            return;
+        }
+        width = 32;
+    }
+
     property string character_image: MainWindowModel.characterImageUrl()
     property string library_description: MainWindowModel.libraryDescription()
     property string library_name: MainWindowModel.libraryName()

@@ -23,6 +23,13 @@ Item{
         }
     }
 
+    Connections{
+        target: portamento_start_point_list_model_container
+        onRequestAdjust:{
+            adjust();
+        }
+    }
+
     function adjust()
     {
         var note = note_list_model_container.find(noteId);

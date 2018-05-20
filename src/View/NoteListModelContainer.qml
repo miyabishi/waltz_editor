@@ -346,7 +346,6 @@ Item {
            }
        }
        root.noteIdCounter++;
-       MainWindowModel.writeHistory(main_window.createSaveData());
        modelUpdatedAll();
        return idOffset;
    }

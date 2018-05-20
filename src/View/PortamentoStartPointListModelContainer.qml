@@ -5,6 +5,7 @@ Item {
     property ListModel portamentoStartPointListModel: ListModel{}
     property int portamentoStartPointIdCounter: 0
     signal modelUpdated()
+    signal requestAdjust()
     Connections{
         target: note_list_model_container
         onNoteRemoved:{
@@ -203,5 +204,6 @@ Item {
         }
         root.portamentoStartPointIdCounter++;
         modelUpdated();
+        requestAdjust();
     }
 }
