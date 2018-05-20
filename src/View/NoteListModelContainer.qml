@@ -322,32 +322,34 @@ Item {
    {
        var data = MainWindowModel.loadFromClipboard();
        var ary = data.selectedNotes
-       var noteIdMap = {};
+       var idOffset = root.noteIdCounter;
 
        for(var index = 0; index < ary.length; ++index)
        {
            var note = ary[index];
-           noteIdMap[note.noteId] = root.noteIdCounter;
-
            console.log("--- paste --- ");
-           console.log("noteId:", root.noteIdCounter);
+           console.log("noteId:", idOffset + note.noteId);
+           console.log("idOffset", idOffset);
            console.log("noteText:", note.noteText);
            console.log("positionX:", note.positionX + aX);
            console.log("aX:", aX);
            console.log("positionY:", note.positionY);
            console.log("noteWidth:", note.noteWidth);
            noteListModel.append({
-                                    "noteId": root.noteIdCounter,
+                                    "noteId": idOffset + note.noteId,
                                     "noteText": note.noteText,
                                     "positionX": note.positionX + aX,
                                     "positionY": note.positionY,
                                     "noteWidth": note.noteWidth
                                 });
-
-           root.noteIdCounter++;
+           if(root.noteIdCounter <= idOffset + note.noteId)
+           {
+               root.noteIdCounter = note.noteId
+           }
        }
+       root.noteIdCounter++;
        modelUpdatedAll();
-       return noteIdMap
+       return idOffset;
    }
 
    function toArray()

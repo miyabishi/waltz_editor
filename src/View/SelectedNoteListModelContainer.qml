@@ -108,11 +108,11 @@ Item {
         var topOfNote = topOfSelectedNote();
 
         var data = {
-              "selectedNotes": note_list_model_container.createClipboardData(topOfNote.positionX),
-//            "portamentoStartPoints": portamento_start_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
-//            "pitchChangingPoints":pitch_changing_point_list_model_containter.createClipboardData(noteIdAry, topOfNote.positionX),
-//            "portamentoEndPoints": portamento_end_point_list_model_container.createClipboardData(noteIdAry, topOfNote.positionX),
-//            "vibrato": vibrato_list_model_container.createClipboardData(noteIdAry),
+            "selectedNotes": note_list_model_container.createClipboardData(topOfNote.positionX),
+            "portamentoStartPoints": portamento_start_point_list_model_container.createClipboardData(topOfNote.positionX),
+            "pitchChangingPoints":pitch_changing_point_list_model_containter.createClipboardData(topOfNote.positionX),
+            "portamentoEndPoints": portamento_end_point_list_model_container.createClipboardData(topOfNote.positionX),
+            "vibrato": vibrato_list_model_container.createClipboardData(),
             "volume": note_volume_list_model_container.createClipboardData(topOfNote.positionX)
         };
         MainWindowModel.saveToClipboard(data);

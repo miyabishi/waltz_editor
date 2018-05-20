@@ -165,21 +165,42 @@ Item {
         return ary
     }
 
-    function createClipboardData(aNoteIdArray, aXOffset)
+    function createClipboardData(aXOffset)
     {
         var portamentoStartPointAry = new Array;
-        for (var index = 0; index < aNoteIdArray.size; index++)
+        for (var index = 0; index < selected_note_list_model_container.count(); index++)
         {
-            var noteId = aNoteIdArray[index]
+            var noteId = selected_note_list_model_container.findNoteIdByIndex(index);
             var portamentoStartPoint = findByNoteId(noteId);
             portamentoStartPointAry[index] = {
                 "portamentoStartPointId": portamentoStartPoint.portamentoStartPointId,
                 "noteId": portamentoStartPoint.noteId,
-                "portamentoStartX": portamentoStartPoint.portamentoStartX + aXOffset,
+                "portamentoStartX": portamentoStartPoint.portamentoStartX - aXOffset,
                 "portamentoStartY": portamentoStartPoint.portamentoStartY,
                 "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
             };
         }
         return portamentoStartPointAry;
+    }
+
+    function pasteFromClipboard(aData, aX, aNoteIdOffset)
+    {
+        var ary = aData.portamentoStartPoints;
+
+        for(var index = 0; index < ary.length; ++index)
+        {
+            root.portamentoStartPointIdCounter++;
+            var portamentoStartPoint = ary[index];
+            portamentoStartPointListModel.append({
+                "portamentoStartPointId": root.portamentoStartPointIdCounter,
+                "noteId": portamentoStartPoint.noteId + aNoteIdOffset,
+                "portamentoStartX": portamentoStartPoint.portamentoStartX + aX,
+                "portamentoStartY": portamentoStartPoint.portamentoStartY,
+                "portamentoStartXOffset": portamentoStartPoint.portamentoStartXOffset
+
+            });
+        }
+        root.portamentoStartPointIdCounter++;
+        modelUpdated();
     }
 }

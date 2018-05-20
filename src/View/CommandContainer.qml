@@ -42,9 +42,12 @@ Item {
 
     function paste(aXOffset)
     {
-        console.log("paste");
         var data = MainWindowModel.loadFromClipboard();
-        var noteIdMap = note_list_model_container.pasteFromClipboard(data,aXOffset);
-        note_volume_list_model_container.pasteFromClipboard(data, aXOffset);
+        var noteIdOffset = note_list_model_container.pasteFromClipboard(data,aXOffset);
+        portamento_start_point_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
+        pitch_changing_point_list_model_containter.pasteFromClipboard(data, aXOffset, noteIdOffset);
+        portamento_end_point_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
+        vibrato_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
+        note_volume_list_model_container.pasteFromClipboard(data, aXOffset, noteIdOffset);
     }
 }

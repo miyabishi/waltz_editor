@@ -236,12 +236,12 @@ Item {
         return ary
     }
 
-    function createClipboardData(aNoteIdArray, aXOffset)
+    function createClipboardData(aXOffset)
     {
         var pitchChangingPointAry = new Array;
-        for (var index = 0; index < aNoteIdArray.size; index++)
+        for (var index = 0; index < selected_note_list_model_container.count(); index++)
         {
-            var noteId = aNoteIdArray[index]
+            var noteId = selected_note_list_model_container.findNoteIdByIndex(index);
             var pitchChangingPointModel  = createChangingPointListModelByNoteId(noteId);
 
             for(var pitchChangingPointIndex = 0;
@@ -259,4 +259,24 @@ Item {
         }
         return pitchChangingPointAry;
     }
+
+    function pasteFromClipboard(aData, aX, aNoteIdOffset)
+    {
+        var ary = aData.pitchChangingPoints;
+
+        for(var index = 0; index < ary.length; ++index)
+        {
+            root.pitchChangingPointIdCounter++;
+            var pitchChangingPoint = ary[index];
+            pitchChangingPointListModel.append({
+                     "pitchChangingPointId": root.pitchChangingPointIdCounter,
+                     "noteId": pitchChangingPoint.noteId + aNoteIdOffset,
+                     "pitchChangingPointX": pitchChangingPoint.pitchChangingPointX + aX,
+                     "pitchChangingPointY": pitchChangingPoint.pitchChangingPointY
+            });
+        }
+        root.pitchChangingPointIdCounter++;
+        modelUpdated();
+    }
+
 }

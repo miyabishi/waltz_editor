@@ -237,14 +237,15 @@ Item {
         return ary
     }
 
-    function createClipboardData(aNoteIdArray)
+    function createClipboardData()
     {
         var vibratoAry = new Array;
-        for (var index = 0; index < aNoteIdArray.size; index++)
+        for (var index = 0; index < selected_note_list_model_container.count(); index++)
         {
-            var noteId = aNoteIdArray[index]
-
+            var noteId = selected_note_list_model_container.findNoteIdByIndex(index);
             var vibrato = findByNoteId(noteId);
+            if (! vibrato) return;
+
             vibratoAry[index] = {
                 "vibratoId": vibrato.vibratoId,
                 "noteId": vibrato.noteId,
@@ -255,4 +256,26 @@ Item {
         }
         return vibratoAry;
     }
+
+    function pasteFromClipboard(aData, aNoteIdOffset)
+    {
+        var ary = aData.vibrato;
+        if (! ary) return;
+        for(var index = 0; index < ary.length; ++index)
+        {
+            root.vibratoIdCounter++;
+            var vibrato = ary[index];
+            vibratoListModel.append({
+                "vibratoId": vibratoIdCounter,
+                "noteId": vibrato.noteId + aNoteIdOffset,
+                "length": vibrato.length,
+                "wavelength": vibrato.wavelength,
+                "amplitude": vibrato.amplitude
+            });
+        }
+        root.vibratoIdCounter++;
+
+        modelUpdated();
+    }
+
 }

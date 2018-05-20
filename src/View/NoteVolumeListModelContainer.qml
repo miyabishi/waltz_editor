@@ -172,20 +172,22 @@ Item {
         return ary
     }
 
-    function pasteFromClipboard(aData, aX, aNoteIdMap)
+    function pasteFromClipboard(aData, aX, aNoteIdOffset)
     {
         console.log("paste volume");
         var ary = aData.volume;
         for(var index = 0; index < ary.length; ++index)
         {
             var volume = ary[index];
+            noteVolumeIdCounter++;
             noteVolumeListModel.append({
-                "noteVolumeId": volume.noteVolumeId,
-                "noteId": aNoteIdMap[volume.noteId],
+                "noteVolumeId": noteVolumeIdCounter,
+                "noteId": volume.noteId + aNoteIdOffset,
                 "positionX": volume.positionX + aX,
                 "volume": volume.volume
             });
         }
+        noteVolumeIdCounter++;
         modelUpdated();
     }
 
@@ -199,7 +201,7 @@ Item {
             volumeAry[index] = {
                 "noteVolumeId": volume.noteVolumeId,
                 "noteId": volume.noteId,
-                "positionX": volume.positionX + aXOffset,
+                "positionX": volume.positionX - aXOffset,
                 "volume": volume.volume
             };
         }
