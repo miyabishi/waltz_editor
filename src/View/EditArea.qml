@@ -84,6 +84,12 @@ Rectangle{
             command_container.save();
             return;
         }
+
+        if (event.key === Qt.Key_O && (event.modifiers & Qt.ControlModifier))
+        {
+            command_container.load();
+            return;
+        }
     }
 
 
