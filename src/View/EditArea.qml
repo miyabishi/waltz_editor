@@ -54,6 +54,12 @@ Rectangle{
             return;
         }
 
+        if (event.key === Qt.Key_C && (event.modifiers & Qt.ControlModifier))
+        {
+            selected_note_list_model_container.copyToClipboard();
+            return;
+        }
+
         if (event.key === Qt.Key_V && (event.modifiers & Qt.ControlModifier))
         {
             command_container.paste(seek_bar.x);

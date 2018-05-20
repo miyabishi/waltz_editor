@@ -185,7 +185,7 @@ Rectangle{
         onClicked: {
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {
-                note_list_model_container.removeNote(pNoteId_);
+                selected_note_list_model_container.removeSelectedNotes();
                 return;
             }
             if (mouse.button === Qt.RightButton)

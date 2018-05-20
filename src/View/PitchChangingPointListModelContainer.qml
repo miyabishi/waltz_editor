@@ -128,6 +128,7 @@ Item {
     function removePitchChangingPoint(aPitchChangingPointId)
     {
         pitchChangingPointListModel.remove(findIndexByPitchChangingPointId(aPitchChangingPointId));
+        MainWindowModel.writeHistory(main_window.createSaveData());
     }
 
     function updatePitchChangingPoint(aPitchChangingPointId, aPitchChangingPointX, aPitchChangingPointY)

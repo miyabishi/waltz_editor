@@ -327,6 +327,7 @@ Item {
 
        root.noteIdCounter++;
        var idOffset = root.noteIdCounter;
+       selected_note_list_model_container.clear();
 
        for(var index = 0; index < ary.length; ++index)
        {
@@ -338,12 +339,14 @@ Item {
                                     "positionY": note.positionY,
                                     "noteWidth": note.noteWidth
                                 });
+           selected_note_list_model_container.append(idOffset + note.noteId);
            if(root.noteIdCounter <= idOffset + note.noteId)
            {
                root.noteIdCounter = idOffset + note.noteId;
            }
        }
        root.noteIdCounter++;
+       MainWindowModel.writeHistory(main_window.createSaveData());
        modelUpdatedAll();
        return idOffset;
    }

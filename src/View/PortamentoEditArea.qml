@@ -385,6 +385,9 @@ Rectangle {
             DropArea{
                 id: portamento_edit_drop_area
                 anchors.fill: parent
+                onDropped: {
+                    MainWindowModel.writeHistory(main_window.createSaveData());
+                }
             }
         }
     }

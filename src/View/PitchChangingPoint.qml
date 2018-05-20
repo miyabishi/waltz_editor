@@ -89,6 +89,7 @@ Item{
             if((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
             {
                 pitch_changing_point_list_model_containter.removePitchChangingPoint(pitchChangingPointId);
+                return;
             }
         }
     }
