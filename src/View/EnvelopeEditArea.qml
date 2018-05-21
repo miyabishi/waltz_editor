@@ -7,13 +7,7 @@ Rectangle {
     property int max: 20
     property int min: height - 35
     property int xOffset:0
-//    signal toUpdateNoteVolume()
 
-    /*
-    onMinChanged: {
-        toUpdateNoteVolume();
-    }
-*/
     onXOffsetChanged: {
         if (envelope_edit_area_scroll_view.flickableItem.contentX === xOffset)
         {

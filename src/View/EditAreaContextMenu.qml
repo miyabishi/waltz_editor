@@ -1,16 +1,24 @@
 import QtQuick 2.0
-import QtGraphicalEffects 1.0
+import QtQuick.Window 2.2
 
-Item{
+Window{
     id: root
     visible: false
-    width: 400
-    height: 200
+    width: edit_area_actual_context_menu.width
+    height: edit_area_actual_context_menu.height
+    flags: Qt.ToolTip
+
+    Item{
+        id: context_menu_delegate
+    }
 
     function openMenu(aX, aY)
     {
-        root.x = aX
-        root.y = aY
+        var mousePos = MainWindowModel.cursorPosition();
+        context_menu_delegate.x = aX;
+        context_menu_delegate.y = aY;
+        root.x = mousePos.x;
+        root.y = mousePos.y;
         visible = true;
     }
 
@@ -72,7 +80,7 @@ Item{
     Connections{
         target:context_menu_paste
         onMenuClicked:{
-            command_container.paste(edit_area.calculateDropX(root));
+            command_container.paste(edit_area.calculateDropX(context_menu_delegate));
             closeMenu();
         }
     }

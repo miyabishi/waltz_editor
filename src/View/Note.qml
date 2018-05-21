@@ -195,7 +195,7 @@ Rectangle{
             }
             if (mouse.button === Qt.RightButton)
             {
-                note_context_menu.openMenu(root.x + mouse.x, root.y + mouse.y);
+                note_context_menu.openMenu();
                 edit_area_context_menu.closeMenu();
                 return;
             }

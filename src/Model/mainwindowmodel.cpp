@@ -328,6 +328,11 @@ QVariantMap MainWindowModel::loadFromClipboard() const
     return mEditorClipboard_->load();
 }
 
+QPoint MainWindowModel::cursorPosition() const
+{
+    return QCursor::pos();
+}
+
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)

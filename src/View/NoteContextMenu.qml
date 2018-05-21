@@ -1,16 +1,18 @@
 import QtQuick 2.0
-import QtGraphicalEffects 1.0
+import QtQuick.Window 2.2
 
-Item{
+Window{
     id: root
     visible: false
-    width: 400
-    height: 200
+    width: note_actual_context_menu.width
+    height: note_actual_context_menu.height
+    flags: Qt.ToolTip
 
-    function openMenu(aX, aY)
+    function openMenu()
     {
-        root.x = aX
-        root.y = aY
+        var cursorPosition = MainWindowModel.cursorPosition();
+        root.x = cursorPosition.x;
+        root.y = cursorPosition.y;
         visible = true;
     }
 

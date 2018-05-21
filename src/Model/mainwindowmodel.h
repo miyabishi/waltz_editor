@@ -5,6 +5,7 @@
 #include <QUrl>
 #include <QImage>
 #include <QString>
+#include <QPoint>
 
 #include "editorclipboard.h"
 #include "src/Domain/ScoreComponent/score.h"
@@ -94,6 +95,9 @@ namespace waltz
                 // for Clipboard
                 Q_INVOKABLE void saveToClipboard(const QVariantMap& aData);
                 Q_INVOKABLE QVariantMap loadFromClipboard() const;
+
+                // for context menu
+                Q_INVOKABLE QPoint cursorPosition() const;
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);
