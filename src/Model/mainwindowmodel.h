@@ -92,6 +92,7 @@ namespace waltz
                 Q_INVOKABLE bool hasPreviousHistoryData();
                 Q_INVOKABLE bool hasNextHistoryData();
 
+
                 // for Clipboard
                 Q_INVOKABLE void saveToClipboard(const QVariantMap& aData);
                 Q_INVOKABLE QVariantMap loadFromClipboard() const;

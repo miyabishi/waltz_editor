@@ -16,9 +16,45 @@ ApplicationWindow {
     property string editingFileName: ""
     property string voiceLibraryPath: ""
     property bool isEdited: false;
+    property bool isClosing: false;
 
     onEditingFileNameChanged: {
         main_window.title = createTitleText();
+    }
+
+    onClosing: {
+        isClosing = true;
+        close.accepted = true;
+        if (! main_window.isEdited) return;
+
+        close.accepted = false;
+        save_confirmation_dialg.openSaveConfirmationDialog();
+
+        return;
+    }
+
+    Connections{
+        target: save_confirmation_dialg
+        onAccepted:{
+            command_container.save();
+        }
+        onDiscard: {
+            console.log("try close");
+            Qt.quit();
+        }
+        onRejected:{
+            isClosing = false;
+        }
+    }
+    Connections{
+        target: saveDialog
+        onAccepted:{
+            if (! isClosing) return;
+            Qt.quit()
+        }
+        onRejected:{
+            isClosing = false;
+        }
     }
 
     onIsEditedChanged: {
@@ -319,6 +355,10 @@ ApplicationWindow {
         }
     }
 
+    SaveConfermationDialog{
+        id: save_confirmation_dialg
+    }
+
     PouringLyricsDialog{
         id: pouring_lyrics_dialog
     }
@@ -330,6 +370,7 @@ ApplicationWindow {
             errorDialog.open()
         }
         onHistoryDataUpdated:{
+            if (! MainWindowModel.hasPreviousHistoryData()) return;
             main_window.isEdited = true;
         }
     }

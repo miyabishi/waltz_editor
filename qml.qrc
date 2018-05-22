@@ -62,5 +62,6 @@
         <file>src/View/WaltzContextMenuItem.qml</file>
         <file>src/View/NoteContextMenu.qml</file>
         <file>src/View/PouringLyricsDialog.qml</file>
+        <file>src/View/SaveConfermationDialog.qml</file>
     </qresource>
 </RCC>
