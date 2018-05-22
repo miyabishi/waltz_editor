@@ -50,7 +50,8 @@ SOURCES += main.cpp \
     src/Domain/History/historydatarepository.cpp \
     src/Domain/LibraryComponent/libraryfilepath.cpp \
     src/Domain/VocalEngine/engine.cpp \
-    src/Model/editorclipboard.cpp
+    src/Model/editorclipboard.cpp \
+    src/Domain/VocalEngine/vocalengineconfig.cpp
 
 RESOURCES += qml.qrc
 
@@ -125,7 +126,8 @@ HEADERS += \
     src/Domain/History/historydatarepository.h \
     src/Domain/LibraryComponent/libraryfilepath.h \
     src/Domain/VocalEngine/engine.h \
-    src/Model/editorclipboard.h
+    src/Model/editorclipboard.h \
+    src/Domain/VocalEngine/vocalengineconfig.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
