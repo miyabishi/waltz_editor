@@ -81,7 +81,7 @@ MenuBar {
         MenuItem{
             text:"Portamento Edit View"
             checkable: true;
-            checked: true;
+            checked: portamento_edit_area.visible;
             onToggled: {
                 portamento_edit_area.visible = checked;
             }
@@ -89,7 +89,7 @@ MenuBar {
         MenuItem{
             text:"Parameter Edit View"
             checkable: true;
-            checked: true;
+            checked: parameters_edit_area.visible;
             onToggled: {
                 parameters_edit_area.visible = checked;
             }

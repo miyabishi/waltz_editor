@@ -220,6 +220,7 @@ ApplicationWindow {
                 PortamentoEditArea{
                     id: portamento_edit_area
                     xOffset: edit_area.xOffset
+                    visible:false
                     height:300
 
                     function changeFillHeight(aIsFillHeight)
@@ -246,6 +247,7 @@ ApplicationWindow {
                 ParametersEditArea{
                     id: parameters_edit_area
                     height: 200
+                    visible:false
                     anchors.left: parent.left
                     anchors.right: parent.right
 
