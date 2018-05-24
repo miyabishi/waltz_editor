@@ -5,6 +5,7 @@
 #include "description.h"
 #include "libraryname.h"
 #include "libraryfilepath.h"
+#include "correspondencesyllablelist.h"
 
 #include <QVariant>
 #include <QSharedPointer>
@@ -18,10 +19,11 @@ namespace waltz
             class LibraryInformation
             {
             public:
-                LibraryInformation(const CharacterImagePointer  aCharactorImage,
-                                   const DescriptionPointer     aDescription,
-                                   const LibraryNamePointer     aLibraryName,
-                                   const LibraryFilePathPointer aLibraryFilePath);
+                LibraryInformation(const CharacterImagePointer      aCharactorImage,
+                                   const DescriptionPointer         aDescription,
+                                   const LibraryNamePointer         aLibraryName,
+                                   const LibraryFilePathPointer     aLibraryFilePath,
+                                   const CorrespondenceSyllableListPointer aCorrespondenceSyllableList);
 
             public:
                 CharacterImagePointer characterImage() const;
@@ -30,10 +32,11 @@ namespace waltz
                 QVariantMap insertLibraryFilePathVariant(const QVariantMap& aVariantMap) const;
 
             private:
-                CharacterImagePointer  mCharacterImage_;
-                DescriptionPointer     mDescription_;
-                LibraryNamePointer     mLibraryName_;
-                LibraryFilePathPointer mLibraryFilePath_;
+                CharacterImagePointer             mCharacterImage_;
+                DescriptionPointer                mDescription_;
+                LibraryNamePointer                mLibraryName_;
+                LibraryFilePathPointer            mLibraryFilePath_;
+                CorrespondenceSyllableListPointer mCorrespondenceSyllableList_;
 
             private:
                 LibraryInformation(const LibraryInformation& aOther);

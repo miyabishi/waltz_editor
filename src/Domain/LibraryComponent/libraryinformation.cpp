@@ -5,11 +5,13 @@ using namespace waltz::editor::LibraryComponent;
 LibraryInformation::LibraryInformation(const CharacterImagePointer aCharacterImage,
                                        const DescriptionPointer aDescription,
                                        const LibraryNamePointer aLibraryName,
-                                       const LibraryFilePathPointer aLibraryFilePath)
+                                       const LibraryFilePathPointer aLibraryFilePath,
+                                       const CorrespondenceSyllableListPointer aCorrespondeceSyllableList)
     : mCharacterImage_(aCharacterImage)
     , mDescription_(aDescription)
     , mLibraryName_(aLibraryName)
     , mLibraryFilePath_(aLibraryFilePath)
+    , mCorrespondenceSyllableList_(aCorrespondeceSyllableList)
 {
 }
 
