@@ -6,12 +6,12 @@ LibraryInformation::LibraryInformation(const CharacterImagePointer aCharacterIma
                                        const DescriptionPointer aDescription,
                                        const LibraryNamePointer aLibraryName,
                                        const LibraryFilePathPointer aLibraryFilePath,
-                                       const CorrespondenceSyllableListPointer aCorrespondeceSyllableList)
+                                       const CorrespondenceAliasListPointer aCorrespondeceAliasList)
     : mCharacterImage_(aCharacterImage)
     , mDescription_(aDescription)
     , mLibraryName_(aLibraryName)
     , mLibraryFilePath_(aLibraryFilePath)
-    , mCorrespondenceSyllableList_(aCorrespondeceSyllableList)
+    , mCorrespondenceAliasList_(aCorrespondeceAliasList)
 {
 }
 

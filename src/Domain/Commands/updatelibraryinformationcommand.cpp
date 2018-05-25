@@ -7,7 +7,7 @@
 #include <waltz_common/parameter.h>
 #include <waltz_common/command.h>
 #include "src/Domain/LibraryComponent/libraryinformation.h"
-#include "src/Domain/LibraryComponent/correspondencesyllablelist.h"
+#include "src/Domain/LibraryComponent/correspondencealiaslist.h"
 
 using namespace waltz::common::Commands;
 using namespace waltz::editor::Commands;
@@ -21,7 +21,7 @@ namespace
     const QString PARAMETER_NAME_DESCRIPTION("Description");
     const QString PARAMETER_NAME_LIBRARY_NAME("LibraryName");
     const QString PARAMETER_NAME_LIBRARY_FILE_PATH("LibraryFilePath");
-    const QString PARAMETER_NAME_CORRESPONDENCE_SYLLABLE_LIST("CorrespondenceSyllableList");
+    const QString PARAMETER_NAME_CORRESPONDENCE_ALIAS_LIST("CorrespondenceAliasList");
 }
 
 
@@ -41,8 +41,8 @@ void UpdateLibraryInformationCommand::exec(const Parameters& aParameters)
                 new LibraryName(aParameters.find(PARAMETER_NAME_LIBRARY_NAME).value().toString()));
     LibraryFilePathPointer libraryFilePath(
                 new LibraryFilePath(aParameters.find(PARAMETER_NAME_LIBRARY_FILE_PATH).value().toString()));
-    CorrespondenceSyllableListPointer correspondenceSyllableList(
-                new CorrespondenceSyllableList(aParameters.find(PARAMETER_NAME_CORRESPONDENCE_SYLLABLE_LIST)));
+    CorrespondenceAliasListPointer correspondenceAliasList(
+                new CorrespondenceAliasList(aParameters.find(PARAMETER_NAME_CORRESPONDENCE_ALIAS_LIST)));
 
     MainWindowModel::getInstance().setLibraryInformation(
                 LibraryInformationPointer(
@@ -50,5 +50,5 @@ void UpdateLibraryInformationCommand::exec(const Parameters& aParameters)
                                            description,
                                            libraryName,
                                            libraryFilePath,
-                                           correspondenceSyllableList)));
+                                           correspondenceAliasList)));
 }

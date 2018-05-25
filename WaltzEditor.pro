@@ -52,8 +52,8 @@ SOURCES += main.cpp \
     src/Domain/VocalEngine/engine.cpp \
     src/Model/editorclipboard.cpp \
     src/Domain/VocalEngine/vocalengineconfig.cpp \
-    src/Domain/LibraryComponent/correspondencesyllablelist.cpp \
-    src/Domain/LibraryComponent/correspondencesyllable.cpp
+    src/Domain/LibraryComponent/correspondencealias.cpp \
+    src/Domain/LibraryComponent/correspondencealiaslist.cpp
 
 RESOURCES += qml.qrc
 
@@ -130,8 +130,8 @@ HEADERS += \
     src/Domain/VocalEngine/engine.h \
     src/Model/editorclipboard.h \
     src/Domain/VocalEngine/vocalengineconfig.h \
-    src/Domain/LibraryComponent/correspondencesyllablelist.h \
-    src/Domain/LibraryComponent/correspondencesyllable.h
+    src/Domain/LibraryComponent/correspondencealias.h \
+    src/Domain/LibraryComponent/correspondencealiaslist.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
