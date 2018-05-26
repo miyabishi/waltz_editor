@@ -30,6 +30,7 @@ namespace waltz
                 DescriptionPointer description() const;
                 LibraryNamePointer libraryName() const;
                 QVariantMap insertLibraryFilePathVariant(const QVariantMap& aVariantMap) const;
+                QStringList correspondenceAliasStringList() const;
 
             private:
                 CharacterImagePointer             mCharacterImage_;

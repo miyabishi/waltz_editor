@@ -19,6 +19,9 @@ namespace waltz
             public:
                 explicit CorrespondenceAliasList(const waltz::common::Commands::Parameter& aParameter);
 
+            public:
+                QStringList toStringList() const;
+
             private:
                 QList<CorrespondenceAliasPointer> mCorrespondenceAliasList_;
 

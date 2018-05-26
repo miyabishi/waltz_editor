@@ -17,3 +17,12 @@ CorrespondenceAliasList::CorrespondenceAliasList(const waltz::common::Commands::
     }
 }
 
+QStringList CorrespondenceAliasList::toStringList() const
+{
+    QStringList stringList;
+    foreach(const CorrespondenceAliasPointer alias, mCorrespondenceAliasList_)
+    {
+        stringList.append(alias->value());
+    }
+    return stringList;
+}

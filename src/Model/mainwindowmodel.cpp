@@ -333,6 +333,12 @@ QPoint MainWindowModel::cursorPosition() const
     return QCursor::pos();
 }
 
+QStringList MainWindowModel::correspondenceAliasLst() const
+{
+    return mLibraryInformation_->correspondenceAliasStringList();
+}
+
+
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)

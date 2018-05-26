@@ -16,6 +16,7 @@ namespace waltz
             {
             public:
                 explicit CorrespondenceAlias(const waltz::common::Commands::Parameters& aParameters);
+                QString value() const;
 
             private:
                 QString mValue_;

@@ -100,6 +100,8 @@ namespace waltz
                 // for context menu
                 Q_INVOKABLE QPoint cursorPosition() const;
 
+                Q_INVOKABLE QStringList correspondenceAliasLst() const;
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();

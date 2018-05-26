@@ -36,3 +36,8 @@ QVariantMap LibraryInformation::insertLibraryFilePathVariant(const QVariantMap& 
     map.insert(LibraryFilePath::variantMapKey(), mLibraryFilePath_->toVariant());
     return map;
 }
+
+QStringList LibraryInformation::correspondenceAliasStringList() const
+{
+    return mCorrespondenceAliasList_->toStringList();
+}
