@@ -100,7 +100,7 @@ namespace waltz
                 // for context menu
                 Q_INVOKABLE QPoint cursorPosition() const;
 
-                Q_INVOKABLE QStringList correspondenceAliasLst() const;
+                Q_INVOKABLE QStringList splitLyrics(const QString& aLyrics) const;
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);

@@ -440,4 +440,26 @@ Item {
            selected_note_list_model_container.append(note.noteId);
         }
    }
+
+   function pouringLyrics(aLyrics)
+   {
+       var splittedLyrics = MainWindowModel.splitLyrics(aLyrics);
+       var currentNote = selected_note_list_model_container.topOfSelectedNote();
+       var currentNoteId = currentNote.noteId;
+
+       for (var index = 0; index < splittedLyrics.length; ++index)
+       {
+           if (! currentNote) break;
+           updateNote({
+                          "noteId": currentNote.noteId,
+                          "noteText": splittedLyrics[index],
+                          "positionX": currentNote.positionX,
+                          "positionY": currentNote.positionY,
+                          "noteWidth": currentNote.noteWidth});
+
+           currentNote = findByIndex(findNextNoteIndex(currentNote.noteId, currentNote.positionX));
+           if (currentNoteId === currentNote.noteId) break;
+           currentNoteId = currentNote.noteId;
+       }
+   }
 }

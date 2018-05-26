@@ -333,9 +333,48 @@ QPoint MainWindowModel::cursorPosition() const
     return QCursor::pos();
 }
 
-QStringList MainWindowModel::correspondenceAliasLst() const
+QStringList MainWindowModel::splitLyrics(const QString& aLyrics) const
 {
-    return mLibraryInformation_->correspondenceAliasStringList();
+    QString lyrics(aLyrics.simplified());
+    QStringList splitLyrics;
+
+    if (mLibraryInformation_.isNull())
+    {
+        return QStringList();
+    }
+
+    while(lyrics.size() > 0)
+    {
+        bool hitFlag = false;
+        QString hitAlias;
+
+        for(int searchLyricsLengthIndex = lyrics.length();
+            searchLyricsLengthIndex > 0;
+            --searchLyricsLengthIndex)
+        {
+            foreach (const QString& alias, mLibraryInformation_->correspondenceAliasStringList())
+            {
+                QString leftSideOfLyrics = lyrics.left(searchLyricsLengthIndex);
+                if (alias != leftSideOfLyrics) continue;
+
+                hitFlag = true;
+                splitLyrics.append(alias);
+                hitAlias = alias;
+                break;
+            }
+            if (hitFlag) break;
+        }
+        if (hitFlag == false)
+        {
+            lyrics = lyrics.mid(1, lyrics.size());
+        }
+        else
+        {
+            lyrics = lyrics.mid(hitAlias.size(), lyrics.size());
+        }
+    }
+
+    return splitLyrics;
 }
 
 

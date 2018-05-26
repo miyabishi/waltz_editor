@@ -10,12 +10,14 @@ Dialog{
     title: "Pouring Lyrics"
 
     TextEdit{
+        id: pouring_lyrics
         color: "#000000"
         width: parent.width
         height: parent.height - 100
     }
 
     onAccepted: {
+        note_list_model_container.pouringLyrics(pouring_lyrics.text);
         close();
     }
 }
