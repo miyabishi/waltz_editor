@@ -8,9 +8,15 @@ Window{
     height: edit_area_actual_context_menu.height
     flags: Qt.ToolTip
 
-    function openMenu()
+    Item{
+        id:context_menu_delegate
+    }
+
+    function openMenu(aX, aY)
     {
         var mousePos = MainWindowModel.cursorPosition();
+        context_menu_delegate.x = aX;
+        context_menu_delegate.y = aY
         root.x = mousePos.x;
         root.y = mousePos.y;
         visible = true;
@@ -34,20 +40,6 @@ Window{
             y: edit_area_actual_context_menu.border.width
 
             WaltzContextMenuItem{
-                id: context_menu_paste
-                text: "Paste"
-                width: 300
-                height: 30
-            }
-
-            WaltzContextMenuItem{
-                id: context_menu_select_all
-                text: "Select All"
-                width: 300
-                height: 30
-            }
-
-            WaltzContextMenuItem{
                 id: context_menu_undo
                 text: "Undo"
                 width: 300
@@ -60,6 +52,34 @@ Window{
                 width: 300
                 height: 30
             }
+
+            Rectangle{
+                color: "#dddddd"
+                width: 300
+                height: 2
+            }
+
+            WaltzContextMenuItem{
+                id: context_menu_paste
+                text: "Paste"
+                width: 300
+                height: 30
+            }
+
+            Rectangle{
+                color: "#dddddd"
+                width: 300
+                height: 2
+            }
+
+            WaltzContextMenuItem{
+                id: context_menu_select_all
+                text: "Select All"
+                width: 300
+                height: 30
+            }
+
+
         }
     }
 

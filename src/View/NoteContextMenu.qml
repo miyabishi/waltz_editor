@@ -54,11 +54,23 @@ Window{
                 height:30
             }
 
+            Rectangle{
+                color: "#dddddd"
+                width: 300
+                height: 2
+            }
+
             WaltzContextMenuItem{
                 id: context_menu_pouring_lyrics
                 text: "Pouring lyrics..."
                 width: 300
                 height:30
+            }
+
+            Rectangle{
+                color: "#dddddd"
+                width: 300
+                height: 2
             }
 
             WaltzContextMenuItem{

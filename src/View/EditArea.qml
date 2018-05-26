@@ -284,8 +284,7 @@ Rectangle{
 
                     if(mouse.button === Qt.RightButton)
                     {
-
-                        edit_area_context_menu.openMenu();
+                        edit_area_context_menu.openMenu(mouse.x, mouse.y);
                         return;
                     }
                 }
