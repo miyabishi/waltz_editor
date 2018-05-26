@@ -13,6 +13,34 @@ Item {
         }
     }
 
+    function refresh()
+    {
+        var tempModel = new Array;
+        for(var index = 0; index < vibratoListModel.count; ++index)
+        {
+            var vibrato = vibratoListModel.get(index);
+            tempModel[index] = {
+                "vibratoId": vibrato.vibratoId,
+                "noteId": vibrato.noteId,
+                "length": vibrato.length,
+                "wavelength": vibrato.wavelength,
+                "amplitude": vibrato.amplitude};
+        }
+
+        vibratoListModel.clear();
+        for(var aryIndex = 0; aryIndex < tempModel.length; ++aryIndex)
+        {
+            var vibratoAry = tempModel[aryIndex];
+            vibratoListModel.append({
+                "vibratoId": vibratoAry.vibratoId,
+                "noteId": vibratoAry.noteId,
+                "length": vibratoAry.length,
+                "wavelength": vibratoAry.wavelength,
+                "amplitude": vibratoAry.amplitude
+            });
+        }
+    }
+
     function reflect()
     {
         for(var index = 0; index < vibratoListModel.count; ++index)

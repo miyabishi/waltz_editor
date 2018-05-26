@@ -16,6 +16,21 @@ Rectangle {
         vibrato_edit_area_scroll_view.flickableItem.contentX = xOffset
     }
 
+    onHeightChanged: {
+        update_display_delay.start();
+    }
+
+
+    Timer {
+        id: update_display_delay
+        interval: 200
+        repeat: false
+
+        onTriggered: {
+            vibrato_list_model_container.refresh();
+        }
+    }
+
     function calculateY(aValue)
     {
         return root.rangeWidth() / 2 - root.rangeWidth() * (aValue / 4.0) + root.max;
@@ -379,11 +394,13 @@ Rectangle {
                         height: 10
                     }
                     onLoaded: {
+                        console.log("amplitude loaded!");
                         var note = note_list_model_container.find(noteId);
                         item.noteId = noteId
                         item.vibratoId = vibratoId
                         item.x = vibrato_list_model_container.calculateVibratoAmplitudeControlPointX(vibratoId, noteId);
                         item.y = root.calculateY(amplitude) - item.height / 2;
+                        console.log("y :", item.y);
                     }
                 }
             }
