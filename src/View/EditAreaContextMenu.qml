@@ -8,15 +8,9 @@ Window{
     height: edit_area_actual_context_menu.height
     flags: Qt.ToolTip
 
-    Item{
-        id: context_menu_delegate
-    }
-
-    function openMenu(aX, aY)
+    function openMenu()
     {
         var mousePos = MainWindowModel.cursorPosition();
-        context_menu_delegate.x = aX;
-        context_menu_delegate.y = aY;
         root.x = mousePos.x;
         root.y = mousePos.y;
         visible = true;
