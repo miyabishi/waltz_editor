@@ -1,5 +1,5 @@
 # Waltz Editor
-Waltz editor is graphic user interface for singing synthesizer.
+Waltz Editor is graphic user interface for singing synthesizer.
 This program connects to an external vocal engine with WebSocket, and it can be used as a general-purpose editor.
 
 

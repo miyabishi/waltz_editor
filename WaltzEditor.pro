@@ -1,4 +1,4 @@
-QT += qml quick websockets widgets
+QT += qml quick websockets widgets xml
 
 CONFIG += c++11
 
@@ -51,9 +51,9 @@ SOURCES += main.cpp \
     src/Domain/LibraryComponent/libraryfilepath.cpp \
     src/Domain/VocalEngine/engine.cpp \
     src/Model/editorclipboard.cpp \
-    src/Domain/VocalEngine/vocalengineconfig.cpp \
     src/Domain/LibraryComponent/correspondencealias.cpp \
-    src/Domain/LibraryComponent/correspondencealiaslist.cpp
+    src/Domain/LibraryComponent/correspondencealiaslist.cpp \
+    src/Settings/editorsettings.cpp
 
 RESOURCES += qml.qrc
 
@@ -129,9 +129,9 @@ HEADERS += \
     src/Domain/LibraryComponent/libraryfilepath.h \
     src/Domain/VocalEngine/engine.h \
     src/Model/editorclipboard.h \
-    src/Domain/VocalEngine/vocalengineconfig.h \
     src/Domain/LibraryComponent/correspondencealias.h \
-    src/Domain/LibraryComponent/correspondencealiaslist.h
+    src/Domain/LibraryComponent/correspondencealiaslist.h \
+    src/Settings/editorsettings.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

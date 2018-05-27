@@ -22,6 +22,7 @@
 
 #include "src/Domain/History/historydatarepository.h"
 #include "src/Domain/ExternalFile/waltzsongfile.h"
+#include "src/Settings/editorsettings.h"
 
 
 using namespace waltz::common::Communicator;
@@ -30,6 +31,7 @@ using namespace waltz::common::Commands;
 using namespace waltz::editor::model;
 using namespace waltz::editor::ScoreComponent;
 using namespace waltz::editor::Communicator;
+using namespace waltz::editor::Settings;
 
 namespace
 {
@@ -383,7 +385,8 @@ MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
     , mScore_(ScorePointer(new Score()))
     , mEditAreaInformation_(new EditAreaInformation(1, 1, 5, 100))
-    , mClient_(new Client(QUrl(QStringLiteral("ws://localhost:8080")), this))
+    , mClient_(new Client(QUrl(QString("ws://localhost:")
+                                   + EditorSettings::getInstance().clientPort()), this))
     , mLibraryInformation_()
     , mEditorClipboard_(new EditorClipboard())
 {
