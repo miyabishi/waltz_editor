@@ -220,12 +220,10 @@ Rectangle {
             Canvas{
                 parent: vibrato_edit_area_scroll_view
                 id: vibrato_edit_area_canvas
-                width: edit_area.width
-                height: root.height
                 contextType: "2d"
+                anchors.fill: parent
 
-                canvasSize: Qt.size(width,height)
-
+                canvasSize: Qt.size(vibrato_edit_area_scroll_view.flickableItem.contentWidth,root.height)
                 canvasWindow: Qt.rect(vibrato_edit_area_scroll_view.flickableItem.contentX,
                                       vibrato_edit_area_scroll_view.flickableItem.contentY,
                                       vibrato_edit_area_scroll_view.width,
@@ -235,8 +233,6 @@ Rectangle {
                                   vibrato_edit_area_scroll_view.height)
 
                 onCanvasWindowChanged: requestPaint()
-
-
 
                 onPaint: {
                     var ctx = vibrato_edit_area_canvas.getContext('2d');
