@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 1.4
 
 Dialog{
     id:root
@@ -9,12 +10,18 @@ Dialog{
     height: 200
     title: "Pouring Lyrics"
 
-    TextEdit{
-        id: pouring_lyrics
-        color: "#000000"
+    Rectangle{
         width: parent.width
-        height: parent.height - 100
+        height: parent.height
+        color: "white"
+        TextArea{
+            id: pouring_lyrics
+            wrapMode: TextEdit.Wrap
+            anchors.fill: parent
+        }
     }
+
+
 
     onAccepted: {
         note_list_model_container.pouringLyrics(pouring_lyrics.text);
