@@ -1,6 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include <QProcess>
 
 namespace waltz
 {
@@ -12,8 +13,12 @@ namespace waltz
             {
             public:
                 Engine();
+                ~Engine();
             public:
                 bool start() const;
+
+            private:
+                QProcess& mProcess_;
             };
         }
     } // namespace editor

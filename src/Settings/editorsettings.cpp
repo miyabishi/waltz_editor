@@ -1,6 +1,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QDomDocument>
+#include <QFileInfo>
 #include "editorsettings.h"
 
 using namespace waltz::editor::Settings;
@@ -89,5 +90,6 @@ QString EditorSettings::clientPort() const
 
 QString EditorSettings::enginePath() const
 {
-    return QDir::cleanPath(mEnginePath_);
+    QFileInfo info(QDir::cleanPath(mEnginePath_));
+    return info.absoluteFilePath();
 }
