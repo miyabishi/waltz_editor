@@ -1,6 +1,7 @@
 #include <QString>
 #include <QUrl>
 #include <QMessageBox>
+#include <QApplication>
 #include <waltz_common/commandid.h>
 #include <waltz_common/parameter.h>
 #include <waltz_common/parameters.h>
@@ -41,6 +42,7 @@ namespace
     const CommandId COMMAND_ID_STOP("Stop");
     const CommandId COMMAND_ID_PAUSE("Pause");
     const CommandId COMMAND_ID_SAVE_WAV("SaveWav");
+    const CommandId COMMAND_ID_EXIT("Exit");
 }
 
 MainWindowModel* MainWindowModel::mInstance_ = 0;
@@ -379,7 +381,11 @@ QStringList MainWindowModel::splitLyrics(const QString& aLyrics) const
     return splitLyrics;
 }
 
-
+void MainWindowModel::exit() const
+{
+    mClient_->sendMessage(COMMAND_ID_EXIT);
+    QTimer::singleShot(100, qApp, SLOT(quit()));
+}
 
 MainWindowModel::MainWindowModel(QObject *aParent)
     : QObject(aParent)
@@ -389,6 +395,7 @@ MainWindowModel::MainWindowModel(QObject *aParent)
                                    + EditorSettings::getInstance().clientPort()), this))
     , mLibraryInformation_()
     , mEditorClipboard_(new EditorClipboard())
+    , mExitTimer_(new QTimer(this))
 {
 }
 

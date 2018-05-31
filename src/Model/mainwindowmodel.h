@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QString>
 #include <QPoint>
+#include <QTimer>
 
 #include "editorclipboard.h"
 #include "src/Domain/ScoreComponent/score.h"
@@ -102,6 +103,8 @@ namespace waltz
 
                 Q_INVOKABLE QStringList splitLyrics(const QString& aLyrics) const;
 
+                Q_INVOKABLE void exit() const;
+
             signals:
                 void errorOccurred(const QString& aErrorMessage);
                 void activePlayButton();
@@ -112,6 +115,7 @@ namespace waltz
                 void resetSeekBar();
                 void pauseSeekBar();
 
+
             private:
                 static MainWindowModel*              mInstance_;
                 ScoreComponent::ScorePointer         mScore_;
@@ -119,6 +123,7 @@ namespace waltz
                 Communicator::Client*                mClient_;
                 LibraryComponent::LibraryInformationPointer mLibraryInformation_;
                 EditorClipboardPointer               mEditorClipboard_;
+                QTimer*                              mExitTimer_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

@@ -24,10 +24,14 @@ ApplicationWindow {
 
     onClosing: {
         isClosing = true;
-        close.accepted = true;
-        if (! main_window.isEdited) return;
-
         close.accepted = false;
+
+        if (! main_window.isEdited)
+        {
+            MainWindowModel.exit();
+            return;
+        }
+
         save_confirmation_dialg.openSaveConfirmationDialog();
 
         return;
@@ -39,8 +43,7 @@ ApplicationWindow {
             command_container.save();
         }
         onDiscard: {
-            console.log("try close");
-            Qt.quit();
+            MainWindowModel.exit();
         }
         onRejected:{
             isClosing = false;
@@ -50,7 +53,7 @@ ApplicationWindow {
         target: saveDialog
         onAccepted:{
             if (! isClosing) return;
-            Qt.quit()
+            MainWindowModel.exit();
         }
         onRejected:{
             isClosing = false;
