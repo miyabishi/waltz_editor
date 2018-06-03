@@ -390,13 +390,11 @@ Rectangle {
                         height: 10
                     }
                     onLoaded: {
-                        console.log("amplitude loaded!");
                         var note = note_list_model_container.find(noteId);
                         item.noteId = noteId
                         item.vibratoId = vibratoId
                         item.x = vibrato_list_model_container.calculateVibratoAmplitudeControlPointX(vibratoId, noteId);
                         item.y = root.calculateY(amplitude) - item.height / 2;
-                        console.log("y :", item.y);
                     }
                 }
             }

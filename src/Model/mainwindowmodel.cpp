@@ -59,6 +59,11 @@ MainWindowModel& MainWindowModel::getInstance()
     return *mInstance_;
 }
 
+QString MainWindowModel::libraryPath() const
+{
+    return mLibraryInformation_->libraryPath();
+}
+
 void MainWindowModel::setLibraryInformation(
         const waltz::editor::LibraryComponent::LibraryInformationPointer aLibraryInformation)
 {
@@ -275,7 +280,6 @@ QVariantMap MainWindowModel::load(const QUrl &aUrl)
 {
     ExternalFile::WaltzSongFile waltzSongFile(aUrl.toLocalFile());
     QVariantMap data = waltzSongFile.load();
-
     loadVoiceLibrary(QUrl::fromLocalFile(waltz::editor::LibraryComponent::LibraryFilePath::fromVariantMap(data)->toString()));
 
     return data;
@@ -393,6 +397,11 @@ void MainWindowModel::loadDefaultLibrary() const
 {
     qDebug() << "load default library!!";
     mClient_->sendMessage(Message(COMMAND_ID_LOAD_DEFAULT_VOICE_LIBRARY));
+}
+
+void MainWindowModel::notifyIsReady()
+{
+    emit isReady();
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

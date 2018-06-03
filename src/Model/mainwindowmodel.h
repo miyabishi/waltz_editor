@@ -104,7 +104,12 @@ namespace waltz
                 Q_INVOKABLE QStringList splitLyrics(const QString& aLyrics) const;
 
                 Q_INVOKABLE void exit() const;
+
+                Q_INVOKABLE QString libraryPath() const;
+
+            public:
                 void loadDefaultLibrary() const;
+                void notifyIsReady();
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);
@@ -115,6 +120,7 @@ namespace waltz
                 void startSeekBar();
                 void resetSeekBar();
                 void pauseSeekBar();
+                void isReady();
 
 
             private:

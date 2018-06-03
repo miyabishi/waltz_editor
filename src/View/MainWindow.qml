@@ -2,7 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Dialogs 1.2
-
+import QtQuick.Window 2.2
 
 ApplicationWindow {
     id:main_window
@@ -76,7 +76,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        MainWindowModel.writeHistory(main_window.createSaveData());
+        loading_window.visible = true
     }
 
     function loadData(aData)
@@ -90,7 +90,6 @@ ApplicationWindow {
         MainWindowModel.setTempo(aData.tempo);
         MainWindowModel.setBeatChild(aData.beat_child);
         MainWindowModel.setBeatParent(aData.beat_parent);
-        MainWindowModel.loadVoiceLibrary(aData.voice_library_path);
         songLoaded();
     }
 
@@ -106,7 +105,6 @@ ApplicationWindow {
             "tempo": MainWindowModel.tempo(),
             "beat_parent": MainWindowModel.beatParent(),
             "beat_child": MainWindowModel.beatChild(),
-            "voice_library_path": vocalOpenDialog.fileUrl,
         };
         return aData;
     }
@@ -377,6 +375,18 @@ ApplicationWindow {
         onHistoryDataUpdated:{
             if (! MainWindowModel.hasPreviousHistoryData()) return;
             main_window.isEdited = true;
+        }
+        onIsReady:{
+            loading_window.close()
+        }
+    }
+
+    Window{
+        id: loading_window
+        flags: Qt.SplashScreen
+        modality: Qt.WindowModal
+        Text{
+            text:"loading..."
         }
     }
 }

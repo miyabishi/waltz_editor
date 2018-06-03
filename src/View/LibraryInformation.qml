@@ -44,6 +44,8 @@ Rectangle{
             root.library_description = MainWindowModel.libraryDescription()
             root.character_image = MainWindowModel.characterImageUrl()
             root.library_name = MainWindowModel.libraryName()
+            main_window.voiceLibraryPath = MainWindowModel.libraryPath()
+            MainWindowModel.writeHistory(main_window.createSaveData());
         }
     }
 

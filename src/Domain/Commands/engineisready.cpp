@@ -20,4 +20,5 @@ EngineIsReady::EngineIsReady()
 void EngineIsReady::exec(const waltz::common::Commands::Parameters& /*aParameters*/)
 {
     waltz::editor::model::MainWindowModel::getInstance().loadDefaultLibrary();
+    waltz::editor::model::MainWindowModel::getInstance().notifyIsReady();
 }
