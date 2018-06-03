@@ -27,6 +27,7 @@ EditorSettings& EditorSettings::getInstance()
 }
 
 EditorSettings::EditorSettings()
+    :mClientPort_("10522")
 {
     load();
 }

@@ -2,6 +2,7 @@
 #include <QUrl>
 #include <QMessageBox>
 #include <QApplication>
+#include <QTimer>
 #include <waltz_common/commandid.h>
 #include <waltz_common/parameter.h>
 #include <waltz_common/parameters.h>
@@ -37,6 +38,7 @@ using namespace waltz::editor::Settings;
 namespace
 {
     const CommandId COMMAND_ID_LOAD_VOICE_LIBRARY("LoadVoiceLibrary");
+    const CommandId COMMAND_ID_LOAD_DEFAULT_VOICE_LIBRARY("LoadDefaultVoiceLibrary");
     const CommandId COMMAND_ID_PLAY_NOTE("PlayNote");
     const CommandId COMMAND_ID_PLAY_SCORE("PlayScore");
     const CommandId COMMAND_ID_STOP("Stop");
@@ -383,8 +385,14 @@ QStringList MainWindowModel::splitLyrics(const QString& aLyrics) const
 
 void MainWindowModel::exit() const
 {
-    mClient_->sendMessage(COMMAND_ID_EXIT);
+    mClient_->sendMessage(Message(COMMAND_ID_EXIT));
     QTimer::singleShot(100, qApp, SLOT(quit()));
+}
+
+void MainWindowModel::loadDefaultLibrary() const
+{
+    qDebug() << "load default library!!";
+    mClient_->sendMessage(Message(COMMAND_ID_LOAD_DEFAULT_VOICE_LIBRARY));
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)
@@ -395,7 +403,6 @@ MainWindowModel::MainWindowModel(QObject *aParent)
                                    + EditorSettings::getInstance().clientPort()), this))
     , mLibraryInformation_()
     , mEditorClipboard_(new EditorClipboard())
-    , mExitTimer_(new QTimer(this))
 {
 }
 

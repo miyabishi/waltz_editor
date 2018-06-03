@@ -104,6 +104,7 @@ namespace waltz
                 Q_INVOKABLE QStringList splitLyrics(const QString& aLyrics) const;
 
                 Q_INVOKABLE void exit() const;
+                void loadDefaultLibrary() const;
 
             signals:
                 void errorOccurred(const QString& aErrorMessage);
@@ -123,7 +124,6 @@ namespace waltz
                 Communicator::Client*                mClient_;
                 LibraryComponent::LibraryInformationPointer mLibraryInformation_;
                 EditorClipboardPointer               mEditorClipboard_;
-                QTimer*                              mExitTimer_;
 
             private:
                 explicit MainWindowModel(QObject *parent = 0);

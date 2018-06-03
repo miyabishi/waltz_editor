@@ -5,6 +5,7 @@
 #include "startseekbarcommand.h"
 #include "resetseekbarcommand.h"
 #include "pauseseekbarcommand.h"
+#include "engineisready.h"
 
 using namespace waltz::common::Commands;
 using namespace waltz::editor::Commands;
@@ -37,5 +38,6 @@ CommandFactory::CommandFactory()
     mCommandList_ << CommandPointer(new StartSeekBarCommand());
     mCommandList_ << CommandPointer(new ResetSeekBarCommand());
     mCommandList_ << CommandPointer(new PauseSeekBarCommand());
+    mCommandList_ << CommandPointer(new EngineIsReady());
 }
 

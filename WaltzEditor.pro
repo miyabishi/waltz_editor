@@ -53,7 +53,8 @@ SOURCES += main.cpp \
     src/Model/editorclipboard.cpp \
     src/Domain/LibraryComponent/correspondencealias.cpp \
     src/Domain/LibraryComponent/correspondencealiaslist.cpp \
-    src/Settings/editorsettings.cpp
+    src/Settings/editorsettings.cpp \
+    src/Domain/Commands/engineisready.cpp
 
 RESOURCES += qml.qrc
 
@@ -131,7 +132,8 @@ HEADERS += \
     src/Model/editorclipboard.h \
     src/Domain/LibraryComponent/correspondencealias.h \
     src/Domain/LibraryComponent/correspondencealiaslist.h \
-    src/Settings/editorsettings.h
+    src/Settings/editorsettings.h \
+    src/Domain/Commands/engineisready.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

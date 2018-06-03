@@ -1,4 +1,6 @@
 #include <QDebug>
+#include <QFileInfo>
+#include <QDir>
 #include "engine.h"
 #include "src/Settings/editorsettings.h"
 
@@ -19,6 +21,9 @@ Engine::~Engine()
 
 bool Engine::start() const
 {
+    QFileInfo info(EditorSettings::getInstance().enginePath());
+
+    mProcess_.setWorkingDirectory(info.dir().absolutePath());
     mProcess_.start(EditorSettings::getInstance().enginePath(),QStringList());
     if(! mProcess_.waitForStarted())
     {
