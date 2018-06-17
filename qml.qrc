@@ -63,5 +63,6 @@
         <file>src/View/NoteContextMenu.qml</file>
         <file>src/View/PouringLyricsDialog.qml</file>
         <file>src/View/SaveConfermationDialog.qml</file>
+        <file>src/View/LoadingWindow.qml</file>
     </qresource>
 </RCC>

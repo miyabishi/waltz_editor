@@ -140,7 +140,9 @@ DISTFILES += \
     image/undo.png \
     src/View/i18n/qml_ja.ts \
     src/View/i18n/qml_ja_JP.qm \
-    src/View/i18n/qml_ja_JP.ts
+    src/View/i18n/qml_ja_JP.ts \
+    src/View/LoadingWindow.qml \
+    src/View/LoadingWindow.qml
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary

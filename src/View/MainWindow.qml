@@ -381,15 +381,10 @@ ApplicationWindow {
         }
     }
 
-    Window{
+    LoadingWindow{
         id: loading_window
-        flags: Qt.SplashScreen
-        modality: Qt.WindowModal
         Component.onCompleted: {
             load_timeout_timer.start();
-        }
-        Text{
-            text:qsTr("loading...")
         }
     }
 
