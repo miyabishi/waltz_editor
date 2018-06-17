@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="qtquickcontrols2.conf">qtquickcontrols2.conf</file>
+        <file alias="image/cursor.png">image/cursor.png</file>
+        <file alias="image/edit.png">image/edit.png</file>
+        <file alias="image/pause.png">image/pause.png</file>
+        <file alias="image/play.png">image/play.png</file>
+        <file alias="image/save.png">image/save.png</file>
+        <file alias="image/stop.png">image/stop.png</file>
+        <file alias="image/open.png">image/open.png</file>
+        <file alias="image/sound_wave.png">image/sound_wave.png</file>
+        <file alias="image/expand_less.png">image/expand_less.png</file>
+        <file alias="image/expand_more.png">image/expand_more.png</file>
+        <file alias="image/skip_next.png">image/skip_next.png</file>
+        <file alias="image/skip_previous.png">image/skip_previous.png</file>
+        <file alias="image/redo.png">image/redo.png</file>
+        <file alias="image/undo.png">image/undo.png</file>
+        <file alias="image/connect_next_note.png">image/connect_next_note.png</file>
+        <file alias="image/connect_previous_note.png">image/connect_previous_note.png</file>
+        <file alias="image/eighth_note.png">image/eighth_note.png</file>
+        <file alias="image/half_note.png">image/half_note.png</file>
+        <file alias="image/quarter_note.png">image/quarter_note.png</file>
+        <file alias="image/sixteenth_note.png">image/sixteenth_note.png</file>
+    </qresource>
+</RCC>

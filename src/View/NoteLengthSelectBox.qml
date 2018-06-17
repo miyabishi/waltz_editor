@@ -3,14 +3,14 @@ import QtQuick.Layouts 1.3
 
 Rectangle{
     id: root
-    anchors.left: parent.left
-    anchors.bottom: parent.bottom
+//    anchors.left: parent.left
+//    anchors.bottom: parent.bottom
     color:"#333333"
 
     width: 40
     height: 40
 
-    anchors.verticalCenter: parent.verticalCenter
+//    anchors.verticalCenter: parent.verticalCenter
     property string imagePath: "qrc:/image/quarter_note.png"
     property int imageIndex: 1
 

@@ -28,7 +28,7 @@ Rectangle{
             color:"#333333"
             property bool isEnabled: false
 
-            anchors.verticalCenter: parent.verticalCenter
+//            anchors.verticalCenter: parent.verticalCenter
 
             Layout.fillWidth: false
             Layout.minimumWidth: 40
@@ -189,7 +189,7 @@ Rectangle{
             id: connect_next_note
             color:"#333333"
 
-            anchors.verticalCenter: parent.verticalCenter
+//            anchors.verticalCenter: parent.verticalCenter
 
             Layout.fillWidth: false
             Layout.minimumWidth: 40
