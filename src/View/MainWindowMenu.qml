@@ -11,29 +11,29 @@ MenuBar {
     }
 
     Menu{
-        title: "&File"
+        title: qsTr("&File")
 
         MenuItem{
-            text:"Open Song..."
+            text:qsTr("Open Song...")
             onTriggered: {
                 command_container.load();
             }
         }
         MenuItem{
-            text:"Save"
+            text:qsTr("Save")
             onTriggered: {
                 command_container.save();
             }
         }
         MenuItem{
-            text:"Save As..."
+            text:qsTr("Save As...")
             onTriggered: {
                 command_container.saveAs();
             }
         }
         MenuSeparator{}
         MenuItem{
-            text:"Open Voice Library..."
+            text:qsTr("Open Voice Library...")
             onTriggered: {
                 command_container.openVocalLibrary();
             }
@@ -41,7 +41,7 @@ MenuBar {
     }
 
     Menu{
-        title: "&Edit"
+        title: qsTr("&Edit")
         Connections{
             target: MainWindowModel
             onHistoryDataUpdated: {
@@ -52,7 +52,7 @@ MenuBar {
 
         MenuItem{
             id: menu_undo
-            text:"Undo"
+            text:qsTr("Undo")
             enabled: MainWindowModel.hasPreviousHistoryData()
             onTriggered: {
                 command_container.undo();
@@ -60,7 +60,7 @@ MenuBar {
         }
         MenuItem{
             id: menu_redo
-            text:"Redo"
+            text:qsTr("Redo")
             enabled: MainWindowModel.hasNextHistoryData()
             onTriggered: {
                 command_container.redo();
@@ -69,9 +69,9 @@ MenuBar {
     }
 
     Menu{
-        title: "&View"
+        title: qsTr("&View")
         MenuItem{
-            text:"Score Edit View"
+            text:qsTr("Score Edit View")
             checkable: true;
             checked: true;
             onToggled: {
@@ -79,7 +79,7 @@ MenuBar {
             }
         }
         MenuItem{
-            text:"Portamento Edit View"
+            text:qsTr("Portamento Edit View")
             checkable: true;
             checked: portamento_edit_area.visible;
             onToggled: {
@@ -87,7 +87,7 @@ MenuBar {
             }
         }
         MenuItem{
-            text:"Parameter Edit View"
+            text:qsTr("Parameter Edit View")
             checkable: true;
             checked: parameters_edit_area.visible;
             onToggled: {
@@ -97,10 +97,26 @@ MenuBar {
     }
 
     Menu{
-        title: "&Help"
+        title: qsTr("&Help")
+
         MenuItem{
-            text:"AboutQt..."
+            text:qsTr("Waltz Document")
             onTriggered: {
+                Qt.openUrlExternally("");
+            }
+        }
+
+        MenuItem{
+            text:qsTr("Report an issue")
+            onTriggered: {
+                Qt.openUrlExternally("https://github.com/miyabishi/waltz_editor/issues");
+            }
+        }
+        MenuSeparator{}
+        MenuItem{
+            text:qsTr("About Qt")
+            onTriggered: {
+                Qt.openUrlExternally("https://www.qt.io/");
             }
         }
     }

@@ -35,7 +35,7 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_note_copy
-                text: "Copy"
+                text: qsTr("Copy")
                 width: 300
                 height:30
             }
@@ -49,7 +49,7 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_note_delete
-                text: "Delete"
+                text: qsTr("Delete")
                 width: 300
                 height:30
             }
@@ -62,7 +62,7 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_pouring_lyrics
-                text: "Pouring lyrics..."
+                text: qsTr("Pouring lyrics...")
                 width: 300
                 height:30
             }
@@ -75,14 +75,14 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_note_connect_to_previous
-                text: "Connect to previous"
+                text: qsTr("Connect to previous")
                 width: 300
                 height:30
             }
 
             WaltzContextMenuItem{
                 id: context_menu_note_connect_to_next
-                text: "Connect to next"
+                text: qsTr("Connect to next")
                 width: 300
                 height:30
             }

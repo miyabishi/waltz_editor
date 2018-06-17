@@ -11,7 +11,7 @@ Rectangle{
 
     Text{
         id: tempo_text
-        text: "Tempo: "
+        text: qsTr("Tempo: ")
         font.family: "Meiryo"
         font.pointSize: 10
         color:"#ffffff"

@@ -47,12 +47,9 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        edit_area.skipToPreviousBar();
+                        if (! play_button.pIsActive_) return;
 
-                        if (play_button.pIsActive_)
-                        {
-                            return;
-                        }
+                        edit_area.skipToPreviousBar();
 
                         MainWindowModel.clearScore();
                         main_window.reflectData()
@@ -79,6 +76,7 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
+
                         MainWindowModel.stop();
                     }
                 }
@@ -116,10 +114,7 @@ Rectangle{
                     anchors.fill: parent
 
                     onClicked: {
-                        if (! play_button.pIsActive_)
-                        {
-                            return;
-                        }
+                        if (! play_button.pIsActive_) return;
 
                         MainWindowModel.clearScore();
                         main_window.reflectData()
@@ -147,6 +142,7 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
+                        if (! play_button.pIsActive_) return;
                         MainWindowModel.pause();
                     }
                 }
@@ -170,13 +166,8 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
+                        if (! play_button.pIsActive_) return;
                         edit_area.skipToNextBar();
-
-                        if (play_button.pIsActive_)
-                        {
-                            return;
-                        }
-
                         MainWindowModel.clearScore();
                         main_window.reflectData()
                         MainWindowModel.play(edit_area.getSeekBarPosition());

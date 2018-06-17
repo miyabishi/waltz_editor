@@ -45,15 +45,15 @@ Rectangle{
 
         Text{
             id: note_length_text
-            text: "Note: "
+            text: qsTr("Note: ")
             font.family: "Meiryo"
             font.pointSize: 10
             color:"#ffffff"
 
             Layout.fillWidth: false
-            Layout.minimumWidth: 40
-            Layout.preferredWidth: 40
-            Layout.maximumWidth: 40
+            Layout.minimumWidth: 60
+            Layout.preferredWidth: 60
+            Layout.maximumWidth: 60
             Layout.minimumHeight: 40
         }
 

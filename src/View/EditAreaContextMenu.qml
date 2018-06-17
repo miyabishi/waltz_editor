@@ -41,14 +41,14 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_undo
-                text: "Undo"
+                text: qsTr("Undo")
                 width: 300
                 height: 30
             }
 
             WaltzContextMenuItem{
                 id: context_menu_redo
-                text: "Redo"
+                text: qsTr("Redo")
                 width: 300
                 height: 30
             }
@@ -61,7 +61,7 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_paste
-                text: "Paste"
+                text: qsTr("Paste")
                 width: 300
                 height: 30
             }
@@ -74,7 +74,7 @@ Window{
 
             WaltzContextMenuItem{
                 id: context_menu_select_all
-                text: "Select All"
+                text: qsTr("Select All")
                 width: 300
                 height: 30
             }

@@ -135,13 +135,16 @@ HEADERS += \
     src/Settings/editorsettings.h \
     src/Domain/Commands/engineisready.h
 
+DISTFILES += \
+    image/redo.png \
+    image/undo.png \
+    src/View/i18n/qml_ja.ts \
+    src/View/i18n/qml_ja_JP.qm \
+    src/View/i18n/qml_ja_JP.ts
+
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/release/ -lWaltzCommonLibrary
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../WaltzCommonLibrary/debug/ -lWaltzCommonLibrary
 else:unix: LIBS += -L$$PWD/../WaltzCommonLibrary/ -lWaltzCommonLibrary
 
 INCLUDEPATH += $$PWD/../WaltzCommonLibrary/include
 DEPENDPATH += $$PWD/../WaltzCommonLibrary/include
-
-DISTFILES += \
-    image/redo.png \
-    image/undo.png

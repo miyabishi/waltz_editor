@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QTranslator>
 #include "src/Model/mainwindowmodel.h"
 #include "src/Model/mathutility.h"
 #include "src/Domain/VocalEngine/engine.h"
@@ -13,8 +14,15 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     waltz::editor::VocalEngine::Engine vocalEngine;
-
     vocalEngine.start();
+
+    QTranslator translator;
+    translator.load(QLatin1String("qml_") + QLocale::system().name(),
+                    QLatin1String("src/View/i18n"));
+
+    qDebug() << QLatin1String("qml_" )+QLocale::system().name();
+    qDebug() << QLatin1String("src/View/i18n");
+    app.installTranslator(&translator);
 
     QQmlApplicationEngine engine;
 

@@ -20,7 +20,7 @@ Rectangle{
     Text{
         anchors.left: parent.left
         id: beat_text
-        text: "Beat:  "
+        text: qsTr("Beat:  ")
         font.family: "Meiryo"
         font.pointSize: 10
         color:"#ffffff"
