@@ -43,7 +43,7 @@ Item {
     TabBar{
         id: bar
         width: parent.width
-        height: 25
+        height:30
         anchors.bottom: parent.bottom
         background: Rectangle{
             anchors.fill: parent

@@ -76,7 +76,6 @@ Rectangle{
                 WButtonMouseArea{
                     anchors.fill: parent
                     onClicked: {
-
                         MainWindowModel.stop();
                     }
                 }

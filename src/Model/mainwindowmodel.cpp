@@ -395,7 +395,6 @@ void MainWindowModel::exit() const
 
 void MainWindowModel::loadDefaultLibrary() const
 {
-    qDebug() << "load default library!!";
     mClient_->sendMessage(Message(COMMAND_ID_LOAD_DEFAULT_VOICE_LIBRARY));
 }
 

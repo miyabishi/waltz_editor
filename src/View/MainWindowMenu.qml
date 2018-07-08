@@ -102,7 +102,7 @@ MenuBar {
         MenuItem{
             text:qsTr("Waltz Document")
             onTriggered: {
-                Qt.openUrlExternally("");
+                Qt.openUrlExternally("https://waltz.gitbook.io/project/");
             }
         }
 

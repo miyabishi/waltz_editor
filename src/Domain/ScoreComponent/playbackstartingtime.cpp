@@ -12,7 +12,6 @@ namespace
 PlaybackStartingTime::PlaybackStartingTime(double aSec)
     : mParameter_(* new Parameter(PARAMETER_NAME, aSec))
 {
-    qDebug() << "playbackstartingtime:" << aSec;
 }
 
 PlaybackStartingTime::~PlaybackStartingTime()

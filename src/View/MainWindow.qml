@@ -169,7 +169,7 @@ ApplicationWindow {
         LibraryInformation{
             id: library_information
             color:"#222222"
-//            anchors.left: parent.left
+            anchors.left: parent.left
             anchors.top:parent.top
             anchors.bottom: parent.bottom
         }
@@ -181,8 +181,8 @@ ApplicationWindow {
             anchors.right: parent.right
 
             SplitView{
-//                anchors.top: parent.top
-//                anchors.bottom: main_scroll_view.top
+                anchors.top: parent.top
+                anchors.bottom: main_scroll_view.top
                 anchors.left: parent.left //library_information.right
 
                 anchors.right: parent.right
@@ -267,7 +267,7 @@ ApplicationWindow {
                   id: main_scroll_view
                   anchors.right: parent.right
                   anchors.left:parent.left
-//                  anchors.bottom: parent.bottom
+                  anchors.bottom: parent.bottom
                   flickableItem.interactive: false
                   style: WaltzScrollViewStyle{}
 
