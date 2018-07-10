@@ -33,6 +33,19 @@
     </message>
 </context>
 <context>
+    <name>LoadingWindow</name>
+    <message>
+        <location filename="../LoadingWindow.qml" line="+13"/>
+        <source>loading...</source>
+        <translation>読み込み中・・・</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Cancel</source>
+        <translation>キャンセル</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../MainWindow.qml" line="+12"/>
@@ -40,9 +53,8 @@
         <translation>Waltz Editor</translation>
     </message>
     <message>
-        <location line="+380"/>
         <source>loading...</source>
-        <translation>読み込み中・・・</translation>
+        <translation type="vanished">読み込み中・・・</translation>
     </message>
 </context>
 <context>
