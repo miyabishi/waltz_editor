@@ -22,6 +22,7 @@ Rectangle{
     property int  squareEndY:0
     property int contentY:edit_area_scroll_view.flickableItem.contentY
 
+
     onXOffsetChanged: {
         if (edit_area_scroll_view.flickableItem.contentX === xOffset)
         {
@@ -227,6 +228,7 @@ Rectangle{
             id: piano_roll_edit_area
             width: edit_area.editAreaWidth
             height: edit_area.numberOfRow * edit_area.rowHeight
+
 
             Repeater{
                 model: edit_area.numberOfRow

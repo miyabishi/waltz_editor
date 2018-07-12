@@ -15,7 +15,7 @@ Dialog{
     {
         if(main_window.editingFileName != "")
         {
-            dialog_message.text = "Do you want to changes to \""+ filePath + "\"?";
+            dialog_message.text = "Do you want to save changes to \""+ filePath + "\"?";
         }
         open();
     }
@@ -23,6 +23,6 @@ Dialog{
     Text{
         id: dialog_message
         color: "#000000"
-        text: "Do you want to changes?";
+        text: "Do you want to save changes?";
     }
 }
