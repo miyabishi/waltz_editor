@@ -378,6 +378,7 @@ ApplicationWindow {
         }
         onIsReady:{
             loading_window.close()
+            tutorial_dialog.visible = true
         }
     }
 
@@ -385,6 +386,46 @@ ApplicationWindow {
         id: loading_window
         Component.onCompleted: {
             load_timeout_timer.start();
+        }
+    }
+
+    Dialog{
+        id: tutorial_dialog
+        title: qsTr("Hint")
+        width: 400
+        height: 400
+        standardButtons: Dialog.NoButton
+
+        Rectangle{
+            state:"tutorial_1"
+            states:[
+                State{
+                    name: "tutorial_1"
+                    PropertyChanges {
+                        target: tutorial_text
+                        text: "aaaa"
+                    }
+                }
+            ]
+            ColumnLayout{
+                Text{
+                    id: tutorial_text
+                }
+                RowLayout{
+                    Layout.alignment: rignt
+
+                    Button{
+                        text: "Next"
+                    }
+                    Button{
+                        text: "Back"
+                    }
+                   Button{
+                       text: "Close"
+                   }
+
+                }
+            }
         }
     }
 
