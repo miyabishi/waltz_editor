@@ -392,36 +392,50 @@ ApplicationWindow {
     Dialog{
         id: tutorial_dialog
         title: qsTr("Hint")
+
+
         width: 400
-        height: 400
+        height: 250
         standardButtons: Dialog.NoButton
 
-        Rectangle{
+        Item{
+            id: tutorial_area
+            anchors.fill: parent
             state:"tutorial_1"
             states:[
                 State{
                     name: "tutorial_1"
                     PropertyChanges {
                         target: tutorial_text
-                        text: "aaaa"
+                        text: qsTr('To place a note, \
+ hold down the \"Ctr\" key and \
+click the piano roll.')
                     }
                 }
             ]
+
             ColumnLayout{
                 Text{
                     id: tutorial_text
+                    Layout.maximumWidth: tutorial_area.width
+                    font.family: "Mairyo"
+                    font.pointSize: 14
+                    Layout.fillHeight: true
+                    Layout.preferredHeight: 200
+                    wrapMode: Text.WrapAnywhere
                 }
                 RowLayout{
-                    Layout.alignment: rignt
+                    Layout.alignment: Qt.AlignRight
 
                     Button{
                         text: "Next"
                     }
+
                     Button{
-                        text: "Back"
-                    }
-                   Button{
-                       text: "Close"
+                        text: "Close"
+                        onClicked: {
+                            tutorial_dialog.close()
+                        }
                    }
 
                 }

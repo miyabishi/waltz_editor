@@ -151,3 +151,5 @@ else:unix: LIBS += -L$$PWD/../WaltzCommonLibrary/ -lWaltzCommonLibrary
 
 INCLUDEPATH += $$PWD/../WaltzCommonLibrary/include
 DEPENDPATH += $$PWD/../WaltzCommonLibrary/include
+
+win32:RC_ICONS = waltz.ico
