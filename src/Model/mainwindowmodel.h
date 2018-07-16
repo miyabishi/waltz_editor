@@ -100,12 +100,13 @@ namespace waltz
 
                 // for context menu
                 Q_INVOKABLE QPoint cursorPosition() const;
-
                 Q_INVOKABLE QStringList splitLyrics(const QString& aLyrics) const;
-
                 Q_INVOKABLE void exit() const;
-
                 Q_INVOKABLE QString libraryPath() const;
+
+                // quickstart
+                Q_INVOKABLE bool shouldOpenQuickStartDialogOnStartUp() const;
+                Q_INVOKABLE void setShouldOpenQuickStartDialogOnStartUp(bool aValue) const;
 
             public:
                 void loadDefaultLibrary() const;

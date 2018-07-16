@@ -11,7 +11,6 @@ namespace waltz
             {
             public:
                 static EditorSettings& getInstance();
-                void save() const;
                 void load();
                 QString clientPort() const;
                 QString enginePath() const;

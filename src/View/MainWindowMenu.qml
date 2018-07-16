@@ -100,6 +100,13 @@ MenuBar {
         title: qsTr("&Help")
 
         MenuItem{
+            text:qsTr("Quick Start...")
+            onTriggered: {
+                quick_start_dialog.open()
+            }
+        }
+
+        MenuItem{
             text:qsTr("Waltz Document")
             onTriggered: {
                 Qt.openUrlExternally("https://waltz.gitbook.io/project/");

@@ -378,7 +378,12 @@ ApplicationWindow {
         }
         onIsReady:{
             loading_window.close()
-            tutorial_dialog.visible = true
+            if (MainWindowModel.shouldOpenQuickStartDialogOnStartUp())
+            {
+                quick_start_dialog.visible = true;
+                return;
+            }
+            quick_start_dialog.visible = false;
         }
     }
 
@@ -389,58 +394,8 @@ ApplicationWindow {
         }
     }
 
-    Dialog{
-        id: tutorial_dialog
-        title: qsTr("Hint")
-
-
-        width: 400
-        height: 250
-        standardButtons: Dialog.NoButton
-
-        Item{
-            id: tutorial_area
-            anchors.fill: parent
-            state:"tutorial_1"
-            states:[
-                State{
-                    name: "tutorial_1"
-                    PropertyChanges {
-                        target: tutorial_text
-                        text: qsTr('To place a note, \
- hold down the \"Ctr\" key and \
-click the piano roll.')
-                    }
-                }
-            ]
-
-            ColumnLayout{
-                Text{
-                    id: tutorial_text
-                    Layout.maximumWidth: tutorial_area.width
-                    font.family: "Mairyo"
-                    font.pointSize: 14
-                    Layout.fillHeight: true
-                    Layout.preferredHeight: 200
-                    wrapMode: Text.WrapAnywhere
-                }
-                RowLayout{
-                    Layout.alignment: Qt.AlignRight
-
-                    Button{
-                        text: "Next"
-                    }
-
-                    Button{
-                        text: "Close"
-                        onClicked: {
-                            tutorial_dialog.close()
-                        }
-                   }
-
-                }
-            }
-        }
+    QuickStartDialog{
+        id:quick_start_dialog
     }
 
     Timer{

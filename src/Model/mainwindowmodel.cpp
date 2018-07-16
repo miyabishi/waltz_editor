@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QTimer>
+#include <QFileInfo>
 #include <waltz_common/commandid.h>
 #include <waltz_common/parameter.h>
 #include <waltz_common/parameters.h>
@@ -401,6 +402,30 @@ void MainWindowModel::loadDefaultLibrary() const
 void MainWindowModel::notifyIsReady()
 {
     emit isReady();
+}
+
+bool MainWindowModel::shouldOpenQuickStartDialogOnStartUp() const
+{
+    QFileInfo info("./config/do_not_show_quickstart");
+    return !info.exists();
+}
+
+void MainWindowModel::setShouldOpenQuickStartDialogOnStartUp(bool aValue) const
+{
+    QFile file("./config/do_not_show_quickstart");
+    QFileInfo info("./config/do_not_show_quickstart");
+
+    file.open(QIODevice::WriteOnly);
+    if (aValue)
+    {
+        if (! info.exists()) return;
+        file.remove();
+        file.close();
+        return;
+    }
+    if (info.exists()) return;
+    file.write(QByteArray());
+    file.close();
 }
 
 MainWindowModel::MainWindowModel(QObject *aParent)

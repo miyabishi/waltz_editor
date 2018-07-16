@@ -64,5 +64,6 @@
         <file>src/View/PouringLyricsDialog.qml</file>
         <file>src/View/SaveConfermationDialog.qml</file>
         <file>src/View/LoadingWindow.qml</file>
+        <file>src/View/QuickStartDialog.qml</file>
     </qresource>
 </RCC>
