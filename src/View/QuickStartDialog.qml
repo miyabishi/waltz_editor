@@ -29,9 +29,9 @@ Dialog{
                 name: "quick_start_1"
                 PropertyChanges {
                     target: quick_start_text
-                    text: qsTr('To place a note, \
-hold down the \"Ctr\" key and \
-click the piano roll.
+                    text:qsTr('To place a note, \
+hold down the Ctr key and \
+click the piano roll. \
 If you click the note again, you can delete the note.')
                 }
                 PropertyChanges {
@@ -47,8 +47,7 @@ If you click the note again, you can delete the note.')
                 name: "quick_start_2"
                 PropertyChanges {
                     target: quick_start_text
-                    text: qsTr('By selecting menu bar item of \"View\", \
-It is possible to display editing area of portamento and parameters.')
+                    text: qsTr('To double-click a note, it is possible to edit a syllable.')
                 }
                 PropertyChanges {
                     target: quick_start_back_button
@@ -61,6 +60,22 @@ It is possible to display editing area of portamento and parameters.')
             },
             State{
                 name: "quick_start_3"
+                PropertyChanges {
+                    target: quick_start_text
+                    text: qsTr('By selecting menu bar item of \"View\", \
+it is possible to display editing area of portamento and parameters.')
+                }
+                PropertyChanges {
+                    target: quick_start_back_button
+                    visible: true
+                }
+                PropertyChanges {
+                    target: quick_start_next_button
+                    visible: true
+                }
+            },
+            State{
+                name: "quick_start_4"
                 PropertyChanges {
                     target: quick_start_text
                     text: qsTr('In portamento edit view, \
@@ -78,7 +93,7 @@ by clicking while holding down the "Ctr" key.')
                 }
             },
             State{
-                name: "quick_start_4"
+                name: "quick_start_5"
                 PropertyChanges {
                     target: quick_start_text
                     text: qsTr('In the parameter edit view, \
@@ -95,7 +110,7 @@ Parameters include volume and vibrato.')
                 }
             },
             State{
-                name: "quick_start_5"
+                name: "quick_start_6"
                 PropertyChanges {
                     target: quick_start_text
                     text: qsTr('Volume can be changed by dragging the bar displayed in parameter edit view.')
@@ -110,10 +125,11 @@ Parameters include volume and vibrato.')
                 }
             },
             State{
-                name: "quick_start_6"
+                name: "quick_start_7"
                 PropertyChanges {
                     target: quick_start_text
-                    text: qsTr('Vibrato can be edited by dragging a square mark in parameter edit view.')
+                    text: qsTr('Vibrato can be added by clicking the note while holding down the Ctr key and\
+ be edited by dragging a square mark in parameter edit view.')
                 }
                 PropertyChanges {
                     target: quick_start_back_button

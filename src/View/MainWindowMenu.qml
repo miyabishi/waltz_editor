@@ -107,9 +107,10 @@ MenuBar {
         }
 
         MenuItem{
-            text:qsTr("Waltz Document")
+            text:qsTr("Waltz Document(In preparation)")
+            enabled: false
             onTriggered: {
-                Qt.openUrlExternally("https://waltz.gitbook.io/project/");
+                //Qt.openUrlExternally("");
             }
         }
 
