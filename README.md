@@ -6,6 +6,10 @@ This program connects to an external vocal engine with WebSocket, and it can be 
 The currently supported vocal engine is below.
 * Waltz Engine (https://github.com/miyabishi/waltz_engine)
 
+## Quickstart package for Windows
+There is a quick start package for Windows on the following link. Unzip the zip file and run Waltz.exe.
+https://drive.google.com/file/d/1MxxyKtf3ox7HV_UCZWRtm5ziUOTgdFFf/view?usp=sharing
+
 ## Building Waltz Editor
 Waltz Editor is developed with Qt5.
 1. Download Qt5 and QtCreater from https://www.qt.io/.
